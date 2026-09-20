@@ -1,0 +1,2034 @@
+<title>Chem Unit 1: Bonding &amp; Conservation of Mass — IB MYP Grade 9</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --bg: #F5F6F2;
+    --surface: #FFFFFF;
+    --surface-2: #ECEFE7;
+    --ink: #1B222C;
+    --ink-soft: #545E6B;
+    --ink-faint: #8A93A0;
+    --accent: #2957A4;
+    --accent-ink: #ffffff;
+    --accent-2: #C1841B;
+    --good: #2C8A57;
+    --good-tint: #E4F3EA;
+    --bad: #C0453A;
+    --bad-tint: #FBEAE8;
+    --border: #DBDFD4;
+    --border-strong: #C4CABC;
+    --shadow: 220 25% 20%;
+    --radius: 14px;
+
+    --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --font-body: "Karla", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+
+    /* per-lesson hues (light) */
+    --hueA: 214; --hueB: 187; --hueC: 262; --hueD: 30; --hueE: 350; --hueF: 150;
+    --lsat: 58%; --llight: 38%; --ltint: 94%;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #12151A;
+      --surface: #191D24;
+      --surface-2: #1F252E;
+      --ink: #E9ECF1;
+      --ink-soft: #A7B0BE;
+      --ink-faint: #6E7787;
+      --accent: #7DA3E8;
+      --accent-ink: #0D1420;
+      --accent-2: #E3AE55;
+      --good: #57C489;
+      --good-tint: #16261E;
+      --bad: #E5847A;
+      --bad-tint: #2A1917;
+      --border: #2A303B;
+      --border-strong: #3A4250;
+      --lsat: 62%; --llight: 68%; --ltint: 16%;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #12151A;
+    --surface: #191D24;
+    --surface-2: #1F252E;
+    --ink: #E9ECF1;
+    --ink-soft: #A7B0BE;
+    --ink-faint: #6E7787;
+    --accent: #7DA3E8;
+    --accent-ink: #0D1420;
+    --accent-2: #E3AE55;
+    --good: #57C489;
+    --good-tint: #16261E;
+    --bad: #E5847A;
+    --bad-tint: #2A1917;
+    --border: #2A303B;
+    --border-strong: #3A4250;
+    --lsat: 62%; --llight: 68%; --ltint: 16%;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior: auto; } *{ animation: none !important; transition: none !important; } }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: var(--accent); }
+
+  ::selection{ background: color-mix(in srgb, var(--accent) 30%, transparent); }
+
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+  h1,h2,h3,h4{ font-family: var(--font-display); font-weight: 600; text-wrap: balance; margin: 0; color: var(--ink); }
+
+  code, .mono, .expr{ font-family: var(--font-mono); }
+
+  button{ font-family: var(--font-body); cursor:pointer; }
+  button:focus-visible, input:focus-visible, a:focus-visible{
+    outline: 2.5px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ============ TOP MASTHEAD ============ */
+  .masthead{
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .masthead-inner{
+    padding: 34px 20px 22px;
+    display:flex; flex-direction:column; gap:16px;
+  }
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow .dot{ width:5px; height:5px; border-radius:50%; background: var(--accent-2); }
+  .title-row{
+    display:flex; justify-content: space-between; align-items:flex-end; gap: 24px; flex-wrap: wrap;
+  }
+  .title-row h1{ font-size: clamp(30px, 4.4vw, 44px); line-height: 1.05; }
+  .title-row .subtitle{ color: var(--ink-soft); font-size: 15.5px; max-width: 46ch; margin-top:6px;}
+  .student-tag{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-soft);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 7px 14px;
+    white-space: nowrap;
+  }
+  .student-tag b{ color: var(--ink); }
+
+  .meta-strip{
+    display:flex; flex-wrap:wrap; gap: 10px 28px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    padding-top: 4px;
+    border-top: 1px dashed var(--border);
+    margin-top: 4px;
+    padding-top: 14px;
+  }
+  .meta-strip span b{ color: var(--ink); font-weight:600; }
+
+  /* ============ SCOREBOARD NAV (sticky) ============ */
+  .scoreboard{
+    position: sticky; top:0; z-index: 40;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px) saturate(1.1);
+    -webkit-backdrop-filter: blur(10px) saturate(1.1);
+    border-bottom: 1px solid var(--border);
+  }
+  .scoreboard-inner{
+    display:flex; align-items:center; gap:10px;
+    padding: 10px 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .scoreboard-inner::-webkit-scrollbar{ display:none; }
+  .score-total{
+    font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-soft);
+    white-space: nowrap; padding-right: 8px; border-right: 1px solid var(--border);
+    margin-right: 4px;
+  }
+  .score-total b{ color: var(--ink); }
+  .chip{
+    flex: 0 0 auto;
+    display:flex; align-items:center; gap:8px;
+    padding: 7px 12px 7px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-decoration: none;
+    transition: border-color .15s ease, color .15s ease, transform .1s ease;
+  }
+  .chip:hover{ border-color: var(--chip-hue); color: var(--ink); }
+  .chip:active{ transform: translateY(1px); }
+  .chip .letter{
+    width: 22px; height:22px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 12px; font-weight: 700;
+    background: var(--chip-tint); color: var(--chip-hue);
+    border: 1px solid color-mix(in srgb, var(--chip-hue) 45%, transparent);
+  }
+  .chip .frac{ font-variant-numeric: tabular-nums; font-size: 12px; }
+  .chip.done{ border-color: var(--good); }
+  .chip.done .letter{ background: var(--good-tint); color: var(--good); border-color: var(--good); }
+  .reset-btn{
+    margin-left: auto; flex: 0 0 auto;
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--ink-faint); background: transparent; border: 1px solid transparent;
+    padding: 6px 8px; border-radius: 8px;
+  }
+  .reset-btn:hover{ color: var(--bad); border-color: var(--border); }
+
+  /* ============ INTRO / REFERENCE CARD ============ */
+  main{ padding: 30px 0 90px; }
+  .intro-card{
+    margin: 26px 0 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+  }
+  .intro-card summary{
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 18px;
+    list-style: none;
+    display:flex; align-items:center; justify-content: space-between;
+    gap: 12px;
+  }
+  .intro-card summary::-webkit-details-marker{ display:none; }
+  .intro-card summary .arrow{
+    font-family: var(--font-mono); color: var(--ink-faint); font-size: 13px;
+    transition: transform .2s ease;
+  }
+  .intro-card[open] summary .arrow{ transform: rotate(180deg); }
+  .intro-grid{
+    margin-top: 18px;
+    display:grid; grid-template-columns: 1fr 1fr; gap: 20px 28px;
+  }
+  @media (max-width: 640px){ .intro-grid{ grid-template-columns: 1fr; } }
+  .intro-block h4{ font-size: 12.5px; text-transform: uppercase; letter-spacing:.08em; color: var(--ink-faint); font-family: var(--font-mono); font-weight:600; margin-bottom:8px;}
+  .intro-block p{ margin:0; color: var(--ink-soft); font-size: 14.5px; }
+  .soi{
+    font-family: var(--font-display); font-style: italic; font-size: 17px; color: var(--ink);
+    grid-column: 1 / -1;
+    padding: 14px 16px;
+    background: var(--surface-2);
+    border-left: 3px solid var(--accent-2);
+    border-radius: 6px;
+  }
+  .iq-table{ grid-column: 1/-1; display:grid; gap:8px; }
+  .iq-row{ display:grid; grid-template-columns: 90px 1fr; gap:12px; font-size: 14px; align-items:baseline; }
+  .iq-row .tag{ font-family: var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color: var(--ink-faint); }
+  .iq-row p{ margin:0; color: var(--ink-soft); }
+
+  /* ============ LESSON SECTION ============ */
+  .lesson{
+    scroll-margin-top: 64px;
+    margin-bottom: 56px;
+  }
+  .lesson-head{
+    display:flex; align-items: center; gap: 16px;
+    padding: 18px 20px;
+    border-radius: var(--radius);
+    background: var(--tint);
+    border: 1px solid color-mix(in srgb, var(--hue) 35%, transparent);
+    margin-bottom: 18px;
+  }
+  .lesson-head .big-letter{
+    font-family: var(--font-display); font-weight:700; font-size: 34px;
+    color: var(--hue);
+    width: 52px; height:52px; flex:0 0 auto;
+    border-radius: 12px;
+    background: var(--surface);
+    display:flex; align-items:center; justify-content:center;
+    border: 1px solid color-mix(in srgb, var(--hue) 40%, transparent);
+  }
+  .lesson-head .htext .kicker{ font-family: var(--font-mono); font-size: 11.5px; text-transform:uppercase; letter-spacing:.09em; color: var(--hue); }
+  .lesson-head .htext h2{ font-size: clamp(20px,2.6vw,26px); margin-top:2px; }
+  .lesson-progress{
+    margin-left:auto; text-align:right; flex: 0 0 auto;
+  }
+  .lesson-progress .ring-label{ font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); }
+  .lesson-progress .bar{
+    width: 90px; height: 6px; border-radius: 4px; background: var(--surface);
+    border: 1px solid var(--border); overflow:hidden; margin-top:6px;
+  }
+  .lesson-progress .bar-fill{ height:100%; background: var(--hue); width:0%; transition: width .3s ease; }
+
+  .rules-box{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 16px;
+  }
+  .rules-box h3{ font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-family: var(--font-mono); color: var(--hue); margin-bottom: 10px; }
+  .rules-box ul{ margin:0; padding-left: 20px; color: var(--ink-soft); font-size: 14.5px; }
+  .rules-box li{ margin-bottom: 5px; }
+  .rules-box li::marker{ color: var(--hue); }
+  .trick-box{ background: color-mix(in srgb, var(--hue) 10%, var(--surface)); border: 1px dashed var(--hue); border-radius: var(--radius); padding: 14px 22px; margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-start; }
+  .trick-box .trick-tag{ font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); white-space: nowrap; padding-top: 2px; }
+  .trick-box .trick-text{ color: var(--ink-soft); font-size: 14.5px; }
+  .trick-box .trick-text b{ color: var(--ink); }
+  .diagram-box{ background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 16px; display:flex; justify-content:center; align-items:center; overflow-x:auto; }
+  .diagram-box svg{ width: 100%; max-width: 620px; height: auto; display:block; }
+  .diagram-box{ flex-direction: column; gap: 8px; }
+  .diagram-caption{ font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); text-align:center; max-width: 620px; }
+  .comic-box{ background: var(--surface-2); border: 2px dashed var(--hue); border-radius: var(--radius); padding: 18px 20px 16px; margin-bottom: 16px; display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .comic-box .comic-tag{ font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); align-self:flex-start; }
+  .comic-box svg{ width: 100%; max-width: 460px; height: auto; display:block; }
+  .comic-box .comic-caption{ font-family: var(--font-body); font-style: italic; font-size: 14px; color: var(--ink-soft); text-align:center; max-width: 560px; }
+  .comic-box text{ fill: var(--ink); font-family: var(--font-mono); }
+  .comic-box .cm-face{ fill: var(--tint); stroke: var(--hue); }
+  .comic-box .cm-face2{ fill: var(--surface); stroke: var(--ink-soft); }
+  .comic-box .cm-line{ stroke: var(--ink); fill:none; }
+  .comic-box .cm-fill{ fill: var(--hue); }
+  .comic-box .cm-bad{ fill: var(--bad-tint); stroke: var(--bad); }
+  .comic-box .cm-good{ fill: var(--good-tint); stroke: var(--good); }
+  .comic-box .cm-bad-fill{ fill: var(--bad); stroke: none; }
+  .comic-box .cm-good-fill{ fill: var(--good); stroke: none; }
+  .comic-box .cm-soft{ fill: var(--ink-faint); }
+
+  .remember-box{
+    background: color-mix(in srgb, var(--hue) 7%, var(--surface));
+    border: 1px solid var(--hue);
+    border-left: 5px solid var(--hue);
+    border-radius: var(--radius);
+    padding: 16px 20px 14px;
+    margin-bottom: 20px;
+  }
+  .remember-box h3{ font-family: var(--font-mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); margin-bottom: 10px; }
+  .remember-box ul{ margin:0; padding-left:0; list-style:none; }
+  .remember-box li{ position:relative; padding-left: 26px; margin-bottom: 7px; color: var(--ink-soft); font-size: 14.5px; }
+  .remember-box li:last-child{ margin-bottom:0; }
+  .remember-box li::before{ content:"\2713"; position:absolute; left:4px; top:0; color: var(--hue); font-weight:700; }
+  .remember-box li b{ color: var(--ink); }
+
+  .cheatsheet{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px 28px;
+    margin-top: 36px;
+  }
+  .cheatsheet h2{ font-size: 24px; margin-bottom: 4px; }
+  .cheatsheet .cs-sub{ color: var(--ink-faint); font-size: 13px; font-family: var(--font-mono); margin-bottom: 18px; }
+  .cs-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+  .cs-card{ background: var(--surface-2); border: 1px solid var(--border); border-top: 3px solid var(--hue); border-radius: var(--radius); padding: 14px 16px; }
+  .cs-card h4{ font-size: 14.5px; display:flex; gap:8px; align-items:center; margin-bottom: 9px; font-family: var(--font-body); font-weight:700; }
+  .cs-card .cs-letter{ font-family: var(--font-mono); font-size: 11px; background: var(--tint); color: var(--hue); border:1px solid var(--hue); border-radius: 6px; padding: 2px 7px; }
+  .cs-card ul{ margin:0; padding-left: 18px; color: var(--ink-soft); font-size: 13.5px; }
+  .cs-card li{ margin-bottom: 5px; }
+  .cs-card li:last-child{ margin-bottom:0; }
+  .cs-card li::marker{ color: var(--hue); }
+  .cs-card li b{ color: var(--ink); }
+  .diagram-box .dg-line{ stroke: var(--hue); fill: none; }
+  .diagram-box .dg-fill{ fill: var(--hue); }
+  .diagram-box .dg-tint{ fill: var(--tint); stroke: var(--hue); }
+  .diagram-box .dg-ink{ fill: var(--ink); }
+  .diagram-box .dg-ink-line{ stroke: var(--ink-soft); fill:none; }
+  .diagram-box .dg-soft{ fill: var(--ink-soft); }
+  .diagram-box .dg-good{ fill: var(--good); stroke: var(--good); }
+  .diagram-box .dg-bad{ fill: var(--bad); stroke: var(--bad); }
+  .diagram-box text{ fill: var(--ink); font-family: var(--font-mono); }
+
+  .example-card{
+    background: var(--surface);
+    border: 1.5px dashed var(--border-strong);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 22px;
+  }
+  .example-card h3{
+    font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-family: var(--font-mono);
+    color: var(--ink-faint); margin-bottom: 10px; display:flex; align-items:center; gap:8px;
+  }
+  .example-card h3::before{ content:"✎"; color: var(--accent-2); font-size:14px; }
+  .example-prob{ font-family: var(--font-mono); font-size: 15.5px; margin-bottom: 12px; color: var(--ink); }
+  .example-steps{ display:flex; flex-direction:column; gap: 6px; }
+  .example-steps .step{
+    display:grid; grid-template-columns: 20px 1fr; gap: 10px;
+    font-size: 14.5px; color: var(--ink-soft); align-items:baseline;
+  }
+  .example-steps .step .n{ font-family: var(--font-mono); color: var(--hue); font-size: 12.5px; }
+  .example-steps .step .expr{ color: var(--ink); }
+  .example-answer{
+    margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border);
+    font-size: 14.5px; color: var(--good); font-family: var(--font-mono); font-weight:600;
+  }
+
+  /* ============ EXERCISE GRID ============ */
+  .ex-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 720px){ .ex-grid{ grid-template-columns: 1fr; } }
+
+  .ex-card{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display:flex; flex-direction:column; gap:10px;
+    transition: border-color .2s ease;
+  }
+  .ex-card.correct{ border-color: var(--good); background: color-mix(in srgb, var(--good-tint) 60%, var(--surface)); }
+  .ex-card.wrong{ border-color: var(--bad); }
+
+  .ex-top{ display:flex; align-items:flex-start; gap:10px; }
+  .ex-num{
+    font-family: var(--font-mono); font-size: 12.5px; font-weight:700;
+    color: var(--hue); background: var(--tint); border:1px solid color-mix(in srgb, var(--hue) 40%, transparent);
+    border-radius: 6px; padding: 2px 7px; flex:0 0 auto; margin-top:2px;
+  }
+  .ex-prompt{ font-size: 14.5px; color: var(--ink); line-height:1.5; }
+  .ex-prompt .expr{ font-size: 14.5px; }
+
+  .ex-input-row{ display:flex; gap:8px; }
+  .ex-input{
+    flex:1; min-width:0;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+  }
+  .ex-input::placeholder{ color: var(--ink-faint); }
+  .ex-check{
+    font-family: var(--font-mono); font-size: 12.5px; font-weight:600;
+    padding: 8px 14px; border-radius: 8px; border: 1px solid var(--hue);
+    background: var(--hue); color: var(--accent-ink);
+    white-space:nowrap;
+  }
+  .ex-check:hover{ filter: brightness(1.06); }
+
+  .ex-feedback{ font-size: 13px; font-family: var(--font-mono); min-height: 4px; }
+  .ex-feedback.correct{ color: var(--good); }
+  .ex-feedback.wrong{ color: var(--bad); }
+
+  .ex-foot{ display:flex; justify-content: space-between; align-items:center; margin-top:2px; }
+  .ex-toggle{
+    background:none; border:none; padding:0; font-size: 12.5px;
+    font-family: var(--font-mono); color: var(--ink-faint); text-decoration: underline; text-underline-offset:3px;
+  }
+  .ex-toggle:hover{ color: var(--hue); }
+  .ex-solution{
+    display:none; margin-top: 4px; padding: 12px 14px;
+    background: var(--surface-2); border-radius: 8px;
+    font-size: 13.5px; color: var(--ink-soft);
+  }
+  .ex-solution.open{ display:block; }
+  .ex-solution .sol-step{ margin-bottom: 4px; }
+  .ex-solution .sol-final{ margin-top:8px; color: var(--good); font-weight:700; font-family: var(--font-mono); }
+
+  .open-note{ font-size: 11.5px; color: var(--ink-faint); font-family: var(--font-mono); }
+
+  sup{ font-size: 0.7em; }
+
+  footer{
+    text-align:center; padding: 30px 20px 50px;
+    color: var(--ink-faint); font-size: 13px; font-family: var(--font-mono);
+  }
+
+  .toast{
+    position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color: var(--bg);
+    padding: 10px 18px; border-radius: 999px; font-family: var(--font-mono); font-size: 13px;
+    opacity: 0; pointer-events:none; transition: opacity .25s ease, transform .25s ease;
+    z-index: 100; white-space: nowrap;
+  }
+  .toast.show{ opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+
+<div class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="eyebrow"><span class="dot"></span>IB MYP Sciences &middot; Chemistry &middot; Grade 9 &middot; Unit 1</div>
+    <div class="title-row">
+      <div>
+        <h1>Chem Unit 1: Bonding &amp; Conservation of Mass</h1>
+        <div class="subtitle">Chemistry workbook &mdash; atomic structure, the periodic table, ionic &amp; covalent bonding, giant structures and the law of conservation of mass. Six lessons, 120 exercises, two worked examples and two diagrams per lesson.</div>
+      </div>
+      <div class="student-tag">Prepared for <b>Devon</b> &middot; 17 weeks</div>
+    </div>
+    <div class="meta-strip">
+      <span>Global context: <b>Globalization and sustainability</b></span>
+      <span>Key concept: <b>Relationships</b></span>
+      <span>Related concepts: <b>Evidence, Interaction</b></span>
+      <span>Criteria: <b>A &middot; D</b></span>
+    </div>
+  </div>
+</div>
+
+<div class="scoreboard">
+  <div class="wrap scoreboard-inner" id="scoreboardInner">
+    <span class="score-total"><b id="totalDone">0</b>/120 done</span>
+    <!-- chips injected by JS -->
+    <button class="reset-btn" id="resetBtn" title="Clear saved progress">reset progress</button>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <details class="intro-card" id="introCard">
+    <summary>Unit reference &mdash; Statement of Inquiry, inquiry questions &amp; how to use this guide<span class="arrow">&#9660;</span></summary>
+    <div class="intro-grid">
+      <p class="soi">&ldquo;Understanding the relationships between bonding, structure, and the conservation of mass allows us to predict and explain the behavior of substances, leading to the development of materials and processes that impact our everyday lives.&rdquo;</p>
+
+      <div class="intro-block">
+        <h4>How this guide works</h4>
+        <p>Each lesson (A&ndash;F) opens with the core rules and a diagram, then two fully worked examples, a short <b>Rules to remember</b> checklist, a <b>chemistry meme break</b>, and 20 practice exercises. Every lesson's checklist is collected again in the <b>Rules to remember</b> cheat sheet at the bottom of the page. Type an answer and press <b>Check</b> for instant feedback, or open <b>Show solution</b> to see the steps. Write formulas the ordinary way &mdash; <code>MgCl2</code>, <code>Na2S</code> &mdash; and for mass answers you can type the unit or leave it off. Your progress is saved automatically in this browser.</p>
+      </div>
+      <div class="intro-block">
+        <h4>IB learner profile</h4>
+        <p><b>Inquirers &amp; Thinkers</b> &mdash; using atomic structure and the periodic table to <i>predict</i> how an unfamiliar substance will bond and behave, instead of memorising every compound one at a time.</p>
+      </div>
+
+      <div class="iq-table">
+        <div class="iq-row"><span class="tag">Factual</span><p>How can you distinguish between ionic and covalent compounds based on their properties?</p></div>
+        <div class="iq-row"><span class="tag">Factual</span><p>What does a balanced chemical equation tell you about the atoms taking part in a reaction?</p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>How accurate are scientists in predicting the products of chemical reactions using knowledge of atomic relationships?</p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>Why does the <em>structure</em> of a substance, rather than the element it is made from, decide its properties? <em>(see Lesson E)</em></p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>Why can mass appear to be lost in an open container without any law being broken? <em>(see Lesson F)</em></p></div>
+        <div class="iq-row"><span class="tag">Debatable</span><p>How accurate are the patterns used by scientists to explain changes in the world around us?</p></div>
+      </div>
+    </div>
+  </details>
+
+  <div id="lessons"></div>
+
+  <section class="cheatsheet" id="cheatsheet">
+    <h2>Rules to remember</h2>
+    <div class="cs-sub">The whole unit on one page &mdash; read this before a test</div>
+    <div class="cs-grid" id="csGrid"></div>
+  </section>
+
+</main>
+
+<footer>Bonding &amp; Conservation of Mass &middot; Chemistry Unit 1 study workbook &middot; built for Devon</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------------------------------------------------------
+     DATA
+  --------------------------------------------------------------- */
+  var LESSONS = [
+    {
+      letter: "A", hueVar: "--hueA", title: "Atomic Structure",
+      rules: [
+        "An atom has a tiny central <b>nucleus</b> holding <b>protons</b> (charge +1, relative mass 1) and <b>neutrons</b> (charge 0, relative mass 1), with <b>electrons</b> (charge &minus;1, almost no mass) in shells around it.",
+        "<b>Atomic number</b> (proton number) = the number of protons. In a <i>neutral</i> atom it is also the number of electrons.",
+        "<b>Mass number</b> = protons + neutrons, so <b>neutrons = mass number &minus; atomic number</b>. Subtract, every time.",
+        "Electron shells fill from the inside out: shell 1 holds up to <b>2</b>, shell 2 up to <b>8</b>, shell 3 up to <b>8</b> at this level. Chlorine (17 electrons) is therefore <b>2,8,7</b>.",
+        "<b>Isotopes</b> are atoms of the same element: same protons, different neutrons. Carbon-12 and carbon-14 both have 6 protons, but 6 and 8 neutrons.",
+        "An <b>ion</b> is an atom that has lost or gained electrons, so protons and electrons no longer match: Mg&sup2;+ still has 12 protons but only 10 electrons."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 180" width="380" height="180">
+        <circle cx="120" cy="92" r="84" class="dg-ink-line" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="120" cy="92" r="62" class="dg-ink-line" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="120" cy="92" r="40" class="dg-ink-line" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="120" cy="92" r="22" class="dg-tint" stroke-width="2"/>
+        <text x="120" y="88" text-anchor="middle" font-size="10.5">11p</text>
+        <text x="120" y="102" text-anchor="middle" font-size="10.5">12n</text>
+        <circle cx="120" cy="52" r="4" class="dg-fill"/>
+        <circle cx="120" cy="132" r="4" class="dg-fill"/>
+        <circle cx="182" cy="92" r="4" class="dg-fill"/>
+        <circle cx="164" cy="48" r="4" class="dg-fill"/>
+        <circle cx="120" cy="30" r="4" class="dg-fill"/>
+        <circle cx="76" cy="48" r="4" class="dg-fill"/>
+        <circle cx="58" cy="92" r="4" class="dg-fill"/>
+        <circle cx="76" cy="136" r="4" class="dg-fill"/>
+        <circle cx="120" cy="154" r="4" class="dg-fill"/>
+        <circle cx="164" cy="136" r="4" class="dg-fill"/>
+        <circle cx="120" cy="8" r="4.5" class="dg-good"/>
+        <text x="222" y="34" font-size="12" font-weight="bold">sodium, Na</text>
+        <text x="222" y="56" font-size="10">atomic number = 11</text>
+        <text x="222" y="72" font-size="10">mass number = 23</text>
+        <line x1="222" y1="82" x2="356" y2="82" class="dg-ink-line" stroke-width="1"/>
+        <text x="222" y="100" font-size="10">protons = 11</text>
+        <text x="222" y="116" font-size="10">neutrons = 23 &minus; 11 = 12</text>
+        <text x="222" y="132" font-size="10">electrons = 2, 8, 1</text>
+        <text x="222" y="156" font-size="9.5" class="dg-soft">green dot = outer electron</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 182" width="380" height="182">
+        <text x="190" y="14" text-anchor="middle" font-size="10">same protons = same element, different neutrons = isotope</text>
+        <rect x="14" y="24" width="168" height="114" rx="10" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="98" cy="81" r="47" class="dg-ink-line" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="98" cy="81" r="29" class="dg-ink-line" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="98" cy="81" r="19" class="dg-fill"/>
+        <text x="98" y="77" text-anchor="middle" font-size="10" style="fill:var(--surface)">6p</text>
+        <text x="98" y="90" text-anchor="middle" font-size="10" style="fill:var(--surface)">6n</text>
+        <circle cx="98" cy="52" r="3.5" class="dg-fill"/>
+        <circle cx="98" cy="110" r="3.5" class="dg-fill"/>
+        <circle cx="98" cy="34" r="3.5" class="dg-fill"/>
+        <circle cx="145" cy="81" r="3.5" class="dg-fill"/>
+        <circle cx="98" cy="128" r="3.5" class="dg-fill"/>
+        <circle cx="51" cy="81" r="3.5" class="dg-fill"/>
+        <text x="98" y="155" text-anchor="middle" font-size="12" font-weight="bold">carbon-12</text>
+        <text x="98" y="172" text-anchor="middle" font-size="9.5">6 protons, 6 neutrons</text>
+        <rect x="198" y="24" width="168" height="114" rx="10" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="282" cy="81" r="47" class="dg-ink-line" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="282" cy="81" r="29" class="dg-ink-line" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="282" cy="81" r="19" class="dg-fill"/>
+        <text x="282" y="77" text-anchor="middle" font-size="10" style="fill:var(--surface)">6p</text>
+        <text x="282" y="90" text-anchor="middle" font-size="10" style="fill:var(--surface)">8n</text>
+        <circle cx="282" cy="52" r="3.5" class="dg-fill"/>
+        <circle cx="282" cy="110" r="3.5" class="dg-fill"/>
+        <circle cx="282" cy="34" r="3.5" class="dg-fill"/>
+        <circle cx="329" cy="81" r="3.5" class="dg-fill"/>
+        <circle cx="282" cy="128" r="3.5" class="dg-fill"/>
+        <circle cx="235" cy="81" r="3.5" class="dg-fill"/>
+        <text x="282" y="155" text-anchor="middle" font-size="12" font-weight="bold">carbon-14</text>
+        <text x="282" y="172" text-anchor="middle" font-size="9.5">6 protons, 8 neutrons</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "A sodium atom: 11 protons and 12 neutrons packed in the nucleus, 11 electrons arranged 2,8,1 in shells.",
+        "Two isotopes of carbon. The proton count is identical, so both are carbon; only the neutron count (and so the mass) differs."
+      ],
+      trick: "<b>p is for proton, positive, packed in the nucleus.</b> The atomic number secretly tells you two things at once &mdash; protons <i>and</i> electrons &mdash; as long as the atom is neutral. Neutrons never come free: you always have to subtract for them. And shells fill like seats in a cinema, front row first: 2, then 8, then 8.",
+      examples: [
+        {
+          problem: "An atom has atomic number 11 and mass number 23. Find its numbers of protons, neutrons and electrons.",
+          steps: [
+            "Protons = atomic number = 11",
+            "Neutrons = mass number &minus; atomic number = 23 &minus; 11 = 12",
+            "The atom is neutral, so electrons = protons = 11",
+            "Check: 11 + 12 = 23, which is the mass number, so the numbers are consistent"
+          ],
+          answer: "11 protons, 12 neutrons, 11 electrons &mdash; this is sodium"
+        },
+        {
+          problem: "Chlorine has atomic number 17. Write its electron arrangement, state how many outer electrons it has, and predict the ion it forms.",
+          steps: [
+            "Neutral atom, so 17 electrons in total",
+            "Fill shell 1 first: 2 electrons used, 15 left",
+            "Fill shell 2: 8 electrons used, 7 left",
+            "The remaining 7 go into shell 3, giving 2,8,7",
+            "7 outer electrons means it needs just 1 more for a full shell, so it gains one electron"
+          ],
+          answer: "2,8,7 &mdash; 7 outer electrons, and it gains 1 electron to form Cl&minus;"
+        }
+      ],
+      remember: [
+        "<b>Atomic number = protons = electrons</b> in a neutral atom. It is the element's ID number and it never changes.",
+        "<b>Neutrons = mass number &minus; atomic number.</b> Neutrons are the only one you have to subtract for.",
+        "Shells fill <b>2, 8, 8</b> from the inside out. The last number is the count of <b>outer</b> electrons, and that number does all the chemistry.",
+        "Same protons + different neutrons = <b>isotopes</b> (same element). Different protons = a <b>different element</b> altogether."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 190" width="460" height="190">
+        <path d="M150 100 Q280 44 398 96" class="cm-line" stroke-width="1.2" stroke-dasharray="4 4"/>
+        <rect x="16" y="8" width="184" height="44" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="90,52 112,52 96,68" class="cm-face2" stroke-width="2"/>
+        <text x="108" y="27" text-anchor="middle" font-size="11">&ldquo;I am 99.98%</text>
+        <text x="108" y="43" text-anchor="middle" font-size="11">of the mass.&rdquo;</text>
+        <circle cx="110" cy="118" r="36" class="cm-face" stroke-width="2"/>
+        <circle cx="98" cy="110" r="3.5" class="cm-fill"/>
+        <circle cx="122" cy="110" r="3.5" class="cm-fill"/>
+        <path d="M96 128 Q110 141 124 128" class="cm-line" stroke-width="2"/>
+        <text x="110" y="174" text-anchor="middle" font-size="11">nucleus: p + n</text>
+        <rect x="256" y="6" width="192" height="46" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="384,52 404,52 410,93" class="cm-face2" stroke-width="2"/>
+        <text x="352" y="26" text-anchor="middle" font-size="11">&ldquo;And I get all</text>
+        <text x="352" y="43" text-anchor="middle" font-size="11">of the legroom.&rdquo;</text>
+        <circle cx="410" cy="110" r="15" class="cm-fill"/>
+        <circle cx="405" cy="106" r="2.2" fill="var(--surface)"/>
+        <circle cx="415" cy="106" r="2.2" fill="var(--surface)"/>
+        <path d="M404 115 Q410 121 416 115" stroke="var(--surface)" fill="none" stroke-width="1.6"/>
+        <text x="410" y="150" text-anchor="middle" font-size="11">electron</text>
+        <text x="404" y="168" text-anchor="middle" font-size="8.5" class="cm-soft">mostly empty space</text>
+      </svg>`,
+        caption: "The nucleus owns almost all of the mass; the electrons own almost all of the room. Scale an atom up to a football stadium and the nucleus is a single pea on the centre spot."
+      },
+      exercises: [
+        { prompt: "An atom has atomic number 6. How many protons does it have?", value: 6,
+          solution: ["Protons = atomic number", "= 6 (this is carbon)"] },
+        { prompt: "The same atom (atomic number 6) is neutral. How many electrons does it have?", value: 6,
+          solution: ["In a neutral atom, electrons = protons = atomic number", "= 6"] },
+        { prompt: "Which subatomic particle has no electric charge?", accept:["neutron","neutrons"],
+          solution: ["Protons are +1 and electrons are &minus;1", "The neutron is electrically neutral"] },
+        { prompt: "Which subatomic particle is found in shells around the nucleus?", accept:["electron","electrons"],
+          solution: ["Protons and neutrons are packed inside the nucleus", "Electrons orbit it in shells"] },
+        { prompt: "What is the relative charge on a proton? Enter it as a signed number.", value: 1, accept:["+1","1"],
+          solution: ["A proton carries a charge of +1", "An electron carries &minus;1, and a neutron 0"] },
+        { prompt: "What is the maximum number of electrons the first electron shell can hold?", value: 2,
+          solution: ["The first (innermost) shell holds a maximum of 2 electrons"] },
+        { prompt: "What is the maximum number of electrons the second electron shell can hold?", value: 8,
+          solution: ["The second shell holds a maximum of 8 electrons"] },
+        { prompt: "An atom has atomic number 17 and mass number 35. How many neutrons does it have?", value: 18,
+          solution: ["Neutrons = mass number &minus; atomic number", "= 35 &minus; 17 = 18"] },
+        { prompt: "An atom has 19 protons and 20 neutrons. What is its mass number?", value: 39,
+          solution: ["Mass number = protons + neutrons", "= 19 + 20 = 39 (potassium-39)"] },
+        { prompt: "An iron atom has 26 protons and a mass number of 56. How many neutrons does it have?", value: 30,
+          solution: ["Neutrons = mass number &minus; atomic number", "= 56 &minus; 26 = 30"] },
+        { prompt: "An atom has the electron arrangement 2,8,7. What is its total number of electrons?", value: 17,
+          solution: ["Add the shells: 2 + 8 + 7", "= 17, so this is chlorine"] },
+        { prompt: "Magnesium has atomic number 12. Write its electron arrangement in the form 2,8,1.", accept:["2,8,2","282"],
+          solution: ["12 electrons: shell 1 takes 2 (10 left), shell 2 takes 8 (2 left)", "The last 2 go in shell 3", "2,8,2"] },
+        { prompt: "Oxygen has atomic number 8. Write its electron arrangement in the form 2,8,1.", accept:["2,6","26"],
+          solution: ["8 electrons: shell 1 takes 2, leaving 6", "Shell 2 can hold 8, so all 6 fit there", "2,6"] },
+        { prompt: "A neon atom has 10 electrons. How many electrons are in its outer shell?", value: 8,
+          solution: ["10 electrons fill as 2,8", "The outer shell holds 8 &mdash; it is full, which is why neon is unreactive"] },
+        { prompt: "Carbon-14 has a mass number of 14 and 6 protons. How many neutrons does it have?", value: 8,
+          solution: ["Neutrons = 14 &minus; 6", "= 8"] },
+        { prompt: "Chlorine-35 and chlorine-37 are isotopes. State the number of protons in chlorine-37.", value: 17,
+          solution: ["Every chlorine atom has 17 protons &mdash; that is what makes it chlorine", "Chlorine-37 simply has 20 neutrons instead of 18"] },
+        { prompt: "State the one quantity that is identical in every atom of chlorine, no matter which isotope it is.", accept:["protons","numberofprotons","protonnumber","atomicnumber","theatomicnumber"],
+          solution: ["Isotopes differ only in neutrons", "The number of protons (the atomic number) is always 17"] },
+        { prompt: "A magnesium ion Mg&sup2;+ has 12 protons. How many electrons does it have?", value: 10,
+          solution: ["A 2+ charge means the atom lost 2 electrons", "12 &minus; 2 = 10 electrons (the same as neon)"] },
+        { prompt: "Define the word \"isotope\" and give one example.", open:true,
+          solution: ["Sample response: Isotopes are atoms of the same element that have the same number of protons but different numbers of neutrons, so they have different mass numbers. Carbon-12 and carbon-14 are isotopes: both have 6 protons, but one has 6 neutrons and the other has 8."] },
+        { prompt: "Explain why it is the number of protons, and not the number of neutrons, that decides which element an atom is.", open:true,
+          solution: ["Sample response: The proton number fixes the electron number in a neutral atom, and the electrons (especially the outer ones) control how the atom reacts. Change the neutrons and you only get a heavier or lighter version of the same element &mdash; an isotope, with identical chemistry. Change the protons and both the charge balance and the electron arrangement change, so you get a completely different element."] }
+      ]
+    },
+    {
+      letter: "B", hueVar: "--hueB", title: "The Periodic Table",
+      rules: [
+        "Elements are arranged in order of increasing <b>atomic number</b>, in <b>groups</b> (columns) and <b>periods</b> (rows).",
+        "For the main groups, the <b>group number = the number of outer-shell electrons</b>. The <b>period number = the number of occupied shells</b>.",
+        "<b>Metals</b> sit on the left and centre and <b>lose</b> electrons when they react; <b>non-metals</b> sit on the right and <b>gain</b> electrons.",
+        "<b>Group 8 (the noble gases)</b> already have full outer shells, so they have nothing to gain or lose and are almost completely unreactive.",
+        "Elements in the same group behave alike because they have the same number of outer electrons: Group 1 are the reactive <b>alkali metals</b>, Group 7 the <b>halogens</b>.",
+        "Reactivity has a direction: Group 1 metals get <b>more</b> reactive going down the group, while Group 7 non-metals get <b>less</b> reactive going down."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 175" width="380" height="175">
+        <text x="190" y="14" text-anchor="middle" font-size="10">group number = number of outer-shell electrons</text>
+        <text x="18" y="34" text-anchor="middle" font-size="9" class="dg-soft">P</text>
+        <text x="47" y="34" text-anchor="middle" font-size="10">1</text>
+        <text x="81" y="34" text-anchor="middle" font-size="10">2</text>
+        <text x="115" y="34" text-anchor="middle" font-size="10">3</text>
+        <text x="149" y="34" text-anchor="middle" font-size="10">4</text>
+        <text x="183" y="34" text-anchor="middle" font-size="10">5</text>
+        <text x="217" y="34" text-anchor="middle" font-size="10">6</text>
+        <text x="251" y="34" text-anchor="middle" font-size="10">7</text>
+        <text x="285" y="34" text-anchor="middle" font-size="10">8</text>
+        <rect x="268" y="40" width="34" height="78" class="dg-tint" stroke-width="1"/>
+        <g class="dg-ink-line" stroke-width="1" fill="none">
+          <rect x="30" y="40" width="34" height="26"/>
+          <rect x="268" y="40" width="34" height="26"/>
+          <rect x="30" y="66" width="34" height="26"/>
+          <rect x="64" y="66" width="34" height="26"/>
+          <rect x="98" y="66" width="34" height="26"/>
+          <rect x="132" y="66" width="34" height="26"/>
+          <rect x="166" y="66" width="34" height="26"/>
+          <rect x="200" y="66" width="34" height="26"/>
+          <rect x="234" y="66" width="34" height="26"/>
+          <rect x="268" y="66" width="34" height="26"/>
+          <rect x="30" y="92" width="34" height="26"/>
+          <rect x="64" y="92" width="34" height="26"/>
+          <rect x="98" y="92" width="34" height="26"/>
+          <rect x="132" y="92" width="34" height="26"/>
+          <rect x="166" y="92" width="34" height="26"/>
+          <rect x="200" y="92" width="34" height="26"/>
+          <rect x="234" y="92" width="34" height="26"/>
+          <rect x="268" y="92" width="34" height="26"/>
+        </g>
+        <text x="18" y="57" text-anchor="middle" font-size="10" class="dg-soft">1</text>
+        <text x="18" y="83" text-anchor="middle" font-size="10" class="dg-soft">2</text>
+        <text x="18" y="109" text-anchor="middle" font-size="10" class="dg-soft">3</text>
+        <text x="47" y="57" text-anchor="middle" font-size="11">H</text>
+        <text x="285" y="57" text-anchor="middle" font-size="11">He</text>
+        <text x="47" y="83" text-anchor="middle" font-size="11">Li</text>
+        <text x="81" y="83" text-anchor="middle" font-size="11">Be</text>
+        <text x="115" y="83" text-anchor="middle" font-size="11">B</text>
+        <text x="149" y="83" text-anchor="middle" font-size="11">C</text>
+        <text x="183" y="83" text-anchor="middle" font-size="11">N</text>
+        <text x="217" y="83" text-anchor="middle" font-size="11">O</text>
+        <text x="251" y="83" text-anchor="middle" font-size="11">F</text>
+        <text x="285" y="83" text-anchor="middle" font-size="11">Ne</text>
+        <text x="47" y="109" text-anchor="middle" font-size="11">Na</text>
+        <text x="81" y="109" text-anchor="middle" font-size="11">Mg</text>
+        <text x="115" y="109" text-anchor="middle" font-size="11">Al</text>
+        <text x="149" y="109" text-anchor="middle" font-size="11">Si</text>
+        <text x="183" y="109" text-anchor="middle" font-size="11">P</text>
+        <text x="217" y="109" text-anchor="middle" font-size="11">S</text>
+        <text x="251" y="109" text-anchor="middle" font-size="11">Cl</text>
+        <text x="285" y="109" text-anchor="middle" font-size="11">Ar</text>
+        <line x1="166" y1="40" x2="166" y2="118" class="dg-line" stroke-width="2.5"/>
+        <text x="96" y="136" text-anchor="middle" font-size="9.5">metals lose electrons</text>
+        <text x="250" y="136" text-anchor="middle" font-size="9.5">non-metals gain electrons</text>
+        <text x="190" y="160" text-anchor="middle" font-size="10">period number = number of shells</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 175" width="380" height="175">
+        <text x="190" y="16" text-anchor="middle" font-size="11" font-weight="bold">Group 1 meets Group 7</text>
+        <circle cx="80" cy="84" r="46" class="dg-ink-line" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="80" cy="84" r="28" class="dg-ink-line" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="80" cy="84" r="15" class="dg-tint" stroke-width="1.5"/>
+        <text x="80" y="88" text-anchor="middle" font-size="11">Li</text>
+        <circle cx="80" cy="56" r="4" class="dg-fill"/>
+        <circle cx="80" cy="112" r="4" class="dg-fill"/>
+        <circle cx="80" cy="38" r="4.5" class="dg-good"/>
+        <line x1="132" y1="84" x2="208" y2="84" class="dg-line" stroke-width="2"/>
+        <polygon points="208,78 208,90 220,84" class="dg-fill"/>
+        <text x="189" y="73" text-anchor="middle" font-size="9.5">1 electron transferred</text>
+        <circle cx="300" cy="84" r="46" class="dg-ink-line" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="300" cy="84" r="28" class="dg-ink-line" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="300" cy="84" r="15" class="dg-tint" stroke-width="1.5"/>
+        <text x="300" y="88" text-anchor="middle" font-size="11">F</text>
+        <circle cx="300" cy="56" r="4" class="dg-fill"/>
+        <circle cx="300" cy="112" r="4" class="dg-fill"/>
+        <circle cx="346" cy="84" r="4" class="dg-fill"/>
+        <circle cx="332" cy="52" r="4" class="dg-fill"/>
+        <circle cx="300" cy="38" r="4" class="dg-fill"/>
+        <circle cx="268" cy="52" r="4" class="dg-fill"/>
+        <circle cx="254" cy="84" r="4" class="dg-fill"/>
+        <circle cx="268" cy="116" r="4" class="dg-fill"/>
+        <circle cx="300" cy="130" r="4" class="dg-fill"/>
+        <text x="80" y="152" text-anchor="middle" font-size="10">Li has 1 to give</text>
+        <text x="300" y="152" text-anchor="middle" font-size="10">F needs exactly 1</text>
+        <text x="190" y="170" text-anchor="middle" font-size="9.5">both end up with full outer shells</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "The first three periods. Read a group number downwards for outer electrons, a period number across for shells; the bar marks the metal / non-metal divide and Group 8 is shaded.",
+        "Why Group 1 and Group 7 are made for each other: one spare electron meets one empty space."
+      ],
+      trick: "Two numbers, two facts: <b>group = outer electrons, period = shells</b>. Then read the table left to right as a staircase from <b>givers</b> to <b>takers</b> &mdash; metals on the left hand electrons over, non-metals on the right snatch them up, and the noble gases on the far right have already got what everyone else is fighting for.",
+      examples: [
+        {
+          problem: "Sodium (Na) is in Group 1, Period 3. How many electrons are in its outer shell, and how many shells does it have?",
+          steps: [
+            "Group 1 &rarr; 1 electron in the outer shell",
+            "Period 3 &rarr; 3 occupied shells",
+            "Check against the arrangement: 2,8,1 has three shells and ends in 1"
+          ],
+          answer: "1 outer electron, 3 electron shells"
+        },
+        {
+          problem: "An element has the electron arrangement 2,8,6. Give its group, its period, whether it is a metal or a non-metal, and the ion it forms.",
+          steps: [
+            "The last number is 6, so it has 6 outer electrons &rarr; Group 6",
+            "There are three numbers, so three shells &rarr; Period 3",
+            "Group 6 is on the right-hand side of the table &rarr; non-metal",
+            "It needs 2 more electrons to fill its outer shell, so it gains 2 and becomes 2&minus;",
+            "2 + 8 + 6 = 16 electrons, so the element is sulfur"
+          ],
+          answer: "Group 6, Period 3, a non-metal, forming S&sup2;&minus;"
+        }
+      ],
+      remember: [
+        "<b>Group number = outer electrons. Period number = shells.</b> Those two facts unlock most periodic-table questions.",
+        "<b>Left loses, right gains.</b> Metals hand electrons over and go positive; non-metals take them and go negative.",
+        "Same group = same number of outer electrons = <b>similar chemical properties</b>. That is the whole point of the columns.",
+        "<b>Group 8 is already full</b>, so it does nothing. Every other element is essentially trying to become a noble gas."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 200" width="460" height="200">
+        <rect x="11" y="6" width="134" height="58" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="66,64 88,64 74,80" class="cm-face2" stroke-width="2"/>
+        <text x="78" y="25" text-anchor="middle" font-size="10">&ldquo;Desperate to</text>
+        <text x="78" y="41" text-anchor="middle" font-size="10">lose exactly</text>
+        <text x="78" y="57" text-anchor="middle" font-size="10">one electron.&rdquo;</text>
+        <circle cx="78" cy="116" r="30" class="cm-face" stroke-width="2"/>
+        <circle cx="68" cy="108" r="3.5" class="cm-fill"/>
+        <circle cx="88" cy="108" r="3.5" class="cm-fill"/>
+        <path d="M66 124 Q78 137 90 124" class="cm-line" stroke-width="2"/>
+        <text x="78" y="164" text-anchor="middle" font-size="11" font-weight="bold">Na, Group 1</text>
+        <text x="78" y="182" text-anchor="middle" font-size="9">1 outer electron</text>
+        <text x="154" y="122" text-anchor="middle" font-size="16" class="cm-good-fill">&#9829;</text>
+        <rect x="163" y="6" width="134" height="58" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="218,64 240,64 226,80" class="cm-face2" stroke-width="2"/>
+        <text x="230" y="25" text-anchor="middle" font-size="10">&ldquo;I need exactly</text>
+        <text x="230" y="41" text-anchor="middle" font-size="10">one. Weird,</text>
+        <text x="230" y="57" text-anchor="middle" font-size="10">right?&rdquo;</text>
+        <circle cx="230" cy="116" r="30" class="cm-face" stroke-width="2"/>
+        <circle cx="220" cy="108" r="3.5" class="cm-fill"/>
+        <circle cx="240" cy="108" r="3.5" class="cm-fill"/>
+        <path d="M218 124 Q230 137 242 124" class="cm-line" stroke-width="2"/>
+        <text x="230" y="164" text-anchor="middle" font-size="11" font-weight="bold">Cl, Group 7</text>
+        <text x="230" y="182" text-anchor="middle" font-size="9">7 outer electrons</text>
+        <rect x="315" y="6" width="134" height="58" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="370,64 392,64 378,80" class="cm-face2" stroke-width="2"/>
+        <text x="382" y="25" text-anchor="middle" font-size="10">&ldquo;I am complete.</text>
+        <text x="382" y="41" text-anchor="middle" font-size="10">Not looking.</text>
+        <text x="382" y="57" text-anchor="middle" font-size="10">Thanks.&rdquo;</text>
+        <circle cx="382" cy="116" r="30" class="cm-face" stroke-width="2"/>
+        <path d="M373 106 q6 -6 12 0" class="cm-line" stroke-width="2"/>
+        <path d="M391 106 q6 -6 12 0" class="cm-line" stroke-width="2"/>
+        <path d="M370 126 L394 126" class="cm-line" stroke-width="2"/>
+        <text x="382" y="164" text-anchor="middle" font-size="11" font-weight="bold">Ar, Group 8</text>
+        <text x="382" y="182" text-anchor="middle" font-size="9">full outer shell</text>
+      </svg>`,
+        caption: "Sodium has one electron it cannot wait to get rid of and chlorine has exactly one gap &mdash; a perfect match. Argon already has a full outer shell, which is why it turns down every offer."
+      },
+      exercises: [
+        { prompt: "An element is in Group 2. How many electrons are in its outer shell?", value: 2,
+          solution: ["Group number = number of outer electrons", "= 2"] },
+        { prompt: "An element is in Period 2. How many electron shells does it have?", value: 2,
+          solution: ["Period number = number of occupied shells", "= 2"] },
+        { prompt: "Chlorine is in Group 7. How many outer electrons does it have?", value: 7,
+          solution: ["Group 7 &rarr; 7 outer electrons (its arrangement is 2,8,7)"] },
+        { prompt: "Which main group number (1 to 8) contains the noble gases?", value: 8,
+          solution: ["The noble gases sit in the last main column", "Group 8 (labelled 18 on some tables)"] },
+        { prompt: "Name the family of elements in Group 8 that are unreactive because they have full outer shells.", accept:["noblegases","noblegas","thenoblegases"],
+          solution: ["Helium, neon, argon and the rest form the noble gases"] },
+        { prompt: "Name the family of reactive metals found in Group 1.", accept:["alkalimetals","alkalimetal","thealkalimetals"],
+          solution: ["Group 1 is the alkali metals: lithium, sodium, potassium and so on"] },
+        { prompt: "Name the family of reactive non-metals found in Group 7.", accept:["halogens","halogen","thehalogens"],
+          solution: ["Group 7 is the halogens: fluorine, chlorine, bromine, iodine"] },
+        { prompt: "True or false: metals are found on the left and centre of the periodic table.", accept:["true","t"],
+          solution: ["True &mdash; the metals occupy the left and centre, non-metals the right"] },
+        { prompt: "True or false: non-metals tend to gain electrons when they react.", accept:["true","t"],
+          solution: ["True &mdash; non-metals gain electrons to complete their outer shell"] },
+        { prompt: "Sulfur has the arrangement 2,8,6. How many electrons does a neutral sulfur atom have in total?", value: 16,
+          solution: ["2 + 8 + 6", "= 16"] },
+        { prompt: "An element has the arrangement 2,8,8,1. Which group is it in?", value: 1,
+          solution: ["The outer shell holds 1 electron", "Group 1 (this is potassium)"] },
+        { prompt: "An element has the arrangement 2,8,5. Which period is it in?", value: 3,
+          solution: ["Count the shells: there are three numbers", "Period 3 (this is phosphorus)"] },
+        { prompt: "Silicon has 14 electrons. Which group is it in?", value: 4,
+          solution: ["14 electrons fill as 2,8,4", "4 outer electrons &rarr; Group 4"] },
+        { prompt: "An element in Group 6 reacts. How many electrons must it gain to fill its outer shell?", value: 2,
+          solution: ["It has 6 outer electrons and needs 8", "8 &minus; 6 = 2 electrons gained"] },
+        { prompt: "Argon has the arrangement 2,8,8. How many electrons does it need to gain or lose to reach a full outer shell?", value: 0,
+          solution: ["Its outer shell already holds 8 electrons &mdash; it is full", "0 &mdash; which is exactly why argon is unreactive"] },
+        { prompt: "An element has the arrangement 2,8,3. Is it a metal or a non-metal?", accept:["metal","ametal"],
+          solution: ["3 outer electrons puts it in Group 3, on the left-hand side", "It loses electrons easily, so it is a metal (aluminium)"] },
+        { prompt: "Going down Group 1 from lithium to potassium, does reactivity increase or decrease?", accept:["increase","increases","itincreases","increasing"],
+          solution: ["The outer electron sits further from the nucleus in each row down", "It is lost more easily, so reactivity increases down Group 1"] },
+        { prompt: "Going down Group 7 from fluorine to iodine, does reactivity increase or decrease?", accept:["decrease","decreases","itdecreases","decreasing"],
+          solution: ["The outer shell is further from the nucleus, so an incoming electron is attracted less strongly", "Reactivity decreases down Group 7"] },
+        { prompt: "Explain why elements in the same group of the periodic table tend to have similar chemical properties.", open:true,
+          solution: ["Sample response: Every element in a group has the same number of outer-shell electrons. Chemical reactions are essentially about what an atom does with those outer electrons, so elements that start with the same number of them lose or gain the same number and form the same kinds of compounds &mdash; which is why all the Group 1 metals react with water in the same way."] },
+        { prompt: "A Group 1 metal and a Group 7 non-metal react together extremely readily. Explain why, using their outer electrons.", open:true,
+          solution: ["Sample response: The Group 1 atom has exactly one outer electron it needs to get rid of, and the Group 7 atom is exactly one electron short of a full shell. The transfer solves both problems at once and leaves both atoms with a noble-gas arrangement, so the reaction releases a lot of energy and happens very easily."] }
+      ]
+    },
+    {
+      letter: "C", hueVar: "--hueC", title: "Ionic Bonding",
+      rules: [
+        "Ionic bonding happens between a <b>metal and a non-metal</b> and involves the <b>transfer</b> of electrons &mdash; they are handed over, not shared.",
+        "The metal <b>loses</b> electrons to become a positive <b>cation</b>; the non-metal <b>gains</b> them to become a negative <b>anion</b>. Both end up with full outer shells.",
+        "The ionic bond itself is the <b>strong electrostatic attraction</b> between the oppositely charged ions, acting in every direction at once.",
+        "Ions stack into a <b>giant ionic lattice</b> &mdash; there are no molecules in NaCl, just millions of alternating Na+ and Cl&minus; ions.",
+        "To write a formula, balance the charges by <b>criss-crossing</b> them: Mg&sup2;+ with Cl&minus; gives MgCl2, because 1 &times; 2+ needs 2 &times; 1&minus;.",
+        "Naming: the metal keeps its name, the non-metal ends in <b>-ide</b> &mdash; sodium + chlorine gives sodium chlor<b>ide</b>."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 195" width="380" height="195">
+        <text x="190" y="16" text-anchor="middle" font-size="10.5">metal + non-metal: the electron is transferred</text>
+        <circle cx="78" cy="72" r="34" class="dg-line" stroke-width="1.5"/>
+        <text x="78" y="77" text-anchor="middle" font-size="13">Na</text>
+        <circle cx="78" cy="38" r="4.5" class="dg-good"/>
+        <circle cx="290" cy="72" r="34" class="dg-line" stroke-width="1.5"/>
+        <text x="290" y="77" text-anchor="middle" font-size="13">Cl</text>
+        <text x="324" y="76" text-anchor="middle" font-size="11">&times;</text>
+        <text x="314" y="56" text-anchor="middle" font-size="11">&times;</text>
+        <text x="290" y="46" text-anchor="middle" font-size="11">&times;</text>
+        <text x="266" y="56" text-anchor="middle" font-size="11">&times;</text>
+        <text x="256" y="76" text-anchor="middle" font-size="11">&times;</text>
+        <text x="266" y="100" text-anchor="middle" font-size="11">&times;</text>
+        <text x="290" y="110" text-anchor="middle" font-size="11">&times;</text>
+        <line x1="120" y1="72" x2="220" y2="72" class="dg-line" stroke-width="2"/>
+        <polygon points="220,66 220,78 232,72" class="dg-fill"/>
+        <text x="176" y="58" text-anchor="middle" font-size="9.5">one electron moves</text>
+        <rect x="24" y="122" width="124" height="44" rx="8" class="dg-tint" stroke-width="1.5"/>
+        <text x="80" y="152" text-anchor="middle" font-size="14">Na</text>
+        <text x="90" y="145" font-size="11">+</text>
+        <text x="86" y="182" text-anchor="middle" font-size="9">2,8 &mdash; full shell</text>
+        <rect x="232" y="122" width="124" height="44" rx="8" class="dg-tint" stroke-width="1.5"/>
+        <text x="290" y="152" text-anchor="middle" font-size="14">Cl</text>
+        <text x="300" y="145" font-size="11">&minus;</text>
+        <text x="294" y="182" text-anchor="middle" font-size="9">2,8,8 &mdash; full shell</text>
+        <line x1="152" y1="144" x2="228" y2="144" class="dg-line" stroke-width="1.5"/>
+        <polygon points="176,138 176,150 188,144" class="dg-fill"/>
+        <polygon points="204,138 204,150 192,144" class="dg-fill"/>
+        <text x="190" y="132" text-anchor="middle" font-size="9">attraction</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 178" width="380" height="178">
+        <text x="150" y="16" text-anchor="middle" font-size="10">the ions repeat in all directions</text>
+        <g class="dg-ink-line" stroke-width="1">
+          <line x1="60" y1="44" x2="236" y2="44"/>
+          <line x1="60" y1="78" x2="236" y2="78"/>
+          <line x1="60" y1="112" x2="236" y2="112"/>
+          <line x1="60" y1="146" x2="236" y2="146"/>
+          <line x1="60" y1="44" x2="60" y2="146"/>
+          <line x1="104" y1="44" x2="104" y2="146"/>
+          <line x1="148" y1="44" x2="148" y2="146"/>
+          <line x1="192" y1="44" x2="192" y2="146"/>
+          <line x1="236" y1="44" x2="236" y2="146"/>
+        </g>
+        <circle cx="60" cy="44" r="13" class="dg-fill"/><text x="60" y="48" text-anchor="middle" font-size="11" style="fill:var(--surface)">+</text>
+        <circle cx="104" cy="44" r="13" class="dg-tint" stroke-width="1.5"/><text x="104" y="48" text-anchor="middle" font-size="11">&minus;</text>
+        <circle cx="148" cy="44" r="13" class="dg-fill"/><text x="148" y="48" text-anchor="middle" font-size="11" style="fill:var(--surface)">+</text>
+        <circle cx="192" cy="44" r="13" class="dg-tint" stroke-width="1.5"/><text x="192" y="48" text-anchor="middle" font-size="11">&minus;</text>
+        <circle cx="236" cy="44" r="13" class="dg-fill"/><text x="236" y="48" text-anchor="middle" font-size="11" style="fill:var(--surface)">+</text>
+        <circle cx="60" cy="78" r="13" class="dg-tint" stroke-width="1.5"/><text x="60" y="82" text-anchor="middle" font-size="11">&minus;</text>
+        <circle cx="104" cy="78" r="13" class="dg-fill"/><text x="104" y="82" text-anchor="middle" font-size="11" style="fill:var(--surface)">+</text>
+        <circle cx="148" cy="78" r="13" class="dg-tint" stroke-width="1.5"/><text x="148" y="82" text-anchor="middle" font-size="11">&minus;</text>
+        <circle cx="192" cy="78" r="13" class="dg-fill"/><text x="192" y="82" text-anchor="middle" font-size="11" style="fill:var(--surface)">+</text>
+        <circle cx="236" cy="78" r="13" class="dg-tint" stroke-width="1.5"/><text x="236" y="82" text-anchor="middle" font-size="11">&minus;</text>
+        <circle cx="60" cy="112" r="13" class="dg-fill"/><text x="60" y="116" text-anchor="middle" font-size="11" style="fill:var(--surface)">+</text>
+        <circle cx="104" cy="112" r="13" class="dg-tint" stroke-width="1.5"/><text x="104" y="116" text-anchor="middle" font-size="11">&minus;</text>
+        <circle cx="148" cy="112" r="13" class="dg-fill"/><text x="148" y="116" text-anchor="middle" font-size="11" style="fill:var(--surface)">+</text>
+        <circle cx="192" cy="112" r="13" class="dg-tint" stroke-width="1.5"/><text x="192" y="116" text-anchor="middle" font-size="11">&minus;</text>
+        <circle cx="236" cy="112" r="13" class="dg-fill"/><text x="236" y="116" text-anchor="middle" font-size="11" style="fill:var(--surface)">+</text>
+        <circle cx="60" cy="146" r="13" class="dg-tint" stroke-width="1.5"/><text x="60" y="150" text-anchor="middle" font-size="11">&minus;</text>
+        <circle cx="104" cy="146" r="13" class="dg-fill"/><text x="104" y="150" text-anchor="middle" font-size="11" style="fill:var(--surface)">+</text>
+        <circle cx="148" cy="146" r="13" class="dg-tint" stroke-width="1.5"/><text x="148" y="150" text-anchor="middle" font-size="11">&minus;</text>
+        <circle cx="192" cy="146" r="13" class="dg-fill"/><text x="192" y="150" text-anchor="middle" font-size="11" style="fill:var(--surface)">+</text>
+        <circle cx="236" cy="146" r="13" class="dg-tint" stroke-width="1.5"/><text x="236" y="150" text-anchor="middle" font-size="11">&minus;</text>
+        <circle cx="272" cy="54" r="10" class="dg-fill"/><text x="272" y="58" text-anchor="middle" font-size="9" style="fill:var(--surface)">+</text>
+        <text x="288" y="58" font-size="9">sodium ion</text>
+        <circle cx="272" cy="88" r="10" class="dg-tint" stroke-width="1.5"/><text x="272" y="92" text-anchor="middle" font-size="9">&minus;</text>
+        <text x="288" y="92" font-size="9">chloride ion</text>
+        <text x="262" y="122" font-size="9">strong attraction</text>
+        <text x="262" y="136" font-size="9">in every direction</text>
+        <text x="150" y="172" text-anchor="middle" font-size="9.5">a giant ionic lattice, not molecules</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "Sodium hands its single outer electron to chlorine. Both ions now have full shells, and their opposite charges lock them together.",
+        "There is no such thing as an NaCl molecule: every sodium ion is surrounded by chloride ions and vice versa, throughout the whole crystal."
+      ],
+      trick: "<b>Metals lose and go plus, non-metals gain and go minus</b> &mdash; and that pull between plus and minus <i>is</i> the bond. For the formula, criss-cross the charges and cancel: Mg&sup2;+ and Cl&minus; become MgCl2. If you can say the charges out loud, you can write the formula without memorising a single compound.",
+      examples: [
+        {
+          problem: "Sodium (Group 1) reacts with chlorine (Group 7). Write the formula of the compound and name it.",
+          steps: [
+            "Na has 1 outer electron and loses it &rarr; Na+",
+            "Cl has 7 outer electrons and gains 1 &rarr; Cl&minus;",
+            "The charges +1 and &minus;1 already cancel, so the ions combine 1 : 1",
+            "Metal name first, non-metal ends in -ide"
+          ],
+          answer: "NaCl, sodium chloride"
+        },
+        {
+          problem: "Magnesium (Group 2) reacts with nitrogen (Group 5). Work out the formula of the compound.",
+          steps: [
+            "Mg has 2 outer electrons and loses both &rarr; Mg&sup2;+",
+            "N has 5 outer electrons and gains 3 to reach 8 &rarr; N&sup3;&minus;",
+            "The charges do not cancel 1 : 1, so find the smallest whole-number balance",
+            "3 Mg&sup2;+ gives 6+ and 2 N&sup3;&minus; gives 6&minus;, so the ratio is 3 : 2",
+            "Check: total charge = 6+ and 6&minus; = zero overall, as every compound must be"
+          ],
+          answer: "Mg3N2, magnesium nitride"
+        }
+      ],
+      remember: [
+        "<b>Metal loses &rarr; positive cation. Non-metal gains &rarr; negative anion.</b> Transfer, never sharing.",
+        "The bond is the <b>electrostatic attraction between opposite charges</b>, pulling in every direction through a giant lattice.",
+        "<b>Criss-cross the charges</b> to get the formula, then cancel: Ca&sup2;+ with Cl&minus; makes CaCl2, and the compound is always neutral overall.",
+        "Ionic compounds have <b>high melting points</b> and conduct <b>only when molten or dissolved</b> &mdash; the ions have to be free to move."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 195" width="460" height="195">
+        <rect x="14" y="6" width="180" height="46" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="96,52 118,52 104,68" class="cm-face2" stroke-width="2"/>
+        <text x="104" y="26" text-anchor="middle" font-size="11">&ldquo;Take my electron.</text>
+        <text x="104" y="43" text-anchor="middle" font-size="11">I insist.&rdquo;</text>
+        <rect x="266" y="6" width="180" height="46" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="336,52 358,52 350,68" class="cm-face2" stroke-width="2"/>
+        <text x="356" y="26" text-anchor="middle" font-size="11">&ldquo;Do not mind</text>
+        <text x="356" y="43" text-anchor="middle" font-size="11">if I do.&rdquo;</text>
+        <circle cx="130" cy="112" r="38" class="cm-face" stroke-width="2"/>
+        <circle cx="117" cy="103" r="4" class="cm-fill"/>
+        <circle cx="143" cy="103" r="4" class="cm-fill"/>
+        <path d="M112 122 Q130 140 148 122" class="cm-line" stroke-width="2"/>
+        <circle cx="330" cy="112" r="38" class="cm-face" stroke-width="2"/>
+        <circle cx="317" cy="103" r="4" class="cm-fill"/>
+        <circle cx="343" cy="103" r="4" class="cm-fill"/>
+        <path d="M312 122 Q330 140 348 122" class="cm-line" stroke-width="2"/>
+        <circle cx="164" cy="82" r="13" class="cm-fill"/>
+        <text x="164" y="87" text-anchor="middle" font-size="13" style="fill:var(--surface)">+</text>
+        <circle cx="296" cy="82" r="13" class="cm-fill"/>
+        <text x="296" y="87" text-anchor="middle" font-size="13" style="fill:var(--surface)">&minus;</text>
+        <line x1="176" y1="116" x2="284" y2="116" class="cm-line" stroke-width="2"/>
+        <polygon points="212,110 212,122 224,116" class="cm-fill"/>
+        <polygon points="248,110 248,122 236,116" class="cm-fill"/>
+        <text x="230" y="100" text-anchor="middle" font-size="10">opposites attract</text>
+        <text x="126" y="172" text-anchor="middle" font-size="13">Na</text>
+        <text x="135" y="166" font-size="10">+</text>
+        <text x="326" y="172" text-anchor="middle" font-size="13">Cl</text>
+        <text x="335" y="166" font-size="10">&minus;</text>
+        <text x="130" y="190" text-anchor="middle" font-size="9" class="cm-soft">gave 1 electron</text>
+        <text x="330" y="190" text-anchor="middle" font-size="9" class="cm-soft">gained 1 electron</text>
+      </svg>`,
+        caption: "Sodium is thrilled to be rid of that electron and chlorine is thrilled to have it &mdash; and now, being oppositely charged, neither of them can walk away. That inability to walk away is the ionic bond."
+      },
+      exercises: [
+        { prompt: "Magnesium is in Group 2. What is the charge on the magnesium ion? Enter it as a plain number, so a 2+ ion is 2.", value: 2,
+          solution: ["Magnesium loses its 2 outer electrons", "Charge = 2+, entered as 2"] },
+        { prompt: "Oxygen is in Group 6. What is the charge on the oxide ion? Enter it as a signed number, for example -2.", value: -2, accept:["2-","-2"],
+          solution: ["Oxygen gains 2 electrons to complete its outer shell", "Charge = 2&minus;, entered as -2"] },
+        { prompt: "Name the type of charged particle formed when an atom loses electrons.", accept:["cation","cations","positiveion","apositiveion"],
+          solution: ["Losing negative electrons leaves the atom positive", "A cation"] },
+        { prompt: "Name the type of charged particle formed when an atom gains electrons.", accept:["anion","anions","negativeion","anegativeion"],
+          solution: ["Gaining negative electrons makes the atom negative", "An anion"] },
+        { prompt: "True or false: ionic bonding involves the transfer of electrons from a metal to a non-metal.", accept:["true","t"],
+          solution: ["True &mdash; that transfer is what creates the two oppositely charged ions"] },
+        { prompt: "Write the formula for magnesium oxide, formed from Mg&sup2;+ and O&sup2;&minus;.", accept:["mgo"],
+          solution: ["The charges 2+ and 2&minus; cancel exactly, so the ratio is 1 : 1", "MgO"] },
+        { prompt: "Write the formula for calcium chloride, formed from Ca&sup2;+ and Cl&minus;.", accept:["cacl2"],
+          solution: ["One Ca&sup2;+ needs two Cl&minus; ions to balance the 2+ charge", "CaCl2"] },
+        { prompt: "Write the formula for potassium oxide, formed from K+ and O&sup2;&minus;.", accept:["k2o"],
+          solution: ["Two K+ ions are needed to balance one O&sup2;&minus;", "K2O"] },
+        { prompt: "Write the formula for lithium oxide, formed from Li+ and O&sup2;&minus;.", accept:["li2o"],
+          solution: ["Two Li+ ions balance one O&sup2;&minus;", "Li2O"] },
+        { prompt: "Sodium (Group 1) reacts with sulfur (Group 6). Write the formula of the compound.", accept:["na2s"],
+          solution: ["Na+ and S&sup2;&minus;", "Two Na+ ions balance one S&sup2;&minus;", "Na2S"] },
+        { prompt: "Aluminium (Group 3) reacts with chlorine (Group 7). Write the formula of the compound.", accept:["alcl3"],
+          solution: ["Al&sup3;+ and Cl&minus;", "Three Cl&minus; ions are needed to balance one Al&sup3;+", "AlCl3"] },
+        { prompt: "Name the compound formed when magnesium reacts with chlorine.", accept:["magnesiumchloride"],
+          solution: ["Metal name first, unchanged; non-metal ends in -ide", "Magnesium chloride"] },
+        { prompt: "Name the compound formed when calcium reacts with oxygen.", accept:["calciumoxide"],
+          solution: ["Calcium keeps its name; oxygen becomes oxide", "Calcium oxide"] },
+        { prompt: "How many electrons in total are transferred when one magnesium atom reacts with one oxygen atom?", value: 2,
+          solution: ["Mg loses 2 electrons and O gains those same 2 electrons", "2 electrons are transferred"] },
+        { prompt: "How many chloride ions (Cl&minus;) are needed to balance the charge on one aluminium ion (Al&sup3;+)?", value: 3,
+          solution: ["Al&sup3;+ carries 3+, and each Cl&minus; carries 1&minus;", "3 chloride ions are needed"] },
+        { prompt: "Does solid sodium chloride conduct electricity? Answer yes or no.", accept:["no","n"],
+          solution: ["The ions are locked in fixed positions in the lattice", "No &mdash; nothing charged is free to move"] },
+        { prompt: "Does molten sodium chloride conduct electricity? Answer yes or no.", accept:["yes","y"],
+          solution: ["Melting frees the ions from the lattice", "Yes &mdash; the mobile ions carry the current"] },
+        { prompt: "Complete the rule in one word: an ionic compound only conducts electricity when its ions are free to ___.", accept:["move","movearound","flow"],
+          solution: ["Charge is only carried if charged particles can travel", "Move"] },
+        { prompt: "Explain why ionic compounds typically have very high melting points.", open:true,
+          solution: ["Sample response: An ionic compound is a giant lattice in which every ion is held by strong electrostatic attraction to all of its oppositely charged neighbours. Melting means overcoming a huge number of those strong attractions at once, which takes a great deal of energy, so the melting point is very high."] },
+        { prompt: "Set out, step by step, how you would predict the formula of the compound formed between aluminium (Group 3) and oxygen (Group 6).", open:true,
+          solution: ["Sample response: Aluminium is in Group 3 so it loses 3 electrons to form Al&sup3;+, and oxygen is in Group 6 so it gains 2 to form O&sup2;&minus;. The charges do not cancel one-for-one, so I find the smallest numbers that balance: 2 &times; 3+ = 6+ and 3 &times; 2&minus; = 6&minus;. That gives 2 aluminium ions to 3 oxide ions, so the formula is Al2O3."] }
+      ]
+    },
+    {
+      letter: "D", hueVar: "--hueD", title: "Covalent Bonding",
+      rules: [
+        "Covalent bonding happens between <b>two non-metals</b> and involves <b>sharing</b> pairs of electrons rather than transferring them.",
+        "<b>One shared pair = one single bond</b> (2 electrons). Two shared pairs = a <b>double</b> bond (4 electrons); three shared pairs = a <b>triple</b> bond (6 electrons).",
+        "Both nuclei are attracted to the same shared pair, and both atoms get to count those electrons as filling their outer shell.",
+        "A <b>dot-and-cross diagram</b> shows the shared electrons and keeps track of which atom each one came from &mdash; dots for one element, crosses for the other.",
+        "<b>Simple molecular</b> substances (H2O, CO2, CH4, O2) have very strong bonds <i>inside</i> each molecule but only <b>weak forces between</b> separate molecules.",
+        "Because only those weak forces have to be overcome, simple molecular substances have <b>low melting and boiling points</b> and <b>do not conduct electricity</b> &mdash; the molecules are uncharged."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 180" width="380" height="180">
+        <text x="190" y="16" text-anchor="middle" font-size="10">H2O: two shared pairs = two single bonds</text>
+        <circle cx="190" cy="100" r="46" class="dg-line" stroke-width="1.5"/>
+        <circle cx="140" cy="78" r="26" class="dg-line" stroke-width="1.5"/>
+        <circle cx="240" cy="78" r="26" class="dg-line" stroke-width="1.5"/>
+        <text x="129" y="76" text-anchor="middle" font-size="12">H</text>
+        <text x="251" y="76" text-anchor="middle" font-size="12">H</text>
+        <text x="190" y="108" text-anchor="middle" font-size="15">O</text>
+        <circle cx="150" cy="90" r="4" class="dg-fill"/>
+        <text x="156" y="81" text-anchor="middle" font-size="12">&times;</text>
+        <circle cx="230" cy="90" r="4" class="dg-fill"/>
+        <text x="224" y="81" text-anchor="middle" font-size="12">&times;</text>
+        <circle cx="166" cy="130" r="4" class="dg-fill"/>
+        <circle cx="177" cy="136" r="4" class="dg-fill"/>
+        <circle cx="203" cy="136" r="4" class="dg-fill"/>
+        <circle cx="214" cy="130" r="4" class="dg-fill"/>
+        <circle cx="20" cy="164" r="4" class="dg-fill"/>
+        <text x="30" y="168" font-size="9.5">= oxygen electron</text>
+        <text x="204" y="168" text-anchor="middle" font-size="12">&times;</text>
+        <text x="212" y="168" font-size="9.5">= hydrogen electron</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 175" width="380" height="175">
+        <text x="190" y="16" text-anchor="middle" font-size="10.5">why simple molecular substances melt easily</text>
+        <circle cx="44" cy="58" r="14" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="86" cy="58" r="14" class="dg-tint" stroke-width="1.5"/>
+        <line x1="58" y1="58" x2="72" y2="58" class="dg-line" stroke-width="6"/>
+        <text x="44" y="62" text-anchor="middle" font-size="10">H</text>
+        <text x="86" y="62" text-anchor="middle" font-size="10">H</text>
+        <path d="M114 48 C100 26 74 26 65 55" class="dg-ink-line" stroke-width="1"/>
+        <text x="116" y="52" font-size="10">strong covalent bond</text>
+        <text x="116" y="68" font-size="9">inside the molecule</text>
+        <circle cx="44" cy="124" r="14" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="86" cy="124" r="14" class="dg-tint" stroke-width="1.5"/>
+        <line x1="58" y1="124" x2="72" y2="124" class="dg-line" stroke-width="6"/>
+        <circle cx="170" cy="124" r="14" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="212" cy="124" r="14" class="dg-tint" stroke-width="1.5"/>
+        <line x1="184" y1="124" x2="198" y2="124" class="dg-line" stroke-width="6"/>
+        <line x1="102" y1="124" x2="154" y2="124" class="dg-ink-line" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <text x="128" y="108" text-anchor="middle" font-size="9.5">weak force</text>
+        <text x="232" y="118" font-size="10">this is what breaks</text>
+        <text x="232" y="134" font-size="9">when it boils</text>
+        <text x="190" y="162" text-anchor="middle" font-size="9.5">the molecules survive, they just drift apart</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "A dot-and-cross diagram of water. Each bond is one shared pair &mdash; one dot from oxygen, one cross from hydrogen &mdash; and oxygen's other four electrons stay as lone pairs.",
+        "Two different forces, two different strengths. Boiling snaps only the dashed forces between molecules; the covalent bonds inside each molecule survive untouched."
+      ],
+      trick: "Ask what is on each side of the bond. <b>Metal + non-metal &rarr; transfer (ionic). Non-metal + non-metal &rarr; share (covalent).</b> Then just count shared pairs: one pair is a single bond, two is a double, three is a triple. And when a question asks why a covalent substance melts easily, remember you are breaking the <i>forces between</i> molecules, not the bonds inside them.",
+      examples: [
+        {
+          problem: "Describe the bonding in a water molecule, H2O, and state how many electrons are shared in total.",
+          steps: [
+            "Hydrogen and oxygen are both non-metals, so the bonding is covalent",
+            "Oxygen has 6 outer electrons and needs 2 more; each hydrogen has 1 and needs 1 more",
+            "Oxygen shares one electron pair with each hydrogen atom",
+            "That is 2 single bonds, each made of 1 shared pair = 2 electrons",
+            "Oxygen's remaining 4 outer electrons stay as two lone pairs"
+          ],
+          answer: "Two single covalent O&ndash;H bonds, sharing 4 electrons in total"
+        },
+        {
+          problem: "Carbon dioxide is O=C=O. Count the bonds, the shared pairs and the shared electrons.",
+          steps: [
+            "Carbon has 4 outer electrons and needs 4 more; each oxygen has 6 and needs 2 more",
+            "Carbon shares 2 pairs with each oxygen, forming a double bond on each side",
+            "2 double bonds = 4 shared pairs in total",
+            "4 pairs &times; 2 electrons = 8 shared electrons",
+            "Check carbon: 4 of its own outer electrons plus 4 shared from the oxygens = 8, a full shell"
+          ],
+          answer: "2 double bonds, 4 shared pairs, 8 shared electrons"
+        }
+      ],
+      remember: [
+        "<b>Non-metal + non-metal = sharing.</b> Nothing is transferred, so no ions are formed and the molecule is neutral.",
+        "<b>1 shared pair = 1 bond = 2 electrons.</b> Double = 4 electrons, triple = 6. Count pairs, not atoms.",
+        "The bonds <b>inside</b> a molecule are strong; the forces <b>between</b> molecules are weak &mdash; and boiling only has to beat the weak ones.",
+        "Simple molecular substances have <b>low melting and boiling points</b> and <b>do not conduct</b>, because there are no free ions or electrons."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 200" width="460" height="200">
+        <rect x="10" y="6" width="176" height="46" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="104,52 126,52 114,68" class="cm-face2" stroke-width="2"/>
+        <text x="98" y="26" text-anchor="middle" font-size="11">&ldquo;Those are MY</text>
+        <text x="98" y="43" text-anchor="middle" font-size="11">electrons.&rdquo;</text>
+        <rect x="274" y="6" width="176" height="46" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="330,52 352,52 342,68" class="cm-face2" stroke-width="2"/>
+        <text x="362" y="26" text-anchor="middle" font-size="11">&ldquo;Ours. They are</text>
+        <text x="362" y="43" text-anchor="middle" font-size="11">OURS.&rdquo;</text>
+        <circle cx="140" cy="116" r="36" class="cm-face" stroke-width="2"/>
+        <circle cx="128" cy="108" r="4" class="cm-fill"/>
+        <circle cx="152" cy="108" r="4" class="cm-fill"/>
+        <path d="M126 126 Q140 140 154 126" class="cm-line" stroke-width="2"/>
+        <circle cx="320" cy="116" r="36" class="cm-face" stroke-width="2"/>
+        <circle cx="308" cy="108" r="4" class="cm-fill"/>
+        <circle cx="332" cy="108" r="4" class="cm-fill"/>
+        <path d="M306 126 Q320 140 334 126" class="cm-line" stroke-width="2"/>
+        <path d="M178 122 Q198 132 212 120" class="cm-line" stroke-width="2"/>
+        <path d="M282 122 Q262 132 248 120" class="cm-line" stroke-width="2"/>
+        <circle cx="222" cy="112" r="6" class="cm-fill"/>
+        <circle cx="238" cy="112" r="6" class="cm-fill"/>
+        <text x="230" y="90" text-anchor="middle" font-size="9.5" class="cm-soft">counted by both</text>
+        <text x="230" y="146" text-anchor="middle" font-size="9.5" class="cm-soft">shared pair</text>
+        <text x="140" y="172" text-anchor="middle" font-size="12">H atom</text>
+        <text x="320" y="172" text-anchor="middle" font-size="12">H atom</text>
+        <text x="230" y="191" text-anchor="middle" font-size="11" font-weight="bold">one covalent bond</text>
+      </svg>`,
+        caption: "Both atoms claim the same two electrons, and remarkably, both claims are allowed. That shared double-counting is exactly what a covalent bond is &mdash; each atom gets a full outer shell without either one giving anything up."
+      },
+      exercises: [
+        { prompt: "Is covalent bonding found between two metals, two non-metals, or a metal and a non-metal?", accept:["twonon-metals","twonon-metal","non-metals","nonmetals","twononmetals"],
+          solution: ["Metals give electrons away, so two of them cannot share", "Covalent bonding occurs between two non-metal atoms"] },
+        { prompt: "How many electrons make up one single covalent bond?", value: 2,
+          solution: ["One shared pair", "= 2 electrons"] },
+        { prompt: "How many shared pairs of electrons are there in one single covalent bond?", value: 1,
+          solution: ["Single bond = one shared pair"] },
+        { prompt: "How many electrons in total are shared in one double covalent bond?", value: 4,
+          solution: ["A double bond is two shared pairs", "2 &times; 2 = 4 electrons"] },
+        { prompt: "True or false: covalent bonding involves the transfer of electrons.", accept:["false","f"],
+          solution: ["False &mdash; covalent bonding is sharing. Transfer is ionic bonding"] },
+        { prompt: "A hydrogen molecule is H&ndash;H. How many shared pairs of electrons does it contain?", value: 1,
+          solution: ["Each hydrogen contributes 1 electron to a single shared pair", "1 shared pair"] },
+        { prompt: "An oxygen molecule is O=O. How many shared pairs of electrons does it contain?", value: 2,
+          solution: ["A double bond is two shared pairs", "2"] },
+        { prompt: "A nitrogen molecule has a triple bond. How many shared pairs does it contain?", value: 3,
+          solution: ["Triple bond = three shared pairs", "3"] },
+        { prompt: "How many electrons in total are shared in that nitrogen triple bond?", value: 6,
+          solution: ["3 shared pairs &times; 2 electrons per pair", "= 6 electrons"] },
+        { prompt: "Methane, CH4, has one single bond to each hydrogen. How many covalent bonds does it have in total?", value: 4,
+          solution: ["One bond per hydrogen atom, and there are 4 hydrogens", "4 bonds"] },
+        { prompt: "Ammonia, NH3, has one single bond to each hydrogen. How many covalent bonds does it have?", value: 3,
+          solution: ["One bond per hydrogen, and there are 3 hydrogens", "3 bonds"] },
+        { prompt: "Carbon dioxide, CO2, contains two C=O double bonds. How many electrons are shared in total?", value: 8,
+          solution: ["Each double bond shares 4 electrons", "4 + 4 = 8 electrons"] },
+        { prompt: "Carbon has 4 outer electrons. How many covalent bonds does a carbon atom usually form?", value: 4,
+          solution: ["Carbon needs 4 more electrons to reach a full outer shell of 8", "It forms 4 covalent bonds"] },
+        { prompt: "Oxygen has 6 outer electrons. How many covalent bonds does an oxygen atom usually form?", value: 2,
+          solution: ["Oxygen needs 2 more electrons to reach 8", "It forms 2 covalent bonds"] },
+        { prompt: "What is the name of the diagram that shows the electrons in a covalent bond and marks which atom each came from?", accept:["dotandcrossdiagram","dot-and-crossdiagram","dotandcross","dot-and-cross","adotandcrossdiagram"],
+          solution: ["Dots for one element, crosses for the other", "A dot-and-cross diagram"] },
+        { prompt: "Which type of substance generally has the lower melting and boiling points: ionic, or simple molecular covalent?", accept:["simplemolecular","simplecovalent","covalent","simplemolecularcovalent","molecular"],
+          solution: ["Melting an ionic solid means breaking strong attractions throughout a giant lattice", "Melting a simple molecular substance only means beating the weak forces between molecules, so it happens at a much lower temperature"] },
+        { prompt: "Do simple molecular substances such as methane contain any free-moving charged particles? Answer yes or no.", accept:["no","n"],
+          solution: ["The molecules are neutral overall and no electrons are free to move", "No &mdash; which is why they do not conduct electricity"] },
+        { prompt: "Which is stronger: the covalent bond inside a water molecule, or the force between two neighbouring water molecules?", accept:["thecovalentbond","covalentbond","covalent","thebondinsidethemolecule","thecovalentbondinsidethemolecule"],
+          solution: ["The covalent bond inside the molecule is far stronger", "That is why water boils at 100&deg;C without any water molecules being torn apart into H and O"] },
+        { prompt: "Explain why water boils at only 100&deg;C even though the covalent bonds inside each water molecule are extremely strong.", open:true,
+          solution: ["Sample response: Boiling separates whole molecules from each other; it does not break the molecules apart. The forces holding one water molecule to the next are much weaker than the O&ndash;H covalent bonds inside a molecule, so comparatively little energy is needed. The steam that comes off is still made of intact H2O molecules."] },
+        { prompt: "Compare what happens to electrons in ionic bonding and in covalent bonding.", open:true,
+          solution: ["Sample response: In ionic bonding electrons are transferred completely from a metal atom to a non-metal atom, producing a positive ion and a negative ion that attract each other. In covalent bonding the electrons are not moved from one atom to the other at all &mdash; a pair sits between the two nuclei and both atoms are attracted to it, so both count it towards a full outer shell and no charged ions are formed."] }
+      ]
+    },
+    {
+      letter: "E", hueVar: "--hueE", title: "Giant Covalent Structures",
+      rules: [
+        "A <b>giant covalent structure</b> is one continuous lattice of atoms held by covalent bonds &mdash; millions of atoms, no separate molecules at all.",
+        "<b>Diamond</b>: every carbon bonds to <b>4</b> others in a rigid three-dimensional lattice, so it is the hardest natural substance and has an enormous melting point. All four outer electrons are used in bonds, so it <b>does not conduct</b>.",
+        "<b>Graphite</b>: every carbon bonds to only <b>3</b> others, forming flat hexagonal layers. The forces <i>between</i> layers are weak, so the layers slide &mdash; graphite is soft and slippery.",
+        "That leaves graphite <b>1 spare (delocalised) electron per atom</b>, free to move between the layers, so graphite <b>conducts electricity</b> &mdash; the one common non-metal element that does.",
+        "<b>Silicon dioxide</b> (SiO2, quartz and sand) has a diamond-like giant covalent lattice: very hard, very high melting point, non-conducting.",
+        "Diamond and graphite are <b>allotropes</b> &mdash; different structural forms of the same element. Same atoms, different arrangement, completely different properties."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 180" width="380" height="180">
+        <g class="dg-line" stroke-width="2">
+          <line x1="100" y1="88" x2="100" y2="38"/>
+          <line x1="100" y1="88" x2="54" y2="118"/>
+          <line x1="100" y1="88" x2="146" y2="118"/>
+          <line x1="100" y1="88" x2="132" y2="60"/>
+          <line x1="100" y1="38" x2="62" y2="20"/>
+          <line x1="100" y1="38" x2="138" y2="20"/>
+          <line x1="54" y1="118" x2="28" y2="146"/>
+          <line x1="146" y1="118" x2="172" y2="146"/>
+          <line x1="132" y1="60" x2="168" y2="44"/>
+        </g>
+        <circle cx="62" cy="20" r="7" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="138" cy="20" r="7" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="28" cy="146" r="7" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="172" cy="146" r="7" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="168" cy="44" r="7" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="100" cy="38" r="9" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="54" cy="118" r="9" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="146" cy="118" r="9" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="132" cy="60" r="9" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="100" cy="88" r="13" class="dg-fill"/>
+        <text x="100" y="93" text-anchor="middle" font-size="12" style="fill:var(--surface)">C</text>
+        <text x="196" y="44" font-size="12" font-weight="bold">diamond</text>
+        <text x="196" y="68" font-size="9.5">every carbon bonds to 4 others</text>
+        <text x="196" y="86" font-size="9.5">rigid lattice in all directions</text>
+        <text x="196" y="104" font-size="9.5">extremely hard</text>
+        <text x="196" y="122" font-size="9.5">no free electrons</text>
+        <text x="196" y="140" font-size="9.5">does not conduct electricity</text>
+        <text x="100" y="172" text-anchor="middle" font-size="9.5">four bonds, nothing left over</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 180" width="380" height="180">
+        <line x1="60" y1="26" x2="140" y2="26" class="dg-line" stroke-width="2"/>
+        <polygon points="140,20 140,32 152,26" class="dg-fill"/>
+        <text x="100" y="16" text-anchor="middle" font-size="9.5">layers slide</text>
+        <polyline points="30,50 50,42 70,50 90,42 110,50 130,42 150,50 170,42 190,50" class="dg-line" stroke-width="2" fill="none"/>
+        <polyline points="30,90 50,82 70,90 90,82 110,90 130,82 150,90 170,82 190,90" class="dg-line" stroke-width="2" fill="none"/>
+        <polyline points="30,130 50,122 70,130 90,122 110,130 130,122 150,130 170,122 190,130" class="dg-line" stroke-width="2" fill="none"/>
+        <line x1="30" y1="70" x2="190" y2="70" class="dg-ink-line" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="30" y1="110" x2="190" y2="110" class="dg-ink-line" stroke-width="1" stroke-dasharray="4 4"/>
+        <circle cx="60" cy="70" r="4" class="dg-good"/>
+        <circle cx="110" cy="70" r="4" class="dg-good"/>
+        <circle cx="160" cy="70" r="4" class="dg-good"/>
+        <circle cx="80" cy="110" r="4" class="dg-good"/>
+        <circle cx="130" cy="110" r="4" class="dg-good"/>
+        <circle cx="180" cy="110" r="4" class="dg-good"/>
+        <circle cx="30" cy="50" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="50" cy="42" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="70" cy="50" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="90" cy="42" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="110" cy="50" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="130" cy="42" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="150" cy="50" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="170" cy="42" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="190" cy="50" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="30" cy="90" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="50" cy="82" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="70" cy="90" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="90" cy="82" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="110" cy="90" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="130" cy="82" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="150" cy="90" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="170" cy="82" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="190" cy="90" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="30" cy="130" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="50" cy="122" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="70" cy="130" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="90" cy="122" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="110" cy="130" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="130" cy="122" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="150" cy="130" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="170" cy="122" r="5" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="190" cy="130" r="5" class="dg-tint" stroke-width="1.5"/>
+        <text x="206" y="44" font-size="12" font-weight="bold">graphite</text>
+        <text x="206" y="68" font-size="9.5">3 bonds per carbon atom</text>
+        <text x="206" y="86" font-size="9.5">layers slide: it is soft</text>
+        <text x="206" y="104" font-size="9.5">1 spare electron per atom</text>
+        <text x="206" y="122" font-size="9.5">delocalised, so it conducts</text>
+        <text x="110" y="160" text-anchor="middle" font-size="9.5">weak forces between the layers</text>
+        <text x="110" y="174" text-anchor="middle" font-size="8.5" class="dg-soft">green dots = delocalised electrons</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "Diamond: each carbon uses all four outer electrons on four bonds, building a rigid lattice that continues in every direction.",
+        "Graphite: three bonds per atom leave flat layers with weak forces between them, plus one delocalised electron per atom free to drift and carry a current."
+      ],
+      trick: "Count the bonds and the leftovers. <b>Diamond: 4 bonds, 0 spare electrons</b> &mdash; rock hard, insulator. <b>Graphite: 3 bonds, 1 spare electron</b> &mdash; soft, slippery, conductor. Every property of both substances falls straight out of those two numbers, and both are just carbon.",
+      examples: [
+        {
+          problem: "Explain why graphite conducts electricity but diamond does not, even though both are pure carbon.",
+          steps: [
+            "In diamond, every carbon forms 4 covalent bonds, using all 4 of its outer electrons",
+            "No electron is left free to move, so no charge can be carried",
+            "In graphite, each carbon forms only 3 bonds, using 3 of its 4 outer electrons",
+            "The fourth electron is delocalised &mdash; free to move between the layers",
+            "Moving charged particles are exactly what an electric current is"
+          ],
+          answer: "Graphite has one delocalised electron per atom to carry the current; in diamond every electron is locked into a bond"
+        },
+        {
+          problem: "Silicon dioxide has a giant covalent lattice like diamond. Predict its hardness, melting point and electrical conductivity, and justify each prediction.",
+          steps: [
+            "Hardness: every atom is locked to its neighbours by strong covalent bonds in a rigid 3D network &rarr; very hard",
+            "Melting point: melting means breaking a huge number of strong covalent bonds, not weak forces &rarr; very high (about 1700&deg;C)",
+            "Conductivity: all outer electrons are used in bonding, so there are no delocalised electrons and no ions &rarr; does not conduct",
+            "Solubility: no charged particles for water to pull away, so it is insoluble"
+          ],
+          answer: "Very hard, very high melting point, and a non-conductor &mdash; sand does not melt in a bonfire or carry a current"
+        }
+      ],
+      remember: [
+        "<b>Giant covalent = one huge lattice of strong bonds</b>, so always: very hard, very high melting point, insoluble.",
+        "<b>Diamond: 4 bonds per atom, no spare electrons</b> &mdash; hardest natural substance, does not conduct.",
+        "<b>Graphite: 3 bonds per atom, 1 delocalised electron</b> &mdash; layers slide (soft, a lubricant) and it conducts electricity.",
+        "Diamond and graphite are <b>allotropes</b>: same element, different arrangement, opposite properties. Structure decides everything."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 195" width="460" height="195">
+        <rect x="8" y="6" width="214" height="182" rx="12" class="cm-face2" stroke-width="2"/>
+        <rect x="238" y="6" width="214" height="182" rx="12" class="cm-face2" stroke-width="2"/>
+        <text x="115" y="30" text-anchor="middle" font-size="12" font-weight="bold">DIAMOND</text>
+        <g class="cm-line" stroke-width="2.5">
+          <line x1="115" y1="100" x2="68" y2="62"/>
+          <line x1="115" y1="100" x2="162" y2="62"/>
+          <line x1="115" y1="100" x2="68" y2="138"/>
+          <line x1="115" y1="100" x2="162" y2="138"/>
+        </g>
+        <circle cx="68" cy="62" r="7" class="cm-fill"/>
+        <circle cx="162" cy="62" r="7" class="cm-fill"/>
+        <circle cx="68" cy="138" r="7" class="cm-fill"/>
+        <circle cx="162" cy="138" r="7" class="cm-fill"/>
+        <circle cx="115" cy="100" r="32" class="cm-face" stroke-width="2"/>
+        <circle cx="105" cy="92" r="3.5" class="cm-fill"/>
+        <circle cx="125" cy="92" r="3.5" class="cm-fill"/>
+        <line x1="100" y1="114" x2="130" y2="114" class="cm-line" stroke-width="2"/>
+        <text x="115" y="162" text-anchor="middle" font-size="10">&ldquo;Four bonds.</text>
+        <text x="115" y="178" text-anchor="middle" font-size="10">No spare time.&rdquo;</text>
+        <text x="345" y="30" text-anchor="middle" font-size="12" font-weight="bold">GRAPHITE</text>
+        <g class="cm-line" stroke-width="2.5">
+          <line x1="345" y1="100" x2="300" y2="66"/>
+          <line x1="345" y1="100" x2="390" y2="66"/>
+          <line x1="345" y1="100" x2="345" y2="144"/>
+        </g>
+        <circle cx="300" cy="66" r="7" class="cm-fill"/>
+        <circle cx="390" cy="66" r="7" class="cm-fill"/>
+        <circle cx="345" cy="144" r="7" class="cm-fill"/>
+        <circle cx="345" cy="100" r="32" class="cm-face" stroke-width="2"/>
+        <circle cx="335" cy="92" r="3.5" class="cm-fill"/>
+        <circle cx="355" cy="92" r="3.5" class="cm-fill"/>
+        <path d="M330 110 Q345 124 360 110" class="cm-line" stroke-width="2"/>
+        <path d="M400 48 Q416 36 432 48" class="cm-line" stroke-width="1.5" stroke-dasharray="3 3"/>
+        <circle cx="416" cy="62" r="9" class="cm-good-fill"/>
+        <text x="416" y="38" text-anchor="middle" font-size="9" class="cm-soft">free!</text>
+        <text x="345" y="162" text-anchor="middle" font-size="10">&ldquo;Three bonds and</text>
+        <text x="345" y="178" text-anchor="middle" font-size="10">a spare. I conduct.&rdquo;</text>
+      </svg>`,
+        caption: "Same element, opposite life choices. Diamond spends all four of its outer electrons on bonds and can never carry a current; graphite keeps one back, so it conducts &mdash; and its lazy, loosely stacked layers are what let a pencil write."
+      },
+      exercises: [
+        { prompt: "How many covalent bonds does each carbon atom form in diamond?", value: 4,
+          solution: ["Each carbon bonds to 4 neighbouring carbon atoms", "= 4"] },
+        { prompt: "How many covalent bonds does each carbon atom form in graphite?", value: 3,
+          solution: ["Each carbon bonds to only 3 neighbours, within its own layer", "= 3"] },
+        { prompt: "How many delocalised electrons does each carbon atom in graphite contribute?", value: 1,
+          solution: ["Carbon has 4 outer electrons and uses 3 in bonds", "4 &minus; 3 = 1 delocalised electron per atom"] },
+        { prompt: "Which element are both diamond and graphite made from?", accept:["carbon","c"],
+          solution: ["Both are pure carbon &mdash; only the arrangement of the atoms differs"] },
+        { prompt: "True or false: diamond conducts electricity.", accept:["false","f"],
+          solution: ["False &mdash; all four outer electrons are locked into bonds, so nothing is free to move"] },
+        { prompt: "True or false: graphite conducts electricity.", accept:["true","t"],
+          solution: ["True &mdash; its delocalised electrons move between the layers and carry the current"] },
+        { prompt: "Would you expect a giant covalent structure such as diamond to have a high or a low melting point?", accept:["high","veryhigh","ahighone"],
+          solution: ["Melting means breaking millions of strong covalent bonds", "High &mdash; very high indeed"] },
+        { prompt: "Are the forces holding graphite's layers to each other strong or weak?", accept:["weak","weakforces","veryweak"],
+          solution: ["The bonds within a layer are strong, but the layers are only weakly held to one another", "Weak &mdash; which is why they slide"] },
+        { prompt: "Name a substance other than diamond and graphite that has a giant covalent structure.", accept:["silicondioxide","sio2","silica","quartz","sand","silicon"],
+          solution: ["Silicon dioxide, found as quartz and sand, has a diamond-like lattice"] },
+        { prompt: "What is the word for different structural forms of the same element, such as diamond and graphite?", accept:["allotropes","allotrope","allotropy"],
+          solution: ["Same element, different arrangement", "They are allotropes"] },
+        { prompt: "How many carbon atoms are there in one ring of a graphite layer?", value: 6,
+          solution: ["Graphite layers are made of flat hexagons", "6 carbon atoms per ring"] },
+        { prompt: "What is the name of a single layer of graphite, one atom thick?", accept:["graphene"],
+          solution: ["A single isolated layer of graphite is called graphene"] },
+        { prompt: "Is diamond made of separate small molecules, or one giant lattice?", accept:["giantlattice","agiantlattice","onegiantlattice","giantcovalentlattice","giantstructure","giantcovalentstructure","lattice"],
+          solution: ["There is no such thing as a diamond molecule", "It is one giant covalent lattice, which is why a diamond can be a single crystal"] },
+        { prompt: "Which has the higher melting point: iodine (simple molecular) or silicon dioxide (giant covalent)?", accept:["silicondioxide","sio2","silica"],
+          solution: ["Melting iodine only beats weak forces between I2 molecules", "Melting silicon dioxide breaks strong covalent bonds throughout the lattice, so silicon dioxide melts at a far higher temperature"] },
+        { prompt: "Are giant covalent structures generally soluble in water? Answer yes or no.", accept:["no","n"],
+          solution: ["Water can only pull apart charged or strongly attracted particles", "No &mdash; giant covalent structures are insoluble"] },
+        { prompt: "Which form of carbon is used as a lubricant and as pencil lead?", accept:["graphite"],
+          solution: ["Its layers slide over one another easily", "Graphite"] },
+        { prompt: "Which form of carbon is used on cutting and drilling tools?", accept:["diamond"],
+          solution: ["Its rigid 3D lattice makes it the hardest natural substance", "Diamond"] },
+        { prompt: "Explain why giant covalent structures have such extremely high melting points.", open:true,
+          solution: ["Sample response: Melting a giant covalent structure means breaking a huge number of strong covalent bonds spread right through the lattice, not just weak forces between separate molecules. Each of those bonds needs a lot of energy to break, and there are millions of them, so the temperature required is enormous &mdash; diamond does not melt below about 3500&deg;C."] },
+        { prompt: "Using the idea of delocalised electrons, explain the difference in electrical conductivity between graphite and diamond.", open:true,
+          solution: ["Sample response: An electric current is a flow of charged particles. Each carbon in graphite forms only three bonds, so its fourth outer electron is delocalised and can move freely between the layers, carrying charge. In diamond each carbon forms four bonds, so every outer electron is fixed in place between two nuclei, leaving nothing free to move and no way to conduct."] },
+        { prompt: "Graphite is used as a lubricant while diamond is used in drill tips. Explain how the structure of each makes it right for its job.", open:true,
+          solution: ["Sample response: Graphite's layers are held to each other only weakly, so they slide past one another under pressure &mdash; exactly the behaviour a lubricant needs, and the reason layers rub off onto paper as pencil marks. Diamond's carbon atoms are each locked to four neighbours in a rigid three-dimensional lattice, so the structure cannot be pushed out of shape, which is precisely what makes it hard enough to cut other materials."] }
+      ]
+    },
+    {
+      letter: "F", hueVar: "--hueF", title: "Conservation of Mass and Balancing Equations",
+      rules: [
+        "<b>The law of conservation of mass:</b> in a closed system the total mass of the reactants equals the total mass of the products. Atoms are rearranged, never created or destroyed.",
+        "A <b>balanced equation</b> has the same number of each type of atom on both sides &mdash; that is conservation of mass written in symbols.",
+        "Balance by changing only the <b>coefficients</b>, the big numbers in front of a formula. <b>Never</b> change a subscript inside a formula: turning H2O into H2O2 makes it a different substance.",
+        "A reaction in an <b>open</b> container can seem to lose mass (a gas escapes) or gain mass (it takes oxygen from the air). Nothing is really lost &mdash; it just left the balance pan.",
+        "<b>Relative formula mass (Mr)</b> = add up the relative atomic masses of every atom in the formula: H2O = 1 + 1 + 16 = 18.",
+        "Because mass is conserved, an unknown mass can always be found by <b>subtraction</b>: mass of reactants &minus; known products = the missing product."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 185" width="380" height="185">
+        <text x="190" y="14" text-anchor="middle" font-size="11" font-weight="bold">closed system vs open system</text>
+        <line x1="190" y1="26" x2="190" y2="180" class="dg-ink-line" stroke-width="1" stroke-dasharray="4 4"/>
+        <path d="M78 56 L78 72 L60 116 L130 116 L112 72 L112 56 Z" class="dg-tint" stroke-width="1.5"/>
+        <rect x="74" y="46" width="42" height="10" rx="3" class="dg-fill"/>
+        <circle cx="80" cy="100" r="3" class="dg-soft"/>
+        <circle cx="95" cy="94" r="3.5" class="dg-soft"/>
+        <circle cx="106" cy="102" r="3" class="dg-soft"/>
+        <rect x="48" y="122" width="94" height="24" rx="4" class="dg-ink-line" fill="none" stroke-width="1.5"/>
+        <text x="95" y="139" text-anchor="middle" font-size="12">50.0 g</text>
+        <text x="95" y="164" text-anchor="middle" font-size="9.5">sealed, nothing escapes</text>
+        <text x="95" y="180" text-anchor="middle" font-size="10">50.0 g stays 50.0 g</text>
+        <path d="M268 56 L268 72 L250 116 L320 116 L302 72 L302 56 Z" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="278" cy="44" r="4" class="dg-bad"/>
+        <circle cx="292" cy="32" r="5" class="dg-bad"/>
+        <circle cx="304" cy="44" r="4" class="dg-bad"/>
+        <circle cx="298" cy="20" r="6" class="dg-bad"/>
+        <circle cx="270" cy="100" r="3" class="dg-soft"/>
+        <circle cx="285" cy="94" r="3.5" class="dg-soft"/>
+        <circle cx="296" cy="102" r="3" class="dg-soft"/>
+        <text x="314" y="26" font-size="10">CO2 gas</text>
+        <rect x="238" y="122" width="94" height="24" rx="4" class="dg-ink-line" fill="none" stroke-width="1.5"/>
+        <text x="285" y="139" text-anchor="middle" font-size="12">49.6 g</text>
+        <text x="285" y="164" text-anchor="middle" font-size="9.5">open, the gas escapes</text>
+        <text x="285" y="180" text-anchor="middle" font-size="10">50.0 g reads 49.6 g</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 180" width="380" height="180">
+        <text x="190" y="26" text-anchor="middle" font-size="13">CH4 + 2O2 &rarr; CO2 + 2H2O</text>
+        <rect x="44" y="44" width="312" height="24" rx="4" class="dg-tint" stroke-width="1"/>
+        <rect x="44" y="44" width="312" height="104" class="dg-ink-line" fill="none" stroke-width="1"/>
+        <g class="dg-ink-line" stroke-width="0.75">
+          <line x1="44" y1="96" x2="356" y2="96"/>
+          <line x1="44" y1="120" x2="356" y2="120"/>
+          <line x1="134" y1="44" x2="134" y2="148"/>
+          <line x1="224" y1="44" x2="224" y2="148"/>
+          <line x1="300" y1="44" x2="300" y2="148"/>
+        </g>
+        <text x="89" y="61" text-anchor="middle" font-size="10.5">atom</text>
+        <text x="179" y="61" text-anchor="middle" font-size="10.5">left</text>
+        <text x="262" y="61" text-anchor="middle" font-size="10.5">right</text>
+        <text x="328" y="61" text-anchor="middle" font-size="10.5">ok</text>
+        <text x="89" y="86" text-anchor="middle" font-size="12">C</text>
+        <text x="179" y="86" text-anchor="middle" font-size="12">1</text>
+        <text x="262" y="86" text-anchor="middle" font-size="12">1</text>
+        <text x="328" y="87" text-anchor="middle" font-size="13" class="dg-good">&#10003;</text>
+        <text x="89" y="112" text-anchor="middle" font-size="12">H</text>
+        <text x="179" y="112" text-anchor="middle" font-size="12">4</text>
+        <text x="262" y="112" text-anchor="middle" font-size="12">4</text>
+        <text x="328" y="113" text-anchor="middle" font-size="13" class="dg-good">&#10003;</text>
+        <text x="89" y="139" text-anchor="middle" font-size="12">O</text>
+        <text x="179" y="139" text-anchor="middle" font-size="12">4</text>
+        <text x="262" y="139" text-anchor="middle" font-size="12">4</text>
+        <text x="328" y="140" text-anchor="middle" font-size="13" class="dg-good">&#10003;</text>
+        <text x="190" y="168" text-anchor="middle" font-size="9.5">same count of every atom on both sides, so mass is conserved</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "The same reaction, run twice. Sealed, the balance never moves; open, the carbon dioxide walks off with 0.4 g of it &mdash; but the mass still exists, just not on the pan.",
+        "Balancing is atom accounting: count each element on the left, count it on the right, and keep adjusting coefficients until all three rows tick."
+      ],
+      trick: "Atoms are never created or destroyed, so whatever goes in must come out. If mass seems to <b>drop</b>, a gas escaped; if it seems to <b>rise</b>, the reaction grabbed oxygen from the air. When balancing, only ever touch the <b>big number in front</b> &mdash; the small subscripts are part of the substance's identity, and changing one is like fixing a spelling mistake by changing the word.",
+      examples: [
+        {
+          problem: "Balance the equation: H2 + O2 &rarr; H2O",
+          steps: [
+            "Count atoms as written: left 2 H and 2 O, right 2 H and 1 O",
+            "Oxygen is short on the right, so put a 2 in front of H2O: H2 + O2 &rarr; 2H2O",
+            "Recount: right is now 4 H and 2 O, left is 2 H and 2 O",
+            "Hydrogen is now short on the left, so put a 2 in front of H2: 2H2 + O2 &rarr; 2H2O",
+            "Final check: left 4 H, 2 O; right 4 H, 2 O &mdash; balanced"
+          ],
+          answer: "2H2 + O2 &rarr; 2H2O"
+        },
+        {
+          problem: "8.0 g of methane burns completely in 32.0 g of oxygen, producing 22.0 g of carbon dioxide and some water. Find the mass of water formed.",
+          steps: [
+            "The reaction is CH4 + 2O2 &rarr; CO2 + 2H2O, and it is carried out in a closed system",
+            "Total mass of reactants = 8.0 + 32.0 = 40.0 g",
+            "By conservation of mass, the products must also total 40.0 g",
+            "Mass of water = 40.0 &minus; 22.0 = 18.0 g",
+            "Sanity check with Mr: 18 is exactly the relative formula mass of H2O, which fits nicely"
+          ],
+          answer: "18.0 g of water"
+        }
+      ],
+      remember: [
+        "<b>Mass in = mass out.</b> Atoms are only rearranged, so the totals on each side of a reaction must match.",
+        "<b>Change coefficients, never subscripts.</b> The big number in front is fair game; the little number inside is part of the substance.",
+        "Mass that seems to <b>vanish</b> escaped as gas; mass that seems to <b>appear</b> came from oxygen in the air. Only a closed system tells the truth.",
+        "<b>Mr = add every atom's Ar.</b> CaCO3 = 40 + 12 + (3 &times; 16) = 100, and unknown masses come out by subtraction."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 195" width="460" height="195">
+        <text x="46" y="36" text-anchor="middle" font-size="15">?!</text>
+        <circle cx="46" cy="72" r="22" class="cm-face" stroke-width="2"/>
+        <circle cx="39" cy="66" r="3" class="cm-fill"/>
+        <circle cx="53" cy="66" r="3" class="cm-fill"/>
+        <path d="M37 82 q5 -6 10 0 t10 0" class="cm-line" stroke-width="1.8"/>
+        <path d="M78 88 L78 138 L152 138 L152 88" class="cm-line" stroke-width="2"/>
+        <rect x="80" y="112" width="70" height="25" class="cm-face"/>
+        <rect x="40" y="142" width="150" height="28" rx="5" class="cm-face2" stroke-width="2"/>
+        <text x="115" y="162" text-anchor="middle" font-size="13">48 g?!</text>
+        <text x="115" y="186" text-anchor="middle" font-size="9.5" class="cm-soft">open flask on a balance</text>
+        <circle cx="170" cy="116" r="7" class="cm-face" stroke-width="1.5"/>
+        <circle cx="202" cy="104" r="9" class="cm-face" stroke-width="1.5"/>
+        <circle cx="236" cy="94" r="11" class="cm-face" stroke-width="1.5"/>
+        <rect x="250" y="6" width="200" height="46" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="294,52 312,52 302,57" class="cm-face2" stroke-width="2"/>
+        <text x="350" y="26" text-anchor="middle" font-size="11">&ldquo;Nothing is lost.</text>
+        <text x="350" y="43" text-anchor="middle" font-size="11">I just left.&rdquo;</text>
+        <circle cx="300" cy="86" r="30" class="cm-face" stroke-width="2"/>
+        <circle cx="289" cy="80" r="3.5" class="cm-fill"/>
+        <circle cx="311" cy="80" r="3.5" class="cm-fill"/>
+        <path d="M288 96 Q300 106 312 96" class="cm-line" stroke-width="2"/>
+        <text x="300" y="134" text-anchor="middle" font-size="10">carbon dioxide</text>
+      </svg>`,
+        caption: "The balance says two grams have gone missing; the carbon dioxide says it is right there, just no longer on the pan. Mass is conserved in a closed system &mdash; an open flask simply is not one."
+      },
+      exercises: [
+        { prompt: "In a sealed container, 10 g of reactant A reacts completely with 15 g of reactant B. What is the total mass of the products, in grams?", value: 25,
+          solution: ["Closed system, so mass of reactants = mass of products", "10 + 15 = 25 g"] },
+        { prompt: "50 g of magnesium reacts completely with oxygen to form 83 g of magnesium oxide. What mass of oxygen reacted, in grams?", value: 33,
+          solution: ["Mass of oxygen = mass of product &minus; mass of magnesium", "83 &minus; 50 = 33 g"] },
+        { prompt: "12 g of carbon burns completely in 32 g of oxygen. What mass of carbon dioxide is formed, in grams?", value: 44,
+          solution: ["C + O2 &rarr; CO2 in a closed system", "12 + 32 = 44 g of carbon dioxide"] },
+        { prompt: "4 g of hydrogen reacts completely with 32 g of oxygen. What mass of water is formed, in grams?", value: 36,
+          solution: ["2H2 + O2 &rarr; 2H2O, with nothing escaping", "4 + 32 = 36 g of water"] },
+        { prompt: "25 g of calcium carbonate is heated and breaks down into 14 g of calcium oxide plus carbon dioxide gas. What mass of carbon dioxide was released, in grams?", value: 11,
+          solution: ["CaCO3 &rarr; CaO + CO2, so the two products must total 25 g", "25 &minus; 14 = 11 g of carbon dioxide"] },
+        { prompt: "True or false: in a chemical reaction, extra atoms can be created to make up for a low starting mass.", accept:["false","f"],
+          solution: ["False &mdash; atoms are never created or destroyed, only rearranged"] },
+        { prompt: "When balancing an equation, are you allowed to change the small subscript numbers inside a formula, such as the 2 in H2O? Answer yes or no.", accept:["no","n"],
+          solution: ["Changing a subscript changes the substance itself &mdash; H2O2 is hydrogen peroxide, not water", "No. Only the coefficients in front may be changed"] },
+        { prompt: "Calculate the relative formula mass (Mr) of H2O. Use Ar: H = 1, O = 16.", value: 18,
+          solution: ["2 hydrogens: 2 &times; 1 = 2", "1 oxygen: 16", "Mr = 2 + 16 = 18"] },
+        { prompt: "Calculate the relative formula mass of CO2. Use Ar: C = 12, O = 16.", value: 44,
+          solution: ["1 carbon: 12", "2 oxygens: 2 &times; 16 = 32", "Mr = 12 + 32 = 44"] },
+        { prompt: "Calculate the relative formula mass of CaCO3. Use Ar: Ca = 40, C = 12, O = 16.", value: 100,
+          solution: ["Ca = 40, C = 12", "3 oxygens: 3 &times; 16 = 48", "Mr = 40 + 12 + 48 = 100"] },
+        { prompt: "Calculate the relative formula mass of H2SO4. Use Ar: H = 1, S = 32, O = 16.", value: 98,
+          solution: ["2 hydrogens: 2", "1 sulfur: 32", "4 oxygens: 4 &times; 16 = 64", "Mr = 2 + 32 + 64 = 98"] },
+        { prompt: "Calculate the relative formula mass of MgCl2. Use Ar: Mg = 24, Cl = 35.5.", value: 95, tol: 0.05,
+          solution: ["1 magnesium: 24", "2 chlorines: 2 &times; 35.5 = 71", "Mr = 24 + 71 = 95"] },
+        { prompt: "Balance: __Na + __Cl2 &rarr; __NaCl. Give the three coefficients in order, for example 2,1,2.", accept:["2,1,2","212"],
+          solution: ["Chlorine comes in pairs, so 2 NaCl are made from 1 Cl2", "That needs 2 Na on the left", "2Na + Cl2 &rarr; 2NaCl, so 2, 1, 2"] },
+        { prompt: "Balance: __H2 + __N2 &rarr; __NH3. Give the coefficients in order for H2, N2, NH3.", accept:["3,1,2","312"],
+          solution: ["N2 supplies 2 nitrogen atoms, so 2 NH3 are made", "2 NH3 needs 6 hydrogen atoms, which is 3 H2", "3H2 + N2 &rarr; 2NH3, so 3, 1, 2"] },
+        { prompt: "Balance: __CH4 + __O2 &rarr; __CO2 + __H2O. Give the coefficients in order for CH4, O2, CO2, H2O.", accept:["1,2,1,2","1212"],
+          solution: ["1 CH4 gives 1 CO2 and, from its 4 hydrogens, 2 H2O", "The right side then holds 2 + 2 = 4 oxygen atoms, which is 2 O2", "CH4 + 2O2 &rarr; CO2 + 2H2O, so 1, 2, 1, 2"] },
+        { prompt: "Balance: __Zn + __HCl &rarr; __ZnCl2 + __H2. Give the coefficients in order for Zn, HCl, ZnCl2, H2.", accept:["1,2,1,1","1211"],
+          solution: ["ZnCl2 needs 2 chlorine atoms, so 2 HCl are required", "Those 2 HCl also supply the 2 hydrogens for 1 H2", "Zn + 2HCl &rarr; ZnCl2 + H2, so 1, 2, 1, 1"] },
+        { prompt: "Balance: __Fe2O3 + __CO &rarr; __Fe + __CO2. Give the coefficients in order for Fe2O3, CO, Fe, CO2.", accept:["1,3,2,3","1323"],
+          solution: ["Fe2O3 contains 2 iron atoms, so 2 Fe are produced", "Each CO picks up one oxygen from the Fe2O3, and there are 3 oxygens to remove", "So 3 CO become 3 CO2: Fe2O3 + 3CO &rarr; 2Fe + 3CO2, giving 1, 3, 2, 3"] },
+        { prompt: "A reaction that releases a gas is carried out in an open container and the measured mass falls. Explain why this does not break the law of conservation of mass.", open:true,
+          solution: ["Sample response: The law applies to a closed system, where nothing can enter or leave. In an open container the gas produced drifts off into the room, so it is no longer sitting on the balance and the reading drops. Weigh the gas as well &mdash; for example by repeating the reaction in a sealed flask &mdash; and the total mass is exactly the same as before."] },
+        { prompt: "State the law of conservation of mass in your own words.", open:true,
+          solution: ["Sample response: In a closed system, the total mass of the reactants before a chemical reaction is exactly equal to the total mass of the products after it, because the atoms present are only rearranged into new combinations rather than being created or destroyed."] },
+        { prompt: "Explain why balancing a chemical equation is really just the law of conservation of mass written in symbols.", open:true,
+          solution: ["Sample response: A balanced equation has the same number of atoms of each element on both sides, which is another way of saying no atoms appeared or disappeared during the reaction. Since every atom has a fixed mass, keeping the atom counts equal keeps the total mass equal, so a correctly balanced equation is a statement of conservation of mass in chemical shorthand."] }
+      ]
+    }
+  ];
+
+  /* ---------------------------------------------------------------
+     STORAGE
+  --------------------------------------------------------------- */
+  var STORE_KEY = "chem_u1_progress_v2";
+  function loadProgress(){
+    try{
+      var raw = localStorage.getItem(STORE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    }catch(e){ return {}; }
+  }
+  function saveProgress(p){
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(p)); }catch(e){ /* ignore */ }
+  }
+  var progress = loadProgress();
+
+  /* ---------------------------------------------------------------
+     ANSWER CHECKING
+  --------------------------------------------------------------- */
+  function parseNum(s){
+    if(s == null) return null;
+    s = String(s).trim();
+    var fracM = s.match(/^(-?\d+(?:\.\d+)?)\s*\/\s*(-?\d+(?:\.\d+)?)$/);
+    if(fracM){
+      var a = parseFloat(fracM[1]), b = parseFloat(fracM[2]);
+      if(b === 0) return null;
+      return a / b;
+    }
+    var v = parseFloat(s);
+    return isNaN(v) ? null : v;
+  }
+  function normalize(raw){
+    return String(raw).toLowerCase().replace(/[\s()]/g,"");
+  }
+  function checkAnswer(ex, raw){
+    if(!raw || !String(raw).trim()) return false;
+    var norm = normalize(raw);
+    if(ex.accept && ex.accept.indexOf(norm) > -1) return true;
+    if(typeof ex.value === "number"){
+      var v = parseNum(raw);
+      if(v !== null && Math.abs(v - ex.value) < (ex.tol || 0.02)) return true;
+    }
+    if(ex.valueSet){
+      var parts = String(raw).toLowerCase().split(/,|or|and/).map(parseNum).filter(function(x){ return x !== null; });
+      if(parts.length === ex.valueSet.length){
+        var remaining = ex.valueSet.slice();
+        var ok = parts.every(function(p){
+          var idx = -1;
+          for(var i=0;i<remaining.length;i++){
+            if(Math.abs(remaining[i]-p) < (ex.tol||0.02)){ idx=i; break; }
+          }
+          if(idx>-1){ remaining.splice(idx,1); return true; }
+          return false;
+        });
+        if(ok) return true;
+      }
+    }
+    return false;
+  }
+
+  /* ---------------------------------------------------------------
+     RENDER
+  --------------------------------------------------------------- */
+  var lessonsEl = document.getElementById("lessons");
+  var scoreboardInner = document.getElementById("scoreboardInner");
+  var resetBtn = document.getElementById("resetBtn");
+  var totalDoneEl = document.getElementById("totalDone");
+
+  function exId(li, ei){ return "L" + li + "E" + ei; }
+
+  function buildChips(){
+    LESSONS.forEach(function(lesson, li){
+      var a = document.createElement("a");
+      a.href = "#lesson-" + lesson.letter;
+      a.className = "chip";
+      a.style.setProperty("--chip-hue", "var(" + lesson.hueVar + "-solid)");
+      a.style.setProperty("--chip-tint", "var(" + lesson.hueVar + "-tint)");
+      a.id = "chip-" + li;
+      a.innerHTML = '<span class="letter">' + lesson.letter + '</span><span class="frac" data-frac>0/' + lesson.exercises.length + '</span>';
+      scoreboardInner.insertBefore(a, resetBtn);
+    });
+  }
+
+  function lessonDoneCount(li){
+    var lesson = LESSONS[li];
+    var n = 0;
+    lesson.exercises.forEach(function(ex, ei){
+      if(progress[exId(li,ei)]) n++;
+    });
+    return n;
+  }
+
+  function updateAllProgressUI(){
+    var total = 0;
+    LESSONS.forEach(function(lesson, li){
+      var n = lessonDoneCount(li);
+      total += n;
+      var lessonTotal = lesson.exercises.length;
+      var chip = document.getElementById("chip-" + li);
+      if(chip){
+        chip.querySelector("[data-frac]").textContent = n + "/" + lessonTotal;
+        chip.classList.toggle("done", n === lessonTotal);
+      }
+      var ring = document.getElementById("ring-" + li);
+      if(ring){
+        ring.querySelector(".ring-label").textContent = n + " / " + lessonTotal;
+        ring.querySelector(".bar-fill").style.width = (n / lessonTotal * 100) + "%";
+      }
+    });
+    totalDoneEl.textContent = total;
+  }
+
+  function showToast(msg){
+    var t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(showToast._h);
+    showToast._h = setTimeout(function(){ t.classList.remove("show"); }, 1600);
+  }
+
+  function buildLessons(){
+    LESSONS.forEach(function(lesson, li){
+      var section = document.createElement("section");
+      section.className = "lesson";
+      section.id = "lesson-" + lesson.letter;
+      section.style.setProperty("--hue", "var(" + lesson.hueVar + "-solid)");
+      section.style.setProperty("--tint", "var(" + lesson.hueVar + "-tint)");
+
+      var head = document.createElement("div");
+      head.className = "lesson-head";
+      head.innerHTML =
+        '<div class="big-letter">' + lesson.letter + '</div>' +
+        '<div class="htext"><div class="kicker">Lesson ' + lesson.letter + '</div><h2>' + lesson.title + '</h2></div>' +
+        '<div class="lesson-progress" id="ring-' + li + '">' +
+          '<div class="ring-label">0 / ' + lesson.exercises.length + '</div>' +
+          '<div class="bar"><div class="bar-fill"></div></div>' +
+        '</div>';
+      section.appendChild(head);
+
+      var rulesBox = document.createElement("div");
+      rulesBox.className = "rules-box";
+      rulesBox.innerHTML = '<h3>The rules</h3><ul>' + lesson.rules.map(function(r){ return "<li>" + r + "</li>"; }).join("") + "</ul>";
+      section.appendChild(rulesBox);
+
+      var diagramList = lesson.diagrams || (lesson.diagram ? [lesson.diagram] : []);
+      var diagramCaptions = lesson.diagramCaptions || [];
+      if(diagramList[0]){
+        var diagramBox = document.createElement("div");
+        diagramBox.className = "diagram-box";
+        diagramBox.innerHTML = diagramList[0] + (diagramCaptions[0] ? '<div class="diagram-caption">' + diagramCaptions[0] + '</div>' : '');
+        section.appendChild(diagramBox);
+      }
+
+      if(lesson.trick){
+        var trickBox = document.createElement("div");
+        trickBox.className = "trick-box";
+        trickBox.innerHTML = '<span class="trick-tag">Rule of thumb</span><span class="trick-text">' + lesson.trick + '</span>';
+        section.appendChild(trickBox);
+      }
+
+      var exampleList = lesson.examples || (lesson.example ? [lesson.example] : []);
+
+      function buildExampleCard(exampleObj, idx){
+        var card = document.createElement("div");
+        card.className = "example-card";
+        card.innerHTML =
+          '<h3>Worked example' + (exampleList.length > 1 ? " " + (idx+1) : "") + '</h3>' +
+          '<div class="example-prob expr">' + exampleObj.problem + '</div>' +
+          '<div class="example-steps">' +
+            exampleObj.steps.map(function(s, i){
+              return '<div class="step"><span class="n">' + (i+1) + '.</span><span class="expr">' + s + '</span></div>';
+            }).join("") +
+          '</div>' +
+          '<div class="example-answer">Answer: ' + exampleObj.answer + '</div>';
+        return card;
+      }
+
+      if(exampleList[0]) section.appendChild(buildExampleCard(exampleList[0], 0));
+
+      if(diagramList[1]){
+        var diagramBox2 = document.createElement("div");
+        diagramBox2.className = "diagram-box";
+        diagramBox2.innerHTML = diagramList[1] + (diagramCaptions[1] ? '<div class="diagram-caption">' + diagramCaptions[1] + '</div>' : '');
+        section.appendChild(diagramBox2);
+      }
+
+      if(exampleList[1]) section.appendChild(buildExampleCard(exampleList[1], 1));
+
+      if(lesson.remember && lesson.remember.length){
+        var rememberBox = document.createElement("div");
+        rememberBox.className = "remember-box";
+        rememberBox.innerHTML = '<h3>Rules to remember</h3><ul>' +
+          lesson.remember.map(function(r){ return "<li>" + r + "</li>"; }).join("") + '</ul>';
+        section.appendChild(rememberBox);
+      }
+
+      if(lesson.comic){
+        var comicBox = document.createElement("div");
+        comicBox.className = "comic-box";
+        comicBox.innerHTML =
+          '<span class="comic-tag">Chemistry meme break</span>' +
+          lesson.comic.svg +
+          '<div class="comic-caption">' + lesson.comic.caption + '</div>';
+        section.appendChild(comicBox);
+      }
+
+      var grid = document.createElement("div");
+      grid.className = "ex-grid";
+
+      lesson.exercises.forEach(function(exObj, ei){
+        var id = exId(li, ei);
+        var card = document.createElement("div");
+        card.className = "ex-card";
+        card.id = "card-" + id;
+
+        var inputRow = exObj.open
+          ? '<div class="open-note">Open response &mdash; there\'s no single right answer. Try it yourself, then compare with the sample.</div>'
+          : '<div class="ex-input-row">' +
+              '<input class="ex-input" type="text" placeholder="your answer" id="input-' + id + '" autocomplete="off" />' +
+              '<button class="ex-check" data-id="' + id + '" data-li="' + li + '" data-ei="' + ei + '">Check</button>' +
+            '</div>' +
+            '<div class="ex-feedback" id="fb-' + id + '"></div>';
+
+        card.innerHTML =
+          '<div class="ex-top"><span class="ex-num">' + (ei+1) + '</span><div class="ex-prompt expr">' + exObj.prompt + '</div></div>' +
+          inputRow +
+          '<div class="ex-foot">' +
+            '<button class="ex-toggle" data-target="sol-' + id + '">' + (exObj.open ? "Show sample response" : "Show solution") + '</button>' +
+          '</div>' +
+          '<div class="ex-solution" id="sol-' + id + '">' +
+            exObj.solution.map(function(s){ return '<div class="sol-step">' + s + '</div>'; }).join("") +
+          '</div>';
+
+        grid.appendChild(card);
+      });
+
+      section.appendChild(grid);
+      lessonsEl.appendChild(section);
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     EVENTS (delegated)
+  --------------------------------------------------------------- */
+  function wireEvents(){
+    lessonsEl.addEventListener("click", function(e){
+      var checkBtn = e.target.closest(".ex-check");
+      if(checkBtn){
+        var li = parseInt(checkBtn.getAttribute("data-li"), 10);
+        var ei = parseInt(checkBtn.getAttribute("data-ei"), 10);
+        var id = checkBtn.getAttribute("data-id");
+        var exObj = LESSONS[li].exercises[ei];
+        var input = document.getElementById("input-" + id);
+        var fb = document.getElementById("fb-" + id);
+        var card = document.getElementById("card-" + id);
+        var ok = checkAnswer(exObj, input.value);
+        card.classList.remove("correct","wrong");
+        fb.classList.remove("correct","wrong");
+        if(ok){
+          card.classList.add("correct");
+          fb.classList.add("correct");
+          fb.textContent = "Correct!";
+          progress[id] = true;
+          saveProgress(progress);
+          updateAllProgressUI();
+        } else {
+          card.classList.add("wrong");
+          fb.classList.add("wrong");
+          fb.textContent = "Not quite — try again or check the solution.";
+        }
+        return;
+      }
+      var toggleBtn = e.target.closest(".ex-toggle");
+      if(toggleBtn){
+        var targetId = toggleBtn.getAttribute("data-target");
+        var sol = document.getElementById(targetId);
+        var willOpen = !sol.classList.contains("open");
+        sol.classList.toggle("open");
+        toggleBtn.textContent = willOpen
+          ? (toggleBtn.textContent.indexOf("sample") > -1 ? "Hide sample response" : "Hide solution")
+          : (toggleBtn.textContent.indexOf("sample") > -1 ? "Show sample response" : "Show solution");
+
+        // mark open-response exercises as "done" once viewed
+        var cardEl = toggleBtn.closest(".ex-card");
+        if(willOpen && cardEl){
+          var idMatch = targetId.replace("sol-","");
+          var liEi = idMatch.match(/^L(\d+)E(\d+)$/);
+          if(liEi){
+            var li2 = parseInt(liEi[1],10), ei2 = parseInt(liEi[2],10);
+            if(LESSONS[li2].exercises[ei2].open){
+              progress[idMatch] = true;
+              saveProgress(progress);
+              updateAllProgressUI();
+            }
+          }
+        }
+        return;
+      }
+    });
+
+    lessonsEl.addEventListener("keydown", function(e){
+      if(e.key === "Enter" && e.target.classList.contains("ex-input")){
+        var id = e.target.id.replace("input-","");
+        var btn = document.querySelector('.ex-check[data-id="' + id + '"]');
+        if(btn) btn.click();
+      }
+    });
+
+    resetBtn.addEventListener("click", function(){
+      if(!confirm("Clear all saved progress on this device?")) return;
+      progress = {};
+      saveProgress(progress);
+      document.querySelectorAll(".ex-card").forEach(function(c){ c.classList.remove("correct","wrong"); });
+      document.querySelectorAll(".ex-feedback").forEach(function(f){ f.textContent = ""; f.classList.remove("correct","wrong"); });
+      updateAllProgressUI();
+      showToast("Progress cleared");
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     HUE SOLID/TINT CSS VARS (derived once, injected as a style tag)
+  --------------------------------------------------------------- */
+  function injectHueVars(){
+    var style = document.createElement("style");
+    var letters = ["A","B","C","D","E","F"];
+    var css = ":root{";
+    letters.forEach(function(L){
+      var hv = "--hue" + L;
+      css += hv + "-solid: hsl(var(" + hv + ") var(--lsat) var(--llight));";
+      css += hv + "-tint: hsl(var(" + hv + ") var(--lsat) var(--ltint));";
+    });
+    css += "}";
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
+  function buildCheatSheet(){
+    var grid = document.getElementById("csGrid");
+    if(!grid) return;
+    LESSONS.forEach(function(lesson){
+      if(!lesson.remember || !lesson.remember.length) return;
+      var card = document.createElement("div");
+      card.className = "cs-card";
+      card.style.setProperty("--hue", "var(" + lesson.hueVar + "-solid)");
+      card.style.setProperty("--tint", "var(" + lesson.hueVar + "-tint)");
+      card.innerHTML =
+        '<h4><span class="cs-letter">' + lesson.letter + '</span>' + lesson.title + '</h4>' +
+        '<ul>' + lesson.remember.map(function(r){ return "<li>" + r + "</li>"; }).join("") + '</ul>';
+      grid.appendChild(card);
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     INIT
+  --------------------------------------------------------------- */
+  injectHueVars();
+  buildChips();
+  buildLessons();
+  buildCheatSheet();
+  wireEvents();
+  updateAllProgressUI();
+
+})();
+</script>

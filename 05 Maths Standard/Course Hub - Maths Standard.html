@@ -1,0 +1,169 @@
+<title>Grade 9 Standard Maths Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #F5F6F2;
+    --surface: #FFFFFF;
+    --surface-2: #ECEFE7;
+    --ink: #1B222C;
+    --ink-soft: #545E6B;
+    --ink-faint: #8A93A0;
+    --accent: #2957A4;
+    --accent-ink: #ffffff;
+    --accent-2: #C1841B;
+    --good: #2C8A57;
+    --good-tint: #E4F3EA;
+    --border: #DBDFD4;
+    --border-strong: #C4CABC;
+    --radius: 16px;
+
+    --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --font-body: "Karla", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+
+    --u1: 262; --u2: 214; --u3: 30; --u4: 350;
+    --lsat: 58%; --llight: 38%; --ltint: 94%;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #12151A; --surface: #191D24; --surface-2: #1F252E;
+      --ink: #E9ECF1; --ink-soft: #A7B0BE; --ink-faint: #6E7787;
+      --accent: #7DA3E8; --accent-ink: #0D1420; --accent-2: #E3AE55;
+      --good: #57C489; --good-tint: #16261E;
+      --border: #2A303B; --border-strong: #3A4250;
+      --lsat: 62%; --llight: 68%; --ltint: 16%;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #12151A; --surface: #191D24; --surface-2: #1F252E;
+    --ink: #E9ECF1; --ink-soft: #A7B0BE; --ink-faint: #6E7787;
+    --accent: #7DA3E8; --accent-ink: #0D1420; --accent-2: #E3AE55;
+    --good: #57C489; --good-tint: #16261E;
+    --border: #2A303B; --border-strong: #3A4250;
+    --lsat: 62%; --llight: 68%; --ltint: 16%;
+  }
+  :root{
+    --u1-solid: hsl(var(--u1) var(--lsat) var(--llight)); --u1-tint: hsl(var(--u1) var(--lsat) var(--ltint));
+    --u2-solid: hsl(var(--u2) var(--lsat) var(--llight)); --u2-tint: hsl(var(--u2) var(--lsat) var(--ltint));
+    --u3-solid: hsl(var(--u3) var(--lsat) var(--llight)); --u3-tint: hsl(var(--u3) var(--lsat) var(--ltint));
+    --u4-solid: hsl(var(--u4) var(--lsat) var(--llight)); --u4-tint: hsl(var(--u4) var(--lsat) var(--ltint));
+  }
+
+  *{ box-sizing: border-box; }
+  @media (prefers-reduced-motion: reduce){ *{ animation: none !important; transition: none !important; } }
+  body{ margin:0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a{ color: var(--accent); }
+  ::selection{ background: color-mix(in srgb, var(--accent) 30%, transparent); }
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 20px; }
+  h1,h2,h3{ font-family: var(--font-display); font-weight: 600; text-wrap: balance; margin: 0; color: var(--ink); }
+  a:focus-visible{ outline: 2.5px solid var(--accent); outline-offset: 2px; }
+
+  .masthead{ background: var(--surface); border-bottom: 1px solid var(--border); }
+  .masthead-inner{ padding: 44px 20px 34px; display:flex; flex-direction:column; gap:14px; }
+  .eyebrow{ font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-faint); display:flex; align-items:center; gap:10px; }
+  .eyebrow .dot{ width:5px; height:5px; border-radius:50%; background: var(--accent-2); }
+  h1{ font-size: clamp(30px, 4.5vw, 44px); line-height: 1.05; }
+  .subtitle{ color: var(--ink-soft); font-size: 16.5px; max-width: 58ch; margin-top:8px; }
+  .student-tag{ font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 7px 14px; display:inline-block; width: fit-content; margin-top: 4px; }
+  .student-tag b{ color: var(--ink); }
+  .stat-strip{ display:flex; gap: 28px; flex-wrap:wrap; margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--border); }
+  .stat{ font-family: var(--font-mono); }
+  .stat .num{ font-size: 22px; font-weight: 700; color: var(--ink); }
+  .stat .lbl{ font-size: 12px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: .06em; }
+
+  main{ padding: 40px 0 80px; }
+  .grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 720px){ .grid{ grid-template-columns: 1fr; } }
+
+  .card{ background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 26px; display:flex; flex-direction:column; gap: 14px; text-decoration:none; color: inherit; position:relative; overflow:hidden; transition: transform .15s ease, border-color .15s ease; }
+  .card:hover{ transform: translateY(-2px); border-color: var(--u-hue); }
+  .card::before{ content:""; position:absolute; top:0; left:0; right:0; height:4px; background: var(--u-hue); }
+  .card-top{ display:flex; align-items:center; gap: 14px; }
+  .card-num{ font-family: var(--font-display); font-weight: 700; font-size: 26px; color: var(--u-hue); width: 46px; height:46px; flex:0 0 auto; border-radius: 10px; background: var(--u-tint); display:flex; align-items:center; justify-content:center; border: 1px solid color-mix(in srgb, var(--u-hue) 40%, transparent); }
+  .card-kicker{ font-family: var(--font-mono); font-size: 11.5px; text-transform:uppercase; letter-spacing:.08em; color: var(--u-hue); }
+  .card h2{ font-size: 21px; margin-top: 2px; }
+  .card p{ margin:0; color: var(--ink-soft); font-size: 14.5px; }
+  .card-meta{ display:flex; gap: 16px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint); padding-top: 10px; border-top: 1px dashed var(--border); }
+  .card-meta b{ color: var(--ink-soft); }
+  .card-cta{ margin-top: auto; font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--u-hue); display:flex; align-items:center; gap:6px; }
+  .card:hover .card-cta{ text-decoration: underline; }
+
+  footer{ text-align:center; padding: 20px 20px 50px; color: var(--ink-faint); font-size: 13px; font-family: var(--font-mono); }
+</style>
+
+<div class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="eyebrow"><span class="dot"></span>IB MYP Standard Mathematics B &middot; Grade 9</div>
+    <h1>Course Hub</h1>
+    <div class="subtitle">Four interactive study workbooks, one per unit &mdash; expanding, factorizing, and graphing quadratics; parallel lines, congruence, similarity, and right-triangle trigonometry; and sets, statistics, and probability. Each opens with the rules, a worked example, and 10 self-checking exercises per lesson.</div>
+    <span class="student-tag">Prepared for <b>Devon</b> &middot; Grade 9, IB MYP Year 4</span>
+    <div class="stat-strip">
+      <div class="stat"><div class="num">4</div><div class="lbl">Units</div></div>
+      <div class="stat"><div class="num">23</div><div class="lbl">Lessons</div></div>
+      <div class="stat"><div class="num">230</div><div class="lbl">Exercises</div></div>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="grid">
+
+    <a class="card" href="https://claude.ai/code/artifact/f2f517d9-4187-4935-b630-62f9326e0b72" style="--u-hue: var(--u1-solid); --u-tint: var(--u1-tint);">
+      <div class="card-top">
+        <div class="card-num">1</div>
+        <div>
+          <div class="card-kicker">Unit 1 &middot; Number, Algebra, Equations</div>
+          <h2>Rules of the Game</h2>
+        </div>
+      </div>
+      <p>Solving equations, distance/midpoint/slope, parallel &amp; perpendicular lines, equations of lines, simultaneous equations, and non-linear systems.</p>
+      <div class="card-meta"><span><b>6</b> lessons</span><span><b>60</b> exercises</span><span>Criteria <b>B &middot; C</b></span></div>
+      <div class="card-cta">Open workbook &rarr;</div>
+    </a>
+
+    <a class="card" href="https://claude.ai/code/artifact/0d1ed38e-b172-4cf8-88c2-1dfe6412f24c" style="--u-hue: var(--u2-solid); --u-tint: var(--u2-tint);">
+      <div class="card-top">
+        <div class="card-num">2</div>
+        <div>
+          <div class="card-kicker">Unit 2 &middot; Thinking with Models: Functions</div>
+          <h2>How Many Forms Has a Quadratic?</h2>
+        </div>
+      </div>
+      <p>Algebraic expansion, quadratic factorization, solving quadratic equations (square roots, factoring, completing the square), and graphing quadratic functions.</p>
+      <div class="card-meta"><span><b>5</b> lessons</span><span><b>50</b> exercises</span><span>Criteria <b>A &middot; D</b></span></div>
+      <div class="card-cta">Open workbook &rarr;</div>
+    </a>
+
+    <a class="card" href="https://claude.ai/code/artifact/35f7134a-bec9-4f2a-96d7-167faa38122d" style="--u-hue: var(--u3-solid); --u-tint: var(--u3-tint);">
+      <div class="card-top">
+        <div class="card-num">3</div>
+        <div>
+          <div class="card-kicker">Unit 3 &middot; Spatial Reasoning: Geometry</div>
+          <h2>Spacious Interiors</h2>
+        </div>
+      </div>
+      <p>Transversals &amp; parallel lines, congruence &amp; proof, similarity, special right-triangle angles, verifying SOHCAHTOA, and problem solving with right triangles.</p>
+      <div class="card-meta"><span><b>6</b> lessons</span><span><b>60</b> exercises</span><span>Criteria <b>B &middot; C &middot; D</b></span></div>
+      <div class="card-cta">Open workbook &rarr;</div>
+    </a>
+
+    <a class="card" href="https://claude.ai/code/artifact/42b307c4-8998-448e-b341-55e72ded1d1a" style="--u-hue: var(--u4-solid); --u-tint: var(--u4-tint);">
+      <div class="card-top">
+        <div class="card-num">4</div>
+        <div>
+          <div class="card-kicker">Unit 4 &middot; Reasoning with Data: Statistics &amp; Probability</div>
+          <h2>A Whole Range of Things</h2>
+        </div>
+      </div>
+      <p>Sets &amp; Venn diagrams, statistical measures of center, introduction to probability, compound events (with and without replacement), and expectation &amp; fair games.</p>
+      <div class="card-meta"><span><b>6</b> lessons</span><span><b>60</b> exercises</span><span>Criteria <b>A</b></span></div>
+      <div class="card-cta">Open workbook &rarr;</div>
+    </a>
+
+  </div>
+</main>
+
+<footer>IB MYP Standard Mathematics B &middot; Grade 9 &middot; built for Devon</footer>

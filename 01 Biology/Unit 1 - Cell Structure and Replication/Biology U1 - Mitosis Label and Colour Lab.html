@@ -1,0 +1,453 @@
+<title>Mitosis Label &amp; Colour Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF9F6; --surface:#FFFFFF; --surface-2:#F3F2ED;
+    --ink:#1C1B19; --ink-soft:#4A4843; --ink-faint:#8A8880;
+    --border:#E2E0D8; --border-strong:#CFCCC1;
+    --hue: hsl(150 58% 30%); --tint: hsl(150 58% 94%);
+    --good:#2E7D4F; --good-tint:#E4F3EA; --bad:#B4402F; --bad-tint:#FBEAE8;
+    --font-display:"Fraunces",Georgia,serif;
+    --font-body:"Karla","Segoe UI",system-ui,sans-serif;
+    --font-mono:"JetBrains Mono",Consolas,monospace;
+    --radius:14px;
+    /* colouring key */
+    --c1:#2C5FA8; --c2:#F2C94C; --c3:#8E5BC4; --c4:#2E9E62; --c5:#D0453A; --c6:#E58A2E; --c7:#5FAFC7;
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+    --bg:#15161A; --surface:#1D1F24; --surface-2:#22242A;
+    --ink:#EFEDE7; --ink-soft:#BFBDB6; --ink-faint:#85837C;
+    --border:#31343B; --border-strong:#41454E;
+    --hue: hsl(150 55% 62%); --tint: hsl(150 40% 16%);
+    --good:#69C68D; --good-tint:#16261E; --bad:#E3796A; --bad-tint:#2A1917;
+    --c1:#6A9BE0; --c2:#F0D477; --c3:#B78BE6; --c4:#63C78E; --c5:#E8776B; --c6:#F0AA5F; --c7:#8ACBDE;
+  }}
+  :root[data-theme="dark"]{
+    --bg:#15161A; --surface:#1D1F24; --surface-2:#22242A;
+    --ink:#EFEDE7; --ink-soft:#BFBDB6; --ink-faint:#85837C;
+    --border:#31343B; --border-strong:#41454E;
+    --hue: hsl(150 55% 62%); --tint: hsl(150 40% 16%);
+    --good:#69C68D; --good-tint:#16261E; --bad:#E3796A; --bad-tint:#2A1917;
+    --c1:#6A9BE0; --c2:#F0D477; --c3:#B78BE6; --c4:#63C78E; --c5:#E8776B; --c6:#F0AA5F; --c7:#8ACBDE;
+  }
+  body{ background:var(--bg); color:var(--ink); font-family:var(--font-body); font-size:15px; line-height:1.55; }
+  .wrap{ max-width:940px; margin:0 auto; padding:40px 22px 70px; }
+  .eyebrow{ font-family:var(--font-mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:9px; }
+  h1{ font-family:var(--font-display); font-size:34px; font-weight:700; margin:0 0 8px; }
+  .lede{ color:var(--ink-soft); max-width:64ch; margin-bottom:8px; }
+  h2{ font-family:var(--font-mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin:34px 0 12px; font-weight:600; }
+
+  .scorebar{ position:sticky; top:0; z-index:20; background:color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter:blur(8px); border-bottom:1px solid var(--border); margin:0 -22px 0; padding:10px 22px;
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap; font-family:var(--font-mono); font-size:12.5px; }
+  .scorebar b{ color:var(--hue); font-size:14px; }
+  .btn{ font-family:var(--font-mono); font-size:12px; border:1px solid var(--border-strong); background:var(--surface);
+    color:var(--ink-soft); border-radius:999px; padding:5px 13px; cursor:pointer; }
+  .btn:hover{ border-color:var(--hue); color:var(--hue); }
+
+  .panel{ background:var(--surface-2); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+
+  /* colour key */
+  .keygrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:10px; }
+  .keyrow{ display:flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--border);
+    border-radius:10px; padding:9px 12px; font-size:13.5px; }
+  .sw{ width:22px; height:22px; border-radius:6px; flex:none; border:1px solid rgba(0,0,0,.2); }
+  .keyrow .num{ font-family:var(--font-mono); font-size:11px; color:var(--ink-faint); width:14px; flex:none; }
+
+  /* chips */
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:6px; }
+  .chip{ font-family:var(--font-body); font-size:13.5px; border:1.5px solid var(--border-strong); background:var(--surface);
+    color:var(--ink); border-radius:999px; padding:6px 14px; cursor:pointer; display:flex; align-items:center; gap:8px; }
+  .chip .dot{ width:12px; height:12px; border-radius:50%; flex:none; }
+  .chip:hover{ border-color:var(--hue); }
+  .chip.active{ border-color:var(--hue); background:var(--tint); box-shadow:0 0 0 3px color-mix(in srgb, var(--hue) 22%, transparent); }
+  .hint{ font-size:12.5px; color:var(--ink-faint); font-family:var(--font-mono); margin-bottom:16px; }
+
+  /* stage cards */
+  .stage{ background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    padding:18px 20px; margin-bottom:16px; }
+  .stage h3{ font-family:var(--font-display); font-size:20px; margin:0 0 2px; }
+  .stage .what{ color:var(--ink-soft); font-size:13.5px; margin-bottom:14px; }
+  .stage-body{ display:grid; grid-template-columns:minmax(260px,1fr) minmax(240px,320px); gap:18px; align-items:start; }
+  @media (max-width:760px){ .stage-body{ grid-template-columns:1fr; } }
+  .fig{ background:var(--surface-2); border:1px solid var(--border); border-radius:10px; padding:10px; }
+  .fig svg{ width:100%; height:auto; display:block; }
+  .fig text{ font-family:var(--font-mono); }
+
+  .slots{ display:flex; flex-direction:column; gap:7px; }
+  .slot{ display:flex; align-items:center; gap:10px; border:1.5px solid var(--border); background:var(--surface-2);
+    border-radius:9px; padding:7px 11px; cursor:pointer; font-size:13.5px; text-align:left; width:100%;
+    font-family:var(--font-body); color:var(--ink); }
+  .slot:hover{ border-color:var(--hue); }
+  .slot .n{ font-family:var(--font-mono); font-size:12px; font-weight:600; width:18px; flex:none;
+    height:18px; border-radius:5px; display:grid; place-items:center; background:var(--tint); color:var(--hue); }
+  .slot .val{ color:var(--ink-faint); font-style:italic; }
+  .slot.filled .val{ color:var(--ink); font-style:normal; }
+  .slot.correct{ border-color:var(--good); background:var(--good-tint); }
+  .slot.wrong{ border-color:var(--bad); background:var(--bad-tint); }
+  .slot .mark{ margin-left:auto; font-family:var(--font-mono); font-size:12px; }
+  .slot.correct .mark{ color:var(--good); }
+  .slot.wrong .mark{ color:var(--bad); }
+  .stage-foot{ display:flex; gap:10px; align-items:center; margin-top:12px; flex-wrap:wrap; }
+  .feedback{ font-family:var(--font-mono); font-size:12.5px; }
+  .feedback.ok{ color:var(--good); } .feedback.no{ color:var(--bad); }
+
+  .order-list{ display:flex; flex-wrap:wrap; gap:8px; }
+  .ord{ font-family:var(--font-mono); font-size:13px; border:1.5px solid var(--border-strong); background:var(--surface);
+    border-radius:9px; padding:7px 13px; cursor:pointer; color:var(--ink); }
+  .ord.picked{ border-color:var(--hue); background:var(--tint); color:var(--hue); }
+  .ord.correct{ border-color:var(--good); background:var(--good-tint); color:var(--good); }
+  .ord.wrong{ border-color:var(--bad); background:var(--bad-tint); color:var(--bad); }
+  .ordslots{ font-family:var(--font-mono); font-size:13px; color:var(--ink-soft); margin:10px 0; }
+
+  .note{ background:var(--surface-2); border:1px solid var(--border); border-left:4px solid var(--hue);
+    border-radius:var(--radius); padding:14px 18px; color:var(--ink-soft); font-size:13.5px; margin-top:16px; }
+  .note b{ color:var(--ink); }
+  footer{ margin-top:34px; color:var(--ink-faint); font-family:var(--font-mono); font-size:12px; text-align:center; }
+</style>
+
+<div class="wrap">
+  <div class="scorebar">
+    <span><b id="score">0</b>/<span id="scoreTotal">28</span> labels placed correctly</span>
+    <span id="stagesDone" style="color:var(--ink-faint)">0 of 5 stages checked</span>
+    <button class="btn" id="resetBtn" style="margin-left:auto">reset</button>
+  </div>
+
+  <div class="eyebrow"><span>Grade 9 Biology &middot; Unit 1 &middot; companion to the colouring sheet</span></div>
+  <h1>Mitosis: label &amp; colour lab</h1>
+  <p class="lede">The worksheet asks you to label seven structures across the five stages. Do it here first &mdash; tap a label, then tap the slot you think it belongs to &mdash; and you will know the answers cold before you put pen to paper.</p>
+
+  <h2>Step 1 &mdash; the colour key</h2>
+  <div class="panel">
+    <p style="margin-top:0; color:var(--ink-soft); font-size:13.5px;">Use the same colour for the same structure in <i>every</i> cell. That consistency is the whole point of the exercise: it makes the changes between the stages jump out.</p>
+    <div class="keygrid" id="keyGrid"></div>
+  </div>
+
+  <h2>Step 2 &mdash; label every stage</h2>
+  <div class="chips" id="chips"></div>
+  <div class="hint">Tap a label above, then tap a numbered slot. Tap a filled slot to empty it again.</div>
+  <div id="stages"></div>
+
+  <h2>Step 3 &mdash; get the order right</h2>
+  <div class="panel">
+    <p style="margin-top:0; color:var(--ink-soft); font-size:13.5px;">Tap the five stages in the order they happen.</p>
+    <div class="ordslots" id="ordSlots">1. ___ &nbsp; 2. ___ &nbsp; 3. ___ &nbsp; 4. ___ &nbsp; 5. ___</div>
+    <div class="order-list" id="ordList"></div>
+    <div class="stage-foot">
+      <button class="btn" id="ordCheck">Check the order</button>
+      <button class="btn" id="ordReset">Clear</button>
+      <span class="feedback" id="ordFeedback"></span>
+    </div>
+  </div>
+
+  <div class="note">
+    <p style="margin-top:0"><b>Why the numbers change from stage to stage.</b> Not all seven structures are visible in every cell, and that is the biology, not a mistake in the sheet. The nuclear membrane and the nucleolus break down during prophase and only come back in telophase. The spindle does not exist until prophase builds it. And what you call number 5 changes too: loose <b>chromatin</b> in interphase, condensed <b>chromosomes</b> from prophase on, separated <b>chromatids</b> once anaphase pulls them apart.</p>
+    <p style="margin-bottom:0"><b>One sentence per stage</b> is what the annotation task wants &mdash; each stage card above gives you the version to write, in your own words.</p>
+  </div>
+
+  <footer>Built for Devon &middot; companion to the Biology Unit 1 workbook</footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var LABELS = [
+    { id:1, name:"Cell membrane",     colour:"var(--c1)", note:"the outer boundary of the whole cell" },
+    { id:2, name:"Cytoplasm",         colour:"var(--c2)", note:"the jelly everything sits in" },
+    { id:3, name:"Nuclear membrane",  colour:"var(--c3)", note:"the envelope around the nucleus" },
+    { id:4, name:"Centriole",         colour:"var(--c4)", note:"organises the spindle, sits at the poles" },
+    { id:5, name:"Chromatin / chromosome", colour:"var(--c5)", note:"the DNA itself" },
+    { id:6, name:"Nucleolus",         colour:"var(--c6)", note:"the dense spot inside the nucleus" },
+    { id:7, name:"Spindle fibre",     colour:"var(--c7)", note:"the protein ropes that move chromosomes" }
+  ];
+
+  function svgInterphase(){ return '' +
+    '<svg viewBox="0 0 300 220">' +
+      '<circle cx="150" cy="115" r="92" fill="none" stroke="var(--c1)" stroke-width="3"/>' +
+      '<circle cx="150" cy="115" r="89" fill="var(--c2)" opacity="0.18"/>' +
+      '<circle cx="150" cy="118" r="52" fill="none" stroke="var(--c3)" stroke-width="2.5" stroke-dasharray="4 3"/>' +
+      '<path d="M120 100 q20 -14 36 4 q16 16 -6 30 q-24 14 -36 -6 q-10 -18 6 -28" fill="none" stroke="var(--c5)" stroke-width="2.5"/>' +
+      '<path d="M132 138 q24 10 44 -6" fill="none" stroke="var(--c5)" stroke-width="2.5"/>' +
+      '<circle cx="168" cy="98" r="9" fill="var(--c6)" opacity="0.75"/>' +
+      '<g stroke="var(--c4)" stroke-width="3">' +
+        '<line x1="86" y1="70" x2="98" y2="76"/><line x1="88" y1="78" x2="100" y2="70"/>' +
+      '</g>' +
+      mk(1, 150, 23) + mk(2, 92, 168) + mk(3, 150, 170) + mk(4, 78, 62) + mk(5, 124, 112) + mk(6, 182, 90) +
+    '</svg>'; }
+
+  function svgProphase(){ return '' +
+    '<svg viewBox="0 0 300 220">' +
+      '<circle cx="150" cy="115" r="92" fill="none" stroke="var(--c1)" stroke-width="3"/>' +
+      '<circle cx="150" cy="115" r="89" fill="var(--c2)" opacity="0.18"/>' +
+      '<circle cx="150" cy="115" r="56" fill="none" stroke="var(--c3)" stroke-width="2" stroke-dasharray="3 7" opacity="0.8"/>' +
+      chrom(126, 92, -20) + chrom(172, 100, 15) + chrom(134, 140, 25) + chrom(176, 142, -10) +
+      '<g stroke="var(--c4)" stroke-width="3">' +
+        '<line x1="70" y1="112" x2="82" y2="118"/><line x1="72" y1="120" x2="84" y2="112"/>' +
+        '<line x1="218" y1="112" x2="230" y2="118"/><line x1="220" y1="120" x2="232" y2="112"/>' +
+      '</g>' +
+      '<g stroke="var(--c7)" stroke-width="1.5" opacity="0.85" fill="none">' +
+        '<path d="M84 116 q22 -18 44 -22"/><path d="M84 116 q22 10 44 22"/>' +
+        '<path d="M216 116 q-22 -16 -42 -18"/><path d="M216 116 q-22 12 -42 24"/>' +
+      '</g>' +
+      mk(1, 150, 23) + mk(2, 104, 176) + mk(3, 198, 162) + mk(4, 60, 100) + mk(5, 150, 116) + mk(7, 108, 84) +
+    '</svg>'; }
+
+  function svgMetaphase(){ return '' +
+    '<svg viewBox="0 0 300 220">' +
+      '<ellipse cx="150" cy="115" rx="104" ry="86" fill="none" stroke="var(--c1)" stroke-width="3"/>' +
+      '<ellipse cx="150" cy="115" rx="101" ry="83" fill="var(--c2)" opacity="0.18"/>' +
+      chrom(150, 62, 0) + chrom(150, 98, 0) + chrom(150, 134, 0) + chrom(150, 168, 0) +
+      '<g stroke="var(--c4)" stroke-width="3">' +
+        '<line x1="52" y1="110" x2="64" y2="116"/><line x1="54" y1="118" x2="66" y2="110"/>' +
+        '<line x1="236" y1="110" x2="248" y2="116"/><line x1="238" y1="118" x2="250" y2="110"/>' +
+      '</g>' +
+      '<g stroke="var(--c7)" stroke-width="1.4" opacity="0.85" fill="none">' +
+        '<path d="M64 114 q42 -54 82 -52"/><path d="M64 114 q42 -18 82 -16"/>' +
+        '<path d="M64 114 q42 16 82 20"/><path d="M64 114 q42 48 82 54"/>' +
+        '<path d="M236 114 q-42 -54 -82 -52"/><path d="M236 114 q-42 -18 -82 -16"/>' +
+        '<path d="M236 114 q-42 16 -82 20"/><path d="M236 114 q-42 48 -82 54"/>' +
+      '</g>' +
+      '<line x1="150" y1="34" x2="150" y2="196" stroke="var(--ink-faint)" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>' +
+      mk(1, 150, 29) + mk(2, 198, 158) + mk(4, 40, 96) + mk(5, 176, 98) + mk(7, 100, 150) +
+    '</svg>'; }
+
+  function svgAnaphase(){ return '' +
+    '<svg viewBox="0 0 300 220">' +
+      '<ellipse cx="150" cy="115" rx="112" ry="78" fill="var(--c2)" opacity="0.18"/>' +
+      '<ellipse cx="150" cy="115" rx="112" ry="78" fill="none" stroke="var(--c1)" stroke-width="3"/>' +
+      halfChrom(104, 62) + halfChrom(196, 62, true) +
+      halfChrom(104, 100) + halfChrom(196, 100, true) +
+      halfChrom(104, 138) + halfChrom(196, 138, true) +
+      halfChrom(104, 172) + halfChrom(196, 172, true) +
+      '<g stroke="var(--c4)" stroke-width="3">' +
+        '<line x1="48" y1="110" x2="60" y2="116"/><line x1="50" y1="118" x2="62" y2="110"/>' +
+        '<line x1="240" y1="110" x2="252" y2="116"/><line x1="242" y1="118" x2="254" y2="110"/>' +
+      '</g>' +
+      '<g stroke="var(--c7)" stroke-width="1.4" opacity="0.85" fill="none">' +
+        '<path d="M60 114 q24 -50 40 -52"/><path d="M60 114 q24 -16 40 -14"/>' +
+        '<path d="M60 114 q24 16 40 22"/><path d="M60 114 q24 46 40 56"/>' +
+        '<path d="M240 114 q-24 -50 -40 -52"/><path d="M240 114 q-24 -16 -40 -14"/>' +
+        '<path d="M240 114 q-24 16 -40 22"/><path d="M240 114 q-24 46 -40 56"/>' +
+      '</g>' +
+      mk(1, 150, 34) + mk(2, 150, 168) + mk(4, 30, 96) + mk(5, 124, 172) + mk(7, 86, 66) +
+    '</svg>'; }
+
+  function svgTelophase(){ return '' +
+    '<svg viewBox="0 0 300 220">' +
+      '<path id="teloShape" d="M18 115 q0 -80 62 -80 q46 0 56 30 q10 -30 56 -30 q62 0 62 80 q0 80 -62 80 q-46 0 -56 -30 q-10 30 -56 30 q-62 0 -62 -80 z" fill="var(--c2)" opacity="0.18"/>' +
+      '<path d="M18 115 q0 -80 62 -80 q46 0 56 30 q10 -30 56 -30 q62 0 62 80 q0 80 -62 80 q-46 0 -56 -30 q-10 30 -56 30 q-62 0 -62 -80 z" fill="none" stroke="var(--c1)" stroke-width="3"/>' +
+      '<circle cx="80" cy="115" r="40" fill="none" stroke="var(--c3)" stroke-width="2.5" stroke-dasharray="4 3"/>' +
+      '<circle cx="220" cy="115" r="40" fill="none" stroke="var(--c3)" stroke-width="2.5" stroke-dasharray="4 3"/>' +
+      '<path d="M58 104 q18 -12 32 4 q14 14 -6 26 q-22 12 -32 -6 q-8 -16 6 -24" fill="none" stroke="var(--c5)" stroke-width="2.4"/>' +
+      '<path d="M198 104 q18 -12 32 4 q14 14 -6 26 q-22 12 -32 -6 q-8 -16 6 -24" fill="none" stroke="var(--c5)" stroke-width="2.4"/>' +
+      '<circle cx="94" cy="100" r="7" fill="var(--c6)" opacity="0.75"/>' +
+      '<circle cx="234" cy="100" r="7" fill="var(--c6)" opacity="0.75"/>' +
+      '<g stroke="var(--c7)" stroke-width="1.4" opacity="0.6" fill="none">' +
+        '<path d="M128 108 q22 6 44 0"/><path d="M128 122 q22 -6 44 0"/>' +
+      '</g>' +
+      mk(1, 30, 92) + mk(2, 190, 168) + mk(3, 80, 162) + mk(5, 64, 130) + mk(6, 110, 88) + mk(7, 150, 136) +
+    '</svg>'; }
+
+  function chrom(cx, cy, rot){
+    return '<g transform="translate(' + cx + ',' + cy + ') rotate(' + rot + ')" stroke="var(--c5)" stroke-width="3" fill="none">' +
+      '<path d="M-7 -13 q5 10 0 13 q-5 3 0 13"/><path d="M7 -13 q-5 10 0 13 q5 3 0 13"/>' +
+      '<circle cx="0" cy="0" r="2.6" fill="var(--c5)" stroke="none"/></g>';
+  }
+  function halfChrom(cx, cy, flip){
+    var s = flip ? -1 : 1;
+    return '<g transform="translate(' + cx + ',' + cy + ') scale(' + s + ',1)" stroke="var(--c5)" stroke-width="3" fill="none">' +
+      '<path d="M4 -12 q-6 9 0 12 q6 3 0 12"/></g>';
+  }
+  function mk(n, x, y){
+    return '<g class="mkr" data-n="' + n + '">' +
+      '<circle cx="' + x + '" cy="' + y + '" r="10" fill="var(--surface)" stroke="var(--ink-faint)" stroke-width="1.5"/>' +
+      '<text x="' + x + '" y="' + (y + 4) + '" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">' + n + '</text></g>';
+  }
+
+  var STAGES = [
+    { key:"interphase", name:"Interphase", what:"Not part of mitosis itself &mdash; this is the cell growing and copying its DNA before division starts.",
+      write:"The cell grows and the DNA is copied, so each chromosome becomes two identical chromatids. The DNA is still loose chromatin and you cannot see separate chromosomes.",
+      svg:svgInterphase, nums:[1,2,3,4,5,6] },
+    { key:"prophase", name:"Prophase", what:"Chromosomes appear, the nucleus breaks down, the spindle is built.",
+      write:"The chromosomes condense and become visible as distinct threads. The nuclear membrane breaks down so they can move freely, and protein fibres called the spindle form and attach to the centromere of each chromosome.",
+      svg:svgProphase, nums:[1,2,3,4,5,7] },
+    { key:"metaphase", name:"Metaphase", what:"One tidy row across the middle of the cell.",
+      write:"The spindle fibres move the chromosomes into place so they line up along the centre of the cell, the equator.",
+      svg:svgMetaphase, nums:[1,2,4,5,7] },
+    { key:"anaphase", name:"Anaphase", what:"The chromatids are pulled apart to opposite ends.",
+      write:"The spindle fibres contract. This separates the two chromatids of each chromosome and pulls them to opposite ends of the cell.",
+      svg:svgAnaphase, nums:[1,2,4,5,7] },
+    { key:"telophase", name:"Telophase", what:"Two nuclei reform; cytokinesis then splits the cytoplasm.",
+      write:"A nuclear membrane reforms around each group of chromosomes and the chromosomes unwind so they can get back to work. The cytoplasm then divides in cytokinesis, giving two genetically identical cells.",
+      svg:svgTelophase, nums:[1,2,3,5,6,7] }
+  ];
+
+  var TOTAL = STAGES.reduce(function(a,s){ return a + s.nums.length; }, 0);
+  var STORE = "bio_mitosis_lab_v1";
+  var state = load();
+  var picked = null;
+
+  function load(){ try{ var r = localStorage.getItem(STORE); return r ? JSON.parse(r) : {}; }catch(e){ return {}; } }
+  function save(){ try{ localStorage.setItem(STORE, JSON.stringify(state)); }catch(e){} }
+
+  /* ---------- colour key ---------- */
+  var kg = document.getElementById("keyGrid");
+  LABELS.forEach(function(l){
+    var d = document.createElement("div");
+    d.className = "keyrow";
+    d.innerHTML = '<span class="num">' + l.id + '</span><span class="sw" style="background:' + l.colour + '"></span>' +
+      '<span><b>' + l.name + '</b><br><span style="color:var(--ink-faint); font-size:12px">' + l.note + '</span></span>';
+    kg.appendChild(d);
+  });
+
+  /* ---------- label chips ---------- */
+  var chipWrap = document.getElementById("chips");
+  LABELS.forEach(function(l){
+    var b = document.createElement("button");
+    b.className = "chip";
+    b.dataset.id = l.id;
+    b.innerHTML = '<span class="dot" style="background:' + l.colour + '"></span>' + l.name;
+    b.addEventListener("click", function(){
+      if(picked === l.id){ picked = null; } else { picked = l.id; }
+      [].forEach.call(chipWrap.children, function(c){ c.classList.toggle("active", +c.dataset.id === picked); });
+    });
+    chipWrap.appendChild(b);
+  });
+
+  /* ---------- stage cards ---------- */
+  var host = document.getElementById("stages");
+  STAGES.forEach(function(stage){
+    state[stage.key] = state[stage.key] || {};
+    var card = document.createElement("section");
+    card.className = "stage";
+
+    var slots = stage.nums.map(function(n){
+      return '<button class="slot" data-n="' + n + '"><span class="n">' + n + '</span>' +
+             '<span class="val">tap a label, then tap here</span><span class="mark"></span></button>';
+    }).join("");
+
+    card.innerHTML =
+      '<h3>' + stage.name + '</h3>' +
+      '<div class="what">' + stage.what + '</div>' +
+      '<div class="stage-body">' +
+        '<div class="fig">' + stage.svg() + '</div>' +
+        '<div class="slots">' + slots + '</div>' +
+      '</div>' +
+      '<div class="stage-foot">' +
+        '<button class="btn check">Check this stage</button>' +
+        '<button class="btn clear">Clear</button>' +
+        '<span class="feedback"></span>' +
+      '</div>' +
+      '<div class="note" style="margin-top:14px"><b>Write beside this cell:</b> ' + stage.write + '</div>';
+
+    host.appendChild(card);
+
+    var slotEls = card.querySelectorAll(".slot");
+    var fb = card.querySelector(".feedback");
+
+    function paint(){
+      slotEls.forEach(function(el){
+        var n = +el.dataset.n;
+        var v = state[stage.key][n];
+        el.classList.remove("correct","wrong");
+        el.querySelector(".mark").textContent = "";
+        var val = el.querySelector(".val");
+        if(v){ val.textContent = LABELS.find(function(l){ return l.id === v; }).name; el.classList.add("filled"); }
+        else { val.textContent = "tap a label, then tap here"; el.classList.remove("filled"); }
+      });
+    }
+
+    slotEls.forEach(function(el){
+      el.addEventListener("click", function(){
+        var n = +el.dataset.n;
+        if(state[stage.key][n]){ delete state[stage.key][n]; }
+        else if(picked){ state[stage.key][n] = picked; }
+        save(); paint(); fb.textContent = ""; updateScore();
+      });
+    });
+
+    card.querySelector(".check").addEventListener("click", function(){
+      var right = 0, filled = 0;
+      slotEls.forEach(function(el){
+        var n = +el.dataset.n, v = state[stage.key][n];
+        if(!v) return;
+        filled++;
+        if(v === n){ el.classList.add("correct"); el.querySelector(".mark").textContent = "correct"; right++; }
+        else { el.classList.add("wrong"); el.querySelector(".mark").textContent = "not this one"; }
+      });
+      if(filled === 0){ fb.className = "feedback"; fb.textContent = "Place some labels first."; return; }
+      fb.className = "feedback " + (right === stage.nums.length ? "ok" : "no");
+      fb.textContent = right + " of " + stage.nums.length + " correct" + (right === stage.nums.length ? " — all of them." : ".");
+      state[stage.key].__checked = true; save(); updateScore();
+    });
+
+    card.querySelector(".clear").addEventListener("click", function(){
+      state[stage.key] = {}; save(); paint(); fb.textContent = ""; updateScore();
+    });
+
+    paint();
+  });
+
+  document.getElementById("scoreTotal").textContent = TOTAL;
+
+  function updateScore(){
+    var right = 0, checked = 0;
+    STAGES.forEach(function(s){
+      if(state[s.key] && state[s.key].__checked) checked++;
+      s.nums.forEach(function(n){ if(state[s.key] && state[s.key][n] === n) right++; });
+    });
+    document.getElementById("score").textContent = right;
+    document.getElementById("stagesDone").textContent = checked + " of 5 stages checked";
+  }
+
+  /* ---------- ordering task ---------- */
+  var ORDER = ["Interphase","Prophase","Metaphase","Anaphase","Telophase"];
+  var shuffled = ["Telophase","Metaphase","Interphase","Anaphase","Prophase"];
+  var chosen = [];
+  var ordList = document.getElementById("ordList");
+  var ordSlots = document.getElementById("ordSlots");
+  var ordFb = document.getElementById("ordFeedback");
+
+  function renderOrder(){
+    ordList.innerHTML = "";
+    shuffled.forEach(function(name){
+      var b = document.createElement("button");
+      b.className = "ord" + (chosen.indexOf(name) > -1 ? " picked" : "");
+      b.textContent = name;
+      b.addEventListener("click", function(){
+        var i = chosen.indexOf(name);
+        if(i > -1){ chosen.splice(i,1); } else if(chosen.length < 5){ chosen.push(name); }
+        ordFb.textContent = ""; renderOrder();
+      });
+      ordList.appendChild(b);
+    });
+    ordSlots.innerHTML = [0,1,2,3,4].map(function(i){
+      return (i+1) + ". " + (chosen[i] || "___");
+    }).join(" &nbsp; ");
+  }
+  document.getElementById("ordCheck").addEventListener("click", function(){
+    if(chosen.length < 5){ ordFb.className = "feedback"; ordFb.textContent = "Pick all five first."; return; }
+    var ok = chosen.every(function(n,i){ return n === ORDER[i]; });
+    ordFb.className = "feedback " + (ok ? "ok" : "no");
+    ordFb.textContent = ok ? "That's the order — I-PMAT." : "Not yet. Remember the mnemonic: I-PMAT.";
+    [].forEach.call(ordList.children, function(b){
+      var i = chosen.indexOf(b.textContent);
+      b.classList.remove("picked");
+      b.classList.add(chosen[i] === ORDER[i] ? "correct" : "wrong");
+    });
+  });
+  document.getElementById("ordReset").addEventListener("click", function(){
+    chosen = []; ordFb.textContent = ""; renderOrder();
+  });
+  renderOrder();
+
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    state = {}; save(); location.reload();
+  });
+
+  updateScore();
+})();
+</script>

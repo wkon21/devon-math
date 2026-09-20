@@ -1,0 +1,280 @@
+<title>Devon's Study Workbooks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FAF9F6; --surface: #FFFFFF; --surface-2: #F3F2ED;
+    --ink: #1C1B19; --ink-soft: #4A4843; --ink-faint: #8A8880;
+    --border: #E2E0D8;
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Karla", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", Consolas, monospace;
+    --radius: 14px;
+    --bio: hsl(150 58% 32%); --bio-t: hsl(150 58% 94%);
+    --chem: hsl(262 58% 42%); --chem-t: hsl(262 58% 95%);
+    --phys: hsl(214 58% 38%); --phys-t: hsl(214 58% 95%);
+    --math: hsl(30 62% 36%); --math-t: hsl(30 62% 94%);
+    --ext:  hsl(350 55% 42%); --ext-t: hsl(350 55% 95%);
+    --ref:  hsl(187 50% 30%); --ref-t: hsl(187 50% 93%);
+    --deb:  hsl(280 45% 40%); --deb-t: hsl(280 45% 95%);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#15161A; --surface:#1D1F24; --surface-2:#22242A;
+      --ink:#EFEDE7; --ink-soft:#BFBDB6; --ink-faint:#85837C; --border:#31343B;
+      --bio: hsl(150 55% 62%); --bio-t: hsl(150 40% 16%);
+      --chem: hsl(262 60% 72%); --chem-t: hsl(262 40% 18%);
+      --phys: hsl(214 62% 68%); --phys-t: hsl(214 40% 17%);
+      --math: hsl(30 65% 64%); --math-t: hsl(30 40% 16%);
+      --ext:  hsl(350 65% 70%); --ext-t: hsl(350 40% 17%);
+      --ref:  hsl(187 55% 60%); --ref-t: hsl(187 40% 15%);
+    --deb:  hsl(280 60% 72%); --deb-t: hsl(280 40% 18%);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#15161A; --surface:#1D1F24; --surface-2:#22242A;
+    --ink:#EFEDE7; --ink-soft:#BFBDB6; --ink-faint:#85837C; --border:#31343B;
+    --bio: hsl(150 55% 62%); --bio-t: hsl(150 40% 16%);
+    --chem: hsl(262 60% 72%); --chem-t: hsl(262 40% 18%);
+    --phys: hsl(214 62% 68%); --phys-t: hsl(214 40% 17%);
+    --math: hsl(30 65% 64%); --math-t: hsl(30 40% 16%);
+    --ext:  hsl(350 65% 70%); --ext-t: hsl(350 40% 17%);
+    --ref:  hsl(187 55% 60%); --ref-t: hsl(187 40% 15%);
+    --deb:  hsl(280 60% 72%); --deb-t: hsl(280 40% 18%);
+  }
+  body{ background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.55; }
+  .wrap{ max-width: 940px; margin: 0 auto; padding: 46px 22px 70px; }
+  .eyebrow{ font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 10px; }
+  h1{ font-family: var(--font-display); font-size: 37px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; }
+  .lede{ color: var(--ink-soft); font-size: 16px; max-width: 64ch; margin-bottom: 30px; }
+  h2{ font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--ink-faint); margin: 36px 0 12px; font-weight: 600; }
+  .grid{ display: grid; grid-template-columns: repeat(auto-fit, minmax(266px, 1fr)); gap: 14px; }
+  a.card{
+    display: block; text-decoration: none; color: inherit;
+    background: var(--surface); border: 1px solid var(--border);
+    border-left: 5px solid var(--c); border-radius: var(--radius);
+    padding: 15px 18px; transition: transform .15s ease, box-shadow .15s ease;
+  }
+  a.card:hover{ transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.09); }
+  .tag{ display:inline-block; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .07em;
+        text-transform: uppercase; color: var(--c); background: var(--ct);
+        border: 1px solid var(--c); border-radius: 6px; padding: 2px 8px; margin-bottom: 9px; }
+  .card h3{ font-family: var(--font-display); font-size: 18.5px; font-weight: 600; margin: 0 0 5px; }
+  .card p{ margin: 0; color: var(--ink-soft); font-size: 13.5px; }
+  .card .stat{ margin-top: 9px; font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-faint); }
+  .card .stat.old{ color: var(--c); }
+
+  .panel{ background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; }
+  .panel h3{ font-family: var(--font-display); font-size: 18px; margin: 0 0 10px; }
+  table{ border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  th{ text-align: left; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .07em;
+      text-transform: uppercase; color: var(--ink-faint); font-weight: 600;
+      border-bottom: 1px solid var(--border); padding: 0 10px 7px 0; }
+  td{ padding: 8px 10px 8px 0; border-bottom: 1px solid var(--border); color: var(--ink-soft); vertical-align: top; }
+  tr:last-child td{ border-bottom: none; }
+  td b{ color: var(--ink); }
+  code{ font-family: var(--font-mono); font-size: 12.3px; background: var(--surface); border: 1px solid var(--border);
+        border-radius: 5px; padding: 1px 5px; color: var(--ink-soft); }
+  .tree{ font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-soft); line-height: 1.75;
+         white-space: pre; overflow-x: auto; margin: 0; }
+  .tree b{ color: var(--ink); }
+  .dates li{ margin-bottom: 5px; color: var(--ink-soft); }
+  .dates b{ color: var(--ink); }
+  footer{ margin-top: 34px; color: var(--ink-faint); font-family: var(--font-mono); font-size: 12px; text-align: center; }
+</style>
+
+<div class="wrap">
+  <div class="eyebrow">IB MYP Grade 9 &middot; Dwight School Seoul</div>
+  <h1>Devon's study workbooks</h1>
+  <p class="lede">Every unit in one place. Each workbook runs in the browser &mdash; type an answer, press <b>Check</b>, open the solution if you're stuck. Progress saves itself in whichever browser you use, so open them from this page every time and the ticks stay put.</p>
+
+  <h2>Sciences</h2>
+  <div class="grid">
+    <a class="card" style="--c: var(--bio); --ct: var(--bio-t);" href="./01 Biology/Unit 1 - Cell Structure and Replication/Biology U1 - Cell Structure and Replication.html">
+      <span class="tag">Biology &middot; Unit 1</span>
+      <h3>Cell Structure &amp; Replication</h3>
+      <p>Cell theory, organelles, the microscope, levels of organization, DNA and genes, mitosis, meiosis and reproduction.</p>
+      <div class="stat">7 lessons &middot; 156 exercises</div>
+    </a>
+    <a class="card" style="--c: var(--chem); --ct: var(--chem-t);" href="./02 Chemistry/Unit 1 - Bonding and Conservation of Mass/Chemistry U1 - Bonding and Conservation of Mass.html">
+      <span class="tag">Chemistry &middot; Unit 1</span>
+      <h3>Bonding &amp; Conservation of Mass</h3>
+      <p>Atomic structure, the periodic table, ionic and covalent bonding, giant structures, and balancing equations.</p>
+      <div class="stat">6 lessons &middot; 120 exercises</div>
+    </a>
+    <a class="card" style="--c: var(--chem); --ct: var(--chem-t);" href="./02 Chemistry/Unit 2 - Rates of Reactions/Chemistry U2 - Rates of Reactions.html">
+      <span class="tag">Chemistry &middot; Unit 2</span>
+      <h3>Rates of Reactions</h3>
+      <p>Collision theory, concentration, surface area, temperature, catalysts, measuring rate and reading rate graphs.</p>
+      <div class="stat">6 lessons &middot; 120 exercises</div>
+    </a>
+    <a class="card" style="--c: var(--phys); --ct: var(--phys-t);" href="./03 Physics/Unit 1 - Everyday Mechanics/Physics U1 - Everyday Mechanics.html">
+      <span class="tag">Physics &middot; Unit 1</span>
+      <h3>Everyday Mechanics</h3>
+      <p>Speed and velocity, acceleration and motion graphs, SUVAT, Newton's laws, friction, and work, energy and power.</p>
+      <div class="stat">6 lessons &middot; 120 exercises</div>
+    </a>
+    <a class="card" style="--c: var(--phys); --ct: var(--phys-t);" href="./03 Physics/Unit 2 - Oscillations and Waves/Physics U2 - Oscillations and Waves.html">
+      <span class="tag">Physics &middot; Unit 2</span>
+      <h3>Oscillations &amp; Waves</h3>
+      <p>Pendulums and simple harmonic motion, energy in oscillations, wave properties, sound, the EM spectrum, reflection and refraction.</p>
+      <div class="stat">6 lessons &middot; 120 exercises</div>
+    </a>
+  </div>
+
+  <h2>Mathematics &mdash; Extended</h2>
+  <div class="grid">
+    <a class="card" style="--c: var(--ext); --ct: var(--ext-t);" href="./04 Maths Extended/Unit 1 - Real Numbers and Radicals/Maths Extended U1 - Real Numbers and Radicals.html">
+      <span class="tag">Extended &middot; Unit 1</span>
+      <h3>Real Numbers &amp; Radicals</h3>
+      <p>The real number system, properties and inverses, interval notation, absolute value, surds, and radical equations.</p>
+      <div class="stat">6 lessons &middot; 120 exercises</div>
+    </a>
+    <a class="card" style="--c: var(--ext); --ct: var(--ext-t);" href="./04 Maths Extended/Unit 2 - Representing Relationships/Maths Extended U2 - Representing Relationships.html">
+      <span class="tag">Extended &middot; Unit 2</span>
+      <h3>Representing Relationships</h3>
+      <p>Expressions vs equations vs functions, rearranging formulae, direct and inverse proportion, factorising, and the three forms of a quadratic.</p>
+      <div class="stat">6 lessons &middot; 120 exercises &middot; starts 8 Oct</div>
+    </a>
+  </div>
+
+  <h2>Mathematics &mdash; Standard</h2>
+  <div class="grid">
+    <a class="card" style="--c: var(--math); --ct: var(--math-t);" href="./05 Maths Standard/Unit 1 - Rules of the Game/Maths Standard U1 - Rules of the Game.html">
+      <span class="tag">Standard &middot; Unit 1</span>
+      <h3>Rules of the Game</h3>
+      <p>Number rules, exponents, order of operations and the conventions everything later depends on.</p>
+      <div class="stat old">6 lessons &middot; 60 exercises &middot; older format</div>
+    </a>
+    <a class="card" style="--c: var(--math); --ct: var(--math-t);" href="./05 Maths Standard/Unit 2 - How Many Forms Has a Quadratic/Maths Standard U2 - How Many Forms Has a Quadratic.html">
+      <span class="tag">Standard &middot; Unit 2</span>
+      <h3>How Many Forms Has a Quadratic</h3>
+      <p>Standard, factored and vertex form, factorising, completing the square, and the quadratic formula.</p>
+      <div class="stat old">6 lessons &middot; 60 exercises &middot; older format</div>
+    </a>
+    <a class="card" style="--c: var(--math); --ct: var(--math-t);" href="./05 Maths Standard/Unit 3 - Spacious Interiors/Maths Standard U3 - Spacious Interiors.html">
+      <span class="tag">Standard &middot; Unit 3</span>
+      <h3>Spacious Interiors</h3>
+      <p>Area, surface area, volume and reasoning in three dimensions.</p>
+      <div class="stat old">6 lessons &middot; 60 exercises &middot; older format</div>
+    </a>
+    <a class="card" style="--c: var(--math); --ct: var(--math-t);" href="./05 Maths Standard/Unit 4 - A Whole Range of Things/Maths Standard U4 - A Whole Range of Things.html">
+      <span class="tag">Standard &middot; Unit 4</span>
+      <h3>A Whole Range of Things</h3>
+      <p>Statistics, measures of spread, and interpreting data honestly.</p>
+      <div class="stat old">6 lessons &middot; 60 exercises &middot; older format</div>
+    </a>
+  </div>
+
+  <h2>Reference</h2>
+  <div class="grid">
+    <a class="card" style="--c: var(--bio); --ct: var(--bio-t);" href="./01 Biology/Unit 1 - Cell Structure and Replication/Biology U1 - Mitosis Label and Colour Lab.html">
+      <span class="tag">Biology &middot; practice lab</span>
+      <h3>Mitosis: label &amp; colour lab</h3>
+      <p>All five stages with the seven structures to label, a colour key for the paper sheet, and the sentence to write beside each cell.</p>
+      <div class="stat">interactive &middot; companion to the colouring worksheet</div>
+    </a>
+    <a class="card" style="--c: var(--bio); --ct: var(--bio-t);" href="./01 Biology/Unit 1 - Cell Structure and Replication/Biology U1 - Wheat Criterion D Practice Test.html">
+      <span class="tag">Biology &middot; Criterion D</span>
+      <h3>What mutations does wheat hide?</h3>
+      <p>Criterion D practice on the wheat-mutation article: the four question parts, model answers to compare against, in-text citations done properly, and science terms you can tap for a definition.</p>
+      <div class="stat">practice test &middot; show / hide model answers</div>
+    </a>
+    <a class="card" style="--c: var(--ref); --ct: var(--ref-t);" href="./06 Encyclopedia/Devon's Encyclopedia.html">
+      <span class="tag">All subjects</span>
+      <h3>Devon's Encyclopedia</h3>
+      <p>The browsable reference across every subject &mdash; look something up rather than working through a unit.</p>
+      <div class="stat">reference, not exercises</div>
+    </a>
+  </div>
+
+  <h2>Debate &amp; speaking</h2>
+  <div class="grid">
+    <a class="card" style="--c: var(--deb); --ct: var(--deb-t);" href="./07 Debate/UBI Debate - Proposition Case.html">
+      <span class="tag">Debate &middot; proposition</span>
+      <h3>Universal Basic Income &mdash; arguing for</h3>
+      <p>Define the motion, three arguments with real evidence, an evidence locker with the numbers, eight rebuttals to the attacks that are coming, cross-examination questions, and the full speech written out.</p>
+      <div class="stat">prep guide &middot; includes the draft speech</div>
+    </a>
+  </div>
+
+  <h2>What's new</h2>
+  <div class="panel">
+    <p style="margin-top:0; color: var(--ink-soft); font-size:13.5px;">These pages update themselves. When a workbook is improved, the same link shows the new version next time you open it &mdash; nothing to download, nothing to re-send.</p>
+    <table>
+      <tr><th style="width:120px">Date</th><th>Change</th></tr>
+      <tr><td><b>20 Sept 2026</b></td><td><b>Every illustration checked and realigned.</b> All 126 diagrams and meme breaks across Biology, Chemistry 1&ndash;2, Physics 1&ndash;2 and Maths Extended 1&ndash;2 were reviewed on screen one by one: labels that spilled out of the shape they sat in, text sitting on top of a line, arrows and leader lines that missed what they pointed at, and speech bubbles aimed at nothing. Also fixed white lettering that was invisible in dark mode.</td></tr>
+      <tr><td><b>16 Sept 2026</b></td><td>New <b>UBI debate guide</b> for the proposition side &mdash; arguments, evidence, rebuttals, cross-ex questions and the full speech, all on one page.</td></tr>
+      <tr><td><b>16 Sept 2026</b></td><td>The <b>wheat Criterion D practice test</b> is now linked here too, under Reference.</td></tr>
+      <tr><td><b>16 Sept 2026</b></td><td>New <b>Mitosis label &amp; colour lab</b> &mdash; an interactive version of the colouring worksheet: tap a label, tap a slot, check. Biology gained two exercises (nucleolus, chromatin) and links to it. Now 156 exercises.</td></tr>
+      <tr><td><b>16 Sept 2026</b></td><td><b>Extended Maths Unit 2 &mdash; Representing Relationships</b> added: expressions vs equations vs functions, rearranging formulae, direct and inverse proportion, factorising, and the three forms of a quadratic. Built from the ManageBac unit description and the class worksheets. 120 exercises.</td></tr>
+      <tr><td><b>13 Sept 2026</b></td><td>Biology updated for this week's lessons: the cell cycle (G1, S, G2, M, G0) added to Lesson F with a new diagram, diploid/haploid and the third source of variation added to Lesson G, 14 new exercises, plus a <b>This week in class</b> panel and a <b>meiosis notes scaffold</b> for the homework. Now 154 exercises.</td></tr>
+      <tr><td><b>9 Sept 2026</b></td><td>Standard Maths Units 1&ndash;4 and the Encyclopedia added as links. This page gained the syllabus table, the folder map and this list.</td></tr>
+      <tr><td><b>9 Sept 2026</b></td><td>Maths Extended Unit 1 accuracy pass: a wrong fraction fixed, the &radic; symbol now accepted as promised, 13 questions that were marked &ldquo;open&rdquo; now auto-grade, and eight answers no longer given away in the question.</td></tr>
+      <tr><td><b>8 Sept 2026</b></td><td>All five science workbooks rebuilt: 120 exercises each, two diagrams and two worked examples per lesson, rules-to-remember checklists, meme breaks, cheat sheets. Biology rebuilt from Ms. Luna's own slides and expanded to 140 exercises covering mitosis, meiosis and reproduction.</td></tr>
+    </table>
+  </div>
+
+  <h2>What's coming up</h2>
+  <div class="panel">
+    <ul class="dates">
+      <li><b>14 September</b> &mdash; Biology summative, <b>Criterion D</b> (science in context).</li>
+      <li><b>16 September</b> &mdash; Biology formative, <b>Criterion A</b> (knowing &amp; understanding). This is the one the Biology workbook covers end to end; its cheat sheet is the night-before read.</li>
+      <li>Already sat: Criterion B on 31 August, Criterion D on 7 September and 14 September.</li>
+      <li><b>Extended Maths Unit 2</b> &mdash; Representing Relationships starts 8 October. The workbook is ready now if he wants a head start.</li>
+    </ul>
+  </div>
+
+  <h2>Syllabus &amp; source material</h2>
+  <div class="panel">
+    <p style="margin-top:0; color: var(--ink-soft); font-size:13.5px;">Each workbook was built from real class material, not from generic curriculum notes. The originals live beside each unit on the Desktop, in a <code>Source Material</code> folder.</p>
+    <table>
+      <tr><th>Unit</th><th>Built from</th></tr>
+      <tr>
+        <td><b>Biology Unit 1</b></td>
+        <td>Ms. Luna's unit slide deck, <i>Cell structure and replication 2026 rotation 1</i> &mdash; statement of inquiry, inquiry questions, assessment dates, command terms and the Criterion B report checklist all come from it.</td>
+      </tr>
+      <tr>
+        <td><b>Maths Extended Unit 1</b></td>
+        <td>Extension Lessons (Pre-Syllabus); Absolute Value and Division Algorithm; the 31 August class activity; the 1 September worksheet.</td>
+      </tr>
+      <tr>
+        <td><b>Maths Standard Units 1&ndash;4</b></td>
+        <td>The ManageBac unit descriptions, plus Mr Basiime's class handouts (expectations, vocabulary routine, talk frames, exit tickets, worked examples on exponents).</td>
+      </tr>
+      <tr>
+        <td><b>Chemistry &amp; Physics</b></td>
+        <td>ManageBac unit descriptions checked against the official IB MYP Grade 9 sciences framework. If class slides turn up for these, the units get rebuilt from them the way Biology was.</td>
+      </tr>
+    </table>
+  </div>
+
+  <h2>Where the files live</h2>
+  <div class="panel">
+    <p class="tree"><b>Desktop\Devon\IB MYP Grade 9\</b>
+  00 START HERE - Devon's Study Links.html
+  01 Biology\
+       Unit 1 - Cell Structure and Replication\
+            Biology U1 - Cell Structure and Replication.html
+            Source Material\
+  02 Chemistry\
+       Unit 1 - Bonding and Conservation of Mass\
+       Unit 2 - Rates of Reactions\
+  03 Physics\
+       Unit 1 - Everyday Mechanics\
+       Unit 2 - Oscillations and Waves\
+  04 Maths Extended\
+       Unit 1 - Real Numbers and Radicals\  (+ Source Material\)
+       Textbook\
+  05 Maths Standard\
+       Unit 1 - Rules of the Game\ ... Unit 4\
+       Class Handouts\
+  06 Encyclopedia\
+  07 Debate\</p>
+    <p style="margin-bottom:0; color: var(--ink-soft); font-size:13.5px;">Subjects are numbered so they sit in teaching order rather than alphabetical order. One folder per unit, named after the unit; the workbook inside carries its subject and unit number, so a file is still recognisable if it ends up somewhere else. Class PDFs live in <code>Source Material\</code> beside the unit they belong to. The links above are what to use day to day &mdash; the Desktop copies are the offline backup.</p>
+  </div>
+
+  <footer>Built for Devon &middot; bookmark this page &middot; last updated 20 September 2026</footer>
+</div>

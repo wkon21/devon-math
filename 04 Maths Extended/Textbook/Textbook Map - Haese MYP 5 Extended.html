@@ -1,0 +1,67 @@
+<title>Extended Maths — Textbook Map</title>
+<style>
+  :root{ --bg:#FAF9F6; --surface:#fff; --surface-2:#F3F2ED; --ink:#1C1B19; --ink-soft:#4A4843;
+         --ink-faint:#8A8880; --border:#E2E0D8; --accent:hsl(350 55% 42%); --tint:hsl(350 55% 95%); }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+    --bg:#15161A; --surface:#1D1F24; --surface-2:#22242A; --ink:#EFEDE7; --ink-soft:#BFBDB6;
+    --ink-faint:#85837C; --border:#31343B; --accent:hsl(350 65% 70%); --tint:hsl(350 40% 17%); } }
+  :root[data-theme="dark"]{ --bg:#15161A; --surface:#1D1F24; --surface-2:#22242A; --ink:#EFEDE7;
+    --ink-soft:#BFBDB6; --ink-faint:#85837C; --border:#31343B; --accent:hsl(350 65% 70%); --tint:hsl(350 40% 17%); }
+  body{ background:var(--bg); color:var(--ink); font-family:"Karla","Segoe UI",system-ui,sans-serif; font-size:15px; line-height:1.55; }
+  .wrap{ max-width:860px; margin:0 auto; padding:40px 22px 60px; }
+  h1{ font-family:Georgia,serif; font-size:30px; margin:0 0 6px; }
+  .sub{ color:var(--ink-soft); margin-bottom:26px; max-width:62ch; }
+  h2{ font-family:ui-monospace,Consolas,monospace; font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+      color:var(--ink-faint); margin:30px 0 10px; }
+  table{ border-collapse:collapse; width:100%; font-size:13.5px; background:var(--surface);
+         border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+  th{ text-align:left; font-family:ui-monospace,Consolas,monospace; font-size:10.5px; letter-spacing:.07em;
+      text-transform:uppercase; color:var(--ink-faint); padding:10px 12px; border-bottom:1px solid var(--border); }
+  td{ padding:9px 12px; border-bottom:1px solid var(--border); color:var(--ink-soft); vertical-align:top; }
+  tr:last-child td{ border-bottom:none; }
+  td b{ color:var(--ink); }
+  .done{ color:var(--accent); font-weight:700; }
+  .note{ background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:16px 20px;
+         color:var(--ink-soft); font-size:13.5px; margin-top:24px; }
+  .note b{ color:var(--ink); }
+</style>
+<div class="wrap">
+  <h1>Extended Maths &mdash; textbook map</h1>
+  <p class="sub">Haese, <i>Mathematics for the International Student 10E &mdash; MYP 5 (Extended)</i>, first edition 2014. 617 pages, 25 printed chapters plus 4 online-only. This is the reference the Extended Maths workbooks are planned against &mdash; it sets the scope and the order, and the workbooks are written fresh from it.</p>
+
+  <h2>Chapters and where they land</h2>
+  <table>
+    <tr><th style="width:46px">Ch</th><th>Topic</th><th style="width:230px">Workbook</th></tr>
+    <tr><td>1</td><td><b>Indices</b> &mdash; index laws, rational indices, standard form</td><td>feeds Unit 1 (rational indices)</td></tr>
+    <tr><td>2</td><td><b>Sets and Venn diagrams</b> &mdash; number sets, interval notation, subsets, unions, algebra of sets</td><td class="done">Unit 1 &mdash; built</td></tr>
+    <tr><td>3</td><td><b>Algebraic expansion and factorisation</b> &mdash; binomial expansion, quadratic trinomials, <i>ax</i>&sup2;+<i>bx</i>+<i>c</i></td><td>Unit 2 candidate</td></tr>
+    <tr><td>4</td><td><b>Radicals and surds</b> &mdash; simplest form, operations, division by radicals, equality of surds</td><td class="done">Unit 1 &mdash; built</td></tr>
+    <tr><td>5</td><td><b>Pythagoras' theorem</b> &mdash; converse, triples, 3-D problems</td><td>&mdash;</td></tr>
+    <tr><td>6</td><td><b>Coordinate geometry</b> &mdash; distance, midpoints, gradient, equations of lines, 3-D</td><td>&mdash;</td></tr>
+    <tr><td>7</td><td><b>Congruence and similarity</b></td><td>&mdash;</td></tr>
+    <tr><td>8</td><td><b>Transformation geometry</b> &mdash; translations, reflections, rotations, dilations</td><td>&mdash;</td></tr>
+    <tr><td>9</td><td><b>Statistics</b> &mdash; centre, spread, box-and-whisker, standard deviation, normal distribution</td><td>&mdash;</td></tr>
+    <tr><td>10</td><td><b>Algebraic fractions</b></td><td>&mdash;</td></tr>
+    <tr><td>11</td><td><b>Quadratic equations</b> &mdash; factorisation, completing the square, the formula, sum and product of roots</td><td>Unit 2 candidate</td></tr>
+    <tr><td>12</td><td><b>Trigonometry</b> &mdash; ratios, bearings, 3-D, sine and cosine rules</td><td>&mdash;</td></tr>
+    <tr><td>13</td><td><b>Probability</b> &mdash; sample space, compound events, conditional, independence</td><td>&mdash;</td></tr>
+    <tr><td>14</td><td><b>Formulae</b> &mdash; construction, rearrangement, prediction</td><td>&mdash;</td></tr>
+    <tr><td>15</td><td><b>Relations and functions</b> &mdash; notation, composite and inverse functions, modulus</td><td>&mdash;</td></tr>
+    <tr><td>16</td><td><b>Number sequences</b> &mdash; arithmetic and geometric sequences and series</td><td>&mdash;</td></tr>
+    <tr><td>17</td><td><b>Vectors</b></td><td>&mdash;</td></tr>
+    <tr><td>18</td><td><b>Exponential functions and logarithms</b> &mdash; growth, decay, compound interest</td><td>&mdash;</td></tr>
+    <tr><td>19</td><td><b>Deductive geometry</b> &mdash; circle theorems, proof, cyclic quadrilaterals</td><td>&mdash;</td></tr>
+    <tr><td>20</td><td><b>Quadratic functions</b> &mdash; graphs, intercepts, axis of symmetry, vertex, optimisation</td><td>Unit 2 candidate</td></tr>
+    <tr><td>21</td><td><b>Advanced trigonometry</b> &mdash; radians, unit circle, identities, equations</td><td>&mdash;</td></tr>
+    <tr><td>22</td><td><b>Inequalities</b> &mdash; interval notation, sign diagrams, non-linear inequalities</td><td>extends Unit 1</td></tr>
+    <tr><td>23</td><td><b>Bivariate statistics</b> &mdash; scatter plots, correlation, line of best fit</td><td>&mdash;</td></tr>
+    <tr><td>24</td><td><b>Polynomials</b> &mdash; remainder and factor theorems</td><td>&mdash;</td></tr>
+    <tr><td>25</td><td><b>Introduction to calculus</b> &mdash; limits, derivatives, stationary points, integration</td><td>&mdash;</td></tr>
+    <tr><td>26&ndash;29</td><td>Online only: counting and probability, circles and ellipses, matrices, linear programming</td><td>not in this PDF</td></tr>
+  </table>
+
+  <div class="note">
+    <p style="margin-top:0"><b>How the textbook gets used.</b> It sets the scope, the order and the difficulty level for each unit &mdash; what an Extended student is expected to handle, and which ideas come before which. The workbooks are written fresh from that: our own explanations, our own diagrams, our own practice questions with our own numbers. Devon still needs his actual copy for the book's own exercise sets.</p>
+    <p style="margin-bottom:0"><b>Also worth knowing:</b> chapters marked with a red letter in the book's contents are the Extension topics &mdash; 2H (algebra of sets), 11F&ndash;G (&Delta; &lt; 0, sum and product of roots) and 21I (compound angle formulae). Those are the parts a Standard student skips, so they are the ones most worth having a workbook for.</p>
+  </div>
+</div>

@@ -1,0 +1,800 @@
+<title>Unit 3: Spacious Interiors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #F5F6F2;
+    --surface: #FFFFFF;
+    --surface-2: #ECEFE7;
+    --ink: #1B222C;
+    --ink-soft: #545E6B;
+    --ink-faint: #8A93A0;
+    --accent: #2957A4;
+    --accent-ink: #ffffff;
+    --accent-2: #C1841B;
+    --good: #2C8A57;
+    --good-tint: #E4F3EA;
+    --bad: #C0453A;
+    --bad-tint: #FBEAE8;
+    --border: #DBDFD4;
+    --border-strong: #C4CABC;
+    --radius: 14px;
+
+    --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --font-body: "Karla", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+
+    --hueA: 214; --hueB: 187; --hueC: 262; --hueD: 30; --hueE: 350; --hueF: 150;
+    --lsat: 58%; --llight: 38%; --ltint: 94%;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #12151A; --surface: #191D24; --surface-2: #1F252E;
+      --ink: #E9ECF1; --ink-soft: #A7B0BE; --ink-faint: #6E7787;
+      --accent: #7DA3E8; --accent-ink: #0D1420; --accent-2: #E3AE55;
+      --good: #57C489; --good-tint: #16261E; --bad: #E5847A; --bad-tint: #2A1917;
+      --border: #2A303B; --border-strong: #3A4250;
+      --lsat: 62%; --llight: 68%; --ltint: 16%;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #12151A; --surface: #191D24; --surface-2: #1F252E;
+    --ink: #E9ECF1; --ink-soft: #A7B0BE; --ink-faint: #6E7787;
+    --accent: #7DA3E8; --accent-ink: #0D1420; --accent-2: #E3AE55;
+    --good: #57C489; --good-tint: #16261E; --bad: #E5847A; --bad-tint: #2A1917;
+    --border: #2A303B; --border-strong: #3A4250;
+    --lsat: 62%; --llight: 68%; --ltint: 16%;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior: auto; } *{ animation: none !important; transition: none !important; } }
+
+  body{ margin:0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a{ color: var(--accent); }
+  ::selection{ background: color-mix(in srgb, var(--accent) 30%, transparent); }
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 20px; }
+  h1,h2,h3,h4{ font-family: var(--font-display); font-weight: 600; text-wrap: balance; margin: 0; color: var(--ink); }
+  code, .mono, .expr{ font-family: var(--font-mono); }
+  button{ font-family: var(--font-body); cursor:pointer; }
+  button:focus-visible, input:focus-visible, a:focus-visible{ outline: 2.5px solid var(--accent); outline-offset: 2px; }
+
+  .masthead{ background: var(--surface); border-bottom: 1px solid var(--border); position: relative; }
+  .masthead-inner{ padding: 34px 20px 22px; display:flex; flex-direction:column; gap:16px; }
+  .eyebrow{ font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-faint); display:flex; align-items:center; gap:10px; }
+  .eyebrow .dot{ width:5px; height:5px; border-radius:50%; background: var(--accent-2); }
+  .eyebrow a{ color: var(--ink-faint); text-decoration: none; }
+  .eyebrow a:hover{ color: var(--accent); text-decoration: underline; }
+  .title-row{ display:flex; justify-content: space-between; align-items:flex-end; gap: 24px; flex-wrap: wrap; }
+  .title-row h1{ font-size: clamp(28px, 4vw, 40px); line-height: 1.08; }
+  .title-row .subtitle{ color: var(--ink-soft); font-size: 15.5px; max-width: 48ch; margin-top:6px;}
+  .student-tag{ font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 7px 14px; white-space: nowrap; }
+  .student-tag b{ color: var(--ink); }
+  .meta-strip{ display:flex; flex-wrap:wrap; gap: 10px 28px; font-size: 13.5px; color: var(--ink-soft); padding-top: 4px; border-top: 1px dashed var(--border); margin-top: 4px; padding-top: 14px; }
+  .meta-strip span b{ color: var(--ink); font-weight:600; }
+
+  .scoreboard{ position: sticky; top:0; z-index: 40; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px) saturate(1.1); -webkit-backdrop-filter: blur(10px) saturate(1.1); border-bottom: 1px solid var(--border); }
+  .scoreboard-inner{ display:flex; align-items:center; gap:10px; padding: 10px 20px; overflow-x: auto; scrollbar-width: none; }
+  .scoreboard-inner::-webkit-scrollbar{ display:none; }
+  .score-total{ font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-soft); white-space: nowrap; padding-right: 8px; border-right: 1px solid var(--border); margin-right: 4px; }
+  .score-total b{ color: var(--ink); }
+  .chip{ flex: 0 0 auto; display:flex; align-items:center; gap:8px; padding: 7px 12px 7px 8px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--ink-soft); font-family: var(--font-mono); font-size: 13px; text-decoration: none; transition: border-color .15s ease, color .15s ease, transform .1s ease; }
+  .chip:hover{ border-color: var(--chip-hue); color: var(--ink); }
+  .chip:active{ transform: translateY(1px); }
+  .chip .letter{ width: 22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size: 12px; font-weight: 700; background: var(--chip-tint); color: var(--chip-hue); border: 1px solid color-mix(in srgb, var(--chip-hue) 45%, transparent); }
+  .chip .frac{ font-variant-numeric: tabular-nums; font-size: 12px; }
+  .chip.done{ border-color: var(--good); }
+  .chip.done .letter{ background: var(--good-tint); color: var(--good); border-color: var(--good); }
+  .reset-btn{ margin-left: auto; flex: 0 0 auto; font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint); background: transparent; border: 1px solid transparent; padding: 6px 8px; border-radius: 8px; }
+  .reset-btn:hover{ color: var(--bad); border-color: var(--border); }
+
+  main{ padding: 30px 0 90px; }
+  .intro-card{ margin: 26px 0 40px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; }
+  .intro-card summary{ cursor: pointer; font-family: var(--font-display); font-weight: 600; font-size: 18px; list-style: none; display:flex; align-items:center; justify-content: space-between; gap: 12px; }
+  .intro-card summary::-webkit-details-marker{ display:none; }
+  .intro-card summary .arrow{ font-family: var(--font-mono); color: var(--ink-faint); font-size: 13px; transition: transform .2s ease; }
+  .intro-card[open] summary .arrow{ transform: rotate(180deg); }
+  .intro-grid{ margin-top: 18px; display:grid; grid-template-columns: 1fr 1fr; gap: 20px 28px; }
+  @media (max-width: 640px){ .intro-grid{ grid-template-columns: 1fr; } }
+  .intro-block h4{ font-size: 12.5px; text-transform: uppercase; letter-spacing:.08em; color: var(--ink-faint); font-family: var(--font-mono); font-weight:600; margin-bottom:8px;}
+  .intro-block p{ margin:0; color: var(--ink-soft); font-size: 14.5px; }
+  .soi{ font-family: var(--font-display); font-style: italic; font-size: 17px; color: var(--ink); grid-column: 1 / -1; padding: 14px 16px; background: var(--surface-2); border-left: 3px solid var(--accent-2); border-radius: 6px; }
+  .iq-table{ grid-column: 1/-1; display:grid; gap:8px; }
+  .iq-row{ display:grid; grid-template-columns: 90px 1fr; gap:12px; font-size: 14px; align-items:baseline; }
+  .iq-row .tag{ font-family: var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color: var(--ink-faint); }
+  .iq-row p{ margin:0; color: var(--ink-soft); }
+
+  .lesson{ scroll-margin-top: 64px; margin-bottom: 56px; }
+  .lesson-head{ display:flex; align-items: center; gap: 16px; padding: 18px 20px; border-radius: var(--radius); background: var(--tint); border: 1px solid color-mix(in srgb, var(--hue) 35%, transparent); margin-bottom: 18px; }
+  .lesson-head .big-letter{ font-family: var(--font-display); font-weight:700; font-size: 34px; color: var(--hue); width: 52px; height:52px; flex:0 0 auto; border-radius: 12px; background: var(--surface); display:flex; align-items:center; justify-content:center; border: 1px solid color-mix(in srgb, var(--hue) 40%, transparent); }
+  .lesson-head .htext .kicker{ font-family: var(--font-mono); font-size: 11.5px; text-transform:uppercase; letter-spacing:.09em; color: var(--hue); }
+  .lesson-head .htext h2{ font-size: clamp(20px,2.6vw,26px); margin-top:2px; }
+  .lesson-progress{ margin-left:auto; text-align:right; flex: 0 0 auto; }
+  .lesson-progress .ring-label{ font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); }
+  .lesson-progress .bar{ width: 90px; height: 6px; border-radius: 4px; background: var(--surface); border: 1px solid var(--border); overflow:hidden; margin-top:6px; }
+  .lesson-progress .bar-fill{ height:100%; background: var(--hue); width:0%; transition: width .3s ease; }
+
+  .rules-box{ background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 22px; margin-bottom: 16px; }
+  .rules-box h3{ font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-family: var(--font-mono); color: var(--hue); margin-bottom: 10px; }
+  .rules-box ul{ margin:0; padding-left: 20px; color: var(--ink-soft); font-size: 14.5px; }
+  .rules-box li{ margin-bottom: 5px; }
+  .rules-box li::marker{ color: var(--hue); }
+  .trick-box{ background: color-mix(in srgb, var(--hue) 10%, var(--surface)); border: 1px dashed var(--hue); border-radius: var(--radius); padding: 14px 22px; margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-start; }
+  .trick-box .trick-tag{ font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); white-space: nowrap; padding-top: 2px; }
+  .trick-box .trick-text{ color: var(--ink-soft); font-size: 14.5px; }
+  .trick-box .trick-text b{ color: var(--ink); }
+
+  .diagram-box{ background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 16px; display:flex; justify-content:center; align-items:center; overflow-x:auto; }
+  .diagram-box svg{ max-width: 100%; height: auto; display:block; }
+  .diagram-box .dg-line{ stroke: var(--hue); fill: none; }
+  .diagram-box .dg-fill{ fill: var(--hue); }
+  .diagram-box .dg-tint{ fill: var(--tint); stroke: var(--hue); }
+  .diagram-box .dg-ink{ fill: var(--ink); }
+  .diagram-box .dg-ink-line{ stroke: var(--ink-soft); fill:none; }
+  .diagram-box .dg-soft{ fill: var(--ink-soft); }
+  .diagram-box .dg-good{ fill: var(--good); stroke: var(--good); }
+  .diagram-box .dg-bad{ fill: var(--bad); stroke: var(--bad); }
+  .diagram-box text{ fill: var(--ink); font-family: var(--font-mono); }
+
+  .example-card{ background: var(--surface); border: 1.5px dashed var(--border-strong); border-radius: var(--radius); padding: 18px 22px; margin-bottom: 22px; }
+  .example-card h3{ font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-family: var(--font-mono); color: var(--ink-faint); margin-bottom: 10px; display:flex; align-items:center; gap:8px; }
+  .example-card h3::before{ content:"✎"; color: var(--accent-2); font-size:14px; }
+  .example-prob{ font-family: var(--font-mono); font-size: 15.5px; margin-bottom: 12px; color: var(--ink); }
+  .example-steps{ display:flex; flex-direction:column; gap: 6px; }
+  .example-steps .step{ display:grid; grid-template-columns: 20px 1fr; gap: 10px; font-size: 14.5px; color: var(--ink-soft); align-items:baseline; }
+  .example-steps .step .n{ font-family: var(--font-mono); color: var(--hue); font-size: 12.5px; }
+  .example-steps .step .expr{ color: var(--ink); }
+  .example-answer{ margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border); font-size: 14.5px; color: var(--good); font-family: var(--font-mono); font-weight:600; }
+
+  .ex-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 720px){ .ex-grid{ grid-template-columns: 1fr; } }
+  .ex-card{ background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; display:flex; flex-direction:column; gap:10px; transition: border-color .2s ease; }
+  .ex-card.correct{ border-color: var(--good); background: color-mix(in srgb, var(--good-tint) 60%, var(--surface)); }
+  .ex-card.wrong{ border-color: var(--bad); }
+  .ex-top{ display:flex; align-items:flex-start; gap:10px; }
+  .ex-num{ font-family: var(--font-mono); font-size: 12.5px; font-weight:700; color: var(--hue); background: var(--tint); border:1px solid color-mix(in srgb, var(--hue) 40%, transparent); border-radius: 6px; padding: 2px 7px; flex:0 0 auto; margin-top:2px; }
+  .ex-prompt{ font-size: 14.5px; color: var(--ink); line-height:1.5; }
+  .ex-prompt .expr{ font-size: 14.5px; }
+  .ex-input-row{ display:flex; gap:8px; }
+  .ex-input{ flex:1; min-width:0; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border-strong); background: var(--bg); color: var(--ink); font-family: var(--font-mono); font-size: 13.5px; }
+  .ex-input::placeholder{ color: var(--ink-faint); }
+  .ex-check{ font-family: var(--font-mono); font-size: 12.5px; font-weight:600; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--hue); background: var(--hue); color: var(--accent-ink); white-space:nowrap; }
+  .ex-check:hover{ filter: brightness(1.06); }
+  .ex-feedback{ font-size: 13px; font-family: var(--font-mono); min-height: 4px; }
+  .ex-feedback.correct{ color: var(--good); }
+  .ex-feedback.wrong{ color: var(--bad); }
+  .ex-foot{ display:flex; justify-content: space-between; align-items:center; margin-top:2px; }
+  .ex-toggle{ background:none; border:none; padding:0; font-size: 12.5px; font-family: var(--font-mono); color: var(--ink-faint); text-decoration: underline; text-underline-offset:3px; }
+  .ex-toggle:hover{ color: var(--hue); }
+  .ex-solution{ display:none; margin-top: 4px; padding: 12px 14px; background: var(--surface-2); border-radius: 8px; font-size: 13.5px; color: var(--ink-soft); }
+  .ex-solution.open{ display:block; }
+  .ex-solution .sol-step{ margin-bottom: 4px; }
+  .open-note{ font-size: 11.5px; color: var(--ink-faint); font-family: var(--font-mono); }
+  sup{ font-size: 0.7em; }
+  footer{ text-align:center; padding: 30px 20px 50px; color: var(--ink-faint); font-size: 13px; font-family: var(--font-mono); }
+  .toast{ position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: 999px; font-family: var(--font-mono); font-size: 13px; opacity: 0; pointer-events:none; transition: opacity .25s ease, transform .25s ease; z-index: 100; white-space: nowrap; }
+  .toast.show{ opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+
+<div class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="eyebrow"><span class="dot"></span>IB MYP Standard Mathematics B &middot; Grade 9 &middot; Unit 3 &middot; <a href="https://claude.ai/code/artifact/74db3449-33a4-488f-a662-0023faf1baa4">&uarr; Course hub</a></div>
+    <div class="title-row">
+      <div>
+        <h1>Unit 3: Spacious Interiors</h1>
+        <div class="subtitle">Unit 3 study workbook — Spatial Reasoning: Geometry. Six lessons on parallel lines, congruence, similarity, special right triangles, and right-triangle trigonometry.</div>
+      </div>
+      <div class="student-tag">Prepared for <b>Devon</b> &middot; Starts Week 4, January &middot; 8 weeks</div>
+    </div>
+    <div class="meta-strip">
+      <span>Global context: <b>Orientation in space and time</b></span>
+      <span>Key concept: <b>Logic</b></span>
+      <span>Related concepts: <b>Space, Generalization, Quantity</b></span>
+      <span>Criteria: <b>B &middot; C &middot; D</b></span>
+    </div>
+  </div>
+</div>
+
+<div class="scoreboard">
+  <div class="wrap scoreboard-inner" id="scoreboardInner">
+    <span class="score-total"><b id="totalDone">0</b>/60 done</span>
+    <button class="reset-btn" id="resetBtn" title="Clear saved progress">reset progress</button>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <details class="intro-card" id="introCard">
+    <summary>Unit reference &mdash; Statement of Inquiry, inquiry questions &amp; how to use this guide<span class="arrow">&#9660;</span></summary>
+    <div class="intro-grid">
+      <p class="soi">&ldquo;Logical understanding of the relationships between quantities, and being able to generalize them, allows us to calculate our position in space, which can help us to meet our everyday needs.&rdquo;</p>
+
+      <div class="intro-block">
+        <h4>How this guide works</h4>
+        <p>Each lesson (A&ndash;F) opens with the core rules, then one fully worked example, then 10 practice exercises. Type an answer and press <b>Check</b> for instant feedback, or open <b>Show solution</b> to see the steps. Your progress is saved automatically in this browser.</p>
+      </div>
+      <div class="intro-block">
+        <h4>IB learner profile</h4>
+        <p><b>Thinkers</b> &mdash; investigating patterns in transversals, congruence, and similarity builds the logical foundation for the trigonometry work in lessons D&ndash;F and the summative task "Measuring the Immeasurable."</p>
+      </div>
+
+      <div class="iq-table">
+        <div class="iq-row"><span class="tag">Factual</span><p>What is space?</p></div>
+        <div class="iq-row"><span class="tag">Factual</span><p>When is a measurement an approximation?</p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>How can you create different representations of space?</p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>How can understanding logic help us to make generalizations?</p></div>
+        <div class="iq-row"><span class="tag">Debatable</span><p>Is it advantageous to make your own generalizations?</p></div>
+      </div>
+    </div>
+  </details>
+
+  <div id="lessons"></div>
+
+</main>
+
+<footer>Unit 3: Spacious Interiors &middot; Unit 3 study workbook &middot; built for Devon</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var LESSONS = [
+    {
+      letter: "A", hueVar: "--hueA", title: "Transversals and Parallel Lines",
+      rules: [
+        "When a transversal crosses two parallel lines, eight angles are formed, but only two distinct angle sizes exist among them.",
+        "Corresponding angles (matching corners) are equal; alternate interior angles (\"Z-angles\") are equal; alternate exterior angles are equal too.",
+        "Co-interior angles (also called allied or \"C-angles\", between the parallel lines, same side of the transversal) are supplementary &mdash; they add to 180&deg;.",
+        "Vertically opposite angles are always equal, and angles on a straight line always sum to 180&deg;, whether or not any lines are parallel."
+      ],
+      diagram: `<svg viewBox="0 0 300 170" width="300" height="170">
+        <line x1="20" y1="50" x2="280" y2="50" class="dg-line" stroke-width="2"/>
+        <line x1="20" y1="130" x2="280" y2="130" class="dg-line" stroke-width="2"/>
+        <line x1="70" y1="10" x2="230" y2="170" class="dg-line" stroke-width="2"/>
+        <path d="M 40 46 L 48 50 L 40 54" class="dg-ink-line" stroke-width="1.5" fill="none"/>
+        <path d="M 40 126 L 48 130 L 40 134" class="dg-ink-line" stroke-width="1.5" fill="none"/>
+        <path d="M 96 50 A 18 18 0 0 1 108 34" class="dg-line" stroke-width="1.5" fill="none"/>
+        <text x="104" y="30" font-size="12" text-anchor="middle">a</text>
+        <path d="M 176 130 A 18 18 0 0 1 188 114" class="dg-line" stroke-width="1.5" fill="none"/>
+        <text x="184" y="110" font-size="12" text-anchor="middle">a</text>
+        <text x="150" y="160" font-size="10.5" text-anchor="middle" class="dg-soft">Corresponding angles (F-shape): equal</text>
+      </svg>`,
+      trick: "Picture the letter shapes: <b>F</b> for corresponding (matching corners), <b>Z</b> for alternate (the zig-zag sits between the parallels), <b>C</b> for co-interior (the \"C\" curve <i>adds up</i> to 180&deg;, it doesn't equal). Spot the letter in the diagram and you know the rule instantly.",
+      example: {
+        problem: "A transversal crosses two parallel lines. One angle is 72&deg;. Find (a) its corresponding angle, (b) its alternate interior angle, and (c) its co-interior angle.",
+        steps: [
+          "Corresponding angles are equal (matching corners): 72&deg;",
+          "Alternate interior angles are equal (Z-pattern): 72&deg;",
+          "Co-interior angles are supplementary: 180&deg; &minus; 72&deg; = 108&deg;"
+        ],
+        answer: "corresponding = 72&deg;, alternate interior = 72&deg;, co-interior = 108&deg;"
+      },
+      exercises: [
+        { prompt: "Two parallel lines are cut by a transversal. One angle is 118&deg;. Find its corresponding angle (just the number, no &deg;).", value: 118,
+          solution: ["Corresponding angles are equal (matching corners)", "= 118&deg;"] },
+        { prompt: "Using the same 118&deg; angle, find its co-interior (same-side interior) angle.", value: 62,
+          solution: ["Co-interior angles are supplementary", "180 &minus; 118 = 62&deg;"] },
+        { prompt: "Using the same 118&deg; angle, find its alternate interior angle.", value: 118,
+          solution: ["Alternate interior angles are equal (Z-pattern)", "= 118&deg;"] },
+        { prompt: "Two parallel lines are cut by a transversal. One angle is 55&deg;. Find the angle vertically opposite to it.", value: 55,
+          solution: ["Vertically opposite angles are always equal, regardless of parallel lines", "= 55&deg;"] },
+        { prompt: "Two co-interior angles are (3x)&deg; and (2x+30)&deg;. Since co-interior angles sum to 180&deg;, find x.", value: 30,
+          solution: ["3x + 2x + 30 = 180", "5x = 150", "x = 30"] },
+        { prompt: "Two alternate interior angles are (4x&minus;10)&deg; and (2x+30)&deg;. Since alternate angles are equal, find x.", value: 20,
+          solution: ["4x &minus; 10 = 2x + 30", "2x = 40", "x = 20"] },
+        { prompt: "Two corresponding angles are (5x)&deg; and (3x+40)&deg;. Find x.", value: 20,
+          solution: ["5x = 3x + 40", "2x = 40", "x = 20"] },
+        { prompt: "l &parallel; m. An angle on line l is 95&deg;, and its co-interior partner on line m is (2x+5)&deg;. Find x.", value: 40,
+          solution: ["Co-interior angles are supplementary: 180 &minus; 95 = 85&deg;", "2x + 5 = 85", "2x = 80 &rarr; x = 40"] },
+        { prompt: "Explain, using angle facts about a straight line and vertically opposite angles, why co-interior angles must sum to 180&deg; while corresponding angles are equal.", open:true,
+          solution: ["A corresponding angle equals its co-interior angle's <i>vertically opposite</i> partner (they're the same angle position, just at a different intersection)", "The co-interior angle and that vertically-opposite angle sit on a straight line together, so they sum to 180&deg;", "Since the corresponding angle equals the vertical-opposite angle, and that angle plus the co-interior angle is 180&deg;, corresponding + co-interior = 180&deg; too &mdash; but corresponding angles themselves are simply equal by the parallel-line property"] },
+        { prompt: "Two lines are cut by a transversal, and one pair of co-interior angles sums to 170&deg; (not 180&deg;). What can you conclude about the two lines, and why?", open:true,
+          solution: ["Co-interior angles only sum to exactly 180&deg; when the two lines are parallel", "Since 170&deg; &ne; 180&deg;, the lines are <b>not</b> parallel &mdash; they will eventually meet if extended"] }
+      ]
+    },
+    {
+      letter: "B", hueVar: "--hueB", title: "Congruence and Proof",
+      rules: [
+        "Congruent triangles are identical in size and shape &mdash; every pair of corresponding sides and angles is equal.",
+        "Four ways to prove triangles congruent: <b>SSS</b> (three sides), <b>SAS</b> (two sides and the included angle), <b>ASA</b>/<b>AAS</b> (two angles and a side), and <b>RHS</b> (right angle, hypotenuse, side) for right triangles.",
+        "In SAS, the angle must be the <i>included</i> angle &mdash; the one between the two given sides &mdash; or the criterion doesn't apply.",
+        "A congruence statement (e.g. &triangle;ABC &cong; &triangle;DEF) lists corresponding vertices in matching order, so you can read off equal sides and angles directly: A&harr;D, B&harr;E, C&harr;F."
+      ],
+      diagram: `<svg viewBox="0 0 300 150" width="300" height="150">
+        <polygon points="30,120 110,120 60,30" class="dg-tint" stroke-width="2"/>
+        <polygon points="190,120 270,120 230,30" class="dg-tint" stroke-width="2"/>
+        <text x="70" y="140" font-size="11" text-anchor="middle" class="dg-soft">Triangle 1</text>
+        <text x="230" y="140" font-size="11" text-anchor="middle" class="dg-soft">Triangle 2</text>
+        <line x1="52" y1="80" x2="60" y2="74" class="dg-ink-line" stroke-width="2.5"/>
+        <line x1="212" y1="80" x2="220" y2="74" class="dg-ink-line" stroke-width="2.5"/>
+        <path d="M 30 120 L 42 120 A 12 12 0 0 1 38 110" class="dg-line" stroke-width="1.5" fill="none"/>
+        <path d="M 190 120 L 202 120 A 12 12 0 0 1 198 110" class="dg-line" stroke-width="1.5" fill="none"/>
+        <text x="150" y="14" font-size="10.5" text-anchor="middle" class="dg-soft">Matching sides &amp; angles &rarr; congruent (SAS)</text>
+      </svg>`,
+      trick: "SSS, SAS, ASA, RHS spells out exactly what's needed &mdash; but <b>AAA never proves congruence</b> (that's similarity, lesson C), and the angle in SAS must sit <i>between</i> the two given sides, not next to just one of them.",
+      example: {
+        problem: "In &triangle;ABC and &triangle;DEF: AB = DE, &ang;A = &ang;D, and AC = DF. Which congruence criterion applies, and are the triangles congruent?",
+        steps: [
+          "Two sides are given: AB=DE and AC=DF",
+          "The angle &ang;A (between sides AB and AC) equals &ang;D (between DE and DF) &mdash; it's the included angle",
+          "Two sides and the included angle match: SAS"
+        ],
+        answer: "Congruent by SAS"
+      },
+      exercises: [
+        { prompt: "Two triangles have all three pairs of corresponding sides equal. Which congruence criterion applies?", accept:["SSS"],
+          solution: ["Three sides match with no angle needed", "SSS"] },
+        { prompt: "A triangle has two sides and the included angle equal to another triangle's. Which criterion?", accept:["SAS"],
+          solution: ["Two sides and the angle between them", "SAS"] },
+        { prompt: "A triangle has two angles and the included side equal to another's. Which criterion?", accept:["ASA"],
+          solution: ["Two angles and the side between them", "ASA"] },
+        { prompt: "Two right triangles have equal hypotenuses and one pair of equal legs. Which criterion?", accept:["RHS"],
+          solution: ["Right angle, Hypotenuse, Side", "RHS"] },
+        { prompt: "A student claims two triangles are congruent because all three pairs of angles match (AAA). Is this valid on its own? Answer yes or no.", accept:["no"],
+          solution: ["AAA only proves the triangles are the same <i>shape</i> (similar), not the same size", "No &mdash; AAA is not a valid congruence criterion"] },
+        { prompt: "&triangle;ABC &cong; &triangle;DEF. If AB=7 and BC=9, find EF.", value: 9,
+          solution: ["Correspondence: A&harr;D, B&harr;E, C&harr;F", "BC corresponds to EF", "EF = 9"] },
+        { prompt: "&triangle;ABC &cong; &triangle;DEF. If &ang;A=50&deg; and &ang;B=65&deg;, find &ang;F (just the number).", value: 65,
+          solution: ["&ang;C = 180 &minus; 50 &minus; 65 = 65&deg;", "&ang;F corresponds to &ang;C", "&ang;F = 65&deg;"] },
+        { prompt: "In isosceles &triangle;ABC, AB=AC, and AD is the perpendicular bisector of BC (D on BC). Name the congruence criterion that proves &triangle;ABD &cong; &triangle;ACD.", accept:["SSS","SAS"],
+          solution: ["AB = AC (given), BD = DC (D is the midpoint, from the bisector), AD = AD (shared side)", "Three matching sides &rarr; SSS", "(You could also use SAS: AB=AC, the right angle at D, and AD=AD.)"] },
+        { prompt: "Using the previous question's congruent triangles, explain what you can now conclude about &ang;B and &ang;C.", open:true,
+          solution: ["Since &triangle;ABD &cong; &triangle;ACD, all corresponding parts are equal (CPCTC)", "&ang;B and &ang;C are corresponding angles in the congruent triangles", "So &ang;B = &ang;C &mdash; the base angles of an isosceles triangle are equal"] },
+        { prompt: "Explain why \"SSA\" (two sides and a non-included angle) is generally <b>not</b> a valid congruence criterion.", open:true,
+          solution: ["With SSA, the given angle isn't locked between the two known sides, so the triangle can sometimes be \"swung\" into two different shapes that both satisfy the same three measurements", "This is called the ambiguous case &mdash; two different triangles can share the same SSA measurements", "(The one exception is when the angle is 90&deg;, which is exactly the RHS criterion.)"] }
+      ]
+    },
+    {
+      letter: "C", hueVar: "--hueC", title: "Similarity",
+      rules: [
+        "Similar triangles have equal corresponding angles and proportional corresponding sides &mdash; same shape, possibly different size.",
+        "<b>AA similarity</b>: if two angles of one triangle equal two angles of another, the triangles are similar (the third angle matches automatically, since angles in a triangle sum to 180&deg;).",
+        "Scale factor = the ratio of corresponding side lengths; multiply by it to enlarge, divide to shrink.",
+        "Similar triangles connect directly to slope: any two right triangles formed under the same straight line are similar, which is exactly why rise/run (slope) stays constant along that line."
+      ],
+      diagram: `<svg viewBox="0 0 300 160" width="300" height="160">
+        <polygon points="20,140 90,140 55,60" class="dg-tint" stroke-width="2"/>
+        <polygon points="130,150 270,150 200,10" class="dg-tint" stroke-width="2"/>
+        <text x="55" y="155" font-size="10" text-anchor="middle" class="dg-ink">4</text>
+        <text x="200" y="12" font-size="10" text-anchor="middle" class="dg-ink" dy="-2">8</text>
+        <text x="150" y="20" font-size="10.5" text-anchor="middle" class="dg-soft">Same angles, proportional sides &rarr; similar</text>
+      </svg>`,
+      trick: "To prove similarity you only need <b>two matching angles</b> (AA) &mdash; the third comes free. Once similar, write matching sides over matching sides as a proportion and cross-multiply to find any missing length.",
+      example: {
+        problem: "&triangle;ABC &sim; &triangle;DEF with AB=6, BC=9, and DE=8. Find EF.",
+        steps: [
+          "Scale factor from ABC to DEF: DE/AB = 8/6 = 4/3",
+          "Apply the same scale factor to BC: EF = BC &times; 4/3",
+          "EF = 9 &times; 4/3 = 12"
+        ],
+        answer: "EF = 12"
+      },
+      exercises: [
+        { prompt: "&triangle;ABC &sim; &triangle;DEF. AB=4, DE=10. Find the scale factor from ABC to DEF.", value: 2.5, accept:["5/2"],
+          solution: ["Scale factor = DE/AB = 10/4", "= 2.5"] },
+        { prompt: "&triangle;ABC &sim; &triangle;DEF with scale factor 3 (ABC to DEF). If BC=5, find EF.", value: 15,
+          solution: ["EF = BC &times; scale factor", "= 5 &times; 3 = 15"] },
+        { prompt: "&triangle;ABC &sim; &triangle;DEF with scale factor 1/2 (ABC to DEF). If AC=20, find DF.", value: 10,
+          solution: ["DF = AC &times; 1/2", "= 20 &times; 0.5 = 10"] },
+        { prompt: "Two right triangles share &ang;A=&ang;D=90&deg; and &ang;B=&ang;E=35&deg;. Are they similar? Answer yes or no.", accept:["yes"],
+          solution: ["Two pairs of angles match (90&deg; and 35&deg;)", "AA similarity &rarr; yes, they are similar"] },
+        { prompt: "A 1.6 m tall person casts a 2 m shadow at the same time a tree casts a 15 m shadow. Find the tree's height (m, 1 d.p.).", value: 12, tol: 0.1,
+          solution: ["Similar triangles: person/shadow = tree/shadow", "1.6/2 = h/15", "h = 1.6 &times; 15/2 = 12 m"] },
+        { prompt: "&triangle;PQR &sim; &triangle;XYZ. PQ=9, QR=12, XY=15. Find YZ.", value: 20,
+          solution: ["Scale factor = XY/PQ = 15/9 = 5/3", "YZ = QR &times; 5/3 = 12 &times; 5/3 = 20"] },
+        { prompt: "In similar triangles, corresponding sides are 4,6,8 and 6,9,12. State the scale factor from the first set to the second.", value: 1.5, accept:["3/2"],
+          solution: ["6/4 = 1.5, 9/6 = 1.5, 12/8 = 1.5 &mdash; all consistent", "Scale factor = 1.5"] },
+        { prompt: "A photograph is enlarged by a scale factor of 2.5. If the original width is 8 cm, find the new width (cm).", value: 20,
+          solution: ["New width = 8 &times; 2.5", "= 20 cm"] },
+        { prompt: "Two triangles share &ang;A=&ang;D, and AB/DE = AC/DF (an equal ratio on the two sides surrounding that angle). Name the similarity criterion this satisfies.", accept:["SAS similarity","SAS"],
+          solution: ["An equal included angle plus two proportional sides around it", "SAS similarity (not to be confused with SAS congruence, which needs equal &mdash; not just proportional &mdash; sides)"] },
+        { prompt: "Explain, using similar right triangles, why the slope between any two points on a straight line is always the same.", open:true,
+          solution: ["Pick any two pairs of points on the line and draw the horizontal/vertical legs down to form right triangles under the line", "Both right triangles share the same angle with the horizontal (the line's own angle of incline), and both have a right angle", "By AA similarity the triangles are similar, so their legs are proportional &mdash; meaning rise/run (slope) is identical for any two points chosen"] }
+      ]
+    },
+    {
+      letter: "D", hueVar: "--hueD", title: "Special Angles",
+      rules: [
+        "A 45-45-90 triangle comes from cutting a <b>square</b> along its diagonal: the two legs are equal, and the hypotenuse = leg &times; &radic;2.",
+        "A 30-60-90 triangle comes from cutting an <b>equilateral triangle</b> in half: the sides are in the ratio 1 : &radic;3 : 2 (short leg : long leg : hypotenuse).",
+        "The &radic;3 side is always opposite the 60&deg; angle, and the shortest side (\"1\") is always opposite the 30&deg; angle.",
+        "These exact ratios give exact trig values &mdash; e.g. sin30&deg;=1/2, cos45&deg;=&radic;2/2, tan60&deg;=&radic;3 &mdash; without needing a calculator."
+      ],
+      diagram: `<svg viewBox="0 0 320 160" width="320" height="160">
+        <polygon points="20,140 120,140 120,40" class="dg-tint" stroke-width="2"/>
+        <text x="55" y="155" font-size="10.5" text-anchor="middle">45&deg;</text>
+        <text x="130" y="95" font-size="10.5" text-anchor="middle">45&deg;</text>
+        <text x="66" y="95" font-size="10" class="dg-ink">1</text>
+        <text x="127" y="90" font-size="10" class="dg-ink">1</text>
+        <text x="75" y="78" font-size="10" class="dg-ink">&radic;2</text>
+        <polygon points="180,140 300,140 300,20" class="dg-tint" stroke-width="2"/>
+        <text x="205" y="155" font-size="10.5" text-anchor="middle">60&deg;</text>
+        <text x="310" y="85" font-size="10.5" text-anchor="middle">30&deg;</text>
+        <text x="235" y="95" font-size="10" class="dg-ink">1</text>
+        <text x="306" y="90" font-size="10" class="dg-ink">2</text>
+        <text x="262" y="70" font-size="10" class="dg-ink">&radic;3</text>
+      </svg>`,
+      trick: "\"A square cut in half\" gives 45-45-90 (legs equal, hyp = leg&times;&radic;2). \"An equilateral triangle cut in half\" gives 30-60-90 (sides 1:&radic;3:2) &mdash; the &radic;3 always sits opposite the <b>60&deg;</b>, never the 30&deg;.",
+      example: {
+        problem: "A 30-60-90 triangle has a hypotenuse of 10. Find the lengths of both legs (exact values).",
+        steps: [
+          "Ratio is 1 : &radic;3 : 2, and the hypotenuse corresponds to '2'",
+          "Scale factor: 10 &divide; 2 = 5",
+          "Short leg (opposite 30&deg;) = 1 &times; 5 = 5",
+          "Long leg (opposite 60&deg;) = &radic;3 &times; 5 = 5&radic;3"
+        ],
+        answer: "short leg = 5, long leg = 5&radic;3"
+      },
+      exercises: [
+        { prompt: "A 45-45-90 triangle has legs of length 6. Find the hypotenuse (exact value, e.g. \"6√2\").", accept:["6√2","6sqrt2"], open:true,
+          solution: ["Hypotenuse = leg &times; &radic;2", "= 6&radic;2"] },
+        { prompt: "A 45-45-90 triangle has a hypotenuse of 8&radic;2. Find the length of each leg.", value: 8,
+          solution: ["Hypotenuse = leg &times; &radic;2, so leg = hypotenuse / &radic;2", "8&radic;2 / &radic;2 = 8"] },
+        { prompt: "A 30-60-90 triangle has a short leg (opposite 30&deg;) of length 4. Find the long leg (exact value, e.g. \"4√3\").", accept:["4√3","4sqrt3"], open:true,
+          solution: ["Long leg = short leg &times; &radic;3", "= 4&radic;3"] },
+        { prompt: "Using the same triangle (short leg 4), find the hypotenuse.", value: 8,
+          solution: ["Hypotenuse = short leg &times; 2", "= 4 &times; 2 = 8"] },
+        { prompt: "A 30-60-90 triangle has hypotenuse 14. Find the short leg (opposite 30&deg;).", value: 7,
+          solution: ["Short leg = hypotenuse / 2", "= 14 / 2 = 7"] },
+        { prompt: "Using the same triangle (hypotenuse 14), find the long leg (exact value, e.g. \"7√3\").", accept:["7√3","7sqrt3"], open:true,
+          solution: ["Long leg = short leg &times; &radic;3 = 7&radic;3"] },
+        { prompt: "State the exact value of sin(30&deg;) as a fraction.", value: 0.5, accept:["1/2"],
+          solution: ["In a 30-60-90 triangle, sin30&deg; = opposite/hypotenuse = short leg / hypotenuse = 1/2"] },
+        { prompt: "State the exact value of cos(45&deg;) (e.g. \"√2/2\").", accept:["√2/2","sqrt2/2","1/√2","1/sqrt2"], open:true,
+          solution: ["In a 45-45-90 triangle, cos45&deg; = adjacent/hypotenuse = leg/(leg&radic;2) = 1/&radic;2 = &radic;2/2"] },
+        { prompt: "State the exact value of tan(60&deg;) (e.g. \"√3\").", accept:["√3","sqrt3"], open:true,
+          solution: ["tan60&deg; = opposite/adjacent = long leg/short leg = &radic;3/1 = &radic;3"] },
+        { prompt: "A ramp forms a 30&deg; angle with the ground and has a horizontal run of 12 m. Using the 30-60-90 ratio, find the ramp's exact length (the hypotenuse) and its exact height. Show your reasoning.", open:true,
+          solution: ["The 30&deg; angle is at the ground, so the horizontal run (12 m) is the side <i>adjacent</i> to 30&deg; &mdash; that's the long leg (opposite the 60&deg; angle at the top)", "Long leg = short leg &times; &radic;3, so short leg (the height) = 12/&radic;3 = 4&radic;3 &asymp; 6.9 m", "Hypotenuse (ramp length) = short leg &times; 2 = 8&radic;3 &asymp; 13.9 m"] }
+      ]
+    },
+    {
+      letter: "E", hueVar: "--hueE", title: "Verifying SOHCAHTOA",
+      rules: [
+        "SOH-CAH-TOA: sin&theta; = opposite/hypotenuse, cos&theta; = adjacent/hypotenuse, tan&theta; = opposite/adjacent.",
+        "The hypotenuse is always the side opposite the right angle &mdash; that never changes. But \"opposite\" and \"adjacent\" are defined relative to the angle you're using, so re-identify them for each angle.",
+        "To find a missing side: choose the ratio that connects the angle, a known side, and the unknown side, then solve the resulting equation.",
+        "To find a missing angle: use the inverse function (sin&#8315;&sup1;, cos&#8315;&sup1;, tan&#8315;&sup1;) on a known ratio of two sides, with your calculator set to degree mode."
+      ],
+      diagram: `<svg viewBox="0 0 300 160" width="300" height="160">
+        <polygon points="30,140 260,140 260,30" class="dg-tint" stroke-width="2"/>
+        <rect x="240" y="120" width="20" height="20" fill="none" class="dg-ink-line" stroke-width="1.2"/>
+        <text x="60" y="132" font-size="11">&theta;</text>
+        <path d="M 30 140 A 24 24 0 0 1 46 122" class="dg-line" stroke-width="1.5" fill="none"/>
+        <text x="145" y="152" font-size="10.5" text-anchor="middle" class="dg-soft">adjacent</text>
+        <text x="278" y="88" font-size="10.5" text-anchor="middle" class="dg-soft" transform="rotate(90 278 88)">opposite</text>
+        <text x="140" y="78" font-size="10.5" text-anchor="middle" class="dg-soft">hypotenuse</text>
+      </svg>`,
+      trick: "SOH-CAH-TOA &mdash; but relabel opposite/adjacent fresh for every angle; only the hypotenuse (opposite the right angle) stays fixed. Solving for a <b>side</b> uses sin/cos/tan directly; solving for an <b>angle</b> needs the inverse button (sin&#8315;&sup1;, not sin) &mdash; mixing these up is the most common GDC mistake.",
+      example: {
+        problem: "In a right triangle, one angle is 40&deg;, and the side adjacent to it is 12 cm. Find the length of the hypotenuse (1 d.p.).",
+        steps: [
+          "Adjacent and hypotenuse are involved &rarr; use cosine: cos40&deg; = adjacent/hypotenuse",
+          "cos40&deg; = 12/h",
+          "h = 12 / cos40&deg; &asymp; 15.7"
+        ],
+        answer: "h &asymp; 15.7 cm"
+      },
+      exercises: [
+        { prompt: "In a right triangle, angle = 35&deg;, opposite side = 7 cm. Find the hypotenuse (1 d.p.).", value: 12.2, tol: 0.15,
+          solution: ["sin35&deg; = opposite/hypotenuse = 7/h", "h = 7/sin35&deg; &asymp; 12.2 cm"] },
+        { prompt: "Angle = 50&deg;, hypotenuse = 20. Find the opposite side (1 d.p.).", value: 15.3, tol: 0.15,
+          solution: ["sin50&deg; = opp/20", "opp = 20 &times; sin50&deg; &asymp; 15.3"] },
+        { prompt: "Angle = 25&deg;, hypotenuse = 15. Find the adjacent side (1 d.p.).", value: 13.6, tol: 0.15,
+          solution: ["cos25&deg; = adj/15", "adj = 15 &times; cos25&deg; &asymp; 13.6"] },
+        { prompt: "Angle = 60&deg;, adjacent = 5. Find the opposite side (1 d.p.).", value: 8.66, tol: 0.15,
+          solution: ["tan60&deg; = opp/5", "opp = 5 &times; tan60&deg; &asymp; 8.7"] },
+        { prompt: "Opposite = 9, adjacent = 12. Find the angle &theta; using tan&#8315;&sup1; (1 d.p., number only).", value: 36.9, tol: 0.3,
+          solution: ["tan&theta; = 9/12 = 0.75", "&theta; = tan&#8315;&sup1;(0.75) &asymp; 36.9&deg;"] },
+        { prompt: "Opposite = 6, hypotenuse = 13. Find &theta; using sin&#8315;&sup1; (1 d.p., number only).", value: 27.5, tol: 0.3,
+          solution: ["sin&theta; = 6/13 &asymp; 0.4615", "&theta; = sin&#8315;&sup1;(0.4615) &asymp; 27.5&deg;"] },
+        { prompt: "Adjacent = 10, hypotenuse = 18. Find &theta; using cos&#8315;&sup1; (1 d.p., number only).", value: 56.3, tol: 0.3,
+          solution: ["cos&theta; = 10/18 &asymp; 0.5556", "&theta; = cos&#8315;&sup1;(0.5556) &asymp; 56.3&deg;"] },
+        { prompt: "A right triangle has legs 9 and 12. Find the hypotenuse using Pythagoras, then state sin&theta; (for the angle opposite the side of length 9) as a fraction in lowest terms.", accept:["3/5"],
+          solution: ["Hypotenuse = &radic;(9&sup2;+12&sup2;) = &radic;225 = 15", "sin&theta; = opposite/hypotenuse = 9/15 = 3/5"] },
+        { prompt: "A 6 m ladder leans against a wall, making a 68&deg; angle with the ground. How high up the wall does it reach (1 d.p.)?", value: 5.56, tol: 0.1,
+          solution: ["sin68&deg; = height/6", "height = 6 &times; sin68&deg; &asymp; 5.6 m"] },
+        { prompt: "Explain why sin&theta; and cos(90&deg;&minus;&theta;) always give the same value, using the definitions of opposite and adjacent in a right triangle.", open:true,
+          solution: ["In any right triangle, the two non-right angles add to 90&deg;, so if one angle is &theta;, the other is 90&deg;&minus;&theta;", "The side that is <i>opposite</i> &theta; is exactly the side that is <i>adjacent</i> to 90&deg;&minus;&theta; (they share the same two sides, just viewed from the other angle)", "So sin&theta; = opposite/hypotenuse uses the same side lengths as cos(90&deg;&minus;&theta;) = adjacent/hypotenuse &mdash; they're always equal"] }
+      ]
+    },
+    {
+      letter: "F", hueVar: "--hueF", title: "Problem Solving with Right-triangles",
+      rules: [
+        "Angle of elevation is measured upward from the horizontal (e.g. looking up at a plane); angle of depression is measured downward from the horizontal (e.g. looking down from a cliff).",
+        "Because the two horizontal reference lines are parallel, the angle of elevation from one point equals the angle of depression from the other (alternate angles).",
+        "A bearing is measured clockwise from north and is always written as three digits, e.g. 070&deg; or 245&deg;.",
+        "Always sketch the right triangle first, label the given angle, sides, and the unknown, then choose sine, cosine, tangent, or Pythagoras accordingly."
+      ],
+      diagram: `<svg viewBox="0 0 300 160" width="300" height="160">
+        <line x1="20" y1="140" x2="280" y2="140" class="dg-ink-line" stroke-width="1.5"/>
+        <line x1="20" y1="140" x2="20" y2="30" class="dg-line" stroke-width="2.5"/>
+        <line x1="20" y1="60" x2="220" y2="60" stroke-dasharray="3,3" class="dg-ink-line" stroke-width="1.2"/>
+        <line x1="20" y1="60" x2="230" y2="140" class="dg-line" stroke-width="2"/>
+        <path d="M 60 60 A 40 40 0 0 1 51 76" class="dg-line" stroke-width="1.5" fill="none"/>
+        <text x="66" y="78" font-size="10.5">elevation</text>
+        <circle cx="230" cy="140" r="4" class="dg-fill"/>
+        <text x="20" y="20" font-size="11" text-anchor="middle" class="dg-ink">N</text>
+        <text x="200" y="153" font-size="10.5" text-anchor="middle" class="dg-soft">observer sights the top &mdash; angle of elevation</text>
+      </svg>`,
+      trick: "Elevation looks <b>UP</b>, depression looks <b>DOWN</b> &mdash; and by alternate angles, they're equal for the same sightline, so you can often reuse one triangle for both. Bearings always start facing north and turn clockwise, written with three digits (5&deg; becomes \"005&deg;\").",
+      example: {
+        problem: "From a point 40 m from the base of a tower, the angle of elevation to the top is 35&deg;. Find the height of the tower (1 d.p.).",
+        steps: [
+          "Draw the right triangle: horizontal distance 40 m is adjacent, height is opposite, angle is 35&deg;",
+          "tan35&deg; = opposite/adjacent = h/40",
+          "h = 40 &times; tan35&deg; &asymp; 28.0 m"
+        ],
+        answer: "height &asymp; 28.0 m"
+      },
+      exercises: [
+        { prompt: "From a point 60 m from a building's base, the angle of elevation to the top is 28&deg;. Find the building's height (1 d.p., m).", value: 31.9, tol: 0.3,
+          solution: ["tan28&deg; = h/60", "h = 60 &times; tan28&deg; &asymp; 31.9 m"] },
+        { prompt: "A person stands 100 m from a cliff. The angle of elevation to the top is 40&deg;. Find the cliff's height (1 d.p., m).", value: 83.9, tol: 0.4,
+          solution: ["tan40&deg; = h/100", "h = 100 &times; tan40&deg; &asymp; 83.9 m"] },
+        { prompt: "From the top of a 50 m cliff, the angle of depression to a boat is 22&deg;. Find the horizontal distance from the base of the cliff to the boat (1 d.p., m).", value: 123.7, tol: 1.5,
+          solution: ["By alternate angles, the angle of elevation from the boat is also 22&deg;", "tan22&deg; = 50/d", "d = 50 / tan22&deg; &asymp; 123.7 m"] },
+        { prompt: "A kite is flying at the end of a 45 m string, making a 55&deg; angle of elevation with the ground. Find the kite's height above the ground (1 d.p., m).", value: 36.9, tol: 0.3,
+          solution: ["The string is the hypotenuse: sin55&deg; = h/45", "h = 45 &times; sin55&deg; &asymp; 36.9 m"] },
+        { prompt: "State the 3-digit bearing that points due east (number only, e.g. 045).", value: 90,
+          solution: ["Bearings are measured clockwise from north", "East is a quarter turn clockwise from north: 090&deg;"] },
+        { prompt: "A ship sails on a bearing of 135&deg; from port. Which compass direction is this closest to? Answer like \"SE\".", accept:["SE","southeast"],
+          solution: ["135&deg; is exactly halfway between east (090&deg;) and south (180&deg;)", "SE (south-east)"] },
+        { prompt: "Two hikers start at the same point. Hiker A walks on a bearing of 060&deg;, Hiker B walks on a bearing of 150&deg;. Find the angle between their paths (number only).", value: 90,
+          solution: ["Angle between paths = 150 &minus; 60", "= 90&deg;"] },
+        { prompt: "A plane climbs at a constant 15&deg; angle of elevation. After flying 2000 m along its flight path (the hypotenuse), find its height above the ground (1 d.p., m).", value: 517.6, tol: 3,
+          solution: ["sin15&deg; = h/2000", "h = 2000 &times; sin15&deg; &asymp; 517.6 m"] },
+        { prompt: "A surveyor measures the angle of elevation to a mountain peak as 18&deg; from a point 3 km from the base (horizontal distance). Explain (without fully computing) which trig ratio you'd use to find the peak's height, and why.", open:true,
+          solution: ["The 3 km horizontal distance is adjacent to the 18&deg; angle, and the height is opposite it", "Since we know the angle and the adjacent side, and want the opposite side, tangent connects them: tan18&deg; = height/3", "Height = 3 &times; tan18&deg; km"] },
+        { prompt: "Comparing two methods for finding an inaccessible height &mdash; similar triangles (shadows) vs. SOHCAHTOA directly &mdash; when might one be more practical than the other? Answer in 2&ndash;3 sentences.", open:true,
+          solution: ["Sample response: The shadow (similar triangles) method needs no angle-measuring tool at all &mdash; just two shadow lengths and one known height &mdash; so it's practical with very simple equipment, but it only works in direct sunlight at a usable shadow angle.", "SOHCAHTOA needs a measured angle of elevation (e.g. a clinometer) but works any time you can sight the top of the object, regardless of sunlight, and it directly uses a single measured distance rather than relying on two shadows falling at once."] }
+      ]
+    }
+  ];
+
+  var STORE_KEY = "u3_progress_v1";
+  function loadProgress(){ try{ var raw = localStorage.getItem(STORE_KEY); return raw ? JSON.parse(raw) : {}; }catch(e){ return {}; } }
+  function saveProgress(p){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(p)); }catch(e){} }
+  var progress = loadProgress();
+
+  function parseNum(s){
+    if(s == null) return null;
+    s = String(s).trim();
+    var fracM = s.match(/^(-?\d+(?:\.\d+)?)\s*\/\s*(-?\d+(?:\.\d+)?)$/);
+    if(fracM){ var a = parseFloat(fracM[1]), b = parseFloat(fracM[2]); if(b === 0) return null; return a / b; }
+    var v = parseFloat(s);
+    return isNaN(v) ? null : v;
+  }
+  function normalize(raw){ return String(raw).toLowerCase().replace(/[\s()]/g,"").replace(/\*\*/g,"^").replace(/²/g,"^2").replace(/√/g,"sqrt").replace(/°/g,""); }
+  function checkAnswer(ex, raw){
+    if(!raw || !String(raw).trim()) return false;
+    var norm = normalize(raw);
+    if(ex.accept){
+      var acceptedNorm = ex.accept.map(normalize);
+      if(acceptedNorm.indexOf(norm) > -1) return true;
+    }
+    if(typeof ex.value === "number"){
+      var v = parseNum(raw);
+      if(v !== null && Math.abs(v - ex.value) < (ex.tol || 0.02)) return true;
+    }
+    if(ex.valueSet){
+      var parts = String(raw).toLowerCase().replace(/±/g,",-,").split(/,|or|and/).map(function(s){return s.replace(/^-,?$/,"-");}).map(parseNum).filter(function(x){ return x !== null; });
+      if(parts.length === ex.valueSet.length){
+        var remaining = ex.valueSet.slice();
+        var ok = parts.every(function(p){
+          var idx = -1;
+          for(var i=0;i<remaining.length;i++){ if(Math.abs(remaining[i]-p) < (ex.tol||0.02)){ idx=i; break; } }
+          if(idx>-1){ remaining.splice(idx,1); return true; }
+          return false;
+        });
+        if(ok) return true;
+      }
+    }
+    return false;
+  }
+
+  var lessonsEl = document.getElementById("lessons");
+  var scoreboardInner = document.getElementById("scoreboardInner");
+  var resetBtn = document.getElementById("resetBtn");
+  var totalDoneEl = document.getElementById("totalDone");
+
+  function exId(li, ei){ return "L" + li + "E" + ei; }
+
+  function buildChips(){
+    LESSONS.forEach(function(lesson, li){
+      var a = document.createElement("a");
+      a.href = "#lesson-" + lesson.letter;
+      a.className = "chip";
+      a.style.setProperty("--chip-hue", "var(" + lesson.hueVar + "-solid)");
+      a.style.setProperty("--chip-tint", "var(" + lesson.hueVar + "-tint)");
+      a.id = "chip-" + li;
+      a.innerHTML = '<span class="letter">' + lesson.letter + '</span><span class="frac" data-frac>0/10</span>';
+      scoreboardInner.insertBefore(a, resetBtn);
+    });
+  }
+
+  function lessonDoneCount(li){
+    var lesson = LESSONS[li];
+    var n = 0;
+    lesson.exercises.forEach(function(ex, ei){ if(progress[exId(li,ei)]) n++; });
+    return n;
+  }
+
+  function updateAllProgressUI(){
+    var total = 0;
+    LESSONS.forEach(function(lesson, li){
+      var n = lessonDoneCount(li);
+      total += n;
+      var chip = document.getElementById("chip-" + li);
+      if(chip){ chip.querySelector("[data-frac]").textContent = n + "/10"; chip.classList.toggle("done", n === 10); }
+      var ring = document.getElementById("ring-" + li);
+      if(ring){ ring.querySelector(".ring-label").textContent = n + " / 10"; ring.querySelector(".bar-fill").style.width = (n*10) + "%"; }
+    });
+    totalDoneEl.textContent = total;
+  }
+
+  function showToast(msg){
+    var t = document.getElementById("toast");
+    t.textContent = msg; t.classList.add("show");
+    clearTimeout(showToast._h);
+    showToast._h = setTimeout(function(){ t.classList.remove("show"); }, 1600);
+  }
+
+  function buildLessons(){
+    LESSONS.forEach(function(lesson, li){
+      var section = document.createElement("section");
+      section.className = "lesson";
+      section.id = "lesson-" + lesson.letter;
+      section.style.setProperty("--hue", "var(" + lesson.hueVar + "-solid)");
+      section.style.setProperty("--tint", "var(" + lesson.hueVar + "-tint)");
+
+      var head = document.createElement("div");
+      head.className = "lesson-head";
+      head.innerHTML =
+        '<div class="big-letter">' + lesson.letter + '</div>' +
+        '<div class="htext"><div class="kicker">Lesson ' + lesson.letter + '</div><h2>' + lesson.title + '</h2></div>' +
+        '<div class="lesson-progress" id="ring-' + li + '"><div class="ring-label">0 / 10</div><div class="bar"><div class="bar-fill"></div></div></div>';
+      section.appendChild(head);
+
+      var rulesBox = document.createElement("div");
+      rulesBox.className = "rules-box";
+      rulesBox.innerHTML = '<h3>The rules</h3><ul>' + lesson.rules.map(function(r){ return "<li>" + r + "</li>"; }).join("") + "</ul>";
+      section.appendChild(rulesBox);
+
+      if(lesson.diagram){
+        var diagramBox = document.createElement("div");
+        diagramBox.className = "diagram-box";
+        diagramBox.innerHTML = lesson.diagram;
+        section.appendChild(diagramBox);
+      }
+
+      if(lesson.trick){
+        var trickBox = document.createElement("div");
+        trickBox.className = "trick-box";
+        trickBox.innerHTML = '<span class="trick-tag">Rule of thumb</span><span class="trick-text">' + lesson.trick + '</span>';
+        section.appendChild(trickBox);
+      }
+
+      var ex = document.createElement("div");
+      ex.className = "example-card";
+      ex.innerHTML =
+        '<h3>Worked example</h3>' +
+        '<div class="example-prob expr">' + lesson.example.problem + '</div>' +
+        '<div class="example-steps">' + lesson.example.steps.map(function(s, i){ return '<div class="step"><span class="n">' + (i+1) + '.</span><span class="expr">' + s + '</span></div>'; }).join("") + '</div>' +
+        '<div class="example-answer">Answer: ' + lesson.example.answer + '</div>';
+      section.appendChild(ex);
+
+      var grid = document.createElement("div");
+      grid.className = "ex-grid";
+
+      lesson.exercises.forEach(function(exObj, ei){
+        var id = exId(li, ei);
+        var card = document.createElement("div");
+        card.className = "ex-card";
+        card.id = "card-" + id;
+
+        var inputRow = exObj.open
+          ? '<div class="open-note">Open response &mdash; check your work against the sample steps.</div>'
+          : '<div class="ex-input-row"><input class="ex-input" type="text" placeholder="your answer" id="input-' + id + '" autocomplete="off" /><button class="ex-check" data-id="' + id + '" data-li="' + li + '" data-ei="' + ei + '">Check</button></div>' +
+            '<div class="ex-feedback" id="fb-' + id + '"></div>';
+
+        card.innerHTML =
+          '<div class="ex-top"><span class="ex-num">' + (ei+1) + '</span><div class="ex-prompt expr">' + exObj.prompt + '</div></div>' +
+          inputRow +
+          '<div class="ex-foot"><button class="ex-toggle" data-target="sol-' + id + '">' + (exObj.open ? "Show sample response" : "Show solution") + '</button></div>' +
+          '<div class="ex-solution" id="sol-' + id + '">' + exObj.solution.map(function(s){ return '<div class="sol-step">' + s + '</div>'; }).join("") + '</div>';
+
+        grid.appendChild(card);
+      });
+
+      section.appendChild(grid);
+      lessonsEl.appendChild(section);
+    });
+  }
+
+  function wireEvents(){
+    lessonsEl.addEventListener("click", function(e){
+      var checkBtn = e.target.closest(".ex-check");
+      if(checkBtn){
+        var li = parseInt(checkBtn.getAttribute("data-li"), 10);
+        var ei = parseInt(checkBtn.getAttribute("data-ei"), 10);
+        var id = checkBtn.getAttribute("data-id");
+        var exObj = LESSONS[li].exercises[ei];
+        var input = document.getElementById("input-" + id);
+        var fb = document.getElementById("fb-" + id);
+        var card = document.getElementById("card-" + id);
+        var ok = checkAnswer(exObj, input.value);
+        card.classList.remove("correct","wrong");
+        fb.classList.remove("correct","wrong");
+        if(ok){
+          card.classList.add("correct"); fb.classList.add("correct"); fb.textContent = "Correct!";
+          progress[id] = true; saveProgress(progress); updateAllProgressUI();
+        } else {
+          card.classList.add("wrong"); fb.classList.add("wrong"); fb.textContent = "Not quite — try again or check the solution.";
+        }
+        return;
+      }
+      var toggleBtn = e.target.closest(".ex-toggle");
+      if(toggleBtn){
+        var targetId = toggleBtn.getAttribute("data-target");
+        var sol = document.getElementById(targetId);
+        var willOpen = !sol.classList.contains("open");
+        sol.classList.toggle("open");
+        toggleBtn.textContent = willOpen
+          ? (toggleBtn.textContent.indexOf("sample") > -1 ? "Hide sample response" : "Hide solution")
+          : (toggleBtn.textContent.indexOf("sample") > -1 ? "Show sample response" : "Show solution");
+        var cardEl = toggleBtn.closest(".ex-card");
+        if(willOpen && cardEl){
+          var idMatch = targetId.replace("sol-","");
+          var liEi = idMatch.match(/^L(\d+)E(\d+)$/);
+          if(liEi){
+            var li2 = parseInt(liEi[1],10), ei2 = parseInt(liEi[2],10);
+            if(LESSONS[li2].exercises[ei2].open){ progress[idMatch] = true; saveProgress(progress); updateAllProgressUI(); }
+          }
+        }
+        return;
+      }
+    });
+
+    lessonsEl.addEventListener("keydown", function(e){
+      if(e.key === "Enter" && e.target.classList.contains("ex-input")){
+        var id = e.target.id.replace("input-","");
+        var btn = document.querySelector('.ex-check[data-id="' + id + '"]');
+        if(btn) btn.click();
+      }
+    });
+
+    resetBtn.addEventListener("click", function(){
+      if(!confirm("Clear all saved progress on this device?")) return;
+      progress = {}; saveProgress(progress);
+      document.querySelectorAll(".ex-card").forEach(function(c){ c.classList.remove("correct","wrong"); });
+      document.querySelectorAll(".ex-feedback").forEach(function(f){ f.textContent = ""; f.classList.remove("correct","wrong"); });
+      updateAllProgressUI(); showToast("Progress cleared");
+    });
+  }
+
+  function injectHueVars(){
+    var style = document.createElement("style");
+    var letters = ["A","B","C","D","E","F"];
+    var css = ":root{";
+    letters.forEach(function(L){
+      var hv = "--hue" + L;
+      css += hv + "-solid: hsl(var(" + hv + ") var(--lsat) var(--llight));";
+      css += hv + "-tint: hsl(var(" + hv + ") var(--lsat) var(--ltint));";
+    });
+    css += "}";
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
+  injectHueVars();
+  buildChips();
+  buildLessons();
+  wireEvents();
+  updateAllProgressUI();
+
+})();
+</script>

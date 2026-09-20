@@ -1,0 +1,1849 @@
+<title>Unit 2: Representing Relationships — Extended Math</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --bg: #F5F6F2;
+    --surface: #FFFFFF;
+    --surface-2: #ECEFE7;
+    --ink: #1B222C;
+    --ink-soft: #545E6B;
+    --ink-faint: #8A93A0;
+    --accent: #2957A4;
+    --accent-ink: #ffffff;
+    --accent-2: #C1841B;
+    --good: #2C8A57;
+    --good-tint: #E4F3EA;
+    --bad: #C0453A;
+    --bad-tint: #FBEAE8;
+    --border: #DBDFD4;
+    --border-strong: #C4CABC;
+    --shadow: 220 25% 20%;
+    --radius: 14px;
+
+    --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --font-body: "Karla", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+
+    /* per-lesson hues (light) */
+    --hueA: 214; --hueB: 187; --hueC: 262; --hueD: 30; --hueE: 350; --hueF: 150;
+    --lsat: 58%; --llight: 38%; --ltint: 94%;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #12151A;
+      --surface: #191D24;
+      --surface-2: #1F252E;
+      --ink: #E9ECF1;
+      --ink-soft: #A7B0BE;
+      --ink-faint: #6E7787;
+      --accent: #7DA3E8;
+      --accent-ink: #0D1420;
+      --accent-2: #E3AE55;
+      --good: #57C489;
+      --good-tint: #16261E;
+      --bad: #E5847A;
+      --bad-tint: #2A1917;
+      --border: #2A303B;
+      --border-strong: #3A4250;
+      --lsat: 62%; --llight: 68%; --ltint: 16%;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #12151A;
+    --surface: #191D24;
+    --surface-2: #1F252E;
+    --ink: #E9ECF1;
+    --ink-soft: #A7B0BE;
+    --ink-faint: #6E7787;
+    --accent: #7DA3E8;
+    --accent-ink: #0D1420;
+    --accent-2: #E3AE55;
+    --good: #57C489;
+    --good-tint: #16261E;
+    --bad: #E5847A;
+    --bad-tint: #2A1917;
+    --border: #2A303B;
+    --border-strong: #3A4250;
+    --lsat: 62%; --llight: 68%; --ltint: 16%;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior: auto; } *{ animation: none !important; transition: none !important; } }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: var(--accent); }
+
+  ::selection{ background: color-mix(in srgb, var(--accent) 30%, transparent); }
+
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+  h1,h2,h3,h4{ font-family: var(--font-display); font-weight: 600; text-wrap: balance; margin: 0; color: var(--ink); }
+
+  code, .mono, .expr{ font-family: var(--font-mono); }
+
+  button{ font-family: var(--font-body); cursor:pointer; }
+  button:focus-visible, input:focus-visible, a:focus-visible{
+    outline: 2.5px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ============ TOP MASTHEAD ============ */
+  .masthead{
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .masthead-inner{
+    padding: 34px 20px 22px;
+    display:flex; flex-direction:column; gap:16px;
+  }
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow .dot{ width:5px; height:5px; border-radius:50%; background: var(--accent-2); }
+  .title-row{
+    display:flex; justify-content: space-between; align-items:flex-end; gap: 24px; flex-wrap: wrap;
+  }
+  .title-row h1{ font-size: clamp(30px, 4.4vw, 44px); line-height: 1.05; }
+  .title-row .subtitle{ color: var(--ink-soft); font-size: 15.5px; max-width: 46ch; margin-top:6px;}
+  .student-tag{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-soft);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 7px 14px;
+    white-space: nowrap;
+  }
+  .student-tag b{ color: var(--ink); }
+
+  .meta-strip{
+    display:flex; flex-wrap:wrap; gap: 10px 28px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    padding-top: 4px;
+    border-top: 1px dashed var(--border);
+    margin-top: 4px;
+    padding-top: 14px;
+  }
+  .meta-strip span b{ color: var(--ink); font-weight:600; }
+
+  /* ============ SCOREBOARD NAV (sticky) ============ */
+  .scoreboard{
+    position: sticky; top:0; z-index: 40;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px) saturate(1.1);
+    -webkit-backdrop-filter: blur(10px) saturate(1.1);
+    border-bottom: 1px solid var(--border);
+  }
+  .scoreboard-inner{
+    display:flex; align-items:center; gap:10px;
+    padding: 10px 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .scoreboard-inner::-webkit-scrollbar{ display:none; }
+  .score-total{
+    font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-soft);
+    white-space: nowrap; padding-right: 8px; border-right: 1px solid var(--border);
+    margin-right: 4px;
+  }
+  .score-total b{ color: var(--ink); }
+  .chip{
+    flex: 0 0 auto;
+    display:flex; align-items:center; gap:8px;
+    padding: 7px 12px 7px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-decoration: none;
+    transition: border-color .15s ease, color .15s ease, transform .1s ease;
+  }
+  .chip:hover{ border-color: var(--chip-hue); color: var(--ink); }
+  .chip:active{ transform: translateY(1px); }
+  .chip .letter{
+    width: 22px; height:22px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 12px; font-weight: 700;
+    background: var(--chip-tint); color: var(--chip-hue);
+    border: 1px solid color-mix(in srgb, var(--chip-hue) 45%, transparent);
+  }
+  .chip .frac{ font-variant-numeric: tabular-nums; font-size: 12px; }
+  .chip.done{ border-color: var(--good); }
+  .chip.done .letter{ background: var(--good-tint); color: var(--good); border-color: var(--good); }
+  .reset-btn{
+    margin-left: auto; flex: 0 0 auto;
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--ink-faint); background: transparent; border: 1px solid transparent;
+    padding: 6px 8px; border-radius: 8px;
+  }
+  .reset-btn:hover{ color: var(--bad); border-color: var(--border); }
+
+  /* ============ INTRO / REFERENCE CARD ============ */
+  main{ padding: 30px 0 90px; }
+  .intro-card{
+    margin: 26px 0 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+  }
+  .intro-card summary{
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 18px;
+    list-style: none;
+    display:flex; align-items:center; justify-content: space-between;
+    gap: 12px;
+  }
+  .intro-card summary::-webkit-details-marker{ display:none; }
+  .intro-card summary .arrow{
+    font-family: var(--font-mono); color: var(--ink-faint); font-size: 13px;
+    transition: transform .2s ease;
+  }
+  .intro-card[open] summary .arrow{ transform: rotate(180deg); }
+  .intro-grid{
+    margin-top: 18px;
+    display:grid; grid-template-columns: 1fr 1fr; gap: 20px 28px;
+  }
+  @media (max-width: 640px){ .intro-grid{ grid-template-columns: 1fr; } }
+  .intro-block h4{ font-size: 12.5px; text-transform: uppercase; letter-spacing:.08em; color: var(--ink-faint); font-family: var(--font-mono); font-weight:600; margin-bottom:8px;}
+  .intro-block p{ margin:0; color: var(--ink-soft); font-size: 14.5px; }
+  .soi{
+    font-family: var(--font-display); font-style: italic; font-size: 17px; color: var(--ink);
+    grid-column: 1 / -1;
+    padding: 14px 16px;
+    background: var(--surface-2);
+    border-left: 3px solid var(--accent-2);
+    border-radius: 6px;
+  }
+  .iq-table{ grid-column: 1/-1; display:grid; gap:8px; }
+  .iq-row{ display:grid; grid-template-columns: 90px 1fr; gap:12px; font-size: 14px; align-items:baseline; }
+  .iq-row .tag{ font-family: var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color: var(--ink-faint); }
+  .iq-row p{ margin:0; color: var(--ink-soft); }
+
+  /* ============ LESSON SECTION ============ */
+  .lesson{
+    scroll-margin-top: 64px;
+    margin-bottom: 56px;
+  }
+  .lesson-head{
+    display:flex; align-items: center; gap: 16px;
+    padding: 18px 20px;
+    border-radius: var(--radius);
+    background: var(--tint);
+    border: 1px solid color-mix(in srgb, var(--hue) 35%, transparent);
+    margin-bottom: 18px;
+  }
+  .lesson-head .big-letter{
+    font-family: var(--font-display); font-weight:700; font-size: 34px;
+    color: var(--hue);
+    width: 52px; height:52px; flex:0 0 auto;
+    border-radius: 12px;
+    background: var(--surface);
+    display:flex; align-items:center; justify-content:center;
+    border: 1px solid color-mix(in srgb, var(--hue) 40%, transparent);
+  }
+  .lesson-head .htext .kicker{ font-family: var(--font-mono); font-size: 11.5px; text-transform:uppercase; letter-spacing:.09em; color: var(--hue); }
+  .lesson-head .htext h2{ font-size: clamp(20px,2.6vw,26px); margin-top:2px; }
+  .lesson-progress{
+    margin-left:auto; text-align:right; flex: 0 0 auto;
+  }
+  .lesson-progress .ring-label{ font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); }
+  .lesson-progress .bar{
+    width: 90px; height: 6px; border-radius: 4px; background: var(--surface);
+    border: 1px solid var(--border); overflow:hidden; margin-top:6px;
+  }
+  .lesson-progress .bar-fill{ height:100%; background: var(--hue); width:0%; transition: width .3s ease; }
+
+  .rules-box{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 16px;
+  }
+  .rules-box h3{ font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-family: var(--font-mono); color: var(--hue); margin-bottom: 10px; }
+  .rules-box ul{ margin:0; padding-left: 20px; color: var(--ink-soft); font-size: 14.5px; }
+  .rules-box li{ margin-bottom: 5px; }
+  .rules-box li::marker{ color: var(--hue); }
+  .trick-box{ background: color-mix(in srgb, var(--hue) 10%, var(--surface)); border: 1px dashed var(--hue); border-radius: var(--radius); padding: 14px 22px; margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-start; }
+  .trick-box .trick-tag{ font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); white-space: nowrap; padding-top: 2px; }
+  .trick-box .trick-text{ color: var(--ink-soft); font-size: 14.5px; }
+  .trick-box .trick-text b{ color: var(--ink); }
+  .diagram-box{ background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 16px; display:flex; justify-content:center; align-items:center; overflow-x:auto; }
+  .diagram-box svg{ width: 100%; max-width: 620px; height: auto; display:block; }
+  .diagram-box{ flex-direction: column; gap: 8px; }
+  .diagram-caption{ font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); text-align:center; max-width: 620px; }
+  .comic-box{ background: var(--surface-2); border: 2px dashed var(--hue); border-radius: var(--radius); padding: 18px 20px 16px; margin-bottom: 16px; display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .comic-box .comic-tag{ font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); align-self:flex-start; }
+  .comic-box svg{ width: 100%; max-width: 460px; height: auto; display:block; }
+  .comic-box .comic-caption{ font-family: var(--font-body); font-style: italic; font-size: 14px; color: var(--ink-soft); text-align:center; max-width: 560px; }
+  .comic-box text{ fill: var(--ink); font-family: var(--font-mono); }
+  .comic-box .cm-face{ fill: var(--tint); stroke: var(--hue); }
+  .comic-box .cm-face2{ fill: var(--surface); stroke: var(--ink-soft); }
+  .comic-box .cm-line{ stroke: var(--ink); fill:none; }
+  .comic-box .cm-fill{ fill: var(--hue); }
+  .comic-box .cm-bad{ fill: var(--bad-tint); stroke: var(--bad); }
+  .comic-box .cm-good{ fill: var(--good-tint); stroke: var(--good); }
+  .comic-box .cm-bad-fill{ fill: var(--bad); stroke: none; }
+  .comic-box .cm-good-fill{ fill: var(--good); stroke: none; }
+  .comic-box .cm-soft{ fill: var(--ink-faint); }
+
+  .remember-box{
+    background: color-mix(in srgb, var(--hue) 7%, var(--surface));
+    border: 1px solid var(--hue);
+    border-left: 5px solid var(--hue);
+    border-radius: var(--radius);
+    padding: 16px 20px 14px;
+    margin-bottom: 20px;
+  }
+  .remember-box h3{ font-family: var(--font-mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); margin-bottom: 10px; }
+  .remember-box ul{ margin:0; padding-left:0; list-style:none; }
+  .remember-box li{ position:relative; padding-left: 26px; margin-bottom: 7px; color: var(--ink-soft); font-size: 14.5px; }
+  .remember-box li:last-child{ margin-bottom:0; }
+  .remember-box li::before{ content:"\2713"; position:absolute; left:4px; top:0; color: var(--hue); font-weight:700; }
+  .remember-box li b{ color: var(--ink); }
+
+  .cheatsheet{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px 28px;
+    margin-top: 36px;
+  }
+  .cheatsheet h2{ font-size: 24px; margin-bottom: 4px; }
+  .cheatsheet .cs-sub{ color: var(--ink-faint); font-size: 13px; font-family: var(--font-mono); margin-bottom: 18px; }
+  .cs-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+  .cs-card{ background: var(--surface-2); border: 1px solid var(--border); border-top: 3px solid var(--hue); border-radius: var(--radius); padding: 14px 16px; }
+  .cs-card h4{ font-size: 14.5px; display:flex; gap:8px; align-items:center; margin-bottom: 9px; font-family: var(--font-body); font-weight:700; }
+  .cs-card .cs-letter{ font-family: var(--font-mono); font-size: 11px; background: var(--tint); color: var(--hue); border:1px solid var(--hue); border-radius: 6px; padding: 2px 7px; }
+  .cs-card ul{ margin:0; padding-left: 18px; color: var(--ink-soft); font-size: 13.5px; }
+  .cs-card li{ margin-bottom: 5px; }
+  .cs-card li:last-child{ margin-bottom:0; }
+  .cs-card li::marker{ color: var(--hue); }
+  .cs-card li b{ color: var(--ink); }
+  .diagram-box .dg-line{ stroke: var(--hue); fill: none; }
+  .diagram-box .dg-fill{ fill: var(--hue); }
+  .diagram-box .dg-tint{ fill: var(--tint); stroke: var(--hue); }
+  .diagram-box .dg-ink{ fill: var(--ink); }
+  .diagram-box .dg-ink-line{ stroke: var(--ink-soft); fill:none; }
+  .diagram-box .dg-soft{ fill: var(--ink-soft); }
+  .diagram-box .dg-good{ fill: var(--good); stroke: var(--good); }
+  .diagram-box .dg-bad{ fill: var(--bad); stroke: var(--bad); }
+  .diagram-box text{ fill: var(--ink); font-family: var(--font-mono); }
+
+  .example-card{
+    background: var(--surface);
+    border: 1.5px dashed var(--border-strong);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 22px;
+  }
+  .example-card h3{
+    font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-family: var(--font-mono);
+    color: var(--ink-faint); margin-bottom: 10px; display:flex; align-items:center; gap:8px;
+  }
+  .example-card h3::before{ content:"✎"; color: var(--accent-2); font-size:14px; }
+  .example-prob{ font-family: var(--font-mono); font-size: 15.5px; margin-bottom: 12px; color: var(--ink); }
+  .example-steps{ display:flex; flex-direction:column; gap: 6px; }
+  .example-steps .step{
+    display:grid; grid-template-columns: 20px 1fr; gap: 10px;
+    font-size: 14.5px; color: var(--ink-soft); align-items:baseline;
+  }
+  .example-steps .step .n{ font-family: var(--font-mono); color: var(--hue); font-size: 12.5px; }
+  .example-steps .step .expr{ color: var(--ink); }
+  .example-answer{
+    margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border);
+    font-size: 14.5px; color: var(--good); font-family: var(--font-mono); font-weight:600;
+  }
+
+  /* ============ EXERCISE GRID ============ */
+  .ex-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 720px){ .ex-grid{ grid-template-columns: 1fr; } }
+
+  .ex-card{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display:flex; flex-direction:column; gap:10px;
+    transition: border-color .2s ease;
+  }
+  .ex-card.correct{ border-color: var(--good); background: color-mix(in srgb, var(--good-tint) 60%, var(--surface)); }
+  .ex-card.wrong{ border-color: var(--bad); }
+
+  .ex-top{ display:flex; align-items:flex-start; gap:10px; }
+  .ex-num{
+    font-family: var(--font-mono); font-size: 12.5px; font-weight:700;
+    color: var(--hue); background: var(--tint); border:1px solid color-mix(in srgb, var(--hue) 40%, transparent);
+    border-radius: 6px; padding: 2px 7px; flex:0 0 auto; margin-top:2px;
+  }
+  .ex-prompt{ font-size: 14.5px; color: var(--ink); line-height:1.5; }
+  .ex-prompt .expr{ font-size: 14.5px; }
+
+  .ex-input-row{ display:flex; gap:8px; }
+  .ex-input{
+    flex:1; min-width:0;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+  }
+  .ex-input::placeholder{ color: var(--ink-faint); }
+  .ex-check{
+    font-family: var(--font-mono); font-size: 12.5px; font-weight:600;
+    padding: 8px 14px; border-radius: 8px; border: 1px solid var(--hue);
+    background: var(--hue); color: var(--accent-ink);
+    white-space:nowrap;
+  }
+  .ex-check:hover{ filter: brightness(1.06); }
+
+  .ex-feedback{ font-size: 13px; font-family: var(--font-mono); min-height: 4px; }
+  .ex-feedback.correct{ color: var(--good); }
+  .ex-feedback.wrong{ color: var(--bad); }
+
+  .ex-foot{ display:flex; justify-content: space-between; align-items:center; margin-top:2px; }
+  .ex-toggle{
+    background:none; border:none; padding:0; font-size: 12.5px;
+    font-family: var(--font-mono); color: var(--ink-faint); text-decoration: underline; text-underline-offset:3px;
+  }
+  .ex-toggle:hover{ color: var(--hue); }
+  .ex-solution{
+    display:none; margin-top: 4px; padding: 12px 14px;
+    background: var(--surface-2); border-radius: 8px;
+    font-size: 13.5px; color: var(--ink-soft);
+  }
+  .ex-solution.open{ display:block; }
+  .ex-solution .sol-step{ margin-bottom: 4px; }
+  .ex-solution .sol-final{ margin-top:8px; color: var(--good); font-weight:700; font-family: var(--font-mono); }
+
+  .open-note{ font-size: 11.5px; color: var(--ink-faint); font-family: var(--font-mono); }
+
+  sup{ font-size: 0.7em; }
+
+  footer{
+    text-align:center; padding: 30px 20px 50px;
+    color: var(--ink-faint); font-size: 13px; font-family: var(--font-mono);
+  }
+
+  .toast{
+    position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color: var(--bg);
+    padding: 10px 18px; border-radius: 999px; font-family: var(--font-mono); font-size: 13px;
+    opacity: 0; pointer-events:none; transition: opacity .25s ease, transform .25s ease;
+    z-index: 100; white-space: nowrap;
+  }
+  .toast.show{ opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+
+<div class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="eyebrow"><span class="dot"></span>IB MYP Extended Mathematics &middot; Grade 9 (MYP 4) &middot; Unit 2 &middot; from 8 October, 8 weeks</div>
+    <div class="title-row">
+      <div>
+        <h1>Unit 2: Representing Relationships</h1>
+        <div class="subtitle">Extended Mathematics workbook &mdash; expressions, equations &amp; functions, rearranging formulae, direct &amp; inverse proportion, expanding &amp; factorising quadratics, the three forms of a quadratic, and quadratic models in real life. Six lessons, 120 exercises, two worked examples and two illustrations per lesson.</div>
+      </div>
+      <div class="student-tag">Prepared for <b>Devon</b> &middot; Extended Math track</div>
+    </div>
+    <div class="meta-strip">
+      <span>Global context: <b>Scientific and technical innovation &mdash; Models</b></span>
+      <span>Key concept: <b>Relationships</b></span>
+      <span>Related concepts: <b>Models &middot; Representation</b></span>
+      <span>Criteria: <b>A &middot; C &middot; D</b></span>
+    </div>
+  </div>
+</div>
+
+<div class="scoreboard">
+  <div class="wrap scoreboard-inner" id="scoreboardInner">
+    <span class="score-total"><b id="totalDone">0</b>/120 done</span>
+    <!-- chips injected by JS -->
+    <button class="reset-btn" id="resetBtn" title="Clear saved progress">reset progress</button>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <details class="intro-card" id="introCard">
+    <summary>Unit reference &mdash; Statement of Inquiry, inquiry questions &amp; how to use this guide<span class="arrow">&#9660;</span></summary>
+    <div class="intro-grid">
+      <p class="soi">&ldquo;Relationships can be modeled to better inform our decision making.&rdquo;</p>
+
+      <div class="intro-block">
+        <h4>How this guide works</h4>
+        <p>Each lesson (A&ndash;F) opens with the core rules and a diagram, then two fully worked examples, a short <b>Rules to remember</b> checklist, a <b>math meme break</b>, and 20 practice exercises. Every lesson's checklist is collected again in the <b>Rules to remember</b> cheat sheet at the bottom of the page. Type an answer and press <b>Check</b> for instant feedback, or open <b>Show solution</b> to see the steps. Type a squared term as <code>x^2</code>, a square root as <code>sqrt</code> (so &radic;(A/&pi;) is <code>sqrt(A/pi)</code>), and note that the checker ignores round brackets and spaces &mdash; so <code>(x+3)(x-2)</code> is read as <code>x+3x-2</code>. Your progress is saved automatically in this browser.</p>
+      </div>
+      <div class="intro-block">
+        <h4>Assessment &amp; the learner profile</h4>
+        <p>This unit is assessed on <b>Criterion A</b> (knowing and understanding), <b>Criterion C</b> (communicating) and <b>Criterion D</b> (applying mathematics in real-life contexts). Criterion C is <i>communication</i>, so a correct number on its own is not a finished answer &mdash; organised working, correct mathematical notation, units, and a sentence saying what the answer means are all being marked, especially in Lesson F. The class uses a <b>TI-84 graphing calculator</b>: use it to check a vertex or an intercept you have already found by hand, not to replace the algebra. The learner profile focus is <b>Inquirers</b> &mdash; Lesson E asks you to decide <i>which</i> form of a quadratic to use before you start, and to justify the choice.</p>
+      </div>
+
+      <div class="iq-table">
+        <div class="iq-row"><span class="tag">Factual</span><p>What are the three forms of a quadratic function and what does each one tell us? <em>(see Lesson E)</em></p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>How are expressions, equations, and functions similar but also different? <em>(see Lesson A, Exercise 19)</em></p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>How are variables and unknowns similar but different? <em>(see Lesson A, Exercise 20)</em></p></div>
+        <div class="iq-row"><span class="tag">Debatable</span><p>When is it better to use different forms of a quadratic function? <em>(see Lesson E, Exercises 18&ndash;20)</em></p></div>
+      </div>
+    </div>
+  </details>
+
+  <div id="lessons"></div>
+
+  <section class="cheatsheet" id="cheatsheet">
+    <h2>Rules to remember</h2>
+    <div class="cs-sub">The whole unit on one page &mdash; read this before a test</div>
+    <div class="cs-grid" id="csGrid"></div>
+  </section>
+
+</main>
+
+<footer>Representing Relationships &middot; Extended Math Unit 2 study workbook &middot; built for Devon</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------------------------------------------------------
+     DATA
+  --------------------------------------------------------------- */
+  var LESSONS = [
+    {
+      letter: "A", hueVar: "--hueA", title: "Expressions, Equations &amp; Functions",
+      rules: [
+        "An <b>expression</b> has no equals sign &mdash; 5x &minus; 7, or x&sup2; + 3x. You cannot solve it, you can only <b>simplify</b> it or <b>evaluate</b> it at a particular x.",
+        "An <b>equation</b> claims two things are equal &mdash; 5x &minus; 7 = 13. It can be <b>solved</b>: you are hunting for the value(s) of x that make the claim true.",
+        "A <b>function</b> is a rule that gives <b>exactly one output for each input</b>. Written f(x) = 3x + 2, the name is f, the input is x, and f(5) = 17 is one output value, not the rule itself.",
+        "<b>Unknown vs variable vs parameter:</b> in 3x + 2 = 11, x is an <b>unknown</b> &mdash; one hidden value to find. In y = 3x + 2, x is a <b>variable</b> &mdash; it ranges over a whole set. In y = mx + c, m and c are <b>parameters</b> &mdash; fixed for one particular line, changed to get a different line.",
+        "The <b>domain</b> is the set of allowed inputs; the <b>range</b> is the set of outputs you actually get. A mapping diagram draws them as two bags with arrows between.",
+        "<b>Vertical line test:</b> if any vertical line cuts a graph more than once, that x has two outputs, so the graph is a relation but <b>not</b> a function."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 360 185" width="360" height="185">
+        <text x="85" y="18" text-anchor="middle" font-size="11" font-weight="bold">Domain (inputs x)</text>
+        <text x="275" y="18" text-anchor="middle" font-size="11" font-weight="bold">Range (outputs f(x))</text>
+        <ellipse cx="85" cy="105" rx="50" ry="58" class="dg-tint" stroke-width="2"/>
+        <ellipse cx="275" cy="105" rx="50" ry="58" class="dg-tint" stroke-width="2"/>
+        <text x="85" y="66" text-anchor="middle" font-size="12">&minus;2</text>
+        <text x="85" y="94" text-anchor="middle" font-size="12">&minus;1</text>
+        <text x="85" y="122" text-anchor="middle" font-size="12">1</text>
+        <text x="85" y="150" text-anchor="middle" font-size="12">3</text>
+        <text x="275" y="66" text-anchor="middle" font-size="12">&minus;3</text>
+        <text x="275" y="94" text-anchor="middle" font-size="12">&minus;1</text>
+        <text x="275" y="122" text-anchor="middle" font-size="12">3</text>
+        <text x="275" y="150" text-anchor="middle" font-size="12">7</text>
+        <line x1="123" y1="62" x2="226" y2="62" class="dg-line" stroke-width="1.6"/>
+        <polygon points="237,62 225,57 225,67" class="dg-fill"/>
+        <line x1="137" y1="90" x2="212" y2="90" class="dg-line" stroke-width="1.6"/>
+        <polygon points="223,90 211,85 211,95" class="dg-fill"/>
+        <line x1="138" y1="118" x2="211" y2="118" class="dg-line" stroke-width="1.6"/>
+        <polygon points="222,118 210,113 210,123" class="dg-fill"/>
+        <line x1="125" y1="146" x2="224" y2="146" class="dg-line" stroke-width="1.6"/>
+        <polygon points="235,146 223,141 223,151" class="dg-fill"/>
+        <text x="180" y="180" text-anchor="middle" font-size="11" font-weight="bold">f(x) = 2x + 1 &mdash; one arrow out of every input</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 190" width="380" height="190">
+        <text x="95" y="22" text-anchor="middle" font-size="11" font-weight="bold">y = x&sup2;</text>
+        <line x1="20" y1="125" x2="170" y2="125" class="dg-ink-line" stroke-width="1.4"/>
+        <line x1="95" y1="32" x2="95" y2="168" class="dg-ink-line" stroke-width="1.4"/>
+        <path d="M35 40 Q95 210 155 40" class="dg-line" style="fill:none" stroke-width="2.4"/>
+        <line x1="71" y1="34" x2="71" y2="166" class="dg-ink-line" stroke-width="1.4" stroke-dasharray="4 3"/>
+        <circle cx="71" cy="111" r="4.5" class="dg-good"/>
+        <text x="95" y="184" text-anchor="middle" font-size="11">1 hit &rarr; function &#10003;</text>
+        <text x="285" y="22" text-anchor="middle" font-size="11" font-weight="bold">x&sup2; + y&sup2; = 25</text>
+        <line x1="210" y1="125" x2="360" y2="125" class="dg-ink-line" stroke-width="1.4"/>
+        <line x1="285" y1="32" x2="285" y2="168" class="dg-ink-line" stroke-width="1.4"/>
+        <circle cx="285" cy="125" r="38" class="dg-line" style="fill:none" stroke-width="2.4"/>
+        <line x1="265" y1="34" x2="265" y2="166" class="dg-ink-line" stroke-width="1.4" stroke-dasharray="4 3"/>
+        <circle cx="265" cy="92.7" r="4.5" class="dg-bad"/>
+        <circle cx="265" cy="157.3" r="4.5" class="dg-bad"/>
+        <text x="285" y="184" text-anchor="middle" font-size="11">2 hits &rarr; not a function &#10007;</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "A mapping diagram for f(x) = 2x + 1: every input in the domain has exactly one arrow leaving it.",
+        "The vertical line test. One crossing everywhere means a function; two crossings anywhere kills it."
+      ],
+      trick: "Look for the equals sign first. No equals sign &rarr; it is an <b>expression</b>, so the only verbs allowed are &ldquo;simplify&rdquo; and &ldquo;evaluate&rdquo;. An equals sign with one mystery letter &rarr; an <b>equation</b>, so &ldquo;solve&rdquo;. An equals sign with an input and an output letter (y = &hellip; or f(x) = &hellip;) &rarr; a <b>function</b>, so &ldquo;graph it&rdquo; or &ldquo;feed it a number&rdquo;.",
+      examples: [
+        {
+          problem: "f(x) = x&sup2; &minus; 4x. Find f(&minus;3), and find every x for which f(x) = 0.",
+          steps: [
+            "f(&minus;3) means substitute &minus;3 everywhere x appears: (&minus;3)&sup2; &minus; 4(&minus;3)",
+            "= 9 + 12 = 21",
+            "For f(x) = 0 the rule becomes an equation: x&sup2; &minus; 4x = 0",
+            "Factorise: x(x &minus; 4) = 0, so x = 0 or x = 4"
+          ],
+          answer: "f(&minus;3) = 21; f(x) = 0 when x = 0 or x = 4"
+        },
+        {
+          problem: "State whether each is an expression, an equation or a function, and say what x is doing in it: (i) 7a &minus; 2a + 5, (ii) 4x &minus; 1 = 11, (iii) y = 4x &minus; 1.",
+          steps: [
+            "(i) No equals sign &rarr; expression. You can only simplify it: 7a &minus; 2a + 5 = 5a + 5",
+            "(ii) Equals sign, one mystery value &rarr; equation. x is an <b>unknown</b>: 4x = 12, x = 3",
+            "(iii) Equals sign linking an input x to an output y &rarr; function. x is a <b>variable</b> &mdash; it is free to be anything, and y follows along"
+          ],
+          answer: "(i) expression &mdash; simplify to 5a + 5; (ii) equation &mdash; x is an unknown, x = 3; (iii) function &mdash; x is a variable"
+        }
+      ],
+      remember: [
+        "<b>No equals sign, no solving.</b> An expression can only be simplified or evaluated.",
+        "<b>f(x) is a machine, f(3) is one thing it made.</b> The rule and a single output are not the same object.",
+        "<b>One input, one output.</b> Two arrows leaving the same domain element (or two crossings of one vertical line) means it is not a function.",
+        "<b>Unknown = hunt it. Variable = let it roam. Parameter = pin it down.</b>"
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 195" width="460" height="195">
+        <rect x="14" y="8" width="192" height="46" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="102,54 118,54 110,84" class="cm-face2" stroke-width="2"/>
+        <text x="110" y="28" text-anchor="middle" font-size="11">&ldquo;Solve me! Go on,</text>
+        <text x="110" y="44" text-anchor="middle" font-size="11">I dare you.&rdquo;</text>
+        <circle cx="110" cy="122" r="34" class="cm-face" stroke-width="2"/>
+        <circle cx="98" cy="114" r="3.5" class="cm-fill"/>
+        <circle cx="122" cy="114" r="3.5" class="cm-fill"/>
+        <path d="M96 130 Q110 144 124 130" class="cm-line" stroke-width="2"/>
+        <text x="110" y="176" text-anchor="middle" font-size="12" font-weight="bold">3x + 2 = 11</text>
+        <text x="110" y="190" text-anchor="middle" font-size="10" class="cm-soft">an equation</text>
+        <rect x="250" y="8" width="198" height="46" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="341,54 357,54 349,84" class="cm-face2" stroke-width="2"/>
+        <text x="349" y="28" text-anchor="middle" font-size="11">&ldquo;With what? I don't</text>
+        <text x="349" y="44" text-anchor="middle" font-size="11">even own an = sign.&rdquo;</text>
+        <circle cx="349" cy="122" r="34" class="cm-face" stroke-width="2"/>
+        <circle cx="337" cy="114" r="3.5" class="cm-fill"/>
+        <circle cx="361" cy="114" r="3.5" class="cm-fill"/>
+        <path d="M335 136 Q349 124 363 136" class="cm-line" stroke-width="2"/>
+        <text x="349" y="176" text-anchor="middle" font-size="12" font-weight="bold">3x + 2</text>
+        <text x="349" y="190" text-anchor="middle" font-size="10" class="cm-soft">an expression</text>
+      </svg>`,
+        caption: "The expression is not being difficult &mdash; it genuinely cannot be solved, because there is no claim to make true. Give it an equals sign and suddenly it has something to prove."
+      },
+      exercises: [
+        { prompt: "Is 5x &minus; 7 an expression, an equation, or a function? (one word)", accept: ["expression","anexpression"],
+          solution: ["There is no equals sign anywhere", "So it is an expression &mdash; it can be simplified or evaluated, never solved"] },
+        { prompt: "Is 5x &minus; 7 = 13 an expression, an equation, or a function? (one word)", accept: ["equation","anequation"],
+          solution: ["There is an equals sign and one mystery letter", "So it is an equation &mdash; solve it for x"] },
+        { prompt: "Solve 5x &minus; 7 = 13.", value: 4,
+          solution: ["Add 7 to both sides: 5x = 20", "Divide both sides by 5: x = 4"] },
+        { prompt: "Simplify the expression 4x + 3 &minus; x + 8. Type your answer with no spaces.", accept: ["3x+11","11+3x"],
+          solution: ["Collect the x terms: 4x &minus; x = 3x", "Collect the numbers: 3 + 8 = 11", "3x + 11"] },
+        { prompt: "f(x) = 3x + 2. Find f(5).", value: 17,
+          solution: ["Substitute x = 5: f(5) = 3(5) + 2", "= 15 + 2 = 17"] },
+        { prompt: "f(x) = x&sup2; &minus; 4x. Find f(&minus;3).", value: 21,
+          solution: ["f(&minus;3) = (&minus;3)&sup2; &minus; 4(&minus;3)", "= 9 + 12 = 21"] },
+        { prompt: "g(x) = 2x&sup2; + 1. Find g(0).", value: 1,
+          solution: ["g(0) = 2(0)&sup2; + 1", "= 0 + 1 = 1"] },
+        { prompt: "In the equation 3x + 2 = 11, is x a variable, an unknown, or a parameter? (one word)", accept: ["unknown","anunknown"],
+          solution: ["There is exactly one value of x that makes the statement true (x = 3)", "A single hidden value to find is an unknown"] },
+        { prompt: "In the function y = 3x + 2, is x a variable, an unknown, or a parameter? (one word)", accept: ["variable","avariable"],
+          solution: ["Here x is not hiding one value &mdash; it is free to be any real number, and y responds", "So x is a variable"] },
+        { prompt: "In the family of lines y = mx + c, what name is given to m and c? (one word, plural)", accept: ["parameters","parameter"],
+          solution: ["m and c stay fixed for one particular line but change from line to line", "They are parameters"] },
+        { prompt: "f(x) = 2x &minus; 9. Find the value of x for which f(x) = 1.", value: 5,
+          solution: ["The rule becomes an equation: 2x &minus; 9 = 1", "2x = 10, so x = 5"] },
+        { prompt: "h(t) = 20 &minus; 5t&sup2;. Find h(2).", value: 0,
+          solution: ["h(2) = 20 &minus; 5(2)&sup2;", "= 20 &minus; 20 = 0"] },
+        { prompt: "For the function f defined by the pairs (1, 3), (2, 5), (3, 7), list the range values separated by commas.", valueSet: [3, 5, 7],
+          solution: ["The range is the set of outputs &mdash; the second number in each pair", "Range: 3, 5, 7 (the domain is 1, 2, 3)"] },
+        { prompt: "A circle with equation x&sup2; + y&sup2; = 25 is graphed. Is it a function? Answer yes or no.", accept: ["no"],
+          solution: ["A vertical line such as x = 3 cuts the circle at y = 4 and at y = &minus;4", "One input giving two outputs breaks the rule &rarr; no"] },
+        { prompt: "A mapping diagram sends 2 to both 5 and 7. Is this a function? Answer yes or no.", accept: ["no"],
+          solution: ["Two arrows leave the input 2", "A function allows exactly one output per input &rarr; no"] },
+        { prompt: "f(x) = 1/(x &minus; 3). One value of x must be excluded from the domain. Which one?", value: 3,
+          solution: ["The denominator cannot be zero", "x &minus; 3 = 0 when x = 3, so x = 3 is excluded"] },
+        { prompt: "f(x) = x&sup2; with domain all real numbers. What is the smallest value in the range?", value: 0,
+          solution: ["Squaring never gives a negative result", "The smallest output is 0, reached at x = 0, so the range is y &ge; 0"] },
+        { prompt: "f(x) = x&sup2;. Find the two values of x for which f(x) = 49. Enter both, separated by a comma.", valueSet: [7, -7],
+          solution: ["x&sup2; = 49", "x = 7 or x = &minus;7 &mdash; a function may repeat an output, it just may not repeat an input"] },
+        { prompt: "Explain, in your own words, the difference between the expression x&sup2; + 3x and the equation x&sup2; + 3x = 10.", open: true,
+          solution: ["Sample response: x&sup2; + 3x is just a recipe &mdash; hand it a number and it hands one back, so all you can do is simplify or evaluate it. Writing = 10 turns it into a claim about x, and now there are particular values (x = 2 and x = &minus;5) that make the claim true, so it can be solved."] },
+        { prompt: "A student says &ldquo;f(x) = x&sup2; and f(2) = 4 are the same thing.&rdquo; Explain why that is wrong.", open: true,
+          solution: ["Sample response: f(x) = x&sup2; is the whole rule &mdash; it describes infinitely many input-output pairs at once. f(2) = 4 is a single fact produced by that rule, one point on the graph. The rule is the machine; f(2) is one item it made."] }
+      ]
+    },
+    {
+      letter: "B", hueVar: "--hueB", title: "Rearranging Formulae",
+      rules: [
+        "A formula stays true as long as you do the <b>same operation to both sides</b>. Rearranging changes nothing about the relationship &mdash; it only changes which quantity you have chosen to represent in terms of the others.",
+        "To make a letter the subject, <b>undo the operations wrapped around it, in reverse order</b> &mdash; outside first, inside last. It is BIDMAS backwards.",
+        "<b>Squares and roots:</b> undo a square with a square root and a square root with a square. A = &pi;r&sup2; &rarr; r&sup2; = A/&pi; &rarr; r = &radic;(A/&pi;). In a real-world formula take the <b>positive</b> root &mdash; a radius is not negative.",
+        "<b>Subject on both sides:</b> gather every term containing it on one side, factor it out, then divide. ax + 7 = bx &rarr; 7 = x(b &minus; a) &rarr; x = 7/(b &minus; a).",
+        "<b>Reciprocals:</b> in 1/f = 1/u + 1/v, first isolate the whole reciprocal 1/v, combine the other side over one denominator, <i>then</i> flip both sides. Never flip term by term &mdash; 1/(u+v) is not 1/u + 1/v."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 180" width="380" height="180">
+        <text x="190" y="16" text-anchor="middle" font-size="11" font-weight="bold">v = u + at &mdash; make t the subject</text>
+        <rect x="16" y="28" width="72" height="32" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="52" y="49" text-anchor="middle" font-size="13" font-weight="bold">t</text>
+        <line x1="92" y1="44" x2="140" y2="44" class="dg-ink-line" stroke-width="1.6"/>
+        <polygon points="150,44 138,39 138,49" class="dg-soft"/>
+        <text x="120" y="34" text-anchor="middle" font-size="10">&times; a</text>
+        <rect x="154" y="28" width="72" height="32" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="190" y="49" text-anchor="middle" font-size="13" font-weight="bold">at</text>
+        <line x1="230" y1="44" x2="278" y2="44" class="dg-ink-line" stroke-width="1.6"/>
+        <polygon points="288,44 276,39 276,49" class="dg-soft"/>
+        <text x="258" y="34" text-anchor="middle" font-size="10">+ u</text>
+        <rect x="292" y="28" width="72" height="32" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="328" y="49" text-anchor="middle" font-size="13" font-weight="bold">v</text>
+        <text x="190" y="84" text-anchor="middle" font-size="11" font-weight="bold">now peel it back off, in reverse</text>
+        <rect x="292" y="94" width="72" height="32" rx="8" class="dg-fill"/>
+        <text x="328" y="115" text-anchor="middle" font-size="13" font-weight="bold" style="fill:var(--surface)">v</text>
+        <line x1="288" y1="110" x2="240" y2="110" class="dg-line" stroke-width="2"/>
+        <polygon points="230,110 242,105 242,115" class="dg-fill"/>
+        <text x="260" y="100" text-anchor="middle" font-size="10">&minus; u</text>
+        <rect x="154" y="94" width="72" height="32" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="190" y="115" text-anchor="middle" font-size="12" font-weight="bold">v &minus; u</text>
+        <line x1="150" y1="110" x2="102" y2="110" class="dg-line" stroke-width="2"/>
+        <polygon points="92,110 104,105 104,115" class="dg-fill"/>
+        <text x="122" y="100" text-anchor="middle" font-size="10">&divide; a</text>
+        <rect x="16" y="94" width="72" height="32" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="52" y="115" text-anchor="middle" font-size="11" font-weight="bold">(v&minus;u)/a</text>
+        <text x="190" y="152" text-anchor="middle" font-size="12" font-weight="bold">t = (v &minus; u) / a</text>
+        <text x="190" y="170" text-anchor="middle" font-size="10">last operation on, first operation off</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 190" width="380" height="190">
+        <text x="190" y="16" text-anchor="middle" font-size="11" font-weight="bold">S = &radic;(a&sup2; + b&sup2;) &mdash; make b the subject</text>
+        <rect x="14" y="26" width="252" height="132" rx="14" class="dg-tint" stroke-width="2"/>
+        <text x="34" y="46" font-size="11" font-weight="bold">&radic; &hellip;</text>
+        <rect x="42" y="52" width="196" height="94" rx="12" class="dg-tint" stroke-width="2"/>
+        <text x="62" y="72" font-size="11" font-weight="bold">a&sup2; + &hellip;</text>
+        <rect x="72" y="78" width="136" height="58" rx="10" class="dg-tint" stroke-width="2"/>
+        <text x="90" y="98" font-size="11" font-weight="bold">( &hellip; )&sup2;</text>
+        <circle cx="152" cy="113" r="15" class="dg-fill"/>
+        <text x="152" y="118" text-anchor="middle" font-size="14" font-weight="bold" style="fill:var(--surface)">b</text>
+        <text x="288" y="46" font-size="11" font-weight="bold">1. square</text>
+        <text x="288" y="76" font-size="11" font-weight="bold">2. &minus; a&sup2;</text>
+        <text x="288" y="106" font-size="11" font-weight="bold">3. &radic;</text>
+        <line x1="278" y1="50" x2="278" y2="112" class="dg-line" stroke-width="2"/>
+        <polygon points="278,124 272,112 284,112" class="dg-fill"/>
+        <text x="190" y="180" text-anchor="middle" font-size="12" font-weight="bold">b = &radic;(S&sup2; &minus; a&sup2;)</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "Build the formula up around t, then strip it back down in the opposite order.",
+        "b is wrapped in three layers. Peel from the outside in: square, subtract a&sup2;, square-root."
+      ],
+      trick: "Ask &ldquo;if I were <i>calculating</i> the subject I want, what would I do to it last?&rdquo; &mdash; and undo that first. Circle the letter you want, then read outwards, listing the operations that touch it. Reverse the list, and apply each inverse to <i>both whole sides</i>.",
+      examples: [
+        {
+          problem: "Make v the subject of 1/f = 1/u + 1/v, then find v when f = 12 cm and u = 20 cm.",
+          steps: [
+            "Isolate the term with v: 1/v = 1/f &minus; 1/u",
+            "Put the right side over a common denominator uf: 1/v = (u &minus; f)/(uf)",
+            "Both sides are now single fractions, so flip them both: v = uf/(u &minus; f)",
+            "Substitute f = 12, u = 20: v = (20)(12)/(20 &minus; 12) = 240/8 = 30",
+            "Check in the original: 1/20 + 1/30 = 3/60 + 2/60 = 5/60 = 1/12 &#10003;"
+          ],
+          answer: "v = uf/(u &minus; f), and v = 30 cm"
+        },
+        {
+          problem: "Make x the subject of 5x + 3c = 2x + 7.",
+          steps: [
+            "x appears on both sides, so gather the x terms on one side: 5x &minus; 2x = 7 &minus; 3c",
+            "3x = 7 &minus; 3c",
+            "Factor is already done on the left (the common factor is 3x... strictly x), divide both sides by 3",
+            "x = (7 &minus; 3c)/3"
+          ],
+          answer: "x = (7 &minus; 3c)/3"
+        }
+      ],
+      remember: [
+        "<b>Same thing, both sides, every time.</b> That is the only legal move.",
+        "<b>Undo outwards-in.</b> The operation done last to your letter is the first one you remove.",
+        "<b>Subject on both sides &rarr; collect, factorise, divide.</b> You can never divide it away one side at a time.",
+        "<b>Flip whole sides, not single terms.</b> 1/u + 1/v is not 1/(u + v)."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 195" width="460" height="195">
+        <rect x="16" y="8" width="224" height="46" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="104,54 120,54 112,86" class="cm-face2" stroke-width="2"/>
+        <text x="128" y="28" text-anchor="middle" font-size="11">&ldquo;I put your socks on first,</text>
+        <text x="128" y="44" text-anchor="middle" font-size="11">then your shoes.&rdquo;</text>
+        <circle cx="112" cy="122" r="32" class="cm-face" stroke-width="2"/>
+        <circle cx="101" cy="115" r="3.5" class="cm-fill"/>
+        <circle cx="123" cy="115" r="3.5" class="cm-fill"/>
+        <path d="M99 131 Q112 143 125 131" class="cm-line" stroke-width="2"/>
+        <text x="112" y="176" text-anchor="middle" font-size="11" font-weight="bold">the formula</text>
+        <rect x="250" y="8" width="198" height="46" rx="11" class="cm-bad" stroke-width="2"/>
+        <polygon points="340,54 356,54 348,86" class="cm-bad" stroke-width="2"/>
+        <text x="348" y="28" text-anchor="middle" font-size="11">&ldquo;Great. Taking the socks</text>
+        <text x="348" y="44" text-anchor="middle" font-size="11">off first, then.&rdquo;</text>
+        <circle cx="348" cy="122" r="32" class="cm-face" stroke-width="2"/>
+        <circle cx="338" cy="115" r="6" class="cm-line" stroke-width="2"/>
+        <circle cx="359" cy="115" r="6" class="cm-line" stroke-width="2"/>
+        <path d="M335 138 Q348 124 361 138" class="cm-line" stroke-width="2.2"/>
+        <text x="348" y="176" text-anchor="middle" font-size="11" font-weight="bold">the student, mid-rearrange</text>
+      </svg>`,
+        caption: "Shoes went on last, so shoes come off first. Rearranging a formula is exactly the same: strip the outermost operation first, and only then the one underneath it."
+      },
+      exercises: [
+        { prompt: "Make a the subject of v = u + at. Type the right-hand side only, using / for division &mdash; e.g. (v&minus;u)/t would be typed as (v-u)/t.", accept: ["v-u/t","-u+v/t"],
+          solution: ["Subtract u from both sides: v &minus; u = at", "Divide both sides by t: a = (v &minus; u)/t"] },
+        { prompt: "Using v = u + at with v = 30 m/s, u = 6 m/s and t = 4 s, find a (in m/s&sup2;).", value: 6,
+          solution: ["a = (v &minus; u)/t = (30 &minus; 6)/4", "= 24/4 = 6 m/s&sup2;"] },
+        { prompt: "Make w the subject of P = 2(l + w). Type the right-hand side only.", accept: ["p/2-l","p-2l/2","1/2p-l"],
+          solution: ["Divide both sides by 2: P/2 = l + w", "Subtract l: w = P/2 &minus; l (the same as (P &minus; 2l)/2)"] },
+        { prompt: "A rectangle has perimeter P = 48 cm and length l = 15 cm. Find its width w (in cm).", value: 9,
+          solution: ["w = P/2 &minus; l = 48/2 &minus; 15", "= 24 &minus; 15 = 9 cm"] },
+        { prompt: "Make r the subject of A = &pi;r&sup2;. Type it as sqrt(A/pi) &mdash; the checker ignores brackets.", accept: ["sqrta/pi","√a/pi"],
+          solution: ["Divide both sides by &pi;: r&sup2; = A/&pi;", "Square-root both sides, taking the positive root for a length: r = &radic;(A/&pi;)"] },
+        { prompt: "A circle has area 78.54 cm&sup2;. Find its radius, in cm (use &pi; &asymp; 3.1416).", value: 5, tol: 0.05,
+          solution: ["r = &radic;(A/&pi;) = &radic;(78.54/3.1416)", "= &radic;25.00 = 5 cm"] },
+        { prompt: "Make C the subject of F = 9C/5 + 32. Type the right-hand side only, e.g. 5(F-32)/9.", accept: ["5f-32/9","5/9f-32"],
+          solution: ["Subtract 32: F &minus; 32 = 9C/5", "Multiply both sides by 5: 5(F &minus; 32) = 9C", "Divide by 9: C = 5(F &minus; 32)/9"] },
+        { prompt: "Convert 95&deg;F to &deg;C using C = 5(F &minus; 32)/9. Give the number only.", value: 35,
+          solution: ["C = 5(95 &minus; 32)/9 = 5(63)/9", "= 315/9 = 35&deg;C"] },
+        { prompt: "Make v the subject of E = &frac12;mv&sup2;. Type it as sqrt(2E/m).", accept: ["sqrt2e/m","√2e/m"],
+          solution: ["Multiply both sides by 2: 2E = mv&sup2;", "Divide by m: v&sup2; = 2E/m", "Positive square root (a speed): v = &radic;(2E/m)"] },
+        { prompt: "An 8 kg object has kinetic energy 400 J. Find its speed v, in m/s.", value: 10,
+          solution: ["v = &radic;(2E/m) = &radic;(2 &times; 400 / 8)", "= &radic;(800/8) = &radic;100 = 10 m/s"] },
+        { prompt: "Make v the subject of 1/f = 1/u + 1/v. Type it as uf/(u-f).", accept: ["uf/u-f","fu/u-f"],
+          solution: ["1/v = 1/f &minus; 1/u", "Common denominator uf: 1/v = (u &minus; f)/(uf)", "Flip both whole sides: v = uf/(u &minus; f)"] },
+        { prompt: "A lens has f = 12 cm and u = 20 cm. Use v = uf/(u &minus; f) to find v, in cm.", value: 30,
+          solution: ["v = (20)(12)/(20 &minus; 12) = 240/8", "= 30 cm. Check: 1/20 + 1/30 = 1/12 &#10003;"] },
+        { prompt: "Make b the subject of S = &radic;(a&sup2; + b&sup2;). Type it as sqrt(S^2-a^2).", accept: ["sqrts^2-a^2","√s^2-a^2","sqrts²-a²"],
+          solution: ["Square both sides: S&sup2; = a&sup2; + b&sup2;", "Subtract a&sup2;: b&sup2; = S&sup2; &minus; a&sup2;", "b = &radic;(S&sup2; &minus; a&sup2;)"] },
+        { prompt: "Using b = &radic;(S&sup2; &minus; a&sup2;) with S = 13 and a = 5, find b.", value: 12,
+          solution: ["b = &radic;(13&sup2; &minus; 5&sup2;) = &radic;(169 &minus; 25)", "= &radic;144 = 12"] },
+        { prompt: "Make x the subject of ax + 7 = bx. Type it as 7/(b-a).", accept: ["7/b-a","-7/a-b"],
+          solution: ["x is on both sides, so collect: 7 = bx &minus; ax", "Factorise the right side: 7 = x(b &minus; a)", "Divide by (b &minus; a): x = 7/(b &minus; a)"] },
+        { prompt: "Using x = 7/(b &minus; a) with a = 3 and b = 10, find x.", value: 1,
+          solution: ["x = 7/(10 &minus; 3) = 7/7", "= 1"] },
+        { prompt: "Make h the subject of V = &#8531;&pi;r&sup2;h. Type it as 3V/(pi r^2), with no spaces.", accept: ["3v/pir^2","3v/pir²","3v/r^2pi"],
+          solution: ["Multiply both sides by 3: 3V = &pi;r&sup2;h", "Divide both sides by &pi;r&sup2;: h = 3V/(&pi;r&sup2;)"] },
+        { prompt: "Make L the subject of T = 2&pi;&radic;(L/g). Type it as gT^2/(4pi^2).", accept: ["gt^2/4pi^2","gt²/4pi²","t^2g/4pi^2"],
+          solution: ["Divide both sides by 2&pi;: T/(2&pi;) = &radic;(L/g)", "Square both sides: T&sup2;/(4&pi;&sup2;) = L/g", "Multiply by g: L = gT&sup2;/(4&pi;&sup2;)"] },
+        { prompt: "A student rearranges A = &pi;r&sup2; and writes r = A/&pi;&sup2;. Explain what they did wrong and give the correct answer.", open: true,
+          solution: ["Sample response: They tried to undo the square by squaring the &pi; instead of square-rooting the whole side. Squaring only ever undoes with a square root, and it must be applied to the entire side: r&sup2; = A/&pi;, so r = &radic;(A/&pi;). A quick test with A = &pi; (which should give r = 1) shows their version gives 1/&pi;, so it is wrong."] },
+        { prompt: "The same relationship can be written A = &pi;r&sup2; or r = &radic;(A/&pi;). Explain what rearranging actually changes, and why an engineer might want each version.", open: true,
+          solution: ["Sample response: Rearranging changes nothing about the relationship itself &mdash; both formulae describe exactly the same circles &mdash; it only changes which quantity is being represented in terms of the other. A = &pi;r&sup2; is the version you want when you know the radius and are ordering material; r = &radic;(A/&pi;) is the version you want when the area is fixed (say, a required footprint) and you have to cut the pipe to size."] }
+      ]
+    },
+    {
+      letter: "C", hueVar: "--hueC", title: "Direct &amp; Inverse Proportion",
+      rules: [
+        "<b>Direct proportion</b>, y &prop; x, means y = kx for some constant k. Double x and y doubles. The graph is a <b>straight line through the origin</b>, and y/x is the same for every pair.",
+        "<b>Inverse proportion</b>, y &prop; 1/x, means y = k/x, i.e. xy = k. Double x and y <b>halves</b>. The graph is a <b>hyperbola</b> that never touches either axis, and the product xy is the same for every pair.",
+        "<b>The four-step method:</b> (1) write the general equation with k, (2) substitute the known pair to find k, (3) rewrite the formula with k in place, (4) substitute again to answer the question.",
+        "<b>Squares work the same way.</b> y &prop; x&sup2; means y = kx&sup2; &mdash; triple x and y becomes 9 times bigger. y &prop; 1/x&sup2; means y = k/x&sup2; &mdash; triple x and y becomes one ninth.",
+        "<b>Reading a table:</b> divide each y by its x &mdash; constant means direct. Multiply each y by its x &mdash; constant means inverse. If neither is constant, it is neither."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 188" width="380" height="188">
+        <text x="95" y="16" text-anchor="middle" font-size="11" font-weight="bold">Direct: y = kx</text>
+        <line x1="30" y1="150" x2="172" y2="150" class="dg-ink-line" stroke-width="1.4"/>
+        <line x1="30" y1="150" x2="30" y2="30" class="dg-ink-line" stroke-width="1.4"/>
+        <line x1="30" y1="150" x2="160" y2="36" class="dg-line" stroke-width="2.6"/>
+        <circle cx="70" cy="115" r="4" class="dg-good"/>
+        <circle cx="110" cy="80" r="4" class="dg-good"/>
+        <line x1="70" y1="115" x2="70" y2="150" class="dg-ink-line" stroke-width="1.2" stroke-dasharray="3 3"/>
+        <line x1="110" y1="80" x2="110" y2="150" class="dg-ink-line" stroke-width="1.2" stroke-dasharray="3 3"/>
+        <text x="70" y="164" text-anchor="middle" font-size="10">x</text>
+        <text x="110" y="164" text-anchor="middle" font-size="10">2x</text>
+        <text x="95" y="178" text-anchor="middle" font-size="10">double x &rarr; double y</text>
+        <text x="40" y="44" font-size="10">starts at (0, 0)</text>
+        <text x="290" y="16" text-anchor="middle" font-size="11" font-weight="bold">Inverse: y = k/x</text>
+        <line x1="222" y1="150" x2="364" y2="150" class="dg-ink-line" stroke-width="1.4"/>
+        <line x1="222" y1="150" x2="222" y2="30" class="dg-ink-line" stroke-width="1.4"/>
+        <polyline points="243.6,60 249,78 258,96 267,106.8 276,114 294,123 312,128.4 330,132 348,134.6" class="dg-line" style="fill:none" stroke-width="2.6"/>
+        <circle cx="258" cy="96" r="4" class="dg-good"/>
+        <circle cx="294" cy="123" r="4" class="dg-good"/>
+        <line x1="258" y1="96" x2="258" y2="150" class="dg-ink-line" stroke-width="1.2" stroke-dasharray="3 3"/>
+        <line x1="294" y1="123" x2="294" y2="150" class="dg-ink-line" stroke-width="1.2" stroke-dasharray="3 3"/>
+        <text x="258" y="164" text-anchor="middle" font-size="10">x</text>
+        <text x="294" y="164" text-anchor="middle" font-size="10">2x</text>
+        <text x="290" y="178" text-anchor="middle" font-size="10">double x &rarr; half y</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 180" width="380" height="180">
+        <text x="95" y="16" text-anchor="middle" font-size="11" font-weight="bold">y &divide; x is constant &rarr; DIRECT</text>
+        <rect x="18" y="24" width="156" height="112" rx="10" class="dg-tint" stroke-width="2"/>
+        <line x1="18" y1="50" x2="174" y2="50" class="dg-ink-line" stroke-width="1.2"/>
+        <line x1="70" y1="24" x2="70" y2="136" class="dg-ink-line" stroke-width="1.2"/>
+        <line x1="122" y1="24" x2="122" y2="136" class="dg-ink-line" stroke-width="1.2"/>
+        <text x="44" y="43" text-anchor="middle" font-size="11" font-weight="bold">x</text>
+        <text x="96" y="43" text-anchor="middle" font-size="11" font-weight="bold">y</text>
+        <text x="148" y="43" text-anchor="middle" font-size="11" font-weight="bold">y &divide; x</text>
+        <text x="44" y="72" text-anchor="middle" font-size="11">2</text>
+        <text x="96" y="72" text-anchor="middle" font-size="11">7</text>
+        <text x="148" y="72" text-anchor="middle" font-size="11" font-weight="bold">3.5</text>
+        <text x="44" y="100" text-anchor="middle" font-size="11">4</text>
+        <text x="96" y="100" text-anchor="middle" font-size="11">14</text>
+        <text x="148" y="100" text-anchor="middle" font-size="11" font-weight="bold">3.5</text>
+        <text x="44" y="128" text-anchor="middle" font-size="11">10</text>
+        <text x="96" y="128" text-anchor="middle" font-size="11">35</text>
+        <text x="148" y="128" text-anchor="middle" font-size="11" font-weight="bold">3.5</text>
+        <text x="95" y="156" text-anchor="middle" font-size="11" font-weight="bold">y = 3.5x</text>
+        <text x="288" y="16" text-anchor="middle" font-size="11" font-weight="bold">x &times; y is constant &rarr; INVERSE</text>
+        <rect x="210" y="24" width="156" height="112" rx="10" class="dg-tint" stroke-width="2"/>
+        <line x1="210" y1="50" x2="366" y2="50" class="dg-ink-line" stroke-width="1.2"/>
+        <line x1="262" y1="24" x2="262" y2="136" class="dg-ink-line" stroke-width="1.2"/>
+        <line x1="314" y1="24" x2="314" y2="136" class="dg-ink-line" stroke-width="1.2"/>
+        <text x="236" y="43" text-anchor="middle" font-size="11" font-weight="bold">x</text>
+        <text x="288" y="43" text-anchor="middle" font-size="11" font-weight="bold">y</text>
+        <text x="340" y="43" text-anchor="middle" font-size="11" font-weight="bold">x &times; y</text>
+        <text x="236" y="72" text-anchor="middle" font-size="11">2</text>
+        <text x="288" y="72" text-anchor="middle" font-size="11">30</text>
+        <text x="340" y="72" text-anchor="middle" font-size="11" font-weight="bold">60</text>
+        <text x="236" y="100" text-anchor="middle" font-size="11">4</text>
+        <text x="288" y="100" text-anchor="middle" font-size="11">15</text>
+        <text x="340" y="100" text-anchor="middle" font-size="11" font-weight="bold">60</text>
+        <text x="236" y="128" text-anchor="middle" font-size="11">10</text>
+        <text x="288" y="128" text-anchor="middle" font-size="11">6</text>
+        <text x="340" y="128" text-anchor="middle" font-size="11" font-weight="bold">60</text>
+        <text x="288" y="156" text-anchor="middle" font-size="11" font-weight="bold">y = 60/x</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "The two shapes to recognise instantly: a line out of the origin, and a hyperbola that never reaches the axes.",
+        "The table test. Divide for direct, multiply for inverse &mdash; whichever column comes out constant names the relationship and hands you k."
+      ],
+      trick: "Never guess k from one glance at the numbers &mdash; run the four steps every time. And sanity-check the answer against the story before you write it down: more workers must give <i>less</i> time, more hours must give <i>more</i> cost. If your answer moves the wrong way you have used the wrong kind of proportion.",
+      examples: [
+        {
+          problem: "The time T to fill a tank is inversely proportional to the number of pumps n. Four pumps fill it in 45 minutes. (a) Find a formula for T. (b) How long would six pumps take? (c) How many pumps are needed to fill it in 20 minutes?",
+          steps: [
+            "Step 1 &mdash; general equation: T = k/n",
+            "Step 2 &mdash; substitute T = 45, n = 4: 45 = k/4, so k = 180",
+            "Step 3 &mdash; rewrite: T = 180/n",
+            "(b) n = 6: T = 180/6 = 30 minutes. More pumps, less time &#10003;",
+            "(c) T = 20: 20 = 180/n, so n = 180/20 = 9 pumps"
+          ],
+          answer: "(a) T = 180/n (b) 30 minutes (c) 9 pumps"
+        },
+        {
+          problem: "y is directly proportional to the square of x. When x = 4, y = 48. Find y when x = 7, and find the positive x for which y = 108.",
+          steps: [
+            "Step 1: y = kx&sup2;",
+            "Step 2: 48 = k(4)&sup2; = 16k, so k = 3",
+            "Step 3: y = 3x&sup2;",
+            "x = 7: y = 3(49) = 147",
+            "y = 108: 108 = 3x&sup2;, so x&sup2; = 36 and x = 6 (taking the positive root)"
+          ],
+          answer: "y = 3x&sup2;; y = 147 when x = 7; x = 6 when y = 108"
+        }
+      ],
+      remember: [
+        "<b>Direct:</b> y = kx, line through the origin, y/x constant, double-and-double.",
+        "<b>Inverse:</b> y = k/x, hyperbola, xy constant, double-and-halve.",
+        "<b>Four steps, always:</b> equation with k &rarr; find k &rarr; rewrite &rarr; substitute.",
+        "<b>Squares square the effect:</b> y &prop; x&sup2; triples x into &times;9; y &prop; 1/x&sup2; triples x into &divide;9."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 200" width="460" height="200">
+        <polygon points="230,158 206,158 230,102 254,158" class="cm-face2" stroke-width="2"/>
+        <line x1="96" y1="76" x2="364" y2="126" class="cm-line" stroke-width="5"/>
+        <circle cx="96" cy="56" r="26" class="cm-face" stroke-width="2"/>
+        <circle cx="87" cy="51" r="3" class="cm-fill"/>
+        <circle cx="105" cy="51" r="3" class="cm-fill"/>
+        <path d="M86 64 Q96 74 106 64" class="cm-line" stroke-width="2"/>
+        <text x="96" y="100" text-anchor="middle" font-size="12" font-weight="bold">x = 10</text>
+        <circle cx="364" cy="106" r="26" class="cm-face" stroke-width="2"/>
+        <circle cx="355" cy="101" r="3" class="cm-fill"/>
+        <circle cx="373" cy="101" r="3" class="cm-fill"/>
+        <path d="M354 116 Q364 108 374 116" class="cm-line" stroke-width="2"/>
+        <text x="364" y="150" text-anchor="middle" font-size="12" font-weight="bold">y = 6</text>
+        <rect x="132" y="8" width="196" height="42" rx="11" class="cm-good" stroke-width="2"/>
+        <polygon points="140,50 164,50 124,60" class="cm-good" stroke-width="2"/>
+        <text x="230" y="26" text-anchor="middle" font-size="11">&ldquo;Go as high as you like.</text>
+        <text x="230" y="42" text-anchor="middle" font-size="11">xy = 60. I handle the rest.&rdquo;</text>
+        <text x="230" y="178" text-anchor="middle" font-size="11" font-weight="bold">k = 60, the fulcrum</text>
+      </svg>`,
+        caption: "In inverse proportion the constant k sits under the see-saw refusing to move: whatever x climbs, y must drop by exactly the factor that keeps the product xy equal to 60."
+      },
+      exercises: [
+        { prompt: "y is directly proportional to x, and y = 20 when x = 4. Find k.", value: 5,
+          solution: ["y = kx, so 20 = k(4)", "k = 5"] },
+        { prompt: "Using y = 5x from the previous question, find y when x = 9.", value: 45,
+          solution: ["y = 5(9)", "= 45"] },
+        { prompt: "The cost C of rope is directly proportional to its length L. 7 m costs $31.50. Find k (the cost per metre, in dollars).", value: 4.5, tol: 0.01, accept: ["$4.50","$4.5"],
+          solution: ["C = kL, so 31.50 = k(7)", "k = 31.50/7 = 4.5, i.e. $4.50 per metre"] },
+        { prompt: "Using C = 4.5L, find the cost in dollars of 12 m of that rope.", value: 54, accept: ["$54","$54.00"],
+          solution: ["C = 4.5(12)", "= $54.00"] },
+        { prompt: "y is inversely proportional to x, and y = 6 when x = 5. Find k.", value: 30,
+          solution: ["y = k/x, so 6 = k/5", "k = 30"] },
+        { prompt: "Using y = 30/x, find y when x = 12.", value: 2.5, tol: 0.01,
+          solution: ["y = 30/12", "= 2.5"] },
+        { prompt: "The time T to paint a mural is inversely proportional to the number of painters n. 6 painters take 10 days. Find k.", value: 60,
+          solution: ["T = k/n, so 10 = k/6", "k = 60 (painter-days of work)"] },
+        { prompt: "Using T = 60/n, how many days would 15 painters take?", value: 4,
+          solution: ["T = 60/15", "= 4 days. More painters, fewer days &#10003;"] },
+        { prompt: "Using T = 60/n, how many painters are needed to finish in 5 days?", value: 12,
+          solution: ["5 = 60/n, so n = 60/5", "= 12 painters"] },
+        { prompt: "y is directly proportional to x&sup2;, and y = 48 when x = 4. Find k.", value: 3,
+          solution: ["y = kx&sup2;, so 48 = k(16)", "k = 3"] },
+        { prompt: "Using y = 3x&sup2;, find y when x = 7.", value: 147,
+          solution: ["y = 3(7)&sup2; = 3(49)", "= 147"] },
+        { prompt: "Using y = 3x&sup2;, find the positive value of x for which y = 108.", value: 6,
+          solution: ["108 = 3x&sup2;, so x&sup2; = 36", "x = 6 (taking the positive root)"] },
+        { prompt: "The brightness B of a lamp is inversely proportional to the square of the distance d. When d = 3 m, B = 20 lux. Find k.", value: 180,
+          solution: ["B = k/d&sup2;, so 20 = k/9", "k = 180"] },
+        { prompt: "Using B = 180/d&sup2;, find the brightness in lux at d = 6 m.", value: 5,
+          solution: ["B = 180/6&sup2; = 180/36", "= 5 lux. Double the distance, a quarter of the brightness"] },
+        { prompt: "Using B = 180/d&sup2;, find the distance in metres at which the brightness is 45 lux.", value: 2,
+          solution: ["45 = 180/d&sup2;, so d&sup2; = 180/45 = 4", "d = 2 m"] },
+        { prompt: "A table shows x = 2, 4, 10 against y = 30, 15, 6. Is this direct or inverse proportion? (one word)", accept: ["inverse","inverseproportion","inverselyproportional"],
+          solution: ["Test y &divide; x: 15, 3.75, 0.6 &mdash; not constant", "Test x &times; y: 60, 60, 60 &mdash; constant", "Inverse proportion, with y = 60/x"] },
+        { prompt: "A table shows x = 2, 4, 10 against y = 7, 14, 35. Is this direct or inverse proportion? (one word)", accept: ["direct","directproportion","directlyproportional"],
+          solution: ["Test y &divide; x: 3.5, 3.5, 3.5 &mdash; constant", "Direct proportion, with y = 3.5x"] },
+        { prompt: "If y &prop; 1/x&sup2; and x is tripled, y is divided by what number?", value: 9,
+          solution: ["y = k/x&sup2;. Replacing x by 3x gives k/(3x)&sup2; = k/(9x&sup2;)", "That is the original y divided by 9"] },
+        { prompt: "A student claims the cost of hiring a hall is directly proportional to the number of hours, because it goes up with time. The price list is 2 h = $120, 4 h = $200, 6 h = $280. Show they are wrong, and describe the real pattern.", open: true,
+          solution: ["Sample response: Test C/h: 60, 50, 46.7 &mdash; not constant, so it is not direct proportion, and the graph would not pass through the origin. The costs go up by a steady $80 for every extra 2 h, so it is linear with a fixed booking fee: C = 40h + 40. Direct proportion is a straight line through the origin, not just any straight line."] },
+        { prompt: "Two quantities are inversely proportional. Explain why their graph can get as close as you like to the axes but never touch them.", open: true,
+          solution: ["Sample response: Inverse proportion means xy = k with k a fixed non-zero number. Touching the y-axis would mean x = 0, and touching the x-axis would mean y = 0 &mdash; either way the product becomes 0, not k. So neither variable can ever actually reach zero, although making x enormous drives y as close to zero as you please."] }
+      ]
+    },
+    {
+      letter: "D", hueVar: "--hueD", title: "Expanding &amp; Factorising Quadratics",
+      rules: [
+        "<b>Expanding two brackets:</b> every term in the first bracket multiplies every term in the second (FOIL, or the area model). (x + 3)(x + 2) = x&sup2; + 2x + 3x + 6 = x&sup2; + 5x + 6.",
+        "<b>Perfect square:</b> (a + b)&sup2; = a&sup2; + 2ab + b&sup2; and (a &minus; b)&sup2; = a&sup2; &minus; 2ab + b&sup2;. The middle term is <i>twice</i> the product &mdash; it is not optional, and (a + b)&sup2; is never a&sup2; + b&sup2;.",
+        "<b>Difference of two squares:</b> (a + b)(a &minus; b) = a&sup2; &minus; b&sup2;. The middle terms cancel, so a&sup2; &minus; b&sup2; factorises straight back to (a + b)(a &minus; b). Note a&sup2; + b&sup2; does <b>not</b> factorise.",
+        "<b>Always look for a common factor first:</b> 6x&sup2; + 15x = 3x(2x + 5), and 2x&sup2; &minus; 18 = 2(x&sup2; &minus; 9) = 2(x &minus; 3)(x + 3).",
+        "<b>Trinomials with a = 1:</b> for x&sup2; + bx + c, find two numbers that multiply to c and add to b. x&sup2; &minus; x &minus; 12: &minus;4 and +3, so (x &minus; 4)(x + 3).",
+        "<b>Trinomials with a &ne; 1 &mdash; the AC method:</b> for ax&sup2; + bx + c, find two numbers multiplying to <b>a&times;c</b> and adding to <b>b</b>, split the middle term into those two, then factorise in pairs."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 196" width="380" height="196">
+        <text x="190" y="14" text-anchor="middle" font-size="11" font-weight="bold">Area model of (x + 3)(x + 2)</text>
+        <rect x="70" y="36" width="160" height="80" class="dg-tint" stroke-width="2"/>
+        <rect x="230" y="36" width="80" height="80" class="dg-tint" stroke-width="2"/>
+        <rect x="70" y="116" width="160" height="40" class="dg-tint" stroke-width="2"/>
+        <rect x="230" y="116" width="80" height="40" class="dg-tint" stroke-width="2"/>
+        <text x="150" y="82" text-anchor="middle" font-size="14" font-weight="bold">x&sup2;</text>
+        <text x="270" y="82" text-anchor="middle" font-size="14" font-weight="bold">3x</text>
+        <text x="150" y="142" text-anchor="middle" font-size="14" font-weight="bold">2x</text>
+        <text x="270" y="142" text-anchor="middle" font-size="14" font-weight="bold">6</text>
+        <text x="150" y="30" text-anchor="middle" font-size="12" font-weight="bold">x</text>
+        <text x="270" y="30" text-anchor="middle" font-size="12" font-weight="bold">3</text>
+        <text x="58" y="82" text-anchor="middle" font-size="12" font-weight="bold">x</text>
+        <text x="58" y="142" text-anchor="middle" font-size="12" font-weight="bold">2</text>
+        <text x="190" y="176" text-anchor="middle" font-size="12" font-weight="bold">x&sup2; + 3x + 2x + 6 = x&sup2; + 5x + 6</text>
+        <text x="190" y="190" text-anchor="middle" font-size="10">the two middle tiles are where the 5x comes from</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 195" width="380" height="195">
+        <text x="190" y="15" text-anchor="middle" font-size="11" font-weight="bold">AC method: factorise 6x&sup2; + 11x &minus; 10</text>
+        <rect x="18" y="22" width="344" height="28" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="28" y="41" font-size="11">1. a &times; c = 6 &times; (&minus;10) = &minus;60, and b = 11</text>
+        <rect x="18" y="56" width="344" height="28" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="28" y="75" font-size="11">2. two numbers, product &minus;60, sum +11:  +15 and &minus;4</text>
+        <rect x="18" y="90" width="344" height="28" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="28" y="109" font-size="11">3. split the middle:  6x&sup2; + 15x &minus; 4x &minus; 10</text>
+        <rect x="18" y="124" width="344" height="28" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="28" y="143" font-size="11">4. factorise in pairs:  3x(2x + 5) &minus; 2(2x + 5)</text>
+        <rect x="18" y="158" width="344" height="30" rx="8" class="dg-fill"/>
+        <text x="28" y="178" font-size="12" font-weight="bold" style="fill:var(--surface)">5. common bracket:  (2x + 5)(3x &minus; 2)</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "Two brackets are the two sides of a rectangle. The four tiles inside are exactly the four products of FOIL.",
+        "The AC method turns an a &ne; 1 trinomial into a four-term expression you can factorise in pairs. If step 4's two brackets do not match, one of your signs is wrong."
+      ],
+      trick: "Before anything else, count the terms. <b>Two terms</b> &rarr; common factor, or difference of two squares. <b>Three terms</b> &rarr; common factor first, then a = 1 pair-of-numbers or the AC method. <b>Four terms</b> &rarr; factorise in pairs. And always multiply your answer back out &mdash; factorising has a built-in check, so there is no excuse for getting it wrong.",
+      examples: [
+        {
+          problem: "Factorise 6x&sup2; + 11x &minus; 10 completely.",
+          steps: [
+            "No common factor (6, 11 and 10 share nothing), and there are three terms with a &ne; 1 &rarr; AC method",
+            "a &times; c = 6 &times; (&minus;10) = &minus;60; we need two numbers with product &minus;60 and sum +11",
+            "Factor pairs of 60: 1&times;60, 2&times;30, 3&times;20, 4&times;15, 5&times;12, 6&times;10. The pair 4 and 15 differ by 11 &rarr; use +15 and &minus;4",
+            "Split: 6x&sup2; + 15x &minus; 4x &minus; 10",
+            "Pairs: 3x(2x + 5) &minus; 2(2x + 5) &rarr; common bracket (2x + 5)",
+            "Check by expanding: (2x + 5)(3x &minus; 2) = 6x&sup2; &minus; 4x + 15x &minus; 10 = 6x&sup2; + 11x &minus; 10 &#10003;"
+          ],
+          answer: "(2x + 5)(3x &minus; 2)"
+        },
+        {
+          problem: "Expand and simplify (3x &minus; 2)&sup2; &minus; (x &minus; 9)(x + 9).",
+          steps: [
+            "(3x &minus; 2)&sup2; is a perfect square: (3x)&sup2; &minus; 2(3x)(2) + 2&sup2; = 9x&sup2; &minus; 12x + 4",
+            "(x &minus; 9)(x + 9) is a difference of two squares: x&sup2; &minus; 81",
+            "Subtract, minding the sign on every term: 9x&sup2; &minus; 12x + 4 &minus; x&sup2; + 81",
+            "Collect: 8x&sup2; &minus; 12x + 85"
+          ],
+          answer: "8x&sup2; &minus; 12x + 85"
+        }
+      ],
+      remember: [
+        "<b>Common factor first, every single time.</b> 2x&sup2; &minus; 18 is not a difference of squares until the 2 comes out.",
+        "<b>(a + b)&sup2; = a&sup2; + 2ab + b&sup2;.</b> The 2ab is the term everybody forgets.",
+        "<b>a&sup2; &minus; b&sup2; factorises; a&sup2; + b&sup2; does not.</b>",
+        "<b>AC method:</b> multiply a&times;c, find two numbers that hit that product and the sum b, split, factorise in pairs."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 195" width="460" height="195">
+        <rect x="14" y="10" width="200" height="44" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="106,54 122,54 114,82" class="cm-face2" stroke-width="2"/>
+        <text x="114" y="30" text-anchor="middle" font-size="11">&ldquo;I brought +5x</text>
+        <text x="114" y="46" text-anchor="middle" font-size="11">to the middle.&rdquo;</text>
+        <circle cx="114" cy="120" r="32" class="cm-face" stroke-width="2"/>
+        <circle cx="103" cy="113" r="3.5" class="cm-fill"/>
+        <circle cx="125" cy="113" r="3.5" class="cm-fill"/>
+        <path d="M101 129 Q114 141 127 129" class="cm-line" stroke-width="2"/>
+        <text x="114" y="172" text-anchor="middle" font-size="12" font-weight="bold">(x + 5)</text>
+        <rect x="246" y="10" width="204" height="44" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="340,54 356,54 348,82" class="cm-face2" stroke-width="2"/>
+        <text x="348" y="30" text-anchor="middle" font-size="11">&ldquo;And I brought &minus;5x.</text>
+        <text x="348" y="46" text-anchor="middle" font-size="11">So&hellip; nobody did.&rdquo;</text>
+        <circle cx="348" cy="120" r="32" class="cm-face" stroke-width="2"/>
+        <circle cx="337" cy="113" r="3.5" class="cm-fill"/>
+        <circle cx="359" cy="113" r="3.5" class="cm-fill"/>
+        <path d="M335 126 q13 10 26 0" class="cm-line" stroke-width="2"/>
+        <text x="348" y="172" text-anchor="middle" font-size="12" font-weight="bold">(x &minus; 5)</text>
+        <text x="230" y="190" text-anchor="middle" font-size="12" font-weight="bold">x&sup2; &minus; 25</text>
+      </svg>`,
+        caption: "The two middle terms turn up, cancel each other out, and leave. That polite mutual annihilation is the entire reason a difference of two squares has no x term."
+      },
+      exercises: [
+        { prompt: "Expand and simplify (x + 4)(x + 7). Type x squared as x^2, with no spaces.", accept: ["x^2+11x+28","x²+11x+28"],
+          solution: ["x&times;x = x&sup2;, x&times;7 = 7x, 4&times;x = 4x, 4&times;7 = 28", "x&sup2; + 7x + 4x + 28 = x&sup2; + 11x + 28"] },
+        { prompt: "Expand and simplify (x &minus; 5)(x + 3). Type x squared as x^2.", accept: ["x^2-2x-15","x²-2x-15"],
+          solution: ["x&sup2; + 3x &minus; 5x &minus; 15", "= x&sup2; &minus; 2x &minus; 15"] },
+        { prompt: "Expand and simplify (2x + 3)(x &minus; 4). Type x squared as x^2.", accept: ["2x^2-5x-12","2x²-5x-12"],
+          solution: ["2x&times;x = 2x&sup2;, 2x&times;(&minus;4) = &minus;8x, 3&times;x = 3x, 3&times;(&minus;4) = &minus;12", "2x&sup2; &minus; 8x + 3x &minus; 12 = 2x&sup2; &minus; 5x &minus; 12"] },
+        { prompt: "Expand (x + 6)&sup2;. Type x squared as x^2.", accept: ["x^2+12x+36","x²+12x+36"],
+          solution: ["(a + b)&sup2; = a&sup2; + 2ab + b&sup2; with a = x, b = 6", "x&sup2; + 2(x)(6) + 36 = x&sup2; + 12x + 36"] },
+        { prompt: "Expand (3x &minus; 2)&sup2;. Type x squared as x^2.", accept: ["9x^2-12x+4","9x²-12x+4"],
+          solution: ["(a &minus; b)&sup2; = a&sup2; &minus; 2ab + b&sup2; with a = 3x, b = 2", "(3x)&sup2; &minus; 2(3x)(2) + 4 = 9x&sup2; &minus; 12x + 4"] },
+        { prompt: "Expand (x &minus; 9)(x + 9). Type x squared as x^2.", accept: ["x^2-81","x²-81"],
+          solution: ["Difference of two squares: (a &minus; b)(a + b) = a&sup2; &minus; b&sup2;", "x&sup2; &minus; 81 (the &minus;9x and +9x cancel)"] },
+        { prompt: "Factorise 6x&sup2; + 15x. Type it as 3x(2x+5) &mdash; brackets are ignored by the checker.", accept: ["3x2x+5","2x+53x"],
+          solution: ["The highest common factor of 6x&sup2; and 15x is 3x", "6x&sup2; + 15x = 3x(2x + 5)"] },
+        { prompt: "Factorise x&sup2; &minus; 49.", accept: ["x-7x+7","x+7x-7"],
+          solution: ["Difference of two squares: 49 = 7&sup2;", "x&sup2; &minus; 49 = (x &minus; 7)(x + 7)"] },
+        { prompt: "Factorise 9x&sup2; &minus; 64.", accept: ["3x-83x+8","3x+83x-8"],
+          solution: ["9x&sup2; = (3x)&sup2; and 64 = 8&sup2;", "(3x &minus; 8)(3x + 8)"] },
+        { prompt: "Factorise x&sup2; + 9x + 20.", accept: ["x+4x+5","x+5x+4"],
+          solution: ["Two numbers multiplying to 20 and adding to 9: 4 and 5", "(x + 4)(x + 5)"] },
+        { prompt: "Factorise x&sup2; &minus; x &minus; 12.", accept: ["x-4x+3","x+3x-4"],
+          solution: ["Two numbers multiplying to &minus;12 and adding to &minus;1: &minus;4 and +3", "(x &minus; 4)(x + 3)"] },
+        { prompt: "Factorise x&sup2; &minus; 13x + 42.", accept: ["x-6x-7","x-7x-6"],
+          solution: ["Product +42, sum &minus;13, so both are negative: &minus;6 and &minus;7", "(x &minus; 6)(x &minus; 7)"] },
+        { prompt: "Factorise 2x&sup2; &minus; 18 completely. Type it as 2(x-3)(x+3).", accept: ["2x-3x+3","2x+3x-3"],
+          solution: ["Common factor 2 first: 2(x&sup2; &minus; 9)", "x&sup2; &minus; 9 is a difference of squares: 2(x &minus; 3)(x + 3)"] },
+        { prompt: "Factorise 2x&sup2; + 7x + 3.", accept: ["2x+1x+3","x+32x+1"],
+          solution: ["a&times;c = 2&times;3 = 6; two numbers with product 6 and sum 7: 6 and 1", "2x&sup2; + 6x + x + 3 = 2x(x + 3) + 1(x + 3)", "(x + 3)(2x + 1)"] },
+        { prompt: "Factorise 3x&sup2; &minus; 10x &minus; 8.", accept: ["3x+2x-4","x-43x+2"],
+          solution: ["a&times;c = 3&times;(&minus;8) = &minus;24; product &minus;24, sum &minus;10: &minus;12 and +2", "3x&sup2; &minus; 12x + 2x &minus; 8 = 3x(x &minus; 4) + 2(x &minus; 4)", "(x &minus; 4)(3x + 2)"] },
+        { prompt: "For 6x&sup2; + 11x &minus; 10, the AC method needs two numbers with product a&times;c and sum b. Give the two numbers, separated by a comma.", valueSet: [15, -4],
+          solution: ["a&times;c = 6 &times; (&minus;10) = &minus;60 and b = 11", "15 &times; (&minus;4) = &minus;60 and 15 + (&minus;4) = 11", "The numbers are 15 and &minus;4"] },
+        { prompt: "Now factorise 6x&sup2; + 11x &minus; 10.", accept: ["2x+53x-2","3x-22x+5"],
+          solution: ["Split the middle: 6x&sup2; + 15x &minus; 4x &minus; 10", "3x(2x + 5) &minus; 2(2x + 5)", "(2x + 5)(3x &minus; 2). Check: 6x&sup2; &minus; 4x + 15x &minus; 10 &#10003;"] },
+        { prompt: "Factorise 4x&sup2; &minus; 20x + 25. Type it as (2x-5)(2x-5) or (2x-5)^2.", accept: ["2x-52x-5","2x-5^2","2x-5²"],
+          solution: ["4x&sup2; = (2x)&sup2; and 25 = 5&sup2;; check the middle: 2(2x)(5) = 20x &#10003;", "It is a perfect square: (2x &minus; 5)&sup2;"] },
+        { prompt: "A student factorises x&sup2; &minus; 9 as (x &minus; 3)(x &minus; 3). Show why that is wrong and give the correct factorisation.", open: true,
+          solution: ["Sample response: Multiply their answer back out: (x &minus; 3)(x &minus; 3) = x&sup2; &minus; 6x + 9, which has a &minus;6x that is not in the original, and the constant has the wrong sign. x&sup2; &minus; 9 is a difference of two squares, so the signs must be opposite: (x &minus; 3)(x + 3), and expanding that gives x&sup2; + 3x &minus; 3x &minus; 9 = x&sup2; &minus; 9 &#10003;"] },
+        { prompt: "Why is &ldquo;take out the common factor first&rdquo; the rule, rather than just a suggestion? Use 12x&sup2; &minus; 27 to make your case.", open: true,
+          solution: ["Sample response: 12x&sup2; &minus; 27 does not look like a difference of two squares, because neither 12 nor 27 is a perfect square, so a student who skips the common factor is likely to declare it unfactorisable. Taking out the 3 first gives 3(4x&sup2; &minus; 9), and now the squares are obvious: 3(2x &minus; 3)(2x + 3). Pulling out the common factor makes the smaller numbers visible, and it is also the only way to be sure you have factorised <i>completely</i>."] }
+      ]
+    },
+    {
+      letter: "E", hueVar: "--hueE", title: "The Three Forms of a Quadratic",
+      rules: [
+        "<b>Standard (general) form</b> y = ax&sup2; + bx + c. It hands you the <b>y-intercept c</b> for free. The sign of a says which way it opens (a &gt; 0 up, a &lt; 0 down) and |a| says how narrow it is.",
+        "<b>Factored (intercept) form</b> y = a(x &minus; p)(x &minus; q). It hands you the <b>x-intercepts p and q</b> for free, and the axis of symmetry sits exactly midway between them: x = (p + q)/2.",
+        "<b>Vertex (completed square) form</b> y = a(x &minus; h)&sup2; + k. It hands you the <b>vertex (h, k)</b> for free, the axis of symmetry x = h, and k as the minimum value (if a &gt; 0) or maximum value (if a &lt; 0). Watch the sign: y = (x + 5)&sup2; &minus; 4 has h = &minus;5.",
+        "<b>Axis of symmetry from standard form:</b> x = &minus;b/(2a). Substitute that x back in to get k, and you have the vertex without completing the square.",
+        "<b>Completing the square:</b> halve b, square it, add and subtract it. x&sup2; &minus; 6x + 5 = (x&sup2; &minus; 6x + 9) &minus; 9 + 5 = (x &minus; 3)&sup2; &minus; 4.",
+        "<b>When a &ne; 1</b>, factor a out of the x terms <i>first</i>: 3x&sup2; + 12x + 7 = 3(x&sup2; + 4x) + 7 = 3[(x + 2)&sup2; &minus; 4] + 7 = 3(x + 2)&sup2; &minus; 5."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 195" width="380" height="195">
+        <text x="64" y="13" text-anchor="middle" font-size="10.5" font-weight="bold">STANDARD</text>
+        <text x="64" y="27" text-anchor="middle" font-size="10">y = x&sup2; &minus; 6x + 5</text>
+        <line x1="18" y1="100" x2="114" y2="100" class="dg-ink-line" stroke-width="1.3"/>
+        <line x1="22.9" y1="42" x2="22.9" y2="152" class="dg-ink-line" stroke-width="1.3"/>
+        <path d="M22.9 50 Q64 230 105.1 50" class="dg-line" style="fill:none" stroke-width="2.4"/>
+        <circle cx="22.9" cy="50" r="4.5" class="dg-good"/>
+        <text x="62" y="46" text-anchor="middle" font-size="10" font-weight="bold">c = 5 free</text>
+        <text x="64" y="172" text-anchor="middle" font-size="9.5">y-intercept (0, 5)</text>
+        <text x="64" y="186" text-anchor="middle" font-size="9.5">a &gt; 0 &rarr; opens up</text>
+        <text x="188" y="13" text-anchor="middle" font-size="10.5" font-weight="bold">FACTORED</text>
+        <text x="188" y="27" text-anchor="middle" font-size="10">y = (x &minus; 1)(x &minus; 5)</text>
+        <line x1="142" y1="100" x2="238" y2="100" class="dg-ink-line" stroke-width="1.3"/>
+        <line x1="146.9" y1="42" x2="146.9" y2="152" class="dg-ink-line" stroke-width="1.3"/>
+        <path d="M146.9 50 Q188 230 229.1 50" class="dg-line" style="fill:none" stroke-width="2.4"/>
+        <circle cx="160.6" cy="100" r="4.5" class="dg-good"/>
+        <circle cx="215.4" cy="100" r="4.5" class="dg-good"/>
+        <text x="153" y="118" text-anchor="middle" font-size="10" font-weight="bold">1</text>
+        <text x="224" y="118" text-anchor="middle" font-size="10" font-weight="bold">5</text>
+        <text x="188" y="172" text-anchor="middle" font-size="9.5">x-intercepts 1 and 5</text>
+        <text x="188" y="186" text-anchor="middle" font-size="9.5">midway &rarr; x = 3</text>
+        <text x="312" y="13" text-anchor="middle" font-size="10.5" font-weight="bold">VERTEX</text>
+        <text x="312" y="27" text-anchor="middle" font-size="10">y = (x &minus; 3)&sup2; &minus; 4</text>
+        <line x1="266" y1="100" x2="362" y2="100" class="dg-ink-line" stroke-width="1.3"/>
+        <line x1="270.9" y1="42" x2="270.9" y2="152" class="dg-ink-line" stroke-width="1.3"/>
+        <line x1="312" y1="42" x2="312" y2="136" class="dg-ink-line" stroke-width="1.4" stroke-dasharray="4 3"/>
+        <path d="M270.9 50 Q312 230 353.1 50" class="dg-line" style="fill:none" stroke-width="2.4"/>
+        <circle cx="312" cy="140" r="4.5" class="dg-good"/>
+        <text x="312" y="158" text-anchor="middle" font-size="10" font-weight="bold">(3, &minus;4)</text>
+        <text x="312" y="172" text-anchor="middle" font-size="9.5">vertex, minimum &minus;4</text>
+        <text x="312" y="186" text-anchor="middle" font-size="9.5">axis x = 3</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 180" width="380" height="180">
+        <text x="190" y="14" text-anchor="middle" font-size="11" font-weight="bold">Which form answers it without any work?</text>
+        <rect x="10" y="22" width="358" height="148" rx="10" class="dg-tint" stroke-width="2"/>
+        <line x1="10" y1="50" x2="368" y2="50" class="dg-ink-line" stroke-width="1.3"/>
+        <line x1="164" y1="22" x2="164" y2="170" class="dg-ink-line" stroke-width="1.3"/>
+        <line x1="232" y1="22" x2="232" y2="170" class="dg-ink-line" stroke-width="1.3"/>
+        <line x1="300" y1="22" x2="300" y2="170" class="dg-ink-line" stroke-width="1.3"/>
+        <text x="198" y="42" text-anchor="middle" font-size="10" font-weight="bold">standard</text>
+        <text x="266" y="42" text-anchor="middle" font-size="10" font-weight="bold">factored</text>
+        <text x="334" y="42" text-anchor="middle" font-size="10" font-weight="bold">vertex</text>
+        <text x="18" y="72" font-size="10.5">Crosses the y-axis?</text>
+        <text x="198" y="72" text-anchor="middle" font-size="13" font-weight="bold" class="dg-good">&#10003;</text>
+        <text x="266" y="72" text-anchor="middle" font-size="12" class="dg-bad">&#10007;</text>
+        <text x="334" y="72" text-anchor="middle" font-size="12" class="dg-bad">&#10007;</text>
+        <text x="18" y="101" font-size="10.5">Crosses the x-axis?</text>
+        <text x="198" y="101" text-anchor="middle" font-size="12" class="dg-bad">&#10007;</text>
+        <text x="266" y="101" text-anchor="middle" font-size="13" font-weight="bold" class="dg-good">&#10003;</text>
+        <text x="334" y="101" text-anchor="middle" font-size="12" class="dg-bad">&#10007;</text>
+        <text x="18" y="130" font-size="10.5">Where is the vertex?</text>
+        <text x="198" y="130" text-anchor="middle" font-size="12" class="dg-bad">&#10007;</text>
+        <text x="266" y="130" text-anchor="middle" font-size="12" class="dg-bad">&#10007;</text>
+        <text x="334" y="130" text-anchor="middle" font-size="13" font-weight="bold" class="dg-good">&#10003;</text>
+        <text x="18" y="159" font-size="10.5">Maximum or minimum?</text>
+        <text x="198" y="159" text-anchor="middle" font-size="12" class="dg-bad">&#10007;</text>
+        <text x="266" y="159" text-anchor="middle" font-size="12" class="dg-bad">&#10007;</text>
+        <text x="334" y="159" text-anchor="middle" font-size="13" font-weight="bold" class="dg-good">&#10003;</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "One parabola, three costumes. It is the same curve every time &mdash; only which fact is written on the outside changes.",
+        "A &#10007; does not mean impossible, it means extra work. Choosing the form is choosing how much algebra you are about to do."
+      ],
+      trick: "Read the question backwards. If it asks for a <b>maximum, minimum or vertex</b>, you want vertex form. If it asks <b>where it crosses the x-axis</b> (or &ldquo;when does it hit the ground&rdquo;), you want factored form. If it asks for the <b>starting value</b> or hands you a table, standard form is already the one you want. Converting takes two minutes; solving in the wrong form takes ten.",
+      examples: [
+        {
+          problem: "Write y = x&sup2; &minus; 6x + 5 in all three forms, and state what each one gives you.",
+          steps: [
+            "Standard form is already there: y = x&sup2; &minus; 6x + 5, so the y-intercept is (0, 5) and it opens up",
+            "Factored: two numbers multiplying to 5 and adding to &minus;6 are &minus;1 and &minus;5 &rarr; y = (x &minus; 1)(x &minus; 5), so the x-intercepts are 1 and 5",
+            "Vertex, by completing the square: half of &minus;6 is &minus;3, and (&minus;3)&sup2; = 9",
+            "y = (x&sup2; &minus; 6x + 9) &minus; 9 + 5 = (x &minus; 3)&sup2; &minus; 4, so the vertex is (3, &minus;4)",
+            "Check the vertex against the original: 3&sup2; &minus; 6(3) + 5 = 9 &minus; 18 + 5 = &minus;4 &#10003;",
+            "Cross-check the axis of symmetry two ways: &minus;b/(2a) = 6/2 = 3, and midway between the intercepts 1 and 5 is also 3 &#10003;"
+          ],
+          answer: "y = x&sup2; &minus; 6x + 5 = (x &minus; 1)(x &minus; 5) = (x &minus; 3)&sup2; &minus; 4; vertex (3, &minus;4), x-intercepts 1 and 5, y-intercept 5"
+        },
+        {
+          problem: "Write y = 3x&sup2; + 12x + 7 in vertex form and state the minimum value.",
+          steps: [
+            "a &ne; 1, so factor 3 out of the x terms only: y = 3(x&sup2; + 4x) + 7",
+            "Inside the bracket, half of 4 is 2 and 2&sup2; = 4: x&sup2; + 4x = (x + 2)&sup2; &minus; 4",
+            "y = 3[(x + 2)&sup2; &minus; 4] + 7 = 3(x + 2)&sup2; &minus; 12 + 7",
+            "y = 3(x + 2)&sup2; &minus; 5, so the vertex is (&minus;2, &minus;5)",
+            "Check: 3(&minus;2)&sup2; + 12(&minus;2) + 7 = 12 &minus; 24 + 7 = &minus;5 &#10003;",
+            "a = 3 &gt; 0, so the parabola opens up and &minus;5 is a minimum"
+          ],
+          answer: "y = 3(x + 2)&sup2; &minus; 5; minimum value &minus;5, at x = &minus;2"
+        }
+      ],
+      remember: [
+        "<b>Standard gives c, factored gives p and q, vertex gives (h, k).</b> Same curve, different free gift.",
+        "<b>Sign trap:</b> y = a(x &minus; h)&sup2; + k, so (x + 5)&sup2; means h = &minus;5, not +5.",
+        "<b>Axis of symmetry, two routes:</b> x = &minus;b/(2a), or the midpoint of the two x-intercepts. They must agree.",
+        "<b>Complete the square:</b> halve b, square it, add it and take it straight back off again."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 200" width="460" height="200">
+        <path d="M30 150 Q160 -10 290 150" class="cm-line" style="fill:none" stroke-width="3"/>
+        <circle cx="160" cy="70" r="5" class="cm-fill"/>
+        <rect x="150" y="10" width="292" height="44" rx="11" class="cm-good" stroke-width="2"/>
+        <polygon points="176,54 196,54 166,68" class="cm-good" stroke-width="2"/>
+        <text x="296" y="30" text-anchor="middle" font-size="11">&ldquo;Standard, factored, vertex &mdash;</text>
+        <text x="296" y="46" text-anchor="middle" font-size="11">I answer to all three, you know.&rdquo;</text>
+        <circle cx="372" cy="128" r="30" class="cm-face" stroke-width="2"/>
+        <circle cx="362" cy="122" r="3.5" class="cm-fill"/>
+        <circle cx="382" cy="122" r="3.5" class="cm-fill"/>
+        <path d="M360 137 Q372 148 384 137" class="cm-line" stroke-width="2"/>
+        <rect x="300" y="166" width="150" height="28" rx="9" class="cm-face2" stroke-width="2"/>
+        <text x="375" y="185" text-anchor="middle" font-size="11">&ldquo;Pick one, please.&rdquo;</text>
+        <text x="110" y="182" text-anchor="middle" font-size="11" font-weight="bold">one parabola, three names</text>
+      </svg>`,
+        caption: "The parabola is not changing shape when you rewrite it &mdash; it is just introducing itself differently. Choose the introduction that answers the question you were actually asked."
+      },
+      exercises: [
+        { prompt: "For y = x&sup2; + 8x + 7, what is the y-intercept?", value: 7,
+          solution: ["In standard form the constant c is the y-intercept", "Check: at x = 0, y = 0 + 0 + 7 = 7"] },
+        { prompt: "Write y = x&sup2; + 8x + 7 in factored form. Type it as (x+1)(x+7).", accept: ["x+1x+7","x+7x+1"],
+          solution: ["Two numbers multiplying to 7 and adding to 8: 1 and 7", "y = (x + 1)(x + 7)"] },
+        { prompt: "From y = (x + 1)(x + 7), give the two x-intercepts, separated by a comma.", valueSet: [-1, -7],
+          solution: ["y = 0 when either bracket is 0", "x + 1 = 0 &rarr; x = &minus;1;  x + 7 = 0 &rarr; x = &minus;7"] },
+        { prompt: "Find the axis of symmetry of y = x&sup2; + 8x + 7 using x = &minus;b/(2a). Enter the x-value.", value: -4,
+          solution: ["a = 1, b = 8, so x = &minus;8/(2&times;1)", "x = &minus;4. (It is also the midpoint of &minus;1 and &minus;7 &#10003;)"] },
+        { prompt: "Find the vertex of y = x&sup2; + 8x + 7. Enter the x-coordinate then the y-coordinate, separated by a comma.", valueSet: [-4, -9],
+          solution: ["x = &minus;b/(2a) = &minus;4", "y = (&minus;4)&sup2; + 8(&minus;4) + 7 = 16 &minus; 32 + 7 = &minus;9", "Vertex (&minus;4, &minus;9)"] },
+        { prompt: "State the vertex of y = (x &minus; 2)&sup2; + 3. Enter x then y, separated by a comma.", valueSet: [2, 3],
+          solution: ["Vertex form is y = a(x &minus; h)&sup2; + k, so h = 2 and k = 3", "Vertex (2, 3)"] },
+        { prompt: "Expand y = (x &minus; 2)&sup2; + 3 into standard form. Type x squared as x^2.", accept: ["x^2-4x+7","x²-4x+7"],
+          solution: ["(x &minus; 2)&sup2; = x&sup2; &minus; 4x + 4", "y = x&sup2; &minus; 4x + 4 + 3 = x&sup2; &minus; 4x + 7"] },
+        { prompt: "State the vertex of y = 2(x + 1)&sup2; &minus; 8. Enter x then y, separated by a comma.", valueSet: [-1, -8],
+          solution: ["y = a(x &minus; h)&sup2; + k, and (x + 1) = (x &minus; (&minus;1)), so h = &minus;1", "k = &minus;8, so the vertex is (&minus;1, &minus;8)"] },
+        { prompt: "Expand y = 2(x + 1)&sup2; &minus; 8 into standard form. Type x squared as x^2.", accept: ["2x^2+4x-6","2x²+4x-6"],
+          solution: ["(x + 1)&sup2; = x&sup2; + 2x + 1, so 2(x&sup2; + 2x + 1) = 2x&sup2; + 4x + 2", "y = 2x&sup2; + 4x + 2 &minus; 8 = 2x&sup2; + 4x &minus; 6"] },
+        { prompt: "Write y = 2x&sup2; + 4x &minus; 6 in factored form. Type it as 2(x+3)(x-1).", accept: ["2x+3x-1","2x-1x+3"],
+          solution: ["Common factor 2: y = 2(x&sup2; + 2x &minus; 3)", "Two numbers multiplying to &minus;3 and adding to 2: +3 and &minus;1", "y = 2(x + 3)(x &minus; 1)"] },
+        { prompt: "Complete the square: write y = x&sup2; &minus; 6x + 5 in vertex form. Type it as (x-3)^2-4.", accept: ["x-3^2-4","x-3²-4"],
+          solution: ["Half of &minus;6 is &minus;3, and (&minus;3)&sup2; = 9", "y = (x&sup2; &minus; 6x + 9) &minus; 9 + 5", "y = (x &minus; 3)&sup2; &minus; 4. Check at x = 3: 9 &minus; 18 + 5 = &minus;4 &#10003;"] },
+        { prompt: "Complete the square: write y = x&sup2; + 10x + 21 in vertex form. Type it as (x+5)^2-4.", accept: ["x+5^2-4","x+5²-4"],
+          solution: ["Half of 10 is 5, and 5&sup2; = 25", "y = (x&sup2; + 10x + 25) &minus; 25 + 21", "y = (x + 5)&sup2; &minus; 4"] },
+        { prompt: "State the vertex of y = x&sup2; + 10x + 21. Enter x then y, separated by a comma.", valueSet: [-5, -4],
+          solution: ["From y = (x + 5)&sup2; &minus; 4, h = &minus;5 and k = &minus;4", "Check: (&minus;5)&sup2; + 10(&minus;5) + 21 = 25 &minus; 50 + 21 = &minus;4 &#10003;"] },
+        { prompt: "Complete the square with a &ne; 1: write y = 3x&sup2; + 12x + 7 in vertex form. Type it as 3(x+2)^2-5.", accept: ["3x+2^2-5","3x+2²-5"],
+          solution: ["Factor 3 from the x terms only: y = 3(x&sup2; + 4x) + 7", "x&sup2; + 4x = (x + 2)&sup2; &minus; 4", "y = 3(x + 2)&sup2; &minus; 12 + 7 = 3(x + 2)&sup2; &minus; 5"] },
+        { prompt: "What is the minimum value of y = 3x&sup2; + 12x + 7?", value: -5,
+          solution: ["Vertex form is y = 3(x + 2)&sup2; &minus; 5 and a = 3 &gt; 0, so it opens up", "The squared bracket is never negative, so the smallest y is &minus;5 (reached at x = &minus;2)"] },
+        { prompt: "For y = &minus;x&sup2; + 6x &minus; 5, what is the maximum value of y?", value: 4,
+          solution: ["x = &minus;b/(2a) = &minus;6/(&minus;2) = 3", "y = &minus;(3)&sup2; + 6(3) &minus; 5 = &minus;9 + 18 &minus; 5 = 4", "a &lt; 0, so it opens down and 4 is a maximum"] },
+        { prompt: "A parabola has x-intercepts at 2 and 8. What is the x-value of its axis of symmetry?", value: 5,
+          solution: ["The axis of symmetry is midway between the x-intercepts", "(2 + 8)/2 = 5"] },
+        { prompt: "You are asked only for the y-intercept of a quadratic. Which form gets you there with no work? (one word)", accept: ["standard","standardform","general","generalform"],
+          solution: ["In y = ax&sup2; + bx + c, the constant c is the y-intercept", "Standard (general) form"] },
+        { prompt: "A ball's height is modelled by a quadratic. You need the maximum height it reaches. Which form would you convert to, and why is that faster than the alternatives?", open: true,
+          solution: ["Sample response: Vertex form, y = a(x &minus; h)&sup2; + k. The maximum height <i>is</i> k, read straight off &mdash; no substitution, no solving. Standard form would mean computing &minus;b/(2a) and then substituting back, and factored form would mean finding both intercepts and then averaging them and substituting, so both take extra steps to arrive at exactly the same point."] },
+        { prompt: "Is any one of the three forms &ldquo;the best&rdquo; form? Argue your position using at least two different questions you might be asked about a parabola.", open: true,
+          solution: ["Sample response: No &mdash; best depends on the question. Asked &ldquo;when does the ball land?&rdquo;, factored form y = a(x &minus; p)(x &minus; q) is best, because the landing time is p or q with no algebra at all. Asked &ldquo;how high does it get?&rdquo;, vertex form wins for the same reason. Asked &ldquo;how high was it when it was thrown?&rdquo;, standard form already shows c. Since all three describe the identical curve, the only real difference is how much work sits between you and the answer, so the skill is choosing and converting quickly rather than committing to one form."] }
+      ]
+    },
+    {
+      letter: "F", hueVar: "--hueF", title: "Quadratic Models in Real Life",
+      rules: [
+        "<b>Sketching from any form:</b> get the vertex, the y-intercept and the x-intercepts (if there are any), plot those three or four points, and join them with a smooth symmetric curve. Never join with straight lines.",
+        "<b>Projectiles:</b> h = &minus;5t&sup2; + ut + h&#8320; (taking g &asymp; 10 m/s&sup2;). h&#8320; is the launch height, the vertex gives the <b>maximum height and when</b>, and the positive x-intercept is <b>when it lands</b>.",
+        "<b>Optimisation:</b> revenue = price &times; quantity, profit = revenue &minus; cost, area = length &times; width. Write the model as one quadratic in one variable, then the vertex is the answer &mdash; h tells you <i>what to choose</i>, k tells you <i>what you get</i>.",
+        "<b>A model has a domain.</b> For a thrown ball, only 0 &le; t &le; landing time is real. The parabola keeps going outside that, but a negative height means nothing &mdash; the ball is not underground.",
+        "<b>Criterion C and D:</b> every answer carries a <b>unit</b> and a <b>sentence</b>. &ldquo;x = 25&rdquo; earns very little; &ldquo;charging $25 per ticket gives the maximum revenue of $2500&rdquo; earns the mark."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 190" width="380" height="190">
+        <text x="190" y="14" text-anchor="middle" font-size="11" font-weight="bold">h = &minus;5t&sup2; + 10t + 15  (metres, seconds)</text>
+        <line x1="34" y1="127.5" x2="352" y2="127.5" class="dg-ink-line" stroke-width="1.4"/>
+        <line x1="119.6" y1="28" x2="119.6" y2="148" class="dg-ink-line" stroke-width="1.4"/>
+        <path d="M58.4 127.5 Q89.0 86.9 119.6 66.6" class="dg-ink-line" style="fill:none" stroke-width="2" stroke-dasharray="5 4"/>
+        <path d="M119.6 66.6 Q211.4 5.6 303.2 127.5" class="dg-line" style="fill:none" stroke-width="2.8"/>
+        <circle cx="180.8" cy="46.25" r="4.5" class="dg-good"/>
+        <circle cx="119.6" cy="66.6" r="4.5" class="dg-good"/>
+        <circle cx="303.2" cy="127.5" r="4.5" class="dg-good"/>
+        <circle cx="58.4" cy="127.5" r="4.5" class="dg-bad"/>
+        <line x1="180.8" y1="46.25" x2="180.8" y2="127.5" class="dg-ink-line" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <text x="180.8" y="34" text-anchor="middle" font-size="10" font-weight="bold">vertex (1 s, 20 m)</text>
+        <text x="40" y="60" font-size="10">15 m</text>
+        <text x="40" y="74" font-size="10">at t = 0</text>
+        <text x="303" y="145" text-anchor="middle" font-size="10" font-weight="bold">lands, t = 3 s</text>
+        <text x="60" y="145" text-anchor="middle" font-size="10">t = &minus;1 &#10007;</text>
+        <text x="190" y="176" text-anchor="middle" font-size="10">sensible domain: 0 &le; t &le; 3 &mdash; outside it, the model is fiction</text>
+        <text x="340" y="120" font-size="10">t</text>
+        <text x="104" y="44" font-size="10">h</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 185" width="380" height="185">
+        <text x="190" y="14" text-anchor="middle" font-size="11" font-weight="bold">Revenue R = p(200 &minus; 4p)</text>
+        <line x1="34" y1="150" x2="356" y2="150" class="dg-ink-line" stroke-width="1.4"/>
+        <line x1="50.9" y1="28" x2="50.9" y2="160" class="dg-ink-line" stroke-width="1.4"/>
+        <path d="M50.9 150 Q186.8 -55.4 322.7 150" class="dg-line" style="fill:none" stroke-width="2.8"/>
+        <line x1="186.8" y1="47.3" x2="186.8" y2="150" class="dg-ink-line" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <circle cx="186.8" cy="47.3" r="4.5" class="dg-good"/>
+        <circle cx="50.9" cy="150" r="4.5" class="dg-bad"/>
+        <circle cx="322.7" cy="150" r="4.5" class="dg-bad"/>
+        <text x="186.8" y="38" text-anchor="middle" font-size="10.5" font-weight="bold">$25 &rarr; $2500</text>
+        <text x="60" y="166" font-size="10">free &rarr; $0</text>
+        <text x="322.7" y="166" text-anchor="middle" font-size="10">$50 &rarr; nobody buys</text>
+        <text x="190" y="182" text-anchor="middle" font-size="10">price p ($) &mdash; the vertex names the price AND the money</text>
+        <text x="58" y="40" font-size="10">R</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "The three points that answer almost every projectile question: launch height, vertex, and the positive root. The dashed arm is algebra, not physics.",
+        "Both x-intercepts are real business facts &mdash; charge nothing and earn nothing, charge too much and sell nothing &mdash; and the peak sits exactly midway between them."
+      ],
+      trick: "Write down what each letter <i>means</i>, with its unit, before you touch any algebra: &ldquo;t = time in seconds since launch, h = height in metres above the ground.&rdquo; Then the vertex is not a pair of numbers, it is a sentence you already know how to finish. And check both roots against the story &mdash; a negative time or a negative price gets rejected out loud, not silently.",
+      examples: [
+        {
+          problem: "A ball is thrown from a 15 m balcony. Its height is h = &minus;5t&sup2; + 10t + 15 metres, t seconds after release. Find the maximum height, when it lands, and a sensible domain.",
+          steps: [
+            "Maximum: t = &minus;b/(2a) = &minus;10/(2 &times; &minus;5) = 1 s",
+            "h(1) = &minus;5(1) + 10(1) + 15 = 20 m &mdash; the vertex is (1, 20)",
+            "Landing means h = 0: &minus;5t&sup2; + 10t + 15 = 0, so &minus;5(t&sup2; &minus; 2t &minus; 3) = 0",
+            "Factorise: &minus;5(t &minus; 3)(t + 1) = 0, giving t = 3 or t = &minus;1",
+            "t = &minus;1 is before the ball was thrown, so reject it: the ball lands after 3 s",
+            "Domain: 0 &le; t &le; 3. Beyond that the formula gives h(4) = &minus;25 m, which is not a real height"
+          ],
+          answer: "Maximum height 20 m, reached 1 s after release; the ball lands 3 s after release; the model only makes sense for 0 &le; t &le; 3 s."
+        },
+        {
+          problem: "A club sells n = 200 &minus; 4p tickets when the price is $p. Find the price that maximises revenue, and that maximum revenue.",
+          steps: [
+            "Revenue = price &times; quantity: R = p(200 &minus; 4p) = 200p &minus; 4p&sup2;",
+            "This is already in factored form R = &minus;4p(p &minus; 50), so R = 0 at p = 0 and p = 50",
+            "The vertex sits midway between the roots: p = (0 + 50)/2 = $25",
+            "R(25) = 25(200 &minus; 100) = 25 &times; 100 = $2500",
+            "Sanity check: at $25 they sell 200 &minus; 100 = 100 tickets, and 100 &times; $25 = $2500 &#10003;"
+          ],
+          answer: "Charging $25 per ticket maximises revenue, selling 100 tickets for a maximum revenue of $2500."
+        }
+      ],
+      remember: [
+        "<b>Vertex = the decision.</b> h is what you should choose, k is what you get for choosing it.",
+        "<b>Reject the impossible root out loud.</b> Negative times, negative lengths and negative prices are answers you throw away <i>and say why</i>.",
+        "<b>State the domain.</b> A model is only a model between the first and last moment it describes something real.",
+        "<b>Units and a sentence, every time.</b> That is literally what Criterion D is marking."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 200" width="460" height="200">
+        <line x1="20" y1="118" x2="440" y2="118" class="cm-line" stroke-width="2.5"/>
+        <path d="M40 118 Q150 6 260 118" class="cm-line" style="fill:none" stroke-width="2.5"/>
+        <path d="M260 118 Q320 178 380 178" class="cm-line" style="fill:none" stroke-width="2" stroke-dasharray="5 4" opacity="0.5"/>
+        <circle cx="380" cy="178" r="15" class="cm-face" stroke-width="2"/>
+        <circle cx="375" cy="175" r="2.6" class="cm-fill"/>
+        <circle cx="386" cy="175" r="2.6" class="cm-fill"/>
+        <path d="M373 184 q7 -6 14 0" class="cm-line" stroke-width="1.8"/>
+        <rect x="222" y="132" width="220" height="30" rx="9" class="cm-bad" stroke-width="2"/>
+        <text x="332" y="152" text-anchor="middle" font-size="11">&ldquo;h(4) = &minus;25 m. Send help?&rdquo;</text>
+        <rect x="24" y="14" width="186" height="42" rx="11" class="cm-good" stroke-width="2"/>
+        <polygon points="78,56 98,56 72,74" class="cm-good" stroke-width="2"/>
+        <text x="117" y="34" text-anchor="middle" font-size="11">&ldquo;Your domain ended</text>
+        <text x="117" y="50" text-anchor="middle" font-size="11">three seconds ago.&rdquo;</text>
+        <circle cx="60" cy="88" r="20" class="cm-face" stroke-width="2"/>
+        <circle cx="53" cy="84" r="2.8" class="cm-fill"/>
+        <circle cx="67" cy="84" r="2.8" class="cm-fill"/>
+        <path d="M52 95 Q60 103 68 95" class="cm-line" stroke-width="1.8"/>
+        <text x="150" y="196" text-anchor="middle" font-size="11" font-weight="bold">ground level, h = 0</text>
+      </svg>`,
+        caption: "The algebra happily keeps going after the ball has landed &mdash; it just stops meaning anything. Stating the domain is how you tell the maths where reality ends."
+      },
+      exercises: [
+        { prompt: "A ball's height is h = &minus;5t&sup2; + 10t + 15 metres, t seconds after release. From what height, in metres, was it released?", value: 15,
+          solution: ["Release is t = 0", "h(0) = 0 + 0 + 15 = 15 m &mdash; the constant term is the launch height"] },
+        { prompt: "For h = &minus;5t&sup2; + 10t + 15, find the time in seconds at which the ball is highest.", value: 1,
+          solution: ["t = &minus;b/(2a) = &minus;10/(2 &times; &minus;5)", "= &minus;10/&minus;10 = 1 second"] },
+        { prompt: "For h = &minus;5t&sup2; + 10t + 15, find the maximum height in metres.", value: 20,
+          solution: ["Substitute t = 1: h = &minus;5(1)&sup2; + 10(1) + 15", "= &minus;5 + 10 + 15 = 20 m"] },
+        { prompt: "Write h = &minus;5t&sup2; + 10t + 15 in factored form. Type it as -5(t-3)(t+1).", accept: ["-5t-3t+1","-5t+1t-3"],
+          solution: ["Common factor &minus;5: h = &minus;5(t&sup2; &minus; 2t &minus; 3)", "Two numbers multiplying to &minus;3 and adding to &minus;2: &minus;3 and +1", "h = &minus;5(t &minus; 3)(t + 1)"] },
+        { prompt: "How many seconds after release does that ball hit the ground?", value: 3,
+          solution: ["Set h = 0: &minus;5(t &minus; 3)(t + 1) = 0, so t = 3 or t = &minus;1", "t = &minus;1 is before the throw, so reject it", "The ball lands 3 s after release"] },
+        { prompt: "Evaluate h(4) for h = &minus;5t&sup2; + 10t + 15. Give the number only (in metres).", value: -25,
+          solution: ["h(4) = &minus;5(16) + 40 + 15 = &minus;80 + 55", "= &minus;25 m &mdash; mathematically fine, physically meaningless"] },
+        { prompt: "What is the largest value of t in the sensible domain of that model? (in seconds)", value: 3,
+          solution: ["The model describes the ball only while it is in the air", "That is 0 &le; t &le; 3, so the largest sensible t is 3 s"] },
+        { prompt: "A club sells n = 200 &minus; 4p tickets at price $p, so revenue is R = p(200 &minus; 4p). Find the revenue in dollars when p = 10.", value: 1600, accept: ["$1600"],
+          solution: ["n = 200 &minus; 40 = 160 tickets", "R = 10 &times; 160 = $1600"] },
+        { prompt: "For R = p(200 &minus; 4p), find the two prices in dollars at which the revenue is zero. Enter both, separated by a comma.", valueSet: [0, 50],
+          solution: ["R = 0 when p = 0 or when 200 &minus; 4p = 0", "200 &minus; 4p = 0 gives p = 50", "At $0 they give tickets away; at $50 nobody buys"] },
+        { prompt: "For R = p(200 &minus; 4p), what ticket price in dollars gives the maximum revenue?", value: 25, accept: ["$25"],
+          solution: ["The axis of symmetry is midway between the roots 0 and 50", "p = (0 + 50)/2 = $25"] },
+        { prompt: "What is that maximum revenue, in dollars?", value: 2500, accept: ["$2500"],
+          solution: ["R(25) = 25(200 &minus; 100) = 25 &times; 100", "= $2500 (100 tickets at $25)"] },
+        { prompt: "A stall's daily profit is P = &minus;2x&sup2; + 40x &minus; 150 dollars, where x is the number of items sold in tens. Find the two break-even values of x. Enter both, separated by a comma.", valueSet: [5, 15],
+          solution: ["Set P = 0: &minus;2(x&sup2; &minus; 20x + 75) = 0", "Factorise: &minus;2(x &minus; 5)(x &minus; 15) = 0", "x = 5 or x = 15"] },
+        { prompt: "For P = &minus;2x&sup2; + 40x &minus; 150, find the value of x that maximises profit.", value: 10,
+          solution: ["x = &minus;b/(2a) = &minus;40/(2 &times; &minus;2) = 10", "(Also the midpoint of the break-even points 5 and 15 &#10003;)"] },
+        { prompt: "What is that maximum profit, in dollars?", value: 50, accept: ["$50"],
+          solution: ["P(10) = &minus;2(100) + 400 &minus; 150", "= &minus;200 + 400 &minus; 150 = $50"] },
+        { prompt: "A rectangular pen uses 60 m of fencing on three sides, the fourth being a wall. If the two sides perpendicular to the wall are each x m, the area is A = x(60 &minus; 2x). Find the area in m&sup2; when x = 10.", value: 400,
+          solution: ["The side along the wall is 60 &minus; 2(10) = 40 m", "A = 10 &times; 40 = 400 m&sup2;"] },
+        { prompt: "For A = x(60 &minus; 2x), find the value of x in metres that gives the largest area.", value: 15,
+          solution: ["A = 0 at x = 0 and at x = 30, so the vertex is midway", "x = 15 m"] },
+        { prompt: "What is that largest area, in m&sup2;?", value: 450,
+          solution: ["A(15) = 15(60 &minus; 30) = 15 &times; 30", "= 450 m&sup2; &mdash; a 15 m by 30 m pen"] },
+        { prompt: "A parabola models profit and opens downwards. Does its vertex give a maximum or a minimum? (one word)", accept: ["maximum","max","amaximum"],
+          solution: ["a &lt; 0 means the arms point down", "The turning point is the highest point &rarr; a maximum"] },
+        { prompt: "For the ball model h = &minus;5t&sup2; + 10t + 15, write a full Criterion D style interpretation of the vertex (1, 20) &mdash; with units and in a sentence.", open: true,
+          solution: ["Sample response: The vertex (1, 20) means that exactly 1 second after it was released, the ball reaches its greatest height of 20 metres above the ground &mdash; 5 m higher than the balcony it was thrown from. After that the height decreases, so the ball is rising for 0 &le; t &lt; 1 s and falling for 1 &lt; t &le; 3 s."] },
+        { prompt: "The revenue model R = p(200 &minus; 4p) gives R = &minus;4200 when p = 70. Explain what has gone wrong, and state a sensible domain for p with a reason.", open: true,
+          solution: ["Sample response: Nothing has gone wrong with the algebra &mdash; the quadratic simply keeps going past the point where it describes anything. At p = 70 the demand formula gives n = 200 &minus; 280 = &minus;80 tickets, and you cannot sell a negative number of tickets, so the revenue figure is meaningless. The sensible domain is 0 &le; p &le; 50: prices cannot be negative, and at p = 50 demand reaches zero. Outside that window the parabola is arithmetic, not a model."] }
+      ]
+    }
+  ];
+
+  /* ---------------------------------------------------------------
+     STORAGE
+  --------------------------------------------------------------- */
+  var STORE_KEY = "g9ext_u2_progress_v1";
+  function loadProgress(){
+    try{
+      var raw = localStorage.getItem(STORE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    }catch(e){ return {}; }
+  }
+  function saveProgress(p){
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(p)); }catch(e){ /* ignore */ }
+  }
+  var progress = loadProgress();
+
+  /* ---------------------------------------------------------------
+     ANSWER CHECKING
+  --------------------------------------------------------------- */
+  function parseNum(s){
+    if(s == null) return null;
+    s = String(s).trim();
+    var fracM = s.match(/^(-?\d+(?:\.\d+)?)\s*\/\s*(-?\d+(?:\.\d+)?)$/);
+    if(fracM){
+      var a = parseFloat(fracM[1]), b = parseFloat(fracM[2]);
+      if(b === 0) return null;
+      return a / b;
+    }
+    var v = parseFloat(s);
+    return isNaN(v) ? null : v;
+  }
+  function normalize(raw){
+    return String(raw).toLowerCase().replace(/[\s()]/g,"");
+  }
+  function checkAnswer(ex, raw){
+    if(!raw || !String(raw).trim()) return false;
+    var norm = normalize(raw);
+    if(ex.accept && ex.accept.indexOf(norm) > -1) return true;
+    if(typeof ex.value === "number"){
+      var v = parseNum(raw);
+      if(v !== null && Math.abs(v - ex.value) < (ex.tol || 0.02)) return true;
+    }
+    if(ex.valueSet){
+      var parts = String(raw).toLowerCase().split(/,|or|and/).map(parseNum).filter(function(x){ return x !== null; });
+      if(parts.length === ex.valueSet.length){
+        var remaining = ex.valueSet.slice();
+        var ok = parts.every(function(p){
+          var idx = -1;
+          for(var i=0;i<remaining.length;i++){
+            if(Math.abs(remaining[i]-p) < (ex.tol||0.02)){ idx=i; break; }
+          }
+          if(idx>-1){ remaining.splice(idx,1); return true; }
+          return false;
+        });
+        if(ok) return true;
+      }
+    }
+    return false;
+  }
+
+  /* ---------------------------------------------------------------
+     RENDER
+  --------------------------------------------------------------- */
+  var lessonsEl = document.getElementById("lessons");
+  var scoreboardInner = document.getElementById("scoreboardInner");
+  var resetBtn = document.getElementById("resetBtn");
+  var totalDoneEl = document.getElementById("totalDone");
+
+  function exId(li, ei){ return "L" + li + "E" + ei; }
+
+  function buildChips(){
+    LESSONS.forEach(function(lesson, li){
+      var a = document.createElement("a");
+      a.href = "#lesson-" + lesson.letter;
+      a.className = "chip";
+      a.style.setProperty("--chip-hue", "var(" + lesson.hueVar + "-solid)");
+      a.style.setProperty("--chip-tint", "var(" + lesson.hueVar + "-tint)");
+      a.id = "chip-" + li;
+      a.innerHTML = '<span class="letter">' + lesson.letter + '</span><span class="frac" data-frac>0/' + lesson.exercises.length + '</span>';
+      scoreboardInner.insertBefore(a, resetBtn);
+    });
+  }
+
+  function lessonDoneCount(li){
+    var lesson = LESSONS[li];
+    var n = 0;
+    lesson.exercises.forEach(function(ex, ei){
+      if(progress[exId(li,ei)]) n++;
+    });
+    return n;
+  }
+
+  function updateAllProgressUI(){
+    var total = 0;
+    LESSONS.forEach(function(lesson, li){
+      var n = lessonDoneCount(li);
+      total += n;
+      var lessonTotal = lesson.exercises.length;
+      var chip = document.getElementById("chip-" + li);
+      if(chip){
+        chip.querySelector("[data-frac]").textContent = n + "/" + lessonTotal;
+        chip.classList.toggle("done", n === lessonTotal);
+      }
+      var ring = document.getElementById("ring-" + li);
+      if(ring){
+        ring.querySelector(".ring-label").textContent = n + " / " + lessonTotal;
+        ring.querySelector(".bar-fill").style.width = (n / lessonTotal * 100) + "%";
+      }
+    });
+    totalDoneEl.textContent = total;
+  }
+
+  function showToast(msg){
+    var t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(showToast._h);
+    showToast._h = setTimeout(function(){ t.classList.remove("show"); }, 1600);
+  }
+
+  function buildLessons(){
+    LESSONS.forEach(function(lesson, li){
+      var section = document.createElement("section");
+      section.className = "lesson";
+      section.id = "lesson-" + lesson.letter;
+      section.style.setProperty("--hue", "var(" + lesson.hueVar + "-solid)");
+      section.style.setProperty("--tint", "var(" + lesson.hueVar + "-tint)");
+
+      var head = document.createElement("div");
+      head.className = "lesson-head";
+      head.innerHTML =
+        '<div class="big-letter">' + lesson.letter + '</div>' +
+        '<div class="htext"><div class="kicker">Lesson ' + lesson.letter + '</div><h2>' + lesson.title + '</h2></div>' +
+        '<div class="lesson-progress" id="ring-' + li + '">' +
+          '<div class="ring-label">0 / ' + lesson.exercises.length + '</div>' +
+          '<div class="bar"><div class="bar-fill"></div></div>' +
+        '</div>';
+      section.appendChild(head);
+
+      var rulesBox = document.createElement("div");
+      rulesBox.className = "rules-box";
+      rulesBox.innerHTML = '<h3>The rules</h3><ul>' + lesson.rules.map(function(r){ return "<li>" + r + "</li>"; }).join("") + "</ul>";
+      section.appendChild(rulesBox);
+
+      var diagramList = lesson.diagrams || (lesson.diagram ? [lesson.diagram] : []);
+      var diagramCaptions = lesson.diagramCaptions || [];
+      if(diagramList[0]){
+        var diagramBox = document.createElement("div");
+        diagramBox.className = "diagram-box";
+        diagramBox.innerHTML = diagramList[0] + (diagramCaptions[0] ? '<div class="diagram-caption">' + diagramCaptions[0] + '</div>' : '');
+        section.appendChild(diagramBox);
+      }
+
+      if(lesson.trick){
+        var trickBox = document.createElement("div");
+        trickBox.className = "trick-box";
+        trickBox.innerHTML = '<span class="trick-tag">Rule of thumb</span><span class="trick-text">' + lesson.trick + '</span>';
+        section.appendChild(trickBox);
+      }
+
+      var exampleList = lesson.examples || (lesson.example ? [lesson.example] : []);
+
+      function buildExampleCard(exampleObj, idx){
+        var card = document.createElement("div");
+        card.className = "example-card";
+        card.innerHTML =
+          '<h3>Worked example' + (exampleList.length > 1 ? " " + (idx+1) : "") + '</h3>' +
+          '<div class="example-prob expr">' + exampleObj.problem + '</div>' +
+          '<div class="example-steps">' +
+            exampleObj.steps.map(function(s, i){
+              return '<div class="step"><span class="n">' + (i+1) + '.</span><span class="expr">' + s + '</span></div>';
+            }).join("") +
+          '</div>' +
+          '<div class="example-answer">Answer: ' + exampleObj.answer + '</div>';
+        return card;
+      }
+
+      if(exampleList[0]) section.appendChild(buildExampleCard(exampleList[0], 0));
+
+      if(diagramList[1]){
+        var diagramBox2 = document.createElement("div");
+        diagramBox2.className = "diagram-box";
+        diagramBox2.innerHTML = diagramList[1] + (diagramCaptions[1] ? '<div class="diagram-caption">' + diagramCaptions[1] + '</div>' : '');
+        section.appendChild(diagramBox2);
+      }
+
+      if(exampleList[1]) section.appendChild(buildExampleCard(exampleList[1], 1));
+
+      if(lesson.remember && lesson.remember.length){
+        var rememberBox = document.createElement("div");
+        rememberBox.className = "remember-box";
+        rememberBox.innerHTML = '<h3>Rules to remember</h3><ul>' +
+          lesson.remember.map(function(r){ return "<li>" + r + "</li>"; }).join("") + '</ul>';
+        section.appendChild(rememberBox);
+      }
+
+      if(lesson.comic){
+        var comicBox = document.createElement("div");
+        comicBox.className = "comic-box";
+        comicBox.innerHTML =
+          '<span class="comic-tag">Math meme break</span>' +
+          lesson.comic.svg +
+          '<div class="comic-caption">' + lesson.comic.caption + '</div>';
+        section.appendChild(comicBox);
+      }
+
+      var grid = document.createElement("div");
+      grid.className = "ex-grid";
+
+      lesson.exercises.forEach(function(exObj, ei){
+        var id = exId(li, ei);
+        var card = document.createElement("div");
+        card.className = "ex-card";
+        card.id = "card-" + id;
+
+        var inputRow = exObj.open
+          ? '<div class="open-note">Open response &mdash; there\'s no single right answer. Try it yourself, then compare with the sample.</div>'
+          : '<div class="ex-input-row">' +
+              '<input class="ex-input" type="text" placeholder="your answer" id="input-' + id + '" autocomplete="off" />' +
+              '<button class="ex-check" data-id="' + id + '" data-li="' + li + '" data-ei="' + ei + '">Check</button>' +
+            '</div>' +
+            '<div class="ex-feedback" id="fb-' + id + '"></div>';
+
+        card.innerHTML =
+          '<div class="ex-top"><span class="ex-num">' + (ei+1) + '</span><div class="ex-prompt expr">' + exObj.prompt + '</div></div>' +
+          inputRow +
+          '<div class="ex-foot">' +
+            '<button class="ex-toggle" data-target="sol-' + id + '">' + (exObj.open ? "Show sample response" : "Show solution") + '</button>' +
+          '</div>' +
+          '<div class="ex-solution" id="sol-' + id + '">' +
+            exObj.solution.map(function(s){ return '<div class="sol-step">' + s + '</div>'; }).join("") +
+          '</div>';
+
+        grid.appendChild(card);
+      });
+
+      section.appendChild(grid);
+      lessonsEl.appendChild(section);
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     EVENTS (delegated)
+  --------------------------------------------------------------- */
+  function wireEvents(){
+    lessonsEl.addEventListener("click", function(e){
+      var checkBtn = e.target.closest(".ex-check");
+      if(checkBtn){
+        var li = parseInt(checkBtn.getAttribute("data-li"), 10);
+        var ei = parseInt(checkBtn.getAttribute("data-ei"), 10);
+        var id = checkBtn.getAttribute("data-id");
+        var exObj = LESSONS[li].exercises[ei];
+        var input = document.getElementById("input-" + id);
+        var fb = document.getElementById("fb-" + id);
+        var card = document.getElementById("card-" + id);
+        var ok = checkAnswer(exObj, input.value);
+        card.classList.remove("correct","wrong");
+        fb.classList.remove("correct","wrong");
+        if(ok){
+          card.classList.add("correct");
+          fb.classList.add("correct");
+          fb.textContent = "Correct!";
+          progress[id] = true;
+          saveProgress(progress);
+          updateAllProgressUI();
+        } else {
+          card.classList.add("wrong");
+          fb.classList.add("wrong");
+          fb.textContent = "Not quite — try again or check the solution.";
+        }
+        return;
+      }
+      var toggleBtn = e.target.closest(".ex-toggle");
+      if(toggleBtn){
+        var targetId = toggleBtn.getAttribute("data-target");
+        var sol = document.getElementById(targetId);
+        var willOpen = !sol.classList.contains("open");
+        sol.classList.toggle("open");
+        toggleBtn.textContent = willOpen
+          ? (toggleBtn.textContent.indexOf("sample") > -1 ? "Hide sample response" : "Hide solution")
+          : (toggleBtn.textContent.indexOf("sample") > -1 ? "Show sample response" : "Show solution");
+
+        // mark open-response exercises as "done" once viewed
+        var cardEl = toggleBtn.closest(".ex-card");
+        if(willOpen && cardEl){
+          var idMatch = targetId.replace("sol-","");
+          var liEi = idMatch.match(/^L(\d+)E(\d+)$/);
+          if(liEi){
+            var li2 = parseInt(liEi[1],10), ei2 = parseInt(liEi[2],10);
+            if(LESSONS[li2].exercises[ei2].open){
+              progress[idMatch] = true;
+              saveProgress(progress);
+              updateAllProgressUI();
+            }
+          }
+        }
+        return;
+      }
+    });
+
+    lessonsEl.addEventListener("keydown", function(e){
+      if(e.key === "Enter" && e.target.classList.contains("ex-input")){
+        var id = e.target.id.replace("input-","");
+        var btn = document.querySelector('.ex-check[data-id="' + id + '"]');
+        if(btn) btn.click();
+      }
+    });
+
+    resetBtn.addEventListener("click", function(){
+      if(!confirm("Clear all saved progress on this device?")) return;
+      progress = {};
+      saveProgress(progress);
+      document.querySelectorAll(".ex-card").forEach(function(c){ c.classList.remove("correct","wrong"); });
+      document.querySelectorAll(".ex-feedback").forEach(function(f){ f.textContent = ""; f.classList.remove("correct","wrong"); });
+      updateAllProgressUI();
+      showToast("Progress cleared");
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     HUE SOLID/TINT CSS VARS (derived once, injected as a style tag)
+  --------------------------------------------------------------- */
+  function injectHueVars(){
+    var style = document.createElement("style");
+    var letters = ["A","B","C","D","E","F"];
+    var css = ":root{";
+    letters.forEach(function(L){
+      var hv = "--hue" + L;
+      css += hv + "-solid: hsl(var(" + hv + ") var(--lsat) var(--llight));";
+      css += hv + "-tint: hsl(var(" + hv + ") var(--lsat) var(--ltint));";
+    });
+    css += "}";
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
+  function buildCheatSheet(){
+    var grid = document.getElementById("csGrid");
+    if(!grid) return;
+    LESSONS.forEach(function(lesson){
+      if(!lesson.remember || !lesson.remember.length) return;
+      var card = document.createElement("div");
+      card.className = "cs-card";
+      card.style.setProperty("--hue", "var(" + lesson.hueVar + "-solid)");
+      card.style.setProperty("--tint", "var(" + lesson.hueVar + "-tint)");
+      card.innerHTML =
+        '<h4><span class="cs-letter">' + lesson.letter + '</span>' + lesson.title + '</h4>' +
+        '<ul>' + lesson.remember.map(function(r){ return "<li>" + r + "</li>"; }).join("") + '</ul>';
+      grid.appendChild(card);
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     INIT
+  --------------------------------------------------------------- */
+  injectHueVars();
+  buildChips();
+  buildLessons();
+  buildCheatSheet();
+  wireEvents();
+  updateAllProgressUI();
+
+})();
+</script>

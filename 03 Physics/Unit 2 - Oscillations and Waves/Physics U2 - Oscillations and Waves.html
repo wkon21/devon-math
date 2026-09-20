@@ -1,0 +1,1868 @@
+<title>Physics Unit 2: Oscillations &amp; Waves &mdash; IB MYP Grade 9</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --bg: #F5F6F2;
+    --surface: #FFFFFF;
+    --surface-2: #ECEFE7;
+    --ink: #1B222C;
+    --ink-soft: #545E6B;
+    --ink-faint: #8A93A0;
+    --accent: #2957A4;
+    --accent-ink: #ffffff;
+    --accent-2: #C1841B;
+    --good: #2C8A57;
+    --good-tint: #E4F3EA;
+    --bad: #C0453A;
+    --bad-tint: #FBEAE8;
+    --border: #DBDFD4;
+    --border-strong: #C4CABC;
+    --shadow: 220 25% 20%;
+    --radius: 14px;
+
+    --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --font-body: "Karla", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+
+    /* per-lesson hues (light) */
+    --hueA: 214; --hueB: 187; --hueC: 262; --hueD: 30; --hueE: 350; --hueF: 150;
+    --lsat: 58%; --llight: 38%; --ltint: 94%;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #12151A;
+      --surface: #191D24;
+      --surface-2: #1F252E;
+      --ink: #E9ECF1;
+      --ink-soft: #A7B0BE;
+      --ink-faint: #6E7787;
+      --accent: #7DA3E8;
+      --accent-ink: #0D1420;
+      --accent-2: #E3AE55;
+      --good: #57C489;
+      --good-tint: #16261E;
+      --bad: #E5847A;
+      --bad-tint: #2A1917;
+      --border: #2A303B;
+      --border-strong: #3A4250;
+      --lsat: 62%; --llight: 68%; --ltint: 16%;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #12151A;
+    --surface: #191D24;
+    --surface-2: #1F252E;
+    --ink: #E9ECF1;
+    --ink-soft: #A7B0BE;
+    --ink-faint: #6E7787;
+    --accent: #7DA3E8;
+    --accent-ink: #0D1420;
+    --accent-2: #E3AE55;
+    --good: #57C489;
+    --good-tint: #16261E;
+    --bad: #E5847A;
+    --bad-tint: #2A1917;
+    --border: #2A303B;
+    --border-strong: #3A4250;
+    --lsat: 62%; --llight: 68%; --ltint: 16%;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior: auto; } *{ animation: none !important; transition: none !important; } }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: var(--accent); }
+
+  ::selection{ background: color-mix(in srgb, var(--accent) 30%, transparent); }
+
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+  h1,h2,h3,h4{ font-family: var(--font-display); font-weight: 600; text-wrap: balance; margin: 0; color: var(--ink); }
+
+  code, .mono, .expr{ font-family: var(--font-mono); }
+
+  button{ font-family: var(--font-body); cursor:pointer; }
+  button:focus-visible, input:focus-visible, a:focus-visible{
+    outline: 2.5px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ============ TOP MASTHEAD ============ */
+  .masthead{
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .masthead-inner{
+    padding: 34px 20px 22px;
+    display:flex; flex-direction:column; gap:16px;
+  }
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow .dot{ width:5px; height:5px; border-radius:50%; background: var(--accent-2); }
+  .title-row{
+    display:flex; justify-content: space-between; align-items:flex-end; gap: 24px; flex-wrap: wrap;
+  }
+  .title-row h1{ font-size: clamp(30px, 4.4vw, 44px); line-height: 1.05; }
+  .title-row .subtitle{ color: var(--ink-soft); font-size: 15.5px; max-width: 46ch; margin-top:6px;}
+  .student-tag{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-soft);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 7px 14px;
+    white-space: nowrap;
+  }
+  .student-tag b{ color: var(--ink); }
+
+  .meta-strip{
+    display:flex; flex-wrap:wrap; gap: 10px 28px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    padding-top: 4px;
+    border-top: 1px dashed var(--border);
+    margin-top: 4px;
+    padding-top: 14px;
+  }
+  .meta-strip span b{ color: var(--ink); font-weight:600; }
+
+  /* ============ SCOREBOARD NAV (sticky) ============ */
+  .scoreboard{
+    position: sticky; top:0; z-index: 40;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px) saturate(1.1);
+    -webkit-backdrop-filter: blur(10px) saturate(1.1);
+    border-bottom: 1px solid var(--border);
+  }
+  .scoreboard-inner{
+    display:flex; align-items:center; gap:10px;
+    padding: 10px 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .scoreboard-inner::-webkit-scrollbar{ display:none; }
+  .score-total{
+    font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-soft);
+    white-space: nowrap; padding-right: 8px; border-right: 1px solid var(--border);
+    margin-right: 4px;
+  }
+  .score-total b{ color: var(--ink); }
+  .chip{
+    flex: 0 0 auto;
+    display:flex; align-items:center; gap:8px;
+    padding: 7px 12px 7px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-decoration: none;
+    transition: border-color .15s ease, color .15s ease, transform .1s ease;
+  }
+  .chip:hover{ border-color: var(--chip-hue); color: var(--ink); }
+  .chip:active{ transform: translateY(1px); }
+  .chip .letter{
+    width: 22px; height:22px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 12px; font-weight: 700;
+    background: var(--chip-tint); color: var(--chip-hue);
+    border: 1px solid color-mix(in srgb, var(--chip-hue) 45%, transparent);
+  }
+  .chip .frac{ font-variant-numeric: tabular-nums; font-size: 12px; }
+  .chip.done{ border-color: var(--good); }
+  .chip.done .letter{ background: var(--good-tint); color: var(--good); border-color: var(--good); }
+  .reset-btn{
+    margin-left: auto; flex: 0 0 auto;
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--ink-faint); background: transparent; border: 1px solid transparent;
+    padding: 6px 8px; border-radius: 8px;
+  }
+  .reset-btn:hover{ color: var(--bad); border-color: var(--border); }
+
+  /* ============ INTRO / REFERENCE CARD ============ */
+  main{ padding: 30px 0 90px; }
+  .intro-card{
+    margin: 26px 0 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+  }
+  .intro-card summary{
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 18px;
+    list-style: none;
+    display:flex; align-items:center; justify-content: space-between;
+    gap: 12px;
+  }
+  .intro-card summary::-webkit-details-marker{ display:none; }
+  .intro-card summary .arrow{
+    font-family: var(--font-mono); color: var(--ink-faint); font-size: 13px;
+    transition: transform .2s ease;
+  }
+  .intro-card[open] summary .arrow{ transform: rotate(180deg); }
+  .intro-grid{
+    margin-top: 18px;
+    display:grid; grid-template-columns: 1fr 1fr; gap: 20px 28px;
+  }
+  @media (max-width: 640px){ .intro-grid{ grid-template-columns: 1fr; } }
+  .intro-block h4{ font-size: 12.5px; text-transform: uppercase; letter-spacing:.08em; color: var(--ink-faint); font-family: var(--font-mono); font-weight:600; margin-bottom:8px;}
+  .intro-block p{ margin:0; color: var(--ink-soft); font-size: 14.5px; }
+  .soi{
+    font-family: var(--font-display); font-style: italic; font-size: 17px; color: var(--ink);
+    grid-column: 1 / -1;
+    padding: 14px 16px;
+    background: var(--surface-2);
+    border-left: 3px solid var(--accent-2);
+    border-radius: 6px;
+  }
+  .iq-table{ grid-column: 1/-1; display:grid; gap:8px; }
+  .iq-row{ display:grid; grid-template-columns: 90px 1fr; gap:12px; font-size: 14px; align-items:baseline; }
+  .iq-row .tag{ font-family: var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color: var(--ink-faint); }
+  .iq-row p{ margin:0; color: var(--ink-soft); }
+
+  /* ============ LESSON SECTION ============ */
+  .lesson{
+    scroll-margin-top: 64px;
+    margin-bottom: 56px;
+  }
+  .lesson-head{
+    display:flex; align-items: center; gap: 16px;
+    padding: 18px 20px;
+    border-radius: var(--radius);
+    background: var(--tint);
+    border: 1px solid color-mix(in srgb, var(--hue) 35%, transparent);
+    margin-bottom: 18px;
+  }
+  .lesson-head .big-letter{
+    font-family: var(--font-display); font-weight:700; font-size: 34px;
+    color: var(--hue);
+    width: 52px; height:52px; flex:0 0 auto;
+    border-radius: 12px;
+    background: var(--surface);
+    display:flex; align-items:center; justify-content:center;
+    border: 1px solid color-mix(in srgb, var(--hue) 40%, transparent);
+  }
+  .lesson-head .htext .kicker{ font-family: var(--font-mono); font-size: 11.5px; text-transform:uppercase; letter-spacing:.09em; color: var(--hue); }
+  .lesson-head .htext h2{ font-size: clamp(20px,2.6vw,26px); margin-top:2px; }
+  .lesson-progress{
+    margin-left:auto; text-align:right; flex: 0 0 auto;
+  }
+  .lesson-progress .ring-label{ font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); }
+  .lesson-progress .bar{
+    width: 90px; height: 6px; border-radius: 4px; background: var(--surface);
+    border: 1px solid var(--border); overflow:hidden; margin-top:6px;
+  }
+  .lesson-progress .bar-fill{ height:100%; background: var(--hue); width:0%; transition: width .3s ease; }
+
+  .rules-box{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 16px;
+  }
+  .rules-box h3{ font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-family: var(--font-mono); color: var(--hue); margin-bottom: 10px; }
+  .rules-box ul{ margin:0; padding-left: 20px; color: var(--ink-soft); font-size: 14.5px; }
+  .rules-box li{ margin-bottom: 5px; }
+  .rules-box li::marker{ color: var(--hue); }
+  .trick-box{ background: color-mix(in srgb, var(--hue) 10%, var(--surface)); border: 1px dashed var(--hue); border-radius: var(--radius); padding: 14px 22px; margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-start; }
+  .trick-box .trick-tag{ font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); white-space: nowrap; padding-top: 2px; }
+  .trick-box .trick-text{ color: var(--ink-soft); font-size: 14.5px; }
+  .trick-box .trick-text b{ color: var(--ink); }
+  .diagram-box{ background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 16px; display:flex; justify-content:center; align-items:center; overflow-x:auto; }
+  .diagram-box svg{ width: 100%; max-width: 620px; height: auto; display:block; }
+  .diagram-box{ flex-direction: column; gap: 8px; }
+  .diagram-caption{ font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); text-align:center; max-width: 620px; }
+  .comic-box{ background: var(--surface-2); border: 2px dashed var(--hue); border-radius: var(--radius); padding: 18px 20px 16px; margin-bottom: 16px; display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .comic-box .comic-tag{ font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); align-self:flex-start; }
+  .comic-box svg{ width: 100%; max-width: 460px; height: auto; display:block; }
+  .comic-box .comic-caption{ font-family: var(--font-body); font-style: italic; font-size: 14px; color: var(--ink-soft); text-align:center; max-width: 560px; }
+  .comic-box text{ fill: var(--ink); font-family: var(--font-mono); }
+  .comic-box .cm-face{ fill: var(--tint); stroke: var(--hue); }
+  .comic-box .cm-face2{ fill: var(--surface); stroke: var(--ink-soft); }
+  .comic-box .cm-line{ stroke: var(--ink); fill:none; }
+  .comic-box .cm-fill{ fill: var(--hue); }
+  .comic-box .cm-bad{ fill: var(--bad-tint); stroke: var(--bad); }
+  .comic-box .cm-good{ fill: var(--good-tint); stroke: var(--good); }
+  .comic-box .cm-bad-fill{ fill: var(--bad); stroke: none; }
+  .comic-box .cm-good-fill{ fill: var(--good); stroke: none; }
+  .comic-box .cm-soft{ fill: var(--ink-faint); }
+
+  .remember-box{
+    background: color-mix(in srgb, var(--hue) 7%, var(--surface));
+    border: 1px solid var(--hue);
+    border-left: 5px solid var(--hue);
+    border-radius: var(--radius);
+    padding: 16px 20px 14px;
+    margin-bottom: 20px;
+  }
+  .remember-box h3{ font-family: var(--font-mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); margin-bottom: 10px; }
+  .remember-box ul{ margin:0; padding-left:0; list-style:none; }
+  .remember-box li{ position:relative; padding-left: 26px; margin-bottom: 7px; color: var(--ink-soft); font-size: 14.5px; }
+  .remember-box li:last-child{ margin-bottom:0; }
+  .remember-box li::before{ content:"\2713"; position:absolute; left:4px; top:0; color: var(--hue); font-weight:700; }
+  .remember-box li b{ color: var(--ink); }
+
+  .cheatsheet{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px 28px;
+    margin-top: 36px;
+  }
+  .cheatsheet h2{ font-size: 24px; margin-bottom: 4px; }
+  .cheatsheet .cs-sub{ color: var(--ink-faint); font-size: 13px; font-family: var(--font-mono); margin-bottom: 18px; }
+  .cs-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+  .cs-card{ background: var(--surface-2); border: 1px solid var(--border); border-top: 3px solid var(--hue); border-radius: var(--radius); padding: 14px 16px; }
+  .cs-card h4{ font-size: 14.5px; display:flex; gap:8px; align-items:center; margin-bottom: 9px; font-family: var(--font-body); font-weight:700; }
+  .cs-card .cs-letter{ font-family: var(--font-mono); font-size: 11px; background: var(--tint); color: var(--hue); border:1px solid var(--hue); border-radius: 6px; padding: 2px 7px; }
+  .cs-card ul{ margin:0; padding-left: 18px; color: var(--ink-soft); font-size: 13.5px; }
+  .cs-card li{ margin-bottom: 5px; }
+  .cs-card li:last-child{ margin-bottom:0; }
+  .cs-card li::marker{ color: var(--hue); }
+  .cs-card li b{ color: var(--ink); }
+  .diagram-box .dg-line{ stroke: var(--hue); fill: none; }
+  .diagram-box .dg-fill{ fill: var(--hue); }
+  .diagram-box .dg-tint{ fill: var(--tint); stroke: var(--hue); }
+  .diagram-box .dg-ink{ fill: var(--ink); }
+  .diagram-box .dg-ink-line{ stroke: var(--ink-soft); fill:none; }
+  .diagram-box .dg-soft{ fill: var(--ink-soft); }
+  .diagram-box .dg-good{ fill: var(--good); stroke: var(--good); }
+  .diagram-box .dg-bad{ fill: var(--bad); stroke: var(--bad); }
+  .diagram-box text{ fill: var(--ink); font-family: var(--font-mono); }
+
+  .example-card{
+    background: var(--surface);
+    border: 1.5px dashed var(--border-strong);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 22px;
+  }
+  .example-card h3{
+    font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-family: var(--font-mono);
+    color: var(--ink-faint); margin-bottom: 10px; display:flex; align-items:center; gap:8px;
+  }
+  .example-card h3::before{ content:"✎"; color: var(--accent-2); font-size:14px; }
+  .example-prob{ font-family: var(--font-mono); font-size: 15.5px; margin-bottom: 12px; color: var(--ink); }
+  .example-steps{ display:flex; flex-direction:column; gap: 6px; }
+  .example-steps .step{
+    display:grid; grid-template-columns: 20px 1fr; gap: 10px;
+    font-size: 14.5px; color: var(--ink-soft); align-items:baseline;
+  }
+  .example-steps .step .n{ font-family: var(--font-mono); color: var(--hue); font-size: 12.5px; }
+  .example-steps .step .expr{ color: var(--ink); }
+  .example-answer{
+    margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border);
+    font-size: 14.5px; color: var(--good); font-family: var(--font-mono); font-weight:600;
+  }
+
+  /* ============ EXERCISE GRID ============ */
+  .ex-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 720px){ .ex-grid{ grid-template-columns: 1fr; } }
+
+  .ex-card{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display:flex; flex-direction:column; gap:10px;
+    transition: border-color .2s ease;
+  }
+  .ex-card.correct{ border-color: var(--good); background: color-mix(in srgb, var(--good-tint) 60%, var(--surface)); }
+  .ex-card.wrong{ border-color: var(--bad); }
+
+  .ex-top{ display:flex; align-items:flex-start; gap:10px; }
+  .ex-num{
+    font-family: var(--font-mono); font-size: 12.5px; font-weight:700;
+    color: var(--hue); background: var(--tint); border:1px solid color-mix(in srgb, var(--hue) 40%, transparent);
+    border-radius: 6px; padding: 2px 7px; flex:0 0 auto; margin-top:2px;
+  }
+  .ex-prompt{ font-size: 14.5px; color: var(--ink); line-height:1.5; }
+  .ex-prompt .expr{ font-size: 14.5px; }
+
+  .ex-input-row{ display:flex; gap:8px; }
+  .ex-input{
+    flex:1; min-width:0;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+  }
+  .ex-input::placeholder{ color: var(--ink-faint); }
+  .ex-check{
+    font-family: var(--font-mono); font-size: 12.5px; font-weight:600;
+    padding: 8px 14px; border-radius: 8px; border: 1px solid var(--hue);
+    background: var(--hue); color: var(--accent-ink);
+    white-space:nowrap;
+  }
+  .ex-check:hover{ filter: brightness(1.06); }
+
+  .ex-feedback{ font-size: 13px; font-family: var(--font-mono); min-height: 4px; }
+  .ex-feedback.correct{ color: var(--good); }
+  .ex-feedback.wrong{ color: var(--bad); }
+
+  .ex-foot{ display:flex; justify-content: space-between; align-items:center; margin-top:2px; }
+  .ex-toggle{
+    background:none; border:none; padding:0; font-size: 12.5px;
+    font-family: var(--font-mono); color: var(--ink-faint); text-decoration: underline; text-underline-offset:3px;
+  }
+  .ex-toggle:hover{ color: var(--hue); }
+  .ex-solution{
+    display:none; margin-top: 4px; padding: 12px 14px;
+    background: var(--surface-2); border-radius: 8px;
+    font-size: 13.5px; color: var(--ink-soft);
+  }
+  .ex-solution.open{ display:block; }
+  .ex-solution .sol-step{ margin-bottom: 4px; }
+  .ex-solution .sol-final{ margin-top:8px; color: var(--good); font-weight:700; font-family: var(--font-mono); }
+
+  .open-note{ font-size: 11.5px; color: var(--ink-faint); font-family: var(--font-mono); }
+
+  sup{ font-size: 0.7em; }
+
+  footer{
+    text-align:center; padding: 30px 20px 50px;
+    color: var(--ink-faint); font-size: 13px; font-family: var(--font-mono);
+  }
+
+  .toast{
+    position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color: var(--bg);
+    padding: 10px 18px; border-radius: 999px; font-family: var(--font-mono); font-size: 13px;
+    opacity: 0; pointer-events:none; transition: opacity .25s ease, transform .25s ease;
+    z-index: 100; white-space: nowrap;
+  }
+  .toast.show{ opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+
+<div class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="eyebrow"><span class="dot"></span>IB MYP Sciences &middot; Physics &middot; Grade 9 (MYP 4) &middot; Unit 2</div>
+    <div class="title-row">
+      <div>
+        <h1>Unit 2: Oscillations &amp; Waves</h1>
+        <div class="subtitle">Physics workbook &mdash; simple harmonic motion, energy in oscillations, transverse &amp; longitudinal waves, the wave speed equation, sound, the electromagnetic spectrum, reflection, refraction and the inverse square law. Six lessons, 120 exercises, two worked examples and two diagrams per lesson.</div>
+      </div>
+      <div class="student-tag">Prepared for <b>Devon</b> &middot; 18 weeks</div>
+    </div>
+    <div class="meta-strip">
+      <span>Global context: <b>Personal and cultural expression</b></span>
+      <span>Key concept: <b>Form</b></span>
+      <span>Related concepts: <b>Patterns, Transformation</b></span>
+      <span>Criteria: <b>A &middot; B &middot; C &middot; D</b></span>
+    </div>
+  </div>
+</div>
+
+<div class="scoreboard">
+  <div class="wrap scoreboard-inner" id="scoreboardInner">
+    <span class="score-total"><b id="totalDone">0</b>/120 done</span>
+    <!-- chips injected by JS -->
+    <button class="reset-btn" id="resetBtn" title="Clear saved progress">reset progress</button>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <details class="intro-card" id="introCard">
+    <summary>Unit reference &mdash; Statement of Inquiry, inquiry questions &amp; how to use this guide<span class="arrow">&#9660;</span></summary>
+    <div class="intro-grid">
+      <p class="soi">&ldquo;Humans use their understanding of wave formation to manipulate visual and auditory patterns to express personal and cultural emotions through music and art.&rdquo;</p>
+
+      <div class="intro-block">
+        <h4>How this guide works</h4>
+        <p>Each lesson (A&ndash;F) opens with the core rules and two diagrams, then two fully worked examples, a short <b>Rules to remember</b> checklist, a <b>physics meme break</b>, and 20 practice exercises. Every lesson's checklist is collected again in the <b>Rules to remember</b> cheat sheet at the bottom of the page. Type an answer and press <b>Check</b> for instant feedback, or open <b>Show solution</b> to see the steps. Numeric answers can be typed with or without units &mdash; <code>2</code> and <code>2 s</code> both pass. Throughout this unit take <b>g = 9.8 m/s&sup2;</b>, the <b>speed of sound in air = 340 m/s</b> and the <b>speed of light in a vacuum = 3.0 &times; 10&#8312; m/s</b>, so your answers match the class. Your progress is saved automatically in this browser.</p>
+      </div>
+      <div class="intro-block">
+        <h4>IB learner profile</h4>
+        <p><b>Inquirers</b> &mdash; the unit starts from something as ordinary as a swinging pendulum (A&ndash;B) and builds outward to the wave patterns (C&ndash;F) behind music, colour, radio and every image you have ever seen.</p>
+      </div>
+
+      <div class="iq-table">
+        <div class="iq-row"><span class="tag">Factual</span><p>What are the main properties of waves?</p></div>
+        <div class="iq-row"><span class="tag">Factual</span><p>What is the difference between a transverse and a longitudinal wave?</p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>How is sound and light generated from oscillating sources?</p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>Why does a pendulum's period depend on its length but not on its mass or amplitude? <em>(see Lesson A)</em></p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>Why must frequency and wavelength trade off against each other within a single medium?</p></div>
+        <div class="iq-row"><span class="tag">Debatable</span><p>Are electromagnetic waves hazardous to human life? <em>(see Lesson E, Exercise 20)</em></p></div>
+      </div>
+    </div>
+  </details>
+
+  <div id="lessons"></div>
+
+  <section class="cheatsheet" id="cheatsheet">
+    <h2>Rules to remember</h2>
+    <div class="cs-sub">The whole unit on one page &mdash; read this before a test</div>
+    <div class="cs-grid" id="csGrid"></div>
+  </section>
+
+</main>
+
+<footer>Oscillations &amp; Waves &middot; Physics Unit 2 study workbook &middot; built for Devon</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------------------------------------------------------
+     DATA
+  --------------------------------------------------------------- */
+  var LESSONS = [
+    {
+      letter: "A", hueVar: "--hueA", title: "Simple Harmonic Motion and Pendulums",
+      rules: [
+        "<b>Simple harmonic motion (SHM)</b> is repeating back-and-forth motion about a central <b>equilibrium</b> position &mdash; a swinging pendulum, a mass bouncing on a spring, a guitar string.",
+        "What makes it SHM is the <b>restoring force</b>: the further the object is pushed from equilibrium, the harder something pulls it back. That is why the motion repeats instead of dying at one end.",
+        "<b>Period (T)</b> is the time for <i>one complete</i> oscillation, in <b>seconds</b>. One complete swing means all the way across and all the way back &mdash; not just one side.",
+        "<b>Frequency (f)</b> is the number of complete oscillations per second, in <b>hertz (Hz)</b>. The two are reciprocals: <b>f = 1/T</b> and <b>T = 1/f</b>.",
+        "<b>Amplitude</b> is the largest displacement from equilibrium. For a pendulum it is how far to the side the bob swings.",
+        "For a simple pendulum with small swings, <b>T = 2&pi;&radic;(L/g)</b>, where L is the length in metres and <b>g = 9.8 m/s&sup2;</b>. Read that formula carefully: <b>mass is not in it, and amplitude is not in it.</b> Only length (and gravity) change the period."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 186" width="380" height="186">
+        <text x="190" y="13" text-anchor="middle" font-size="10.5">one complete oscillation of a pendulum</text>
+        <line x1="110" y1="26" x2="270" y2="26" class="dg-ink-line" stroke-width="2.5"/>
+        <circle cx="190" cy="26" r="4" class="dg-fill"/>
+        <line x1="190" y1="26" x2="190" y2="140" class="dg-ink-line" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="190" y1="26" x2="124" y2="124" class="dg-line" stroke-width="2"/>
+        <line x1="190" y1="26" x2="256" y2="124" class="dg-line" stroke-width="2"/>
+        <line x1="190" y1="26" x2="190" y2="144" class="dg-line" stroke-width="2"/>
+        <circle cx="124" cy="124" r="11" class="dg-tint" stroke-width="2"/>
+        <circle cx="256" cy="124" r="11" class="dg-tint" stroke-width="2"/>
+        <circle cx="190" cy="144" r="11" class="dg-fill"/>
+        <path d="M 124 138 Q 190 168 256 138" class="dg-good" stroke-width="2" stroke-dasharray="5 4" style="fill:none"/>
+        <text x="120" y="96" text-anchor="middle" font-size="9.5">extreme</text>
+        <text x="260" y="96" text-anchor="middle" font-size="9.5">extreme</text>
+        <text x="190" y="176" text-anchor="middle" font-size="10">equilibrium (lowest point)</text>
+        <line x1="86" y1="62" x2="161" y2="71" class="dg-soft dg-ink-line" stroke-width="1" style="fill:none"/>
+        <text x="18" y="60" font-size="10">L = length</text>
+        <text x="18" y="74" font-size="9.5" class="dg-soft">pivot to</text>
+        <text x="18" y="86" font-size="9.5" class="dg-soft">centre of bob</text>
+        <text x="296" y="60" font-size="10">T = time for</text>
+        <text x="296" y="74" font-size="10">the WHOLE</text>
+        <text x="296" y="88" font-size="10">there-and-back</text>
+        <line x1="124" y1="124" x2="190" y2="124" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <line x1="124" y1="118" x2="124" y2="130" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <line x1="190" y1="118" x2="190" y2="130" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <text x="112" y="110" text-anchor="end" font-size="9.5" class="dg-good">amplitude</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 180" width="380" height="180">
+        <text x="190" y="13" text-anchor="middle" font-size="10.5">what changes T, and what does not (g = 9.8 m/s&sup2;)</text>
+        <line x1="24" y1="30" x2="356" y2="30" class="dg-ink-line" stroke-width="2"/>
+        <line x1="66" y1="30" x2="66" y2="72" class="dg-line" stroke-width="2"/>
+        <circle cx="66" cy="80" r="9" class="dg-tint" stroke-width="2"/>
+        <text x="66" y="146" text-anchor="middle" font-size="10">L = 0.25 m</text>
+        <text x="66" y="162" text-anchor="middle" font-size="11">T = 1.00 s</text>
+        <line x1="160" y1="30" x2="160" y2="114" class="dg-line" stroke-width="2"/>
+        <circle cx="160" cy="122" r="9" class="dg-tint" stroke-width="2"/>
+        <text x="160" y="146" text-anchor="middle" font-size="10">L = 1.00 m</text>
+        <text x="160" y="162" text-anchor="middle" font-size="11">T = 2.01 s</text>
+        <line x1="252" y1="30" x2="252" y2="72" class="dg-line" stroke-width="2"/>
+        <circle cx="252" cy="82" r="15" class="dg-fill"/>
+        <text x="252" y="133" text-anchor="middle" font-size="10">L = 0.25 m,</text>
+        <text x="252" y="147" text-anchor="middle" font-size="10">bob 10&times; heavier</text>
+        <text x="252" y="162" text-anchor="middle" font-size="11" class="dg-good">T = 1.00 s</text>
+        <text x="322" y="72" text-anchor="middle" font-size="10" class="dg-good">same!</text>
+        <path d="M 300 78 Q 286 84 272 88" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <polygon points="268,89 280,83 280,92" class="dg-good"/>
+        <text x="190" y="176" text-anchor="middle" font-size="9.5" class="dg-soft">4&times; the length &rarr; 2&times; the period. 10&times; the mass &rarr; no change.</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "One oscillation is the full round trip &mdash; across and back. A common exam slip is to time only half of it, which halves every answer that follows.",
+        "Quadruple the length and the period doubles (because of the square root). Change the mass, and the period does not budge."
+      ],
+      trick: "Two habits will carry you through this whole lesson. First, <b>f and T are reciprocals</b> &mdash; whichever one you are given, the other is one divided by it. Second, when a question changes something about a pendulum, ask <b>&ldquo;is that thing in the formula?&rdquo;</b> T = 2&pi;&radic;(L/g) contains only <b>L</b> and <b>g</b>. Mass is not there. Amplitude is not there. So a heavier bob, or a slightly wider swing, changes <b>nothing</b> about the period &mdash; and examiners ask that almost every year.",
+      examples: [
+        {
+          problem: "A pendulum completes 20 oscillations in 40 seconds. Find its period and its frequency.",
+          steps: [
+            "Period is the time for ONE oscillation, so divide the total time by the number of oscillations",
+            "T = 40 &divide; 20 = 2 s",
+            "Frequency is the reciprocal of the period: f = 1/T",
+            "f = 1 &divide; 2 = 0.5",
+            "Units: T in seconds, f in hertz"
+          ],
+          answer: "T = 2 s and f = 0.5 Hz"
+        },
+        {
+          problem: "A simple pendulum is 0.45 m long. Taking g = 9.8 m/s&sup2;, find its period and its frequency for small swings.",
+          steps: [
+            "T = 2&pi;&radic;(L/g), with L = 0.45 m and g = 9.8 m/s&sup2;",
+            "L/g = 0.45 &divide; 9.8 = 0.0459",
+            "&radic;0.0459 = 0.214",
+            "T = 2&pi; &times; 0.214 = 1.35 s (2 d.p.)",
+            "f = 1/T = 1 &divide; 1.3464 = 0.743 Hz",
+            "Note that the mass of the bob was never needed &mdash; it does not appear in the formula"
+          ],
+          answer: "T = 1.35 s and f = 0.74 Hz"
+        }
+      ],
+      remember: [
+        "<b>One oscillation = there AND back.</b> Time many swings and divide, so a stopwatch slip is spread thin.",
+        "<b>f = 1/T</b> and <b>T = 1/f</b>. Period in seconds, frequency in hertz &mdash; never mix the units up.",
+        "<b>T = 2&pi;&radic;(L/g)</b>, with g = 9.8 m/s&sup2;. Only <b>length</b> and <b>gravity</b> are in it.",
+        "<b>Mass and amplitude do not change the period.</b> This is the single most-tested surprise in the topic."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 200" width="460" height="200">
+        <line x1="40" y1="16" x2="420" y2="16" class="cm-line" stroke-width="3"/>
+        <line x1="104" y1="16" x2="104" y2="74" class="cm-line" stroke-width="2"/>
+        <circle cx="104" cy="98" r="24" class="cm-fill"/>
+        <circle cx="96" cy="92" r="3.5" style="fill:var(--surface)"/>
+        <circle cx="112" cy="92" r="3.5" style="fill:var(--surface)"/>
+        <path d="M94 108 Q104 118 114 108" class="cm-line" stroke-width="2" style="stroke:var(--surface);fill:none"/>
+        <text x="104" y="146" text-anchor="middle" font-size="11">heavy bob, L = 0.25 m</text>
+        <line x1="300" y1="16" x2="300" y2="86" class="cm-line" stroke-width="2"/>
+        <circle cx="300" cy="98" r="11" class="cm-face" stroke-width="2"/>
+        <circle cx="296" cy="95" r="2" class="cm-fill"/>
+        <circle cx="304" cy="95" r="2" class="cm-fill"/>
+        <path d="M295 104 Q300 109 305 104" class="cm-line" stroke-width="1.6"/>
+        <text x="300" y="146" text-anchor="middle" font-size="11">light bob, L = 0.25 m</text>
+        <rect x="10" y="150" width="222" height="44" rx="10" class="cm-face2" stroke-width="2"/>
+        <text x="121" y="169" text-anchor="middle" font-size="11">&ldquo;Stand back, tiny. I am</text>
+        <text x="121" y="185" text-anchor="middle" font-size="11">ten times the pendulum.&rdquo;</text>
+        <rect x="244" y="150" width="208" height="44" rx="10" class="cm-good" stroke-width="2"/>
+        <text x="348" y="169" text-anchor="middle" font-size="11">&ldquo;We both take 1.00 s.</text>
+        <text x="348" y="185" text-anchor="middle" font-size="11">Check the formula, pal.&rdquo;</text>
+      </svg>`,
+        caption: "The heavy bob has more weight pulling it down, but exactly proportionally more mass to accelerate, and the two cancel. T = 2&pi;&radic;(L/g) has no m in it, so both pendulums keep perfect time with each other."
+      },
+      exercises: [
+        { prompt: "A pendulum completes 10 oscillations in 20 seconds. Find its period (s).", value: 2, tol: 0.02,
+          solution: ["T = total time &divide; number of oscillations", "T = 20 &divide; 10", "= 2 s"] },
+        { prompt: "Using that same pendulum, find its frequency (Hz).", value: 0.5, tol: 0.02,
+          solution: ["f = 1/T", "= 1 &divide; 2", "= 0.5 Hz"] },
+        { prompt: "A pendulum has a frequency of 4 Hz. Find its period (s).", value: 0.25, tol: 0.01,
+          solution: ["T = 1/f", "= 1 &divide; 4", "= 0.25 s"] },
+        { prompt: "A pendulum has a period of 0.5 s. Find its frequency (Hz).", value: 2, tol: 0.02,
+          solution: ["f = 1/T", "= 1 &divide; 0.5", "= 2 Hz"] },
+        { prompt: "A pendulum swings 15 times in 30 seconds. Find its frequency (Hz).", value: 0.5, tol: 0.02,
+          solution: ["f = number of oscillations &divide; time", "= 15 &divide; 30", "= 0.5 Hz"] },
+        { prompt: "A mass on a spring completes 24 oscillations in 6 seconds. Find its frequency (Hz).", value: 4, tol: 0.05,
+          solution: ["f = 24 &divide; 6", "= 4 Hz"] },
+        { prompt: "What is the SI unit of frequency? (Name or symbol.)", accept:["hertz","hz","thehertz"],
+          solution: ["Frequency counts oscillations per second", "The unit is the hertz (Hz)"] },
+        { prompt: "What name is given to the central position an oscillating object keeps returning to?", accept:["equilibrium","equilibriumposition","theequilibriumposition","rest","restposition"],
+          solution: ["It is the equilibrium (rest) position", "The restoring force always points back toward it"] },
+        { prompt: "What name is given to the maximum displacement of an oscillation from its equilibrium position?", accept:["amplitude","theamplitude"],
+          solution: ["Amplitude"] },
+        { prompt: "The mass of a pendulum bob is doubled, with the length unchanged. Does its period increase, decrease or stay the same? (Answer: increase / decrease / same)", accept:["same","staysthesame","thesame","nochange","unchanged","itstaysthesame"],
+          solution: ["Mass does not appear in T = 2&pi;&radic;(L/g)", "The period stays exactly the same"] },
+        { prompt: "The length of a pendulum is increased, with everything else unchanged. Does its period increase, decrease or stay the same?", accept:["increase","increases","itincreases","goesup"],
+          solution: ["T = 2&pi;&radic;(L/g), so T grows as L grows", "The period increases"] },
+        { prompt: "A pendulum is swung through a larger (but still small) angle. Does its period increase, decrease or stay the same?", accept:["same","staysthesame","thesame","nochange","unchanged","itstaysthesame"],
+          solution: ["Amplitude does not appear in the small-angle formula", "The period stays the same"] },
+        { prompt: "A simple pendulum is 1.00 m long. Taking g = 9.8 m/s&sup2;, find its period (s) to 2 d.p.", value: 2.01, tol: 0.03,
+          solution: ["T = 2&pi;&radic;(L/g) = 2&pi;&radic;(1.00 &divide; 9.8)", "&radic;0.1020 = 0.3194", "T = 2&pi; &times; 0.3194 = 2.01 s"] },
+        { prompt: "A simple pendulum is 0.25 m long. Taking g = 9.8 m/s&sup2;, find its period (s) to 2 d.p.", value: 1.00, tol: 0.03,
+          solution: ["T = 2&pi;&radic;(0.25 &divide; 9.8) = 2&pi;&radic;0.02551", "&radic;0.02551 = 0.1597", "T = 2&pi; &times; 0.1597 = 1.00 s"] },
+        { prompt: "Find the frequency (Hz) of that 0.25 m pendulum, to 2 d.p.", value: 1.00, tol: 0.03,
+          solution: ["f = 1/T = 1 &divide; 1.0035", "= 1.00 Hz"] },
+        { prompt: "The length of a pendulum is made 4 times bigger. By what factor is its period multiplied?", value: 2, tol: 0.05,
+          solution: ["T is proportional to &radic;L", "&radic;4 = 2, so the period is multiplied by 2"] },
+        { prompt: "The same 1.00 m pendulum is taken to the Moon, where g = 1.6 m/s&sup2;. Find its new period (s) to 2 d.p.", value: 4.97, tol: 0.06,
+          solution: ["T = 2&pi;&radic;(1.00 &divide; 1.6) = 2&pi;&radic;0.625", "&radic;0.625 = 0.7906", "T = 2&pi; &times; 0.7906 = 4.97 s &mdash; weaker gravity, slower swing"] },
+        { prompt: "A pendulum has a frequency of 0.4 Hz. How many complete oscillations does it make in 60 seconds?", value: 24, tol: 0.5,
+          solution: ["number = f &times; time", "= 0.4 &times; 60", "= 24 oscillations"] },
+        { prompt: "Explain why a pendulum's period does not depend on the mass of its bob, even though a heavier bob is pulled down harder by gravity.", open: true,
+          solution: ["Sample response: A heavier bob does feel a bigger restoring force, because the force of gravity on it is larger. But it also has proportionally more mass to accelerate, and by a = F/m those two effects cancel exactly. The bob therefore has the same acceleration at every point of the swing whatever its mass, so it takes the same time to complete a cycle. That is why m does not appear in T = 2&pi;&radic;(L/g)."] },
+        { prompt: "Describe how you would measure the period of a classroom pendulum as accurately as possible with a stopwatch, and explain each choice you make.", open: true,
+          solution: ["Sample response: I would time 20 complete oscillations rather than one, then divide the total by 20. My reaction time error (about 0.2 s) is then spread over 20 swings instead of falling on one, so it barely affects the answer. I would start and stop the stopwatch as the bob passes through the equilibrium position, because it is moving fastest there and the moment of passing is easiest to judge. I would repeat the whole measurement three times and take a mean, and I would keep the swing angle small so the T = 2&pi;&radic;(L/g) relationship still holds."] }
+      ]
+    },
+    {
+      letter: "B", hueVar: "--hueB", title: "Energy in Oscillations",
+      rules: [
+        "In an oscillating system the energy is constantly traded between <b>kinetic energy (KE)</b> and <b>potential energy (PE)</b> &mdash; gravitational PE for a pendulum, elastic PE for a spring.",
+        "At the <b>extremes</b> of the swing the object is momentarily at rest, so <b>KE = 0 and PE is maximum</b>. At the <b>equilibrium</b> position it moves fastest, so <b>KE is maximum and PE is minimum</b>.",
+        "Ignoring friction, the <b>total mechanical energy KE + PE is constant</b> at every point of the swing. If you know the total and one of the two, subtract to get the other.",
+        "The two formulas you need: <b>PE = mgh</b> (with g = 9.8 m/s&sup2; and h measured from the lowest point) and <b>KE = &frac12;mv&sup2;</b>. Energy is measured in <b>joules (J)</b>.",
+        "Because all the PE at the top becomes KE at the bottom, <b>mgh = &frac12;mv&sup2;</b>, so <b>v = &radic;(2gh)</b> &mdash; and the mass cancels out again.",
+        "Real oscillations show <b>damping</b>: friction at the pivot and air resistance turn a little mechanical energy into heat and sound each cycle, so the amplitude shrinks while the period stays roughly the same."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 196" width="380" height="196">
+        <text x="190" y="13" text-anchor="middle" font-size="10.5">the same 1.0 J, shared out three different ways</text>
+        <line x1="60" y1="22" x2="320" y2="22" class="dg-ink-line" stroke-width="2"/>
+        <circle cx="190" cy="22" r="3" class="dg-fill"/>
+        <line x1="190" y1="22" x2="118" y2="76" class="dg-ink-line" stroke-width="1.4"/>
+        <line x1="190" y1="22" x2="190" y2="94" class="dg-ink-line" stroke-width="1.4"/>
+        <line x1="190" y1="22" x2="262" y2="76" class="dg-ink-line" stroke-width="1.4"/>
+        <circle cx="118" cy="76" r="7" class="dg-tint" stroke-width="2"/>
+        <circle cx="190" cy="94" r="7" class="dg-fill"/>
+        <circle cx="262" cy="76" r="7" class="dg-tint" stroke-width="2"/>
+        <text x="190" y="114" text-anchor="middle" font-size="9.5" class="dg-soft">fastest here</text>
+        <text x="63" y="126" text-anchor="middle" font-size="10">left extreme</text>
+        <rect x="40" y="132" width="20" height="44" class="dg-fill" opacity="0.9"/>
+        <rect x="66" y="132" width="20" height="44" class="dg-ink-line" stroke-width="1.4"/>
+        <text x="63" y="190" text-anchor="middle" font-size="9">PE 1.0 &middot; KE 0</text>
+        <text x="187" y="126" text-anchor="middle" font-size="10">equilibrium</text>
+        <rect x="164" y="132" width="20" height="44" class="dg-ink-line" stroke-width="1.4"/>
+        <rect x="190" y="132" width="20" height="44" class="dg-fill" opacity="0.9"/>
+        <text x="187" y="190" text-anchor="middle" font-size="9">PE 0 &middot; KE 1.0</text>
+        <text x="315" y="126" text-anchor="middle" font-size="10">right extreme</text>
+        <rect x="292" y="132" width="20" height="44" class="dg-fill" opacity="0.9"/>
+        <rect x="318" y="132" width="20" height="44" class="dg-ink-line" stroke-width="1.4"/>
+        <text x="315" y="190" text-anchor="middle" font-size="9">PE 1.0 &middot; KE 0</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 192" width="380" height="192">
+        <text x="190" y="13" text-anchor="middle" font-size="10.5">damping: the amplitude shrinks, the period does not</text>
+        <line x1="30" y1="96" x2="356" y2="96" class="dg-ink-line" stroke-width="1.2" stroke-dasharray="4 4"/>
+        <path d="M 34 96 Q 54 26 74 96 Q 94 162 114 96 Q 134 38 154 96 Q 174 150 194 96 Q 214 50 234 96 Q 254 140 274 96 Q 294 60 314 96 Q 334 130 350 96" class="dg-line" stroke-width="2.5" fill="none"/>
+        <line x1="34" y1="60" x2="350" y2="82" class="dg-bad" stroke-width="1.6" stroke-dasharray="5 4" style="fill:none"/>
+        <line x1="34" y1="133" x2="350" y2="112" class="dg-bad" stroke-width="1.6" stroke-dasharray="5 4" style="fill:none"/>
+        <text x="352" y="30" text-anchor="end" font-size="9.5" class="dg-bad">amplitude envelope</text>
+        <line x1="332" y1="38" x2="338" y2="78" class="dg-bad" stroke-width="1" style="fill:none"/>
+        <text x="20" y="112" font-size="9.5" class="dg-soft">rest</text>
+        <line x1="34" y1="172" x2="114" y2="172" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <line x1="34" y1="167" x2="34" y2="177" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <line x1="114" y1="167" x2="114" y2="177" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <line x1="274" y1="172" x2="350" y2="172" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <line x1="274" y1="167" x2="274" y2="177" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <line x1="350" y1="167" x2="350" y2="177" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <text x="74" y="186" text-anchor="middle" font-size="9.5" class="dg-good">one period</text>
+        <text x="312" y="186" text-anchor="middle" font-size="9.5" class="dg-good">still one period</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "Read the pair of bars at each position: the total height is always the same 1.0 J, only the split between PE and KE changes as the bob swings.",
+        "Damping removes energy every cycle, so the swings get smaller &mdash; but the time each swing takes is essentially unchanged, because the period never depended on amplitude."
+      ],
+      trick: "Two sentences will answer most energy-in-oscillation questions. <b>&ldquo;Extremes: all PE, no KE.&rdquo;</b> <b>&ldquo;Middle: all KE, least PE.&rdquo;</b> Everything in between is a mixture that adds to the same total. And when you are asked for a speed at the bottom, do not hunt for the mass &mdash; write mgh = &frac12;mv&sup2;, cancel the m, and you are left with <b>v = &radic;(2gh)</b>.",
+      examples: [
+        {
+          problem: "A pendulum bob has 10 J of gravitational potential energy at its highest point. Friction is negligible. Find its kinetic energy as it passes through the lowest point, and its kinetic energy when it is halfway back up with 4 J of PE.",
+          steps: [
+            "With no friction, total mechanical energy is constant: KE + PE = 10 J everywhere",
+            "At the lowest point, take PE = 0 (it is the reference height)",
+            "KE = 10 &minus; 0 = 10 J",
+            "At the point where PE = 4 J: KE = total &minus; PE",
+            "KE = 10 &minus; 4 = 6 J"
+          ],
+          answer: "10 J at the bottom, and 6 J at the point where PE is 4 J"
+        },
+        {
+          problem: "A 0.20 kg pendulum bob is pulled aside until it is 0.050 m higher than its lowest point, and released. Taking g = 9.8 m/s&sup2;, find its potential energy at the release point and its speed as it passes through the lowest point.",
+          steps: [
+            "PE = mgh = 0.20 &times; 9.8 &times; 0.050",
+            "PE = 0.098 J",
+            "All of that PE becomes KE at the bottom, so &frac12;mv&sup2; = 0.098 J",
+            "Shortcut: v = &radic;(2gh), because the mass cancels",
+            "v = &radic;(2 &times; 9.8 &times; 0.050) = &radic;0.98",
+            "v = 0.99 m/s (2 d.p.)"
+          ],
+          answer: "PE = 0.098 J at the top, and v = 0.99 m/s at the bottom"
+        }
+      ],
+      remember: [
+        "<b>Extremes = maximum PE, zero KE.</b> <b>Equilibrium = maximum KE, minimum PE.</b>",
+        "<b>KE + PE = constant</b> when friction is ignored, so subtract to find whichever one is missing.",
+        "<b>PE = mgh</b> and <b>KE = &frac12;mv&sup2;</b>, in joules, with g = 9.8 m/s&sup2;.",
+        "Speed at the bottom is <b>v = &radic;(2gh)</b> &mdash; the mass cancels, so it never appears in the answer."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 196" width="460" height="196">
+        <line x1="60" y1="14" x2="400" y2="14" class="cm-line" stroke-width="3"/>
+        <line x1="230" y1="14" x2="118" y2="86" class="cm-line" stroke-width="1.6"/>
+        <line x1="230" y1="14" x2="230" y2="118" class="cm-line" stroke-width="1.6"/>
+        <circle cx="118" cy="98" r="22" class="cm-face" stroke-width="2"/>
+        <circle cx="110" cy="93" r="3" class="cm-fill"/>
+        <circle cx="126" cy="93" r="3" class="cm-fill"/>
+        <path d="M108 108 Q118 116 128 108" class="cm-line" stroke-width="2"/>
+        <circle cx="230" cy="140" r="22" class="cm-face" stroke-width="2"/>
+        <circle cx="222" cy="135" r="3" class="cm-fill"/>
+        <circle cx="238" cy="135" r="3" class="cm-fill"/>
+        <path d="M220 150 Q230 158 240 150" class="cm-line" stroke-width="2"/>
+        <rect x="6" y="126" width="98" height="46" rx="10" class="cm-face2" stroke-width="2"/>
+        <polygon points="86,126 104,126 96,112" class="cm-face2" stroke-width="2"/>
+        <text x="55" y="146" text-anchor="middle" font-size="11">&ldquo;I am full of</text>
+        <text x="55" y="162" text-anchor="middle" font-size="11">POTENTIAL.&rdquo;</text>
+        <rect x="258" y="98" width="144" height="46" rx="10" class="cm-good" stroke-width="2"/>
+        <polygon points="259,112 259,130 248,141" class="cm-good" stroke-width="2"/>
+        <text x="330" y="118" text-anchor="middle" font-size="11">&ldquo;And now I am</text>
+        <text x="330" y="134" text-anchor="middle" font-size="11">entirely KINETIC.&rdquo;</text>
+        <text x="230" y="186" text-anchor="middle" font-size="10.5" class="cm-soft">total energy: unchanged, thank you very much</text>
+      </svg>`,
+        caption: "The bob is not gaining or losing energy as it swings &mdash; it is only changing which pocket the energy sits in. Full of potential at the top, all kinetic at the bottom, same total the whole way."
+      },
+      exercises: [
+        { prompt: "At the maximum displacement of a pendulum's swing, what is its kinetic energy (J)?", value: 0, tol: 0.01,
+          solution: ["The bob is momentarily at rest at the extremes", "KE = &frac12;mv&sup2; with v = 0, so KE = 0 J"] },
+        { prompt: "At the equilibrium (central) position, is the kinetic energy at a maximum or a minimum?", accept:["maximum","max","amaximum","itsmaximum"],
+          solution: ["The bob moves fastest at the equilibrium position", "KE is at its maximum there"] },
+        { prompt: "At the equilibrium (central) position, is the potential energy at a maximum or a minimum?", accept:["minimum","min","aminimum"],
+          solution: ["This is the lowest point of the swing", "PE is at its minimum there"] },
+        { prompt: "A pendulum has 10 J of potential energy at its highest point and friction is negligible. Find its kinetic energy at the lowest point (J).", value: 10, tol: 0.05,
+          solution: ["Energy is conserved: all 10 J of PE becomes KE", "KE = 10 J"] },
+        { prompt: "A mass on a spring has 6 J of total mechanical energy. At one instant its kinetic energy is 2 J. Find its potential energy at that instant (J).", value: 4, tol: 0.05,
+          solution: ["PE = total &minus; KE", "= 6 &minus; 2", "= 4 J"] },
+        { prompt: "A swinging bob has a total mechanical energy of 12 J. At one point its potential energy is 7 J. Find its kinetic energy there (J).", value: 5, tol: 0.05,
+          solution: ["KE = total &minus; PE", "= 12 &minus; 7", "= 5 J"] },
+        { prompt: "Where in its swing does a pendulum move fastest? (One or two words.)", accept:["equilibrium","attheequilibrium","equilibriumposition","theequilibriumposition","themiddle","middle","centre","center","thelowestpoint","lowestpoint","bottom"],
+          solution: ["At the equilibrium position &mdash; the lowest, central point of the swing"] },
+        { prompt: "Where in its swing does a pendulum momentarily come to a complete stop?", accept:["attheextremes","theextremes","extremes","maximumdisplacement","atmaximumdisplacement","thehighestpoint","highestpoint"],
+          solution: ["At the extremes, the points of maximum displacement", "It is momentarily at rest there before swinging back"] },
+        { prompt: "A 0.20 kg bob is raised 0.050 m above its lowest point. Taking g = 9.8 m/s&sup2;, find its potential energy (J).", value: 0.098, tol: 0.003,
+          solution: ["PE = mgh", "= 0.20 &times; 9.8 &times; 0.050", "= 0.098 J"] },
+        { prompt: "Find the speed of that 0.20 kg bob as it passes the lowest point (m/s), to 2 d.p.", value: 0.99, tol: 0.03,
+          solution: ["v = &radic;(2gh) &mdash; the mass cancels", "= &radic;(2 &times; 9.8 &times; 0.050) = &radic;0.98", "= 0.99 m/s"] },
+        { prompt: "A 0.50 kg bob passes the lowest point at 2.0 m/s. Find its kinetic energy there (J).", value: 1, tol: 0.03,
+          solution: ["KE = &frac12;mv&sup2;", "= 0.5 &times; 0.50 &times; 2.0&sup2; = 0.5 &times; 0.50 &times; 4.0", "= 1.0 J"] },
+        { prompt: "Ignoring friction, find the potential energy of that same 0.50 kg bob at the top of its swing (J).", value: 1, tol: 0.03,
+          solution: ["All the KE at the bottom came from PE at the top", "PE = 1.0 J"] },
+        { prompt: "Find the height above the lowest point that the 0.50 kg bob reaches (m), to 3 d.p. Take g = 9.8 m/s&sup2;.", value: 0.204, tol: 0.006,
+          solution: ["h = v&sup2; &divide; (2g)", "= 2.0&sup2; &divide; (2 &times; 9.8) = 4.0 &divide; 19.6", "= 0.204 m"] },
+        { prompt: "A 0.40 kg bob is raised 0.20 m. Taking g = 9.8 m/s&sup2;, find its potential energy (J).", value: 0.784, tol: 0.01,
+          solution: ["PE = mgh = 0.40 &times; 9.8 &times; 0.20", "= 0.784 J"] },
+        { prompt: "Find the speed of that 0.40 kg bob at the lowest point (m/s), to 2 d.p.", value: 1.98, tol: 0.04,
+          solution: ["v = &radic;(2gh) = &radic;(2 &times; 9.8 &times; 0.20)", "= &radic;3.92", "= 1.98 m/s"] },
+        { prompt: "A second bob of 0.80 kg is released from the same height of 0.20 m. Find its speed at the lowest point (m/s), to 2 d.p.", value: 1.98, tol: 0.04,
+          solution: ["v = &radic;(2gh) does not contain the mass", "= &radic;3.92 = 1.98 m/s &mdash; identical to the lighter bob"] },
+        { prompt: "What is the name for the gradual loss of amplitude in a real oscillation caused by friction and air resistance?", accept:["damping","damped","dampening"],
+          solution: ["Damping"] },
+        { prompt: "In a real swinging pendulum, the lost mechanical energy is transferred mainly into which form of energy? (One word.)", accept:["heat","thermal","thermalenergy","heatenergy","internal","internalenergy"],
+          solution: ["Friction at the pivot and air resistance transfer it to heat (thermal energy), with a little sound"] },
+        { prompt: "Explain, using energy transformations, why a genuinely frictionless pendulum would keep returning to exactly the same height forever.", open: true,
+          solution: ["Sample response: With no friction at the pivot and no air resistance, no mechanical energy is converted into heat or sound, so the total KE + PE stays fixed. The energy simply moves back and forth between potential at the extremes and kinetic at the bottom. Since the total never falls, the bob always has exactly enough energy to climb back to its original height, and the amplitude never shrinks."] },
+        { prompt: "A real pendulum's swings gradually get smaller, but a stopwatch shows the period barely changes. Explain both observations.", open: true,
+          solution: ["Sample response: Friction and air resistance remove a little mechanical energy each cycle and turn it into heat and sound, so the total energy falls and the bob can no longer climb as high &mdash; the amplitude decays. The period, however, is given by T = 2&pi;&radic;(L/g), which depends only on the length and gravity. Since neither of those is changing, each smaller swing still takes essentially the same time as the large ones did."] }
+      ]
+    },
+    {
+      letter: "C", hueVar: "--hueC", title: "Wave Basics: Transverse and Longitudinal Waves",
+      rules: [
+        "A wave <b>transfers energy from place to place without transferring matter</b>. The particles of the medium oscillate about a fixed position; they do not travel along with the wave.",
+        "In a <b>transverse</b> wave the oscillations are <b>perpendicular</b> (at right angles) to the direction of travel &mdash; light, water ripples, a shaken rope. It has <b>crests</b> and <b>troughs</b>.",
+        "In a <b>longitudinal</b> wave the oscillations are <b>parallel</b> to the direction of travel &mdash; sound, a pushed slinky. It has <b>compressions</b> (particles squashed together) and <b>rarefactions</b> (particles spread apart).",
+        "<b>Wavelength (&lambda;)</b> is the distance between two matching points on consecutive waves &mdash; crest to crest, trough to trough, or compression to compression. It is measured in <b>metres</b>.",
+        "<b>Amplitude</b> is the maximum displacement from the rest position, measured from the <i>middle</i> line to a crest &mdash; <b>not</b> from a trough all the way up to a crest, which is twice the amplitude.",
+        "Amplitude carries the <b>energy</b> of a wave: a bigger amplitude means a louder sound or a brighter light. Frequency and wavelength describe the <b>pattern</b>, not the energy carried per wave."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 396 186" width="396" height="186">
+        <text x="190" y="13" text-anchor="middle" font-size="10.5">transverse wave: the four labels you must know</text>
+        <line x1="24" y1="94" x2="352" y2="94" class="dg-ink-line" stroke-width="1.2" stroke-dasharray="4 4"/>
+        <text x="24" y="110" font-size="9.5" class="dg-soft">rest line</text>
+        <path d="M 30 94 Q 60 14 90 94 Q 120 174 150 94 Q 180 14 210 94 Q 240 174 270 94 Q 300 14 330 94" class="dg-line" stroke-width="2.6" fill="none"/>
+        <line x1="60" y1="42" x2="180" y2="42" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <line x1="60" y1="36" x2="60" y2="48" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <line x1="180" y1="36" x2="180" y2="48" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <text x="120" y="32" text-anchor="middle" font-size="10.5" class="dg-good">wavelength &lambda;</text>
+        <text x="300" y="46" text-anchor="middle" font-size="10">crest</text>
+        <line x1="300" y1="54" x2="300" y2="94" class="dg-bad" stroke-width="1.6" style="fill:none"/>
+        <line x1="294" y1="54" x2="306" y2="54" class="dg-bad" stroke-width="1.6" style="fill:none"/>
+        <line x1="294" y1="94" x2="306" y2="94" class="dg-bad" stroke-width="1.6" style="fill:none"/>
+        <text x="336" y="78" font-size="10" class="dg-bad">amplitude</text>
+        <line x1="120" y1="136" x2="120" y2="142" class="dg-ink-line" stroke-width="1"/>
+        <text x="120" y="154" text-anchor="middle" font-size="10">trough</text>
+        <text x="190" y="178" text-anchor="middle" font-size="9.5">particles move up-down; the wave travels to the right &rarr;</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 178" width="380" height="178">
+        <text x="190" y="13" text-anchor="middle" font-size="10.5">longitudinal wave: compressions and rarefactions</text>
+        <line x1="26" y1="34" x2="26" y2="98" class="dg-line" stroke-width="2.4"/>
+        <line x1="34" y1="34" x2="34" y2="98" class="dg-line" stroke-width="2.4"/>
+        <line x1="42" y1="34" x2="42" y2="98" class="dg-line" stroke-width="2.4"/>
+        <line x1="68" y1="34" x2="68" y2="98" class="dg-line" stroke-width="2.4"/>
+        <line x1="94" y1="34" x2="94" y2="98" class="dg-line" stroke-width="2.4"/>
+        <line x1="126" y1="34" x2="126" y2="98" class="dg-line" stroke-width="2.4"/>
+        <line x1="134" y1="34" x2="134" y2="98" class="dg-line" stroke-width="2.4"/>
+        <line x1="142" y1="34" x2="142" y2="98" class="dg-line" stroke-width="2.4"/>
+        <line x1="168" y1="34" x2="168" y2="98" class="dg-line" stroke-width="2.4"/>
+        <line x1="194" y1="34" x2="194" y2="98" class="dg-line" stroke-width="2.4"/>
+        <line x1="226" y1="34" x2="226" y2="98" class="dg-line" stroke-width="2.4"/>
+        <line x1="234" y1="34" x2="234" y2="98" class="dg-line" stroke-width="2.4"/>
+        <line x1="242" y1="34" x2="242" y2="98" class="dg-line" stroke-width="2.4"/>
+        <line x1="268" y1="34" x2="268" y2="98" class="dg-line" stroke-width="2.4"/>
+        <line x1="294" y1="34" x2="294" y2="98" class="dg-line" stroke-width="2.4"/>
+        <line x1="326" y1="34" x2="326" y2="98" class="dg-line" stroke-width="2.4"/>
+        <line x1="334" y1="34" x2="334" y2="98" class="dg-line" stroke-width="2.4"/>
+        <line x1="342" y1="34" x2="342" y2="98" class="dg-line" stroke-width="2.4"/>
+        <text x="34" y="28" text-anchor="middle" font-size="9.5">C</text>
+        <text x="134" y="28" text-anchor="middle" font-size="9.5">C</text>
+        <text x="234" y="28" text-anchor="middle" font-size="9.5">C</text>
+        <text x="334" y="28" text-anchor="middle" font-size="9.5">C</text>
+        <text x="84" y="28" text-anchor="middle" font-size="9.5" class="dg-soft">R</text>
+        <text x="184" y="28" text-anchor="middle" font-size="9.5" class="dg-soft">R</text>
+        <text x="284" y="28" text-anchor="middle" font-size="9.5" class="dg-soft">R</text>
+        <line x1="34" y1="112" x2="134" y2="112" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <line x1="34" y1="106" x2="34" y2="118" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <line x1="134" y1="106" x2="134" y2="118" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <text x="84" y="128" text-anchor="middle" font-size="10" class="dg-good">one wavelength</text>
+        <text x="26" y="148" font-size="10">C = compression (squashed)</text>
+        <text x="26" y="162" font-size="10" class="dg-soft">R = rarefaction (spread out)</text>
+        <line x1="272" y1="150" x2="330" y2="150" class="dg-ink-line" stroke-width="1.6"/>
+        <polygon points="340,150 328,145 328,155" class="dg-fill"/>
+        <text x="352" y="132" text-anchor="end" font-size="9.5">particles vibrate along this line</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "On a transverse wave, wavelength runs crest to crest along the direction of travel, while amplitude is measured from the rest line up to a crest &mdash; two different directions, two different meanings.",
+        "A longitudinal wave has no crests to point at, so its wavelength is measured from one compression to the next; the particles jiggle back and forth along the same line the wave travels."
+      ],
+      trick: "The names tell you the answer. <b>TRANSverse</b> &mdash; the vibration goes <i>across</i> the direction of travel, like shaking a rope up and down while the wave runs away from you sideways. <b>LONGitudinal</b> &mdash; the vibration is a<i>long</i> the direction of travel, like shoving a slinky forwards. And when you measure: <b>amplitude is a height from the middle</b>, <b>wavelength is a length along the wave</b>. If a question gives you the total distance from trough to crest, <b>halve it</b> to get the amplitude.",
+      examples: [
+        {
+          problem: "A rope wave is drawn on a grid. Four complete waves fit into a 10 m length of rope, and the rope rises 0.30 m above the rest line at each crest. Find the wavelength and the amplitude.",
+          steps: [
+            "Wavelength is the length of ONE complete wave",
+            "&lambda; = total length &divide; number of complete waves",
+            "&lambda; = 10 &divide; 4 = 2.5 m",
+            "Amplitude is measured from the rest line to a crest, and that is exactly what was given",
+            "amplitude = 0.30 m"
+          ],
+          answer: "&lambda; = 2.5 m and amplitude = 0.30 m"
+        },
+        {
+          problem: "On a different transverse wave, the vertical distance from the bottom of a trough to the top of the next crest is 12 cm, and each particle takes 0.25 s to complete one full up-and-down cycle. Find the amplitude and the frequency.",
+          steps: [
+            "Trough-to-crest is the full peak-to-peak height, which is TWICE the amplitude",
+            "amplitude = 12 &divide; 2 = 6 cm",
+            "The time for one full cycle is the period, so T = 0.25 s",
+            "f = 1/T = 1 &divide; 0.25",
+            "f = 4 Hz"
+          ],
+          answer: "amplitude = 6 cm and f = 4 Hz"
+        }
+      ],
+      remember: [
+        "<b>Waves carry energy, not matter.</b> The floating duck bobs; it does not ride to shore.",
+        "<b>Transverse = vibration across the travel</b> (crests and troughs). <b>Longitudinal = vibration along the travel</b> (compressions and rarefactions).",
+        "<b>Wavelength &lambda;</b> = matching point to matching point, in metres. <b>Amplitude</b> = rest line to crest.",
+        "<b>Trough to crest is 2 &times; amplitude.</b> Halve it before you write the answer."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 190" width="460" height="190">
+        <path d="M 8 118 Q 44 82 80 118 Q 116 154 152 118 Q 188 82 224 118 Q 260 154 296 118 Q 332 82 368 118 Q 404 154 440 118" class="cm-line" stroke-width="2.4"/>
+        <ellipse cx="152" cy="112" rx="26" ry="15" class="cm-face" stroke-width="2"/>
+        <circle cx="166" cy="98" r="13" class="cm-face" stroke-width="2"/>
+        <circle cx="170" cy="95" r="2.6" class="cm-fill"/>
+        <polygon points="178,99 192,103 178,107" class="cm-good-fill"/>
+        <rect x="182" y="18" width="188" height="62" rx="12" class="cm-face2" stroke-width="2"/>
+        <polygon points="196,80 218,80 190,100" class="cm-face2" stroke-width="2"/>
+        <text x="276" y="40" text-anchor="middle" font-size="11">&ldquo;Waves have been rushing</text>
+        <text x="276" y="56" text-anchor="middle" font-size="11">past me all afternoon and</text>
+        <text x="276" y="72" text-anchor="middle" font-size="11">I am STILL right here.&rdquo;</text>
+        <rect x="14" y="140" width="200" height="44" rx="10" class="cm-good" stroke-width="2"/>
+        <polygon points="180,140 202,140 226,122" class="cm-good" stroke-width="2"/>
+        <text x="114" y="159" text-anchor="middle" font-size="11">&ldquo;Correct. I carry energy.</text>
+        <text x="114" y="175" text-anchor="middle" font-size="11">I do not carry ducks.&rdquo;</text>
+        <text x="340" y="166" text-anchor="middle" font-size="10.5" class="cm-soft">&mdash; the wave, firmly</text>
+      </svg>`,
+        caption: "The duck goes up and down as each wave passes and ends the afternoon exactly where it began. That is the whole idea: the wave moves the energy along, while the water &mdash; and the duck &mdash; stays put."
+      },
+      exercises: [
+        { prompt: "Is a light wave transverse or longitudinal?", accept:["transverse","itstransverse"],
+          solution: ["Light is transverse &mdash; its oscillations are perpendicular to its direction of travel"] },
+        { prompt: "Is a sound wave transverse or longitudinal?", accept:["longitudinal","itslongitudinal"],
+          solution: ["Sound is longitudinal &mdash; the air is pushed back and forth along the direction of travel"] },
+        { prompt: "In a transverse wave, do the particles oscillate parallel or perpendicular to the direction of travel?", accept:["perpendicular","atrightangles","rightangles","perpendicularly"],
+          solution: ["Perpendicular (at right angles) to the direction of travel"] },
+        { prompt: "In a longitudinal wave, do the particles oscillate parallel or perpendicular to the direction of travel?", accept:["parallel","alongit","parallelto"],
+          solution: ["Parallel to, or along, the direction of travel"] },
+        { prompt: "What is the term for the distance between two matching points on consecutive waves, for example crest to crest?", accept:["wavelength","thewavelength","lambda"],
+          solution: ["Wavelength, symbol &lambda;, measured in metres"] },
+        { prompt: "What is the term for the maximum displacement of a wave from its rest position?", accept:["amplitude","theamplitude"],
+          solution: ["Amplitude"] },
+        { prompt: "What name is given to the squashed-together regions of a longitudinal wave?", accept:["compressions","compression","acompression"],
+          solution: ["Compressions"] },
+        { prompt: "What name is given to the spread-out, low density regions of a longitudinal wave?", accept:["rarefactions","rarefaction","ararefaction"],
+          solution: ["Rarefactions"] },
+        { prompt: "What is the name for the highest point of a transverse wave?", accept:["crest","acrest","peak","thecrest"],
+          solution: ["A crest (also called a peak)"] },
+        { prompt: "What is the name for the lowest point of a transverse wave?", accept:["trough","atrough","thetrough"],
+          solution: ["A trough"] },
+        { prompt: "Three complete waves fit into a 12 m stretch of rope. Find the wavelength (m).", value: 4, tol: 0.05,
+          solution: ["&lambda; = total length &divide; number of complete waves", "= 12 &divide; 3", "= 4 m"] },
+        { prompt: "Five complete waves fit into a 2.5 m stretch of rope. Find the wavelength (m).", value: 0.5, tol: 0.02,
+          solution: ["&lambda; = 2.5 &divide; 5", "= 0.5 m"] },
+        { prompt: "A transverse wave measures 12 cm from the bottom of a trough to the top of a crest. Find its amplitude (cm).", value: 6, tol: 0.1,
+          solution: ["Trough to crest is twice the amplitude", "amplitude = 12 &divide; 2", "= 6 cm"] },
+        { prompt: "A wave's amplitude is 0.15 m. Find the total vertical distance from a trough to a crest (m).", value: 0.3, tol: 0.01,
+          solution: ["Trough to crest = 2 &times; amplitude", "= 2 &times; 0.15", "= 0.30 m"] },
+        { prompt: "A wave transfers something from place to place without transferring matter. What does it transfer? (One word.)", accept:["energy","itsenergy"],
+          solution: ["Energy"] },
+        { prompt: "As a water wave passes a floating leaf, does the leaf travel along with the wave? (yes / no)", accept:["no","nope","itdoesnot","itdoesn't"],
+          solution: ["No &mdash; the leaf bobs up and down about a fixed position", "Only the energy moves along"] },
+        { prompt: "You push and pull one end of a slinky along its own length. Is the wave you make transverse or longitudinal?", accept:["longitudinal","itslongitudinal"],
+          solution: ["Pushing along the slinky's length makes compressions and rarefactions", "It is longitudinal"] },
+        { prompt: "Which wave property determines how loud a sound is heard?", accept:["amplitude","theamplitude","itsamplitude"],
+          solution: ["Amplitude &mdash; a larger amplitude carries more energy, which the ear hears as a louder sound"] },
+        { prompt: "Explain what it means to say that a wave transfers energy without transferring matter, using an example you can picture.", open: true,
+          solution: ["Sample response: When a wave passes through a medium, each particle of the medium oscillates about its own fixed position and then returns to it &mdash; it is not carried along. What travels is the disturbance, and with it the energy. A duck sitting on a lake is a good picture: waves stream past it towards the shore all afternoon, but the duck simply rises and falls in place. The water is not flowing to the shore; only the energy of the wave is."] },
+        { prompt: "Give one everyday example each of a transverse and a longitudinal wave, and explain how you can tell which type each one is.", open: true,
+          solution: ["Sample response: A ripple on a pond is transverse: the water surface moves up and down while the ripple spreads outwards, so the oscillation is perpendicular to the travel. Sound from a speaker is longitudinal: the cone pushes and pulls the air backwards and forwards along the same line that the sound travels, creating compressions and rarefactions. The test in both cases is to compare the direction the particles move with the direction the wave goes: across means transverse, along means longitudinal."] }
+      ]
+    },
+    {
+      letter: "D", hueVar: "--hueD", title: "The Wave Speed Equation",
+      rules: [
+        "<b>Wave speed = frequency &times; wavelength</b>, written <b>v = f&lambda;</b>. Units: v in <b>m/s</b>, f in <b>Hz</b>, &lambda; in <b>metres</b>.",
+        "It works for <b>every</b> wave &mdash; sound, light, water ripples, radio, seismic waves. There is no separate formula to learn for each one.",
+        "Rearranged: <b>f = v &divide; &lambda;</b> and <b>&lambda; = v &divide; f</b>. Since v = &lambda;/T as well, you can go through the period whenever the frequency is not given directly.",
+        "In a given medium the <b>speed is fixed</b> by the medium itself. So if the frequency goes up, the wavelength <b>must</b> come down in exact proportion &mdash; double f and &lambda; halves.",
+        "Standard values to use in this unit: <b>sound in air &asymp; 340 m/s</b>, and <b>light (all EM waves) in a vacuum = 3.0 &times; 10&#8312; m/s</b>.",
+        "Convert before you substitute. Times must be in seconds and lengths in metres, or the m/s you write at the end is a lie."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 172" width="380" height="172">
+        <text x="190" y="13" text-anchor="middle" font-size="10.5">why v = f&lambda; makes sense</text>
+        <path d="M 30 62 Q 44 34 58 62 Q 72 90 86 62 Q 100 34 114 62 Q 128 90 142 62 Q 156 34 170 62 Q 184 90 198 62" class="dg-line" stroke-width="2.4" fill="none"/>
+        <line x1="30" y1="80" x2="86" y2="80" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <line x1="30" y1="74" x2="30" y2="86" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <line x1="86" y1="74" x2="86" y2="86" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <text x="58" y="96" text-anchor="middle" font-size="10" class="dg-good">&lambda; = 2 m each</text>
+        <text x="212" y="46" font-size="10.5">f = 3 Hz means</text>
+        <text x="212" y="62" font-size="10.5">3 whole waves leave</text>
+        <text x="212" y="78" font-size="10.5">every second</text>
+        <line x1="30" y1="118" x2="330" y2="118" class="dg-ink-line" stroke-width="1.2"/>
+        <text x="30" y="136" font-size="10.5">so in 1 second the front travels</text>
+        <text x="30" y="154" font-size="11.5">3 waves &times; 2 m = 6 m, i.e. v = f&lambda; = 6 m/s</text>
+        <polygon points="330,118 318,113 318,123" class="dg-fill"/>
+        <text x="286" y="112" font-size="9.5" class="dg-soft">1 second later</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 184" width="380" height="184">
+        <text x="190" y="13" text-anchor="middle" font-size="10.5">same medium, same speed: f and &lambda; trade off</text>
+        <text x="24" y="38" font-size="10">low f, long &lambda;</text>
+        <path d="M 24 66 Q 54 32 84 66 Q 114 100 144 66 Q 174 32 204 66 Q 234 100 264 66 Q 294 32 324 66" class="dg-line" stroke-width="2.4" fill="none"/>
+        <line x1="24" y1="84" x2="144" y2="84" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <line x1="24" y1="78" x2="24" y2="90" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <line x1="144" y1="78" x2="144" y2="90" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <text x="84" y="97" text-anchor="middle" font-size="9.5" class="dg-good">&lambda; = 4 m, f = 85 Hz</text>
+        <text x="24" y="120" font-size="10">high f, short &lambda;</text>
+        <path d="M 24 142 Q 39 122 54 142 Q 69 162 84 142 Q 99 122 114 142 Q 129 162 144 142 Q 159 122 174 142 Q 189 162 204 142 Q 219 122 234 142 Q 249 162 264 142 Q 279 122 294 142 Q 309 162 324 142" class="dg-line" stroke-width="2.4" fill="none"/>
+        <line x1="24" y1="160" x2="84" y2="160" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <line x1="24" y1="154" x2="24" y2="166" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <line x1="84" y1="154" x2="84" y2="166" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <text x="24" y="174" font-size="9.5" class="dg-good">&lambda; = 2 m, f = 170 Hz</text>
+        <text x="324" y="174" text-anchor="end" font-size="10.5" class="dg-bad">both give v = 340 m/s</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "The equation is really a counting argument: three waves leave each second and each is two metres long, so six metres of wave passes you every second.",
+        "In the same air both notes travel at 340 m/s. Halving the wavelength forces the frequency to double, because their product is pinned to the speed of sound."
+      ],
+      trick: "Write <b>v = f&lambda;</b> at the top of the page before you do anything else, then label which two of the three you were given. If the question gives a <b>period</b> instead of a frequency, convert first with f = 1/T. And watch for the trap question that says &ldquo;the pitch is raised while the speed of sound stays the same&rdquo;: the speed is <b>fixed by the air</b>, so a higher frequency can only mean a <b>shorter</b> wavelength.",
+      examples: [
+        {
+          problem: "A wave has a frequency of 50 Hz and a wavelength of 4 m. Find its speed.",
+          steps: [
+            "v = f&lambda;",
+            "v = 50 &times; 4",
+            "v = 200",
+            "Units: Hz &times; m = (1/s) &times; m = m/s"
+          ],
+          answer: "v = 200 m/s"
+        },
+        {
+          problem: "A radio station broadcasts at a frequency of 1.0 &times; 10&#8312; Hz. Taking the speed of all electromagnetic waves in air as 3.0 &times; 10&#8312; m/s, find the wavelength of the broadcast. Then find the wavelength of a 500 Hz sound wave in air, where the speed is 340 m/s.",
+          steps: [
+            "Rearrange: &lambda; = v &divide; f",
+            "Radio: &lambda; = (3.0 &times; 10&#8312;) &divide; (1.0 &times; 10&#8312;)",
+            "&lambda; = 3.0 m",
+            "Sound: &lambda; = 340 &divide; 500",
+            "&lambda; = 0.68 m",
+            "Same equation, wildly different speeds &mdash; always use the speed that belongs to that wave"
+          ],
+          answer: "the radio wave is 3.0 m long; the sound wave is 0.68 m long"
+        }
+      ],
+      remember: [
+        "<b>v = f&lambda;</b>, and therefore <b>f = v/&lambda;</b> and <b>&lambda; = v/f</b>. One equation for every wave there is.",
+        "<b>Sound in air &asymp; 340 m/s. Light in a vacuum = 3.0 &times; 10&#8312; m/s.</b> Learn both numbers.",
+        "In one medium the speed is fixed, so <b>f and &lambda; are inversely proportional</b>: double one, halve the other.",
+        "No frequency given? <b>f = 1/T</b> first, then substitute. Metres and seconds, always."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 194" width="460" height="194">
+        <line x1="90" y1="112" x2="370" y2="132" class="cm-line" stroke-width="3"/>
+        <polygon points="230,124 210,158 250,158" class="cm-fill"/>
+        <circle cx="120" cy="88" r="24" class="cm-face" stroke-width="2"/>
+        <circle cx="112" cy="83" r="3" class="cm-fill"/>
+        <circle cx="128" cy="83" r="3" class="cm-fill"/>
+        <path d="M110 98 Q120 106 130 98" class="cm-line" stroke-width="2"/>
+        <text x="120" y="150" text-anchor="middle" font-size="10.5">frequency</text>
+        <circle cx="340" cy="104" r="24" class="cm-face" stroke-width="2"/>
+        <circle cx="332" cy="99" r="3" class="cm-fill"/>
+        <circle cx="348" cy="99" r="3" class="cm-fill"/>
+        <path d="M330 118 Q340 110 350 118" class="cm-line" stroke-width="2"/>
+        <text x="340" y="152" text-anchor="middle" font-size="10.5">wavelength</text>
+        <rect x="14" y="6" width="176" height="44" rx="10" class="cm-face2" stroke-width="2"/>
+        <polygon points="94,50 116,50 106,64" class="cm-face2" stroke-width="2"/>
+        <text x="102" y="26" text-anchor="middle" font-size="11">&ldquo;I am going UP!</text>
+        <text x="102" y="42" text-anchor="middle" font-size="11">Doubling, in fact.&rdquo;</text>
+        <rect x="256" y="6" width="196" height="44" rx="10" class="cm-bad" stroke-width="2"/>
+        <polygon points="330,50 352,50 342,78" class="cm-bad" stroke-width="2"/>
+        <text x="354" y="26" text-anchor="middle" font-size="11">&ldquo;Then I am halving.</text>
+        <text x="354" y="42" text-anchor="middle" font-size="11">I don't make the rules.&rdquo;</text>
+        <text x="230" y="186" text-anchor="middle" font-size="10.5">the speed of sound, holding the balance at 340 m/s</text>
+      </svg>`,
+        caption: "The pivot is the speed of the medium, and it will not move. Since v = f&lambda; is fixed at 340 m/s in air, every rise in frequency has to be paid for with an equal fall in wavelength."
+      },
+      exercises: [
+        { prompt: "A wave has a frequency of 20 Hz and a wavelength of 3 m. Find its speed (m/s).", value: 60, tol: 0.5,
+          solution: ["v = f&lambda;", "= 20 &times; 3", "= 60 m/s"] },
+        { prompt: "A wave has a frequency of 100 Hz and a wavelength of 0.5 m. Find its speed (m/s).", value: 50, tol: 0.5,
+          solution: ["v = f&lambda; = 100 &times; 0.5", "= 50 m/s"] },
+        { prompt: "A sound wave travels at 340 m/s with a wavelength of 2 m. Find its frequency (Hz).", value: 170, tol: 1,
+          solution: ["f = v &divide; &lambda;", "= 340 &divide; 2", "= 170 Hz"] },
+        { prompt: "A sound wave travels at 340 m/s with a frequency of 680 Hz. Find its wavelength (m).", value: 0.5, tol: 0.02,
+          solution: ["&lambda; = v &divide; f", "= 340 &divide; 680", "= 0.5 m"] },
+        { prompt: "A wave has a speed of 12 m/s and a period of 0.5 s. Find its wavelength (m). (Find the frequency first.)", value: 6, tol: 0.1,
+          solution: ["f = 1/T = 1 &divide; 0.5 = 2 Hz", "&lambda; = v &divide; f = 12 &divide; 2", "= 6 m"] },
+        { prompt: "A wave has a period of 0.25 s and a wavelength of 8 m. Find its speed (m/s).", value: 32, tol: 0.3,
+          solution: ["f = 1/T = 1 &divide; 0.25 = 4 Hz", "v = f&lambda; = 4 &times; 8", "= 32 m/s"] },
+        { prompt: "A water wave has a wavelength of 0.4 m and a frequency of 2.5 Hz. Find its speed (m/s).", value: 1, tol: 0.03,
+          solution: ["v = f&lambda; = 2.5 &times; 0.4", "= 1.0 m/s"] },
+        { prompt: "Thirty complete waves pass a post in 10 seconds, and each is 2 m long. Find the speed of the waves (m/s).", value: 6, tol: 0.1,
+          solution: ["f = 30 &divide; 10 = 3 Hz", "v = f&lambda; = 3 &times; 2", "= 6 m/s"] },
+        { prompt: "A 256 Hz tuning fork sounds in air, where the speed of sound is 340 m/s. Find the wavelength (m), to 2 d.p.", value: 1.33, tol: 0.03,
+          solution: ["&lambda; = v &divide; f = 340 &divide; 256", "= 1.328...", "= 1.33 m"] },
+        { prompt: "A 1700 Hz whistle sounds in air at 340 m/s. Find the wavelength (m).", value: 0.2, tol: 0.01,
+          solution: ["&lambda; = 340 &divide; 1700", "= 0.2 m"] },
+        { prompt: "A sound wave in air (340 m/s) has a wavelength of 0.68 m. Find its frequency (Hz).", value: 500, tol: 3,
+          solution: ["f = v &divide; &lambda; = 340 &divide; 0.68", "= 500 Hz"] },
+        { prompt: "A sound wave in air (340 m/s) has a wavelength of 0.85 m. Find its frequency (Hz).", value: 400, tol: 3,
+          solution: ["f = 340 &divide; 0.85", "= 400 Hz"] },
+        { prompt: "Sound travels through water at 1500 m/s. Find the wavelength (m) of a 750 Hz note in water.", value: 2, tol: 0.05,
+          solution: ["&lambda; = v &divide; f = 1500 &divide; 750", "= 2 m &mdash; much longer than the same note in air"] },
+        { prompt: "An electromagnetic wave has a frequency of 1.0 &times; 10&#8312; Hz. Taking the speed of light as 3.0 &times; 10&#8312; m/s, find its wavelength (m).", value: 3, tol: 0.05,
+          solution: ["&lambda; = v &divide; f = (3.0 &times; 10&#8312;) &divide; (1.0 &times; 10&#8312;)", "= 3.0 m"] },
+        { prompt: "A radio wave has a frequency of 2 &times; 10&#8310; Hz and a wavelength of 150 m. Find its speed, written in the form \"3 x 10^8\".", accept:["3x10^8","3.0x10^8","300000000","3x108","3e8"],
+          solution: ["v = f&lambda; = (2 &times; 10&#8310;) &times; 150", "= 3 &times; 10&#8312; m/s &mdash; the speed of light, as expected for a radio wave"] },
+        { prompt: "Two waves travel in the same medium, so they share a speed. Wave P has twice the frequency of wave Q. Wave P's wavelength is what fraction of wave Q's? (Answer as a decimal.)", value: 0.5, tol: 0.02,
+          solution: ["v = f&lambda; is fixed, so f and &lambda; are inversely proportional", "Doubling f must halve &lambda;", "P's wavelength is 0.5 of Q's"] },
+        { prompt: "In the same medium, a wave's wavelength is made 3 times longer. By what factor is its frequency multiplied? (Answer as a decimal to 2 d.p.)", value: 0.33, tol: 0.02,
+          solution: ["f = v/&lambda; with v fixed, so tripling &lambda; divides f by 3", "factor = 1/3 = 0.33"] },
+        { prompt: "True or false: the equation v = f&lambda; applies only to sound waves.", accept:["false","f","itsfalse"],
+          solution: ["False &mdash; v = f&lambda; describes every kind of wave, including light, water waves and seismic waves"] },
+        { prompt: "Explain why, for waves travelling at a fixed speed, an increase in frequency must be matched by a decrease in wavelength.", open: true,
+          solution: ["Sample response: The speed of a wave is set by the medium it is travelling through, not by the source, so v is a fixed number. Because v = f&lambda;, the product of frequency and wavelength has to keep equalling that fixed number. If the source vibrates faster, f rises, and the only way for the product to stay the same is for &lambda; to fall by the same factor. Physically, more waves are being squeezed into each second, so each one has less room and comes out shorter."] },
+        { prompt: "A guitarist plays a higher note on the same guitar in the same room. Explain what happens to the frequency, the speed and the wavelength of the sound, and why.", open: true,
+          solution: ["Sample response: A higher note means the string vibrates faster, so the frequency of the sound wave increases. The speed does not change, because the speed of sound is a property of the air (about 340 m/s), not of the note being played. Since v = f&lambda; and v is fixed while f has risen, the wavelength must fall in proportion. So the higher note is a shorter wave travelling at exactly the same speed as the lower one, which is why both notes reach the audience together."] }
+      ]
+    },
+    {
+      letter: "E", hueVar: "--hueE", title: "Sound and the Electromagnetic Spectrum",
+      rules: [
+        "<b>Sound is a longitudinal wave that needs a medium.</b> It travels by making particles vibrate and pass the disturbance on, so it cannot cross a vacuum. In air it travels at about <b>340 m/s</b>, and faster in liquids and solids because their particles are closer together.",
+        "For sound, <b>frequency is heard as pitch</b> and <b>amplitude is heard as loudness</b>. The human audible range is roughly <b>20 Hz to 20 000 Hz</b>; above that is ultrasound.",
+        "<b>Electromagnetic (EM) waves are transverse</b> oscillations of electric and magnetic fields. They need <b>no medium</b> and all travel through a vacuum at <b>3.0 &times; 10&#8312; m/s</b>.",
+        "The EM spectrum in order of <b>increasing frequency and decreasing wavelength</b>: <b>radio, microwave, infrared, visible, ultraviolet, X-ray, gamma</b>. It is one continuous family, not seven different things.",
+        "<b>Visible light is a very narrow strip</b> of that spectrum. Within it, <b>red has the longest wavelength</b> and <b>violet the shortest</b>.",
+        "Higher frequency means <b>more energy per wave</b>. That is why UV, X-rays and gamma rays are ionising and dangerous, while radio waves at the other end are not."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 186" width="380" height="186">
+        <text x="190" y="14" text-anchor="middle" font-size="10.5">the electromagnetic spectrum</text>
+        <text x="184" y="32" text-anchor="middle" font-size="9.5">visible</text>
+        <line x1="184" y1="35" x2="184" y2="42" class="dg-ink-line" stroke-width="1.2"/>
+        <rect x="16" y="42" width="52" height="32" class="dg-tint" stroke-width="1.4"/>
+        <rect x="68" y="42" width="46" height="32" class="dg-tint" stroke-width="1.4"/>
+        <rect x="114" y="42" width="60" height="32" class="dg-tint" stroke-width="1.4"/>
+        <rect x="174" y="42" width="20" height="32" class="dg-fill"/>
+        <rect x="194" y="42" width="48" height="32" class="dg-tint" stroke-width="1.4"/>
+        <rect x="242" y="42" width="50" height="32" class="dg-tint" stroke-width="1.4"/>
+        <rect x="292" y="42" width="52" height="32" class="dg-tint" stroke-width="1.4"/>
+        <text x="42" y="62" text-anchor="middle" font-size="9.5">radio</text>
+        <text x="91" y="62" text-anchor="middle" font-size="9.5">micro</text>
+        <text x="144" y="62" text-anchor="middle" font-size="9.5">infrared</text>
+        <text x="218" y="62" text-anchor="middle" font-size="9.5">UV</text>
+        <text x="267" y="62" text-anchor="middle" font-size="9.5">X-ray</text>
+        <text x="318" y="62" text-anchor="middle" font-size="9.5">gamma</text>
+        <line x1="16" y1="94" x2="344" y2="94" class="dg-good" stroke-width="1.8" style="fill:none"/>
+        <polygon points="352,94 340,89 340,99" class="dg-good"/>
+        <text x="20" y="108" font-size="9.5" class="dg-good">frequency increasing &mdash; and energy with it</text>
+        <line x1="344" y1="126" x2="16" y2="126" class="dg-bad" stroke-width="1.8" style="fill:none"/>
+        <polygon points="8,126 20,121 20,131" class="dg-bad"/>
+        <text x="152" y="140" font-size="9.5" class="dg-bad">wavelength increasing</text>
+        <text x="16" y="160" font-size="9.5" class="dg-soft">&lambda; &asymp; 10&sup3; m</text>
+        <text x="344" y="160" text-anchor="end" font-size="9.5" class="dg-soft">&lambda; &asymp; 10&#8315;&sup1;&sup2; m</text>
+        <text x="190" y="180" text-anchor="middle" font-size="10">all seven travel at 3.0 &times; 10&#8312; m/s in a vacuum</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 180" width="380" height="180">
+        <text x="190" y="13" text-anchor="middle" font-size="10.5">the bell-in-a-vacuum-jar test</text>
+        <path d="M 40 138 L 40 62 Q 40 30 90 30 Q 140 30 140 62 L 140 138 Z" class="dg-ink-line" stroke-width="2" fill="none"/>
+        <line x1="30" y1="138" x2="150" y2="138" class="dg-ink-line" stroke-width="2.5"/>
+        <rect x="76" y="76" width="28" height="30" rx="5" class="dg-fill"/>
+        <circle cx="90" cy="112" r="4" class="dg-fill"/>
+        <text x="90" y="130" text-anchor="middle" font-size="9.5">ringing bell</text>
+        <text x="90" y="56" text-anchor="middle" font-size="9.5" class="dg-soft">air pumped out</text>
+        <path d="M 112 92 Q 122 96 132 92" class="dg-bad" stroke-width="1.6" style="fill:none"/>
+        <path d="M 112 100 Q 124 104 136 100" class="dg-bad" stroke-width="1.6" style="fill:none"/>
+        <line x1="148" y1="86" x2="170" y2="108" class="dg-bad" stroke-width="2.4" style="fill:none"/>
+        <line x1="170" y1="86" x2="148" y2="108" class="dg-bad" stroke-width="2.4" style="fill:none"/>
+        <text x="180" y="96" font-size="10.5" class="dg-bad">sound: blocked</text>
+        <text x="180" y="110" font-size="9.5" class="dg-soft">no particles to vibrate</text>
+        <line x1="104" y1="66" x2="170" y2="66" class="dg-good" stroke-width="2" style="fill:none"/>
+        <polygon points="178,66 166,61 166,71" class="dg-good"/>
+        <text x="186" y="62" font-size="10.5" class="dg-good">light: gets out</text>
+        <text x="186" y="76" font-size="9.5" class="dg-soft">EM waves need no medium</text>
+        <text x="190" y="166" text-anchor="middle" font-size="9.5">You can still SEE it shaking. You just cannot HEAR it.</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "One family, seven names. Reading left to right the frequency and the energy rise while the wavelength falls, and every band travels at the same speed in a vacuum.",
+        "Pump the air out and the sound stops dead while the light comes through untouched &mdash; the cleanest demonstration that sound is mechanical and EM waves are not."
+      ],
+      trick: "Sound needs <b>somebody to shake</b>. No particles, no sound &mdash; which is why space is silent and why sound goes <i>faster</i>, not slower, through water and steel. For the EM order, use a sentence you will not forget: <b>&ldquo;Roman Men Invented Very Unusual X-ray Guns&rdquo;</b> &mdash; Radio, Microwave, Infrared, Visible, Ultraviolet, X-ray, Gamma. Say it left to right and you are going towards <b>higher frequency, shorter wavelength, more energy, more danger</b>.",
+      examples: [
+        {
+          problem: "Explain why two astronauts working outside their spacecraft cannot hear each other shout, even though they can see each other perfectly well.",
+          steps: [
+            "Sound is a longitudinal mechanical wave: it travels by making particles of a medium vibrate and pass the disturbance along",
+            "Space is a vacuum, so there are essentially no particles between the astronauts",
+            "With nothing to vibrate, the sound wave cannot be carried at all",
+            "Light is an electromagnetic wave &mdash; an oscillation of electric and magnetic fields, needing no particles",
+            "So light crosses the vacuum unaffected while sound does not"
+          ],
+          answer: "sound needs a medium and space has none, whereas light is an EM wave and travels through a vacuum, so they can see but not hear each other"
+        },
+        {
+          problem: "Green light has a wavelength of 6.0 &times; 10&#8315;&#8311; m. Taking the speed of light as 3.0 &times; 10&#8312; m/s, find its frequency. Separately, a student sees lightning and hears the thunder 6.0 s later; taking the speed of sound as 340 m/s, find how far away the storm is.",
+          steps: [
+            "Light: f = v &divide; &lambda; = (3.0 &times; 10&#8312;) &divide; (6.0 &times; 10&#8315;&#8311;)",
+            "f = 5.0 &times; 10&sup1;&#8308; Hz &mdash; a typical visible-light frequency",
+            "Thunder: the light arrives almost instantly, so the 6.0 s is essentially all the sound's travel time",
+            "distance = speed &times; time = 340 &times; 6.0",
+            "distance = 2040 m, about 2 km"
+          ],
+          answer: "f = 5.0 &times; 10&sup1;&#8308; Hz for the green light; the storm is 2040 m (about 2 km) away"
+        }
+      ],
+      remember: [
+        "<b>Sound is longitudinal and needs a medium.</b> No air, no sound &mdash; and it is <i>faster</i> in liquids and solids, not slower.",
+        "<b>Pitch = frequency. Loudness = amplitude.</b> Audible range roughly 20 Hz to 20 000 Hz.",
+        "<b>Radio, Microwave, Infrared, Visible, Ultraviolet, X-ray, Gamma</b> &mdash; frequency up, wavelength down, left to right.",
+        "<b>All EM waves travel at 3.0 &times; 10&#8312; m/s in a vacuum</b>, and higher frequency means more energy per wave."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 196" width="460" height="196">
+        <circle cx="18" cy="24" r="1.8" class="cm-fill"/>
+        <circle cx="120" cy="16" r="1.6" class="cm-fill"/>
+        <circle cx="330" cy="20" r="1.8" class="cm-fill"/>
+        <circle cx="438" cy="40" r="1.6" class="cm-fill"/>
+        <circle cx="112" cy="112" r="34" class="cm-face2" stroke-width="2"/>
+        <circle cx="112" cy="112" r="25" class="cm-face" stroke-width="2"/>
+        <circle cx="103" cy="107" r="3.5" class="cm-fill"/>
+        <circle cx="121" cy="107" r="3.5" class="cm-fill"/>
+        <ellipse cx="112" cy="124" rx="8" ry="6" class="cm-line" stroke-width="2"/>
+        <text x="112" y="172" text-anchor="middle" font-size="10.5">astronaut A, shouting</text>
+        <circle cx="352" cy="112" r="34" class="cm-face2" stroke-width="2"/>
+        <circle cx="352" cy="112" r="25" class="cm-face" stroke-width="2"/>
+        <circle cx="343" cy="107" r="3.5" class="cm-fill"/>
+        <circle cx="361" cy="107" r="3.5" class="cm-fill"/>
+        <path d="M342 124 L362 124" class="cm-line" stroke-width="2"/>
+        <text x="352" y="172" text-anchor="middle" font-size="10.5">astronaut B, hearing nothing</text>
+        <rect x="6" y="8" width="176" height="52" rx="10" class="cm-face2" stroke-width="2"/>
+        <polygon points="76,60 98,60 88,78" class="cm-face2" stroke-width="2"/>
+        <text x="94" y="28" text-anchor="middle" font-size="11">&ldquo;HELLO?? CAN YOU</text>
+        <text x="94" y="46" text-anchor="middle" font-size="11">HEAR ME AT ALL??&rdquo;</text>
+        <rect x="248" y="8" width="204" height="52" rx="10" class="cm-bad" stroke-width="2"/>
+        <polygon points="336,60 358,60 350,78" class="cm-bad" stroke-width="2"/>
+        <text x="350" y="28" text-anchor="middle" font-size="11">(sees the mouth moving.</text>
+        <text x="350" y="46" text-anchor="middle" font-size="11">hears absolutely nothing.)</text>
+        <text x="230" y="190" text-anchor="middle" font-size="10.5" class="cm-soft">the light made it across. the sound had nothing to shake.</text>
+      </svg>`,
+        caption: "The light reflecting off astronaut A crosses the vacuum happily, because EM waves need no medium. The shout gets nowhere at all, because a longitudinal wave has to have particles to squash."
+      },
+      exercises: [
+        { prompt: "Is sound a transverse or a longitudinal wave?", accept:["longitudinal","itslongitudinal"],
+          solution: ["Longitudinal &mdash; the air is compressed and rarefied along the direction of travel"] },
+        { prompt: "Can sound travel through a vacuum? (yes / no)", accept:["no","nope","itcannot","itcant","itcan't"],
+          solution: ["No &mdash; there are no particles in a vacuum to pass the vibration along"] },
+        { prompt: "Can electromagnetic waves travel through a vacuum? (yes / no)", accept:["yes","yep","theycan","itcan"],
+          solution: ["Yes &mdash; EM waves are oscillating electric and magnetic fields and need no medium"] },
+        { prompt: "Name the region of the EM spectrum with the longest wavelength.", accept:["radio","radiowaves","radiowave"],
+          solution: ["Radio waves"] },
+        { prompt: "Name the region of the EM spectrum with the shortest wavelength.", accept:["gamma","gammarays","gammaray","gammaradiation"],
+          solution: ["Gamma rays"] },
+        { prompt: "Which narrow band of the EM spectrum can the human eye detect?", accept:["visible","visiblelight","light"],
+          solution: ["Visible light"] },
+        { prompt: "Name the EM radiation with a slightly longer wavelength than visible light, strongly associated with heat.", accept:["infrared","ir","infraredradiation"],
+          solution: ["Infrared"] },
+        { prompt: "Name the EM radiation with a slightly shorter wavelength than visible light, which causes sunburn.", accept:["ultraviolet","uv","ultravioletlight"],
+          solution: ["Ultraviolet (UV)"] },
+        { prompt: "Name the EM region that sits between radio waves and infrared, used in ovens and mobile phones.", accept:["microwaves","microwave","micro"],
+          solution: ["Microwaves"] },
+        { prompt: "Which colour of visible light has the longest wavelength?", accept:["red","redlight"],
+          solution: ["Red"] },
+        { prompt: "Which colour of visible light has the shortest wavelength?", accept:["violet","purple","violetlight"],
+          solution: ["Violet"] },
+        { prompt: "In which wave property is the pitch of a musical note carried?", accept:["frequency","thefrequency","itsfrequency"],
+          solution: ["Frequency &mdash; a higher frequency is heard as a higher pitch"] },
+        { prompt: "Give the approximate speed of sound in air (m/s), as used throughout this unit.", value: 340, tol: 12,
+          solution: ["About 340 m/s in air at room temperature"] },
+        { prompt: "Give the approximate upper limit of the human audible frequency range (Hz).", value: 20000, tol: 1500,
+          solution: ["Roughly 20 000 Hz (20 kHz); frequencies above this are called ultrasound"] },
+        { prompt: "A student hears thunder 3.0 s after seeing the lightning. Taking the speed of sound as 340 m/s, find the distance to the storm (m).", value: 1020, tol: 10,
+          solution: ["The light arrives essentially instantly, so 3.0 s is the sound's travel time", "distance = 340 &times; 3.0", "= 1020 m"] },
+        { prompt: "A second flash is followed by thunder 6.0 s later. Find that distance (m), again with v = 340 m/s.", value: 2040, tol: 20,
+          solution: ["distance = 340 &times; 6.0", "= 2040 m, about 2 km"] },
+        { prompt: "A cliff is 850 m from a hiker. Taking v = 340 m/s, how long does a shout take to reach the cliff (s)?", value: 2.5, tol: 0.05,
+          solution: ["time = distance &divide; speed", "= 850 &divide; 340", "= 2.5 s"] },
+        { prompt: "Green light has a wavelength of 6.0 &times; 10&#8315;&#8311; m and travels at 3.0 &times; 10&#8312; m/s. Find its frequency, written in the form \"5 x 10^14\".", accept:["5x10^14","5.0x10^14","5x1014","5e14","500000000000000"],
+          solution: ["f = v &divide; &lambda; = (3.0 &times; 10&#8312;) &divide; (6.0 &times; 10&#8315;&#8311;)", "= 5.0 &times; 10&sup1;&#8308; Hz"] },
+        { prompt: "Explain why sound requires a medium to travel but electromagnetic waves do not.", open: true,
+          solution: ["Sample response: Sound is a mechanical wave. It moves by making the particles of a medium vibrate back and forth, each particle nudging the next, so the disturbance is handed along. Remove the particles and there is nothing to do the handing, so the wave cannot exist. Electromagnetic waves are not made of moving matter at all &mdash; they are a changing electric field regenerating a changing magnetic field and vice versa. That process needs no material to happen in, so EM waves cross a vacuum at 3.0 &times; 10&#8312; m/s."] },
+        { prompt: "Are electromagnetic waves hazardous to human life? Argue both sides, using the idea that energy increases with frequency.", open: true,
+          solution: ["Sample response: It depends entirely on which part of the spectrum you mean, because the energy carried by each wave rises with frequency. At the low-frequency end, radio and microwaves carry too little energy per wave to break chemical bonds, and we live surrounded by them safely; the main risk is heating at very high intensity. At the high-frequency end, UV, X-rays and gamma rays carry enough energy to ionise atoms and damage DNA, which is why sunburn causes skin cancer and why radiographers stand behind shielding. So the honest answer is that the spectrum is not uniformly dangerous: the same family of waves gives us both radio broadcasts and radiotherapy, and the question is really about frequency, intensity and exposure time rather than EM waves as such."] }
+      ]
+    },
+    {
+      letter: "F", hueVar: "--hueF", title: "Reflection, Refraction and the Inverse Square Law",
+      rules: [
+        "The <b>normal</b> is an imaginary line drawn <b>perpendicular to the surface</b> at the point where the ray hits. Every angle in this lesson is measured from the normal, <b>never</b> from the surface itself.",
+        "<b>Law of reflection: angle of incidence = angle of reflection.</b> A ray arriving along the normal (0&deg;) bounces straight back along it.",
+        "<b>Refraction</b> is the bending of a wave as it crosses into a new medium, and it happens because the wave <b>changes speed</b>. A wave arriving along the normal changes speed but does not bend.",
+        "Entering a <b>denser</b> medium the wave <b>slows down and bends toward the normal</b>; leaving into a <b>less dense</b> medium it <b>speeds up and bends away from the normal</b>.",
+        "In refraction the <b>frequency never changes</b> &mdash; the source is still vibrating at the same rate. Since v = f&lambda; and v has changed, the <b>wavelength</b> must change instead.",
+        "<b>Inverse square law:</b> for a wave spreading from a point source, <b>intensity &prop; 1 &divide; distance&sup2;</b>. Double the distance and the intensity falls to a <b>quarter</b>; triple it and it falls to a <b>ninth</b>."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 182" width="380" height="182">
+        <text x="96" y="13" text-anchor="middle" font-size="10.5">reflection: &theta;i = &theta;r</text>
+        <line x1="16" y1="126" x2="180" y2="126" class="dg-ink-line" stroke-width="2.5"/>
+        <line x1="98" y1="126" x2="98" y2="34" class="dg-ink-line" stroke-width="1.2" stroke-dasharray="4 4"/>
+        <text x="102" y="30" font-size="9.5" class="dg-soft">normal</text>
+        <line x1="30" y1="44" x2="98" y2="126" class="dg-line" stroke-width="2.2"/>
+        <polygon points="70,92 58,88 62,79" class="dg-fill"/>
+        <line x1="98" y1="126" x2="166" y2="44" class="dg-line" stroke-width="2.2"/>
+        <polygon points="150,63 142,74 154,74" class="dg-fill"/>
+        <path d="M 98 90 Q 88 96 80 106" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <path d="M 98 90 Q 108 96 116 106" class="dg-good" stroke-width="1.6" style="fill:none"/>
+        <text x="72" y="82" font-size="10" class="dg-good">&theta;i</text>
+        <text x="112" y="82" font-size="10" class="dg-good">&theta;r</text>
+        <text x="96" y="146" text-anchor="middle" font-size="9.5">mirror</text>
+        <text x="96" y="162" text-anchor="middle" font-size="9.5" class="dg-soft">40&deg; in gives 40&deg; out</text>
+        <text x="288" y="13" text-anchor="middle" font-size="10.5">refraction: air into glass</text>
+        <rect x="204" y="88" width="168" height="72" class="dg-tint" stroke-width="1.4"/>
+        <text x="208" y="156" font-size="9.5">glass (denser, slower)</text>
+        <text x="210" y="80" font-size="9.5" class="dg-soft">air (faster)</text>
+        <line x1="310" y1="26" x2="310" y2="146" class="dg-ink-line" stroke-width="1.2" stroke-dasharray="4 4"/>
+        <line x1="272" y1="42" x2="310" y2="88" class="dg-line" stroke-width="2.2"/>
+        <polygon points="299,74 286,71 291,62" class="dg-fill"/>
+        <line x1="310" y1="88" x2="325" y2="140" class="dg-bad" stroke-width="2.4" style="fill:none"/>
+        <line x1="310" y1="88" x2="366" y2="146" class="dg-ink-line" stroke-width="1.4" stroke-dasharray="3 3"/>
+        <text x="206" y="44" font-size="9.5" class="dg-bad">bends TOWARD</text>
+        <text x="206" y="56" font-size="9.5" class="dg-bad">the normal</text>
+        <text x="374" y="172" text-anchor="end" font-size="9" class="dg-soft">(unbent path)</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 180" width="380" height="180">
+        <text x="190" y="13" text-anchor="middle" font-size="10.5">inverse square law: the same light, spread thinner</text>
+        <circle cx="30" cy="94" r="7" class="dg-fill"/>
+        <text x="30" y="118" text-anchor="middle" font-size="9.5">source</text>
+        <line x1="30" y1="94" x2="330" y2="34" class="dg-ink-line" stroke-width="1.4"/>
+        <line x1="30" y1="94" x2="330" y2="154" class="dg-ink-line" stroke-width="1.4"/>
+        <rect x="110" y="78" width="14" height="32" class="dg-fill" opacity="0.9"/>
+        <text x="117" y="70" text-anchor="middle" font-size="9.5">d</text>
+        <text x="117" y="126" text-anchor="middle" font-size="10.5">1 unit</text>
+        <text x="117" y="140" text-anchor="middle" font-size="9" class="dg-soft">of area</text>
+        <rect x="196" y="60" width="14" height="68" class="dg-fill" opacity="0.55"/>
+        <text x="203" y="52" text-anchor="middle" font-size="9.5">2d</text>
+        <text x="203" y="152" text-anchor="middle" font-size="10.5">4 units</text>
+        <rect x="288" y="42" width="14" height="104" class="dg-fill" opacity="0.32"/>
+        <text x="295" y="34" text-anchor="middle" font-size="9.5">3d</text>
+        <text x="312" y="98" font-size="10.5">9 units</text>
+        <text x="190" y="172" text-anchor="middle" font-size="9.5">twice as far &rarr; &frac14; the intensity; three times as far &rarr; 1/9</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "Both angles are measured from the dashed normal, not the surface. On the right, the ray slows entering the glass and tucks in toward the normal, away from the unbent grey path it would have taken.",
+        "The same light energy has to cover a patch that grows with the square of the distance, so at 2d it is spread over four times the area and is four times fainter."
+      ],
+      trick: "Three sentences cover this whole lesson. <b>Reflection: angle in = angle out, measured from the normal.</b> <b>Refraction: slower means bend toward the normal, faster means bend away</b> &mdash; and if a question gives you the angle from the <i>surface</i>, subtract it from 90&deg; before you use it. <b>Inverse square: square the distance factor, then divide.</b> Three times further is nine times fainter, not three &mdash; the word &ldquo;square&rdquo; is doing real work in the name.",
+      examples: [
+        {
+          problem: "A lamp gives an intensity of 100 units at a distance of 1 m. Find the intensity at 2 m, and at 5 m.",
+          steps: [
+            "Intensity &prop; 1 &divide; distance&sup2;",
+            "From 1 m to 2 m the distance is &times;2, so the intensity is &divide; 2&sup2; = &divide; 4",
+            "intensity at 2 m = 100 &divide; 4 = 25 units",
+            "From 1 m to 5 m the distance is &times;5, so the intensity is &divide; 5&sup2; = &divide; 25",
+            "intensity at 5 m = 100 &divide; 25 = 4 units"
+          ],
+          answer: "25 units at 2 m, and 4 units at 5 m"
+        },
+        {
+          problem: "Light of wavelength 6.0 &times; 10&#8315;&#8311; m travels through air at 3.0 &times; 10&#8312; m/s and enters glass, where its speed drops to 2.0 &times; 10&#8312; m/s. State which way it bends, and find its frequency and its wavelength inside the glass.",
+          steps: [
+            "It slows down entering the denser medium, so it bends TOWARD the normal",
+            "Frequency is set by the source and does not change on refraction, so find it in air",
+            "f = v &divide; &lambda; = (3.0 &times; 10&#8312;) &divide; (6.0 &times; 10&#8315;&#8311;) = 5.0 &times; 10&sup1;&#8308; Hz",
+            "In the glass that same frequency applies, with the new speed",
+            "&lambda; = v &divide; f = (2.0 &times; 10&#8312;) &divide; (5.0 &times; 10&sup1;&#8308;)",
+            "&lambda; = 4.0 &times; 10&#8315;&#8311; m &mdash; shorter, exactly as the slower speed requires"
+          ],
+          answer: "it bends toward the normal; f stays 5.0 &times; 10&sup1;&#8308; Hz and &lambda; falls to 4.0 &times; 10&#8315;&#8311; m"
+        }
+      ],
+      remember: [
+        "<b>Measure every angle from the NORMAL</b>, the perpendicular to the surface &mdash; never from the surface.",
+        "<b>Angle of incidence = angle of reflection.</b> Always, for every mirror, at every angle.",
+        "<b>Into denser = slower = bend toward the normal.</b> Out into less dense = faster = bend away.",
+        "<b>Intensity &prop; 1/d&sup2;.</b> Twice as far is a <b>quarter</b> as bright; three times as far is a <b>ninth</b>."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 194" width="460" height="194">
+        <rect x="20" y="104" width="420" height="60" class="cm-face2" stroke-width="2"/>
+        <text x="268" y="142" font-size="11" class="cm-soft">WATER (denser, slower)</text>
+        <line x1="200" y1="20" x2="200" y2="184" class="cm-line" stroke-width="1.4" stroke-dasharray="5 4"/>
+        <text x="192" y="32" text-anchor="end" font-size="10" class="cm-soft">normal</text>
+        <line x1="120" y1="30" x2="200" y2="104" class="cm-line" stroke-width="2.4"/>
+        <line x1="200" y1="104" x2="238" y2="184" class="cm-line" stroke-width="2.4"/>
+        <circle cx="200" cy="104" r="15" class="cm-face" stroke-width="2"/>
+        <circle cx="195" cy="101" r="2.4" class="cm-fill"/>
+        <circle cx="205" cy="101" r="2.4" class="cm-fill"/>
+        <path d="M194 110 Q200 115 206 110" class="cm-line" stroke-width="1.8"/>
+        <rect x="238" y="14" width="212" height="62" rx="12" class="cm-good" stroke-width="2"/>
+        <polygon points="252,76 274,76 246,96" class="cm-good" stroke-width="2"/>
+        <text x="344" y="36" text-anchor="middle" font-size="11">&ldquo;I am not lost and I am not</text>
+        <text x="344" y="53" text-anchor="middle" font-size="11">broken. I simply slowed down,</text>
+        <text x="344" y="70" text-anchor="middle" font-size="11">so I lean in. Basic manners.&rdquo;</text>
+        <rect x="10" y="52" width="98" height="40" rx="10" class="cm-face2" stroke-width="2"/>
+        <polygon points="52,92 74,92 92,114" class="cm-face2" stroke-width="2"/>
+        <text x="59" y="70" text-anchor="middle" font-size="11">&ldquo;why is the</text>
+        <text x="59" y="86" text-anchor="middle" font-size="11">straw bent?&rdquo;</text>
+      </svg>`,
+        caption: "The ray is not damaged, it is just slower in water, and the side of the beam that arrives first gets held up first &mdash; so the whole ray pivots toward the normal. Your brain assumes light travelled in a straight line, and draws you a bent straw."
+      },
+      exercises: [
+        { prompt: "A ray of light strikes a mirror with an angle of incidence of 40&deg;. Find the angle of reflection (&deg;).", value: 40, tol: 0.5,
+          solution: ["Law of reflection: angle of reflection = angle of incidence", "= 40&deg;"] },
+        { prompt: "A ray strikes a mirror with an angle of incidence of 25&deg;. Find the angle of reflection (&deg;).", value: 25, tol: 0.5,
+          solution: ["angle of reflection = angle of incidence", "= 25&deg;"] },
+        { prompt: "A ray travels straight along the normal onto a mirror (angle of incidence 0&deg;). Find the angle of reflection (&deg;).", value: 0, tol: 0.5,
+          solution: ["angle of reflection = angle of incidence = 0&deg;", "The ray simply bounces straight back along the normal"] },
+        { prompt: "A ray makes an angle of 60&deg; with the SURFACE of a mirror. Find the angle of reflection measured from the normal (&deg;).", value: 30, tol: 0.5,
+          solution: ["The normal is perpendicular to the surface, so angle of incidence = 90 &minus; 60 = 30&deg;", "angle of reflection = 30&deg;"] },
+        { prompt: "What is the name of the imaginary line, perpendicular to a surface, from which angles of incidence and reflection are measured?", accept:["normal","thenormal"],
+          solution: ["The normal"] },
+        { prompt: "When light passes from air into glass, does it bend toward or away from the normal?", accept:["toward","towards","towardthenormal","towardsthenormal"],
+          solution: ["Toward the normal &mdash; it slows down entering the denser medium"] },
+        { prompt: "When light passes from glass back out into air, does it bend toward or away from the normal?", accept:["away","awayfromthenormal","awayfrom"],
+          solution: ["Away from the normal &mdash; it speeds up entering the less dense medium"] },
+        { prompt: "What physical change causes a wave to refract as it crosses a boundary? (A few words.)", accept:["changeinspeed","achangeinspeed","itchangesspeed","changeofspeed","speedchange","achangeofspeed","changeinvelocity"],
+          solution: ["A change in the wave's speed as it enters the new medium"] },
+        { prompt: "When light refracts into glass, does its frequency change? (yes / no)", accept:["no","nope","itdoesnot","itdoesn't"],
+          solution: ["No &mdash; the source is still vibrating at the same rate", "The speed and wavelength change instead"] },
+        { prompt: "When light refracts into glass and slows down, does its wavelength increase or decrease?", accept:["decrease","decreases","itdecreases","getsshorter","shorter"],
+          solution: ["v = f&lambda; with f unchanged, so a smaller v means a smaller &lambda;", "The wavelength decreases"] },
+        { prompt: "A light source has an intensity of 80 units at 1 m. Find its intensity at 2 m (units).", value: 20, tol: 0.5,
+          solution: ["Distance &times;2, so intensity &divide; 2&sup2; = &divide;4", "80 &divide; 4", "= 20 units"] },
+        { prompt: "Using that same source, find its intensity at 4 m (units).", value: 5, tol: 0.2,
+          solution: ["Distance &times;4 from 1 m, so intensity &divide; 4&sup2; = &divide;16", "80 &divide; 16", "= 5 units"] },
+        { prompt: "A source has an intensity of 36 units at a distance d. Find its intensity at a distance of 3d (units).", value: 4, tol: 0.2,
+          solution: ["Distance &times;3, so intensity &divide; 3&sup2; = &divide;9", "36 &divide; 9", "= 4 units"] },
+        { prompt: "A lamp gives 400 W/m&sup2; at 2 m. Find the intensity at 8 m (W/m&sup2;).", value: 25, tol: 0.5,
+          solution: ["Distance goes from 2 m to 8 m, a factor of 4", "intensity &divide; 4&sup2; = &divide;16", "400 &divide; 16 = 25 W/m&sup2;"] },
+        { prompt: "A lamp gives 900 units at 1 m. Find the intensity at 3 m (units).", value: 100, tol: 2,
+          solution: ["Distance &times;3, so &divide; 3&sup2; = &divide;9", "900 &divide; 9", "= 100 units"] },
+        { prompt: "A detector reads 45 units at 2 m from a point source. Find the reading at 1 m (units).", value: 180, tol: 2,
+          solution: ["Moving closer by a factor of 2 multiplies the intensity by 2&sup2; = 4", "45 &times; 4", "= 180 units"] },
+        { prompt: "True or false: doubling your distance from a point source halves the intensity you receive.", accept:["false","f","itsfalse"],
+          solution: ["False &mdash; it quarters it, because the law is an inverse SQUARE law", "Intensity &divide; 2&sup2; = &divide;4"] },
+        { prompt: "State the law of reflection precisely, making clear where each angle is measured from.", open: true,
+          solution: ["Sample response: When a ray of light strikes a reflecting surface, the angle of incidence is equal to the angle of reflection. Both angles are measured between the ray and the normal &mdash; the line drawn perpendicular to the surface at the exact point where the ray hits &mdash; and not between the ray and the surface itself. The incident ray, the reflected ray and the normal all lie in the same plane."] },
+        { prompt: "Explain, using the inverse square law, why a street lamp seems to dim so sharply as you walk away from it &mdash; much faster than you might expect.", open: true,
+          solution: ["Sample response: The lamp emits a fixed amount of light energy each second, and that energy spreads out over the surface of an expanding sphere. The area of a sphere grows with the square of its radius, so at twice the distance the same energy is smeared over four times the area, and each square metre of your eye catches only a quarter as much. At three times the distance it is a ninth. Because our intuition expects brightness to fall in step with distance rather than with distance squared, the drop always feels steeper than expected."] },
+        { prompt: "Explain why a straight straw looks bent where it enters a glass of water, referring to refraction and to how your eye interprets what it receives.", open: true,
+          solution: ["Sample response: Light leaving the underwater part of the straw speeds up as it crosses from water into air, so it refracts away from the normal at the surface. By the time that light reaches your eye it is travelling along a different line from the one it started on. Your brain, however, always assumes light has travelled in a straight line, so it traces the ray straight back and places the submerged part of the straw somewhere it is not &mdash; slightly displaced and higher up. The straw is perfectly straight; the light path is what has the kink in it."] }
+      ]
+    }
+  ];
+
+  /* ---------------------------------------------------------------
+     STORAGE
+  --------------------------------------------------------------- */
+  var STORE_KEY = "phys_u2_progress_v2";
+  function loadProgress(){
+    try{
+      var raw = localStorage.getItem(STORE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    }catch(e){ return {}; }
+  }
+  function saveProgress(p){
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(p)); }catch(e){ /* ignore */ }
+  }
+  var progress = loadProgress();
+
+  /* ---------------------------------------------------------------
+     ANSWER CHECKING
+  --------------------------------------------------------------- */
+  function parseNum(s){
+    if(s == null) return null;
+    s = String(s).trim();
+    var fracM = s.match(/^(-?\d+(?:\.\d+)?)\s*\/\s*(-?\d+(?:\.\d+)?)$/);
+    if(fracM){
+      var a = parseFloat(fracM[1]), b = parseFloat(fracM[2]);
+      if(b === 0) return null;
+      return a / b;
+    }
+    var v = parseFloat(s);
+    return isNaN(v) ? null : v;
+  }
+  function normalize(raw){
+    return String(raw).toLowerCase().replace(/[\s()]/g,"");
+  }
+  function checkAnswer(ex, raw){
+    if(!raw || !String(raw).trim()) return false;
+    var norm = normalize(raw);
+    if(ex.accept && ex.accept.indexOf(norm) > -1) return true;
+    if(typeof ex.value === "number"){
+      var v = parseNum(raw);
+      if(v !== null && Math.abs(v - ex.value) < (ex.tol || 0.02)) return true;
+    }
+    if(ex.valueSet){
+      var parts = String(raw).toLowerCase().split(/,|or|and/).map(parseNum).filter(function(x){ return x !== null; });
+      if(parts.length === ex.valueSet.length){
+        var remaining = ex.valueSet.slice();
+        var ok = parts.every(function(p){
+          var idx = -1;
+          for(var i=0;i<remaining.length;i++){
+            if(Math.abs(remaining[i]-p) < (ex.tol||0.02)){ idx=i; break; }
+          }
+          if(idx>-1){ remaining.splice(idx,1); return true; }
+          return false;
+        });
+        if(ok) return true;
+      }
+    }
+    return false;
+  }
+
+  /* ---------------------------------------------------------------
+     RENDER
+  --------------------------------------------------------------- */
+  var lessonsEl = document.getElementById("lessons");
+  var scoreboardInner = document.getElementById("scoreboardInner");
+  var resetBtn = document.getElementById("resetBtn");
+  var totalDoneEl = document.getElementById("totalDone");
+
+  function exId(li, ei){ return "L" + li + "E" + ei; }
+
+  function buildChips(){
+    LESSONS.forEach(function(lesson, li){
+      var a = document.createElement("a");
+      a.href = "#lesson-" + lesson.letter;
+      a.className = "chip";
+      a.style.setProperty("--chip-hue", "var(" + lesson.hueVar + "-solid)");
+      a.style.setProperty("--chip-tint", "var(" + lesson.hueVar + "-tint)");
+      a.id = "chip-" + li;
+      a.innerHTML = '<span class="letter">' + lesson.letter + '</span><span class="frac" data-frac>0/' + lesson.exercises.length + '</span>';
+      scoreboardInner.insertBefore(a, resetBtn);
+    });
+  }
+
+  function lessonDoneCount(li){
+    var lesson = LESSONS[li];
+    var n = 0;
+    lesson.exercises.forEach(function(ex, ei){
+      if(progress[exId(li,ei)]) n++;
+    });
+    return n;
+  }
+
+  function updateAllProgressUI(){
+    var total = 0;
+    LESSONS.forEach(function(lesson, li){
+      var n = lessonDoneCount(li);
+      total += n;
+      var lessonTotal = lesson.exercises.length;
+      var chip = document.getElementById("chip-" + li);
+      if(chip){
+        chip.querySelector("[data-frac]").textContent = n + "/" + lessonTotal;
+        chip.classList.toggle("done", n === lessonTotal);
+      }
+      var ring = document.getElementById("ring-" + li);
+      if(ring){
+        ring.querySelector(".ring-label").textContent = n + " / " + lessonTotal;
+        ring.querySelector(".bar-fill").style.width = (n / lessonTotal * 100) + "%";
+      }
+    });
+    totalDoneEl.textContent = total;
+  }
+
+  function showToast(msg){
+    var t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(showToast._h);
+    showToast._h = setTimeout(function(){ t.classList.remove("show"); }, 1600);
+  }
+
+  function buildLessons(){
+    LESSONS.forEach(function(lesson, li){
+      var section = document.createElement("section");
+      section.className = "lesson";
+      section.id = "lesson-" + lesson.letter;
+      section.style.setProperty("--hue", "var(" + lesson.hueVar + "-solid)");
+      section.style.setProperty("--tint", "var(" + lesson.hueVar + "-tint)");
+
+      var head = document.createElement("div");
+      head.className = "lesson-head";
+      head.innerHTML =
+        '<div class="big-letter">' + lesson.letter + '</div>' +
+        '<div class="htext"><div class="kicker">Lesson ' + lesson.letter + '</div><h2>' + lesson.title + '</h2></div>' +
+        '<div class="lesson-progress" id="ring-' + li + '">' +
+          '<div class="ring-label">0 / ' + lesson.exercises.length + '</div>' +
+          '<div class="bar"><div class="bar-fill"></div></div>' +
+        '</div>';
+      section.appendChild(head);
+
+      var rulesBox = document.createElement("div");
+      rulesBox.className = "rules-box";
+      rulesBox.innerHTML = '<h3>The rules</h3><ul>' + lesson.rules.map(function(r){ return "<li>" + r + "</li>"; }).join("") + "</ul>";
+      section.appendChild(rulesBox);
+
+      var diagramList = lesson.diagrams || (lesson.diagram ? [lesson.diagram] : []);
+      var diagramCaptions = lesson.diagramCaptions || [];
+      if(diagramList[0]){
+        var diagramBox = document.createElement("div");
+        diagramBox.className = "diagram-box";
+        diagramBox.innerHTML = diagramList[0] + (diagramCaptions[0] ? '<div class="diagram-caption">' + diagramCaptions[0] + '</div>' : '');
+        section.appendChild(diagramBox);
+      }
+
+      if(lesson.trick){
+        var trickBox = document.createElement("div");
+        trickBox.className = "trick-box";
+        trickBox.innerHTML = '<span class="trick-tag">Rule of thumb</span><span class="trick-text">' + lesson.trick + '</span>';
+        section.appendChild(trickBox);
+      }
+
+      var exampleList = lesson.examples || (lesson.example ? [lesson.example] : []);
+
+      function buildExampleCard(exampleObj, idx){
+        var card = document.createElement("div");
+        card.className = "example-card";
+        card.innerHTML =
+          '<h3>Worked example' + (exampleList.length > 1 ? " " + (idx+1) : "") + '</h3>' +
+          '<div class="example-prob expr">' + exampleObj.problem + '</div>' +
+          '<div class="example-steps">' +
+            exampleObj.steps.map(function(s, i){
+              return '<div class="step"><span class="n">' + (i+1) + '.</span><span class="expr">' + s + '</span></div>';
+            }).join("") +
+          '</div>' +
+          '<div class="example-answer">Answer: ' + exampleObj.answer + '</div>';
+        return card;
+      }
+
+      if(exampleList[0]) section.appendChild(buildExampleCard(exampleList[0], 0));
+
+      if(diagramList[1]){
+        var diagramBox2 = document.createElement("div");
+        diagramBox2.className = "diagram-box";
+        diagramBox2.innerHTML = diagramList[1] + (diagramCaptions[1] ? '<div class="diagram-caption">' + diagramCaptions[1] + '</div>' : '');
+        section.appendChild(diagramBox2);
+      }
+
+      if(exampleList[1]) section.appendChild(buildExampleCard(exampleList[1], 1));
+
+      if(lesson.remember && lesson.remember.length){
+        var rememberBox = document.createElement("div");
+        rememberBox.className = "remember-box";
+        rememberBox.innerHTML = '<h3>Rules to remember</h3><ul>' +
+          lesson.remember.map(function(r){ return "<li>" + r + "</li>"; }).join("") + '</ul>';
+        section.appendChild(rememberBox);
+      }
+
+      if(lesson.comic){
+        var comicBox = document.createElement("div");
+        comicBox.className = "comic-box";
+        comicBox.innerHTML =
+          '<span class="comic-tag">Physics meme break</span>' +
+          lesson.comic.svg +
+          '<div class="comic-caption">' + lesson.comic.caption + '</div>';
+        section.appendChild(comicBox);
+      }
+
+      var grid = document.createElement("div");
+      grid.className = "ex-grid";
+
+      lesson.exercises.forEach(function(exObj, ei){
+        var id = exId(li, ei);
+        var card = document.createElement("div");
+        card.className = "ex-card";
+        card.id = "card-" + id;
+
+        var inputRow = exObj.open
+          ? '<div class="open-note">Open response &mdash; there\'s no single right answer. Try it yourself, then compare with the sample.</div>'
+          : '<div class="ex-input-row">' +
+              '<input class="ex-input" type="text" placeholder="your answer" id="input-' + id + '" autocomplete="off" />' +
+              '<button class="ex-check" data-id="' + id + '" data-li="' + li + '" data-ei="' + ei + '">Check</button>' +
+            '</div>' +
+            '<div class="ex-feedback" id="fb-' + id + '"></div>';
+
+        card.innerHTML =
+          '<div class="ex-top"><span class="ex-num">' + (ei+1) + '</span><div class="ex-prompt expr">' + exObj.prompt + '</div></div>' +
+          inputRow +
+          '<div class="ex-foot">' +
+            '<button class="ex-toggle" data-target="sol-' + id + '">' + (exObj.open ? "Show sample response" : "Show solution") + '</button>' +
+          '</div>' +
+          '<div class="ex-solution" id="sol-' + id + '">' +
+            exObj.solution.map(function(s){ return '<div class="sol-step">' + s + '</div>'; }).join("") +
+          '</div>';
+
+        grid.appendChild(card);
+      });
+
+      section.appendChild(grid);
+      lessonsEl.appendChild(section);
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     EVENTS (delegated)
+  --------------------------------------------------------------- */
+  function wireEvents(){
+    lessonsEl.addEventListener("click", function(e){
+      var checkBtn = e.target.closest(".ex-check");
+      if(checkBtn){
+        var li = parseInt(checkBtn.getAttribute("data-li"), 10);
+        var ei = parseInt(checkBtn.getAttribute("data-ei"), 10);
+        var id = checkBtn.getAttribute("data-id");
+        var exObj = LESSONS[li].exercises[ei];
+        var input = document.getElementById("input-" + id);
+        var fb = document.getElementById("fb-" + id);
+        var card = document.getElementById("card-" + id);
+        var ok = checkAnswer(exObj, input.value);
+        card.classList.remove("correct","wrong");
+        fb.classList.remove("correct","wrong");
+        if(ok){
+          card.classList.add("correct");
+          fb.classList.add("correct");
+          fb.textContent = "Correct!";
+          progress[id] = true;
+          saveProgress(progress);
+          updateAllProgressUI();
+        } else {
+          card.classList.add("wrong");
+          fb.classList.add("wrong");
+          fb.textContent = "Not quite — try again or check the solution.";
+        }
+        return;
+      }
+      var toggleBtn = e.target.closest(".ex-toggle");
+      if(toggleBtn){
+        var targetId = toggleBtn.getAttribute("data-target");
+        var sol = document.getElementById(targetId);
+        var willOpen = !sol.classList.contains("open");
+        sol.classList.toggle("open");
+        toggleBtn.textContent = willOpen
+          ? (toggleBtn.textContent.indexOf("sample") > -1 ? "Hide sample response" : "Hide solution")
+          : (toggleBtn.textContent.indexOf("sample") > -1 ? "Show sample response" : "Show solution");
+
+        // mark open-response exercises as "done" once viewed
+        var cardEl = toggleBtn.closest(".ex-card");
+        if(willOpen && cardEl){
+          var idMatch = targetId.replace("sol-","");
+          var liEi = idMatch.match(/^L(\d+)E(\d+)$/);
+          if(liEi){
+            var li2 = parseInt(liEi[1],10), ei2 = parseInt(liEi[2],10);
+            if(LESSONS[li2].exercises[ei2].open){
+              progress[idMatch] = true;
+              saveProgress(progress);
+              updateAllProgressUI();
+            }
+          }
+        }
+        return;
+      }
+    });
+
+    lessonsEl.addEventListener("keydown", function(e){
+      if(e.key === "Enter" && e.target.classList.contains("ex-input")){
+        var id = e.target.id.replace("input-","");
+        var btn = document.querySelector('.ex-check[data-id="' + id + '"]');
+        if(btn) btn.click();
+      }
+    });
+
+    resetBtn.addEventListener("click", function(){
+      if(!confirm("Clear all saved progress on this device?")) return;
+      progress = {};
+      saveProgress(progress);
+      document.querySelectorAll(".ex-card").forEach(function(c){ c.classList.remove("correct","wrong"); });
+      document.querySelectorAll(".ex-feedback").forEach(function(f){ f.textContent = ""; f.classList.remove("correct","wrong"); });
+      updateAllProgressUI();
+      showToast("Progress cleared");
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     HUE SOLID/TINT CSS VARS (derived once, injected as a style tag)
+  --------------------------------------------------------------- */
+  function injectHueVars(){
+    var style = document.createElement("style");
+    var letters = ["A","B","C","D","E","F"];
+    var css = ":root{";
+    letters.forEach(function(L){
+      var hv = "--hue" + L;
+      css += hv + "-solid: hsl(var(" + hv + ") var(--lsat) var(--llight));";
+      css += hv + "-tint: hsl(var(" + hv + ") var(--lsat) var(--ltint));";
+    });
+    css += "}";
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
+  function buildCheatSheet(){
+    var grid = document.getElementById("csGrid");
+    if(!grid) return;
+    LESSONS.forEach(function(lesson){
+      if(!lesson.remember || !lesson.remember.length) return;
+      var card = document.createElement("div");
+      card.className = "cs-card";
+      card.style.setProperty("--hue", "var(" + lesson.hueVar + "-solid)");
+      card.style.setProperty("--tint", "var(" + lesson.hueVar + "-tint)");
+      card.innerHTML =
+        '<h4><span class="cs-letter">' + lesson.letter + '</span>' + lesson.title + '</h4>' +
+        '<ul>' + lesson.remember.map(function(r){ return "<li>" + r + "</li>"; }).join("") + '</ul>';
+      grid.appendChild(card);
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     INIT
+  --------------------------------------------------------------- */
+  injectHueVars();
+  buildChips();
+  buildLessons();
+  buildCheatSheet();
+  wireEvents();
+  updateAllProgressUI();
+
+})();
+</script>

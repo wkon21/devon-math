@@ -1,0 +1,1716 @@
+<title>Unit 1: Real Numbers &amp; Radicals — Extended Math</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --bg: #F5F6F2;
+    --surface: #FFFFFF;
+    --surface-2: #ECEFE7;
+    --ink: #1B222C;
+    --ink-soft: #545E6B;
+    --ink-faint: #8A93A0;
+    --accent: #2957A4;
+    --accent-ink: #ffffff;
+    --accent-2: #C1841B;
+    --good: #2C8A57;
+    --good-tint: #E4F3EA;
+    --bad: #C0453A;
+    --bad-tint: #FBEAE8;
+    --border: #DBDFD4;
+    --border-strong: #C4CABC;
+    --shadow: 220 25% 20%;
+    --radius: 14px;
+
+    --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --font-body: "Karla", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+
+    /* per-lesson hues (light) */
+    --hueA: 214; --hueB: 187; --hueC: 262; --hueD: 30; --hueE: 350; --hueF: 150;
+    --lsat: 58%; --llight: 38%; --ltint: 94%;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #12151A;
+      --surface: #191D24;
+      --surface-2: #1F252E;
+      --ink: #E9ECF1;
+      --ink-soft: #A7B0BE;
+      --ink-faint: #6E7787;
+      --accent: #7DA3E8;
+      --accent-ink: #0D1420;
+      --accent-2: #E3AE55;
+      --good: #57C489;
+      --good-tint: #16261E;
+      --bad: #E5847A;
+      --bad-tint: #2A1917;
+      --border: #2A303B;
+      --border-strong: #3A4250;
+      --lsat: 62%; --llight: 68%; --ltint: 16%;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #12151A;
+    --surface: #191D24;
+    --surface-2: #1F252E;
+    --ink: #E9ECF1;
+    --ink-soft: #A7B0BE;
+    --ink-faint: #6E7787;
+    --accent: #7DA3E8;
+    --accent-ink: #0D1420;
+    --accent-2: #E3AE55;
+    --good: #57C489;
+    --good-tint: #16261E;
+    --bad: #E5847A;
+    --bad-tint: #2A1917;
+    --border: #2A303B;
+    --border-strong: #3A4250;
+    --lsat: 62%; --llight: 68%; --ltint: 16%;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior: auto; } *{ animation: none !important; transition: none !important; } }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: var(--accent); }
+
+  ::selection{ background: color-mix(in srgb, var(--accent) 30%, transparent); }
+
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+  h1,h2,h3,h4{ font-family: var(--font-display); font-weight: 600; text-wrap: balance; margin: 0; color: var(--ink); }
+
+  code, .mono, .expr{ font-family: var(--font-mono); }
+
+  button{ font-family: var(--font-body); cursor:pointer; }
+  button:focus-visible, input:focus-visible, a:focus-visible{
+    outline: 2.5px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ============ TOP MASTHEAD ============ */
+  .masthead{
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .masthead-inner{
+    padding: 34px 20px 22px;
+    display:flex; flex-direction:column; gap:16px;
+  }
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow .dot{ width:5px; height:5px; border-radius:50%; background: var(--accent-2); }
+  .title-row{
+    display:flex; justify-content: space-between; align-items:flex-end; gap: 24px; flex-wrap: wrap;
+  }
+  .title-row h1{ font-size: clamp(30px, 4.4vw, 44px); line-height: 1.05; }
+  .title-row .subtitle{ color: var(--ink-soft); font-size: 15.5px; max-width: 46ch; margin-top:6px;}
+  .student-tag{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-soft);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 7px 14px;
+    white-space: nowrap;
+  }
+  .student-tag b{ color: var(--ink); }
+
+  .meta-strip{
+    display:flex; flex-wrap:wrap; gap: 10px 28px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    padding-top: 4px;
+    border-top: 1px dashed var(--border);
+    margin-top: 4px;
+    padding-top: 14px;
+  }
+  .meta-strip span b{ color: var(--ink); font-weight:600; }
+
+  /* ============ SCOREBOARD NAV (sticky) ============ */
+  .scoreboard{
+    position: sticky; top:0; z-index: 40;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px) saturate(1.1);
+    -webkit-backdrop-filter: blur(10px) saturate(1.1);
+    border-bottom: 1px solid var(--border);
+  }
+  .scoreboard-inner{
+    display:flex; align-items:center; gap:10px;
+    padding: 10px 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .scoreboard-inner::-webkit-scrollbar{ display:none; }
+  .score-total{
+    font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-soft);
+    white-space: nowrap; padding-right: 8px; border-right: 1px solid var(--border);
+    margin-right: 4px;
+  }
+  .score-total b{ color: var(--ink); }
+  .chip{
+    flex: 0 0 auto;
+    display:flex; align-items:center; gap:8px;
+    padding: 7px 12px 7px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-decoration: none;
+    transition: border-color .15s ease, color .15s ease, transform .1s ease;
+  }
+  .chip:hover{ border-color: var(--chip-hue); color: var(--ink); }
+  .chip:active{ transform: translateY(1px); }
+  .chip .letter{
+    width: 22px; height:22px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 12px; font-weight: 700;
+    background: var(--chip-tint); color: var(--chip-hue);
+    border: 1px solid color-mix(in srgb, var(--chip-hue) 45%, transparent);
+  }
+  .chip .frac{ font-variant-numeric: tabular-nums; font-size: 12px; }
+  .chip.done{ border-color: var(--good); }
+  .chip.done .letter{ background: var(--good-tint); color: var(--good); border-color: var(--good); }
+  .reset-btn{
+    margin-left: auto; flex: 0 0 auto;
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--ink-faint); background: transparent; border: 1px solid transparent;
+    padding: 6px 8px; border-radius: 8px;
+  }
+  .reset-btn:hover{ color: var(--bad); border-color: var(--border); }
+
+  /* ============ INTRO / REFERENCE CARD ============ */
+  main{ padding: 30px 0 90px; }
+  .intro-card{
+    margin: 26px 0 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+  }
+  .intro-card summary{
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 18px;
+    list-style: none;
+    display:flex; align-items:center; justify-content: space-between;
+    gap: 12px;
+  }
+  .intro-card summary::-webkit-details-marker{ display:none; }
+  .intro-card summary .arrow{
+    font-family: var(--font-mono); color: var(--ink-faint); font-size: 13px;
+    transition: transform .2s ease;
+  }
+  .intro-card[open] summary .arrow{ transform: rotate(180deg); }
+  .intro-grid{
+    margin-top: 18px;
+    display:grid; grid-template-columns: 1fr 1fr; gap: 20px 28px;
+  }
+  @media (max-width: 640px){ .intro-grid{ grid-template-columns: 1fr; } }
+  .intro-block h4{ font-size: 12.5px; text-transform: uppercase; letter-spacing:.08em; color: var(--ink-faint); font-family: var(--font-mono); font-weight:600; margin-bottom:8px;}
+  .intro-block p{ margin:0; color: var(--ink-soft); font-size: 14.5px; }
+  .soi{
+    font-family: var(--font-display); font-style: italic; font-size: 17px; color: var(--ink);
+    grid-column: 1 / -1;
+    padding: 14px 16px;
+    background: var(--surface-2);
+    border-left: 3px solid var(--accent-2);
+    border-radius: 6px;
+  }
+  .iq-table{ grid-column: 1/-1; display:grid; gap:8px; }
+  .iq-row{ display:grid; grid-template-columns: 90px 1fr; gap:12px; font-size: 14px; align-items:baseline; }
+  .iq-row .tag{ font-family: var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color: var(--ink-faint); }
+  .iq-row p{ margin:0; color: var(--ink-soft); }
+
+  /* ============ LESSON SECTION ============ */
+  .lesson{
+    scroll-margin-top: 64px;
+    margin-bottom: 56px;
+  }
+  .lesson-head{
+    display:flex; align-items: center; gap: 16px;
+    padding: 18px 20px;
+    border-radius: var(--radius);
+    background: var(--tint);
+    border: 1px solid color-mix(in srgb, var(--hue) 35%, transparent);
+    margin-bottom: 18px;
+  }
+  .lesson-head .big-letter{
+    font-family: var(--font-display); font-weight:700; font-size: 34px;
+    color: var(--hue);
+    width: 52px; height:52px; flex:0 0 auto;
+    border-radius: 12px;
+    background: var(--surface);
+    display:flex; align-items:center; justify-content:center;
+    border: 1px solid color-mix(in srgb, var(--hue) 40%, transparent);
+  }
+  .lesson-head .htext .kicker{ font-family: var(--font-mono); font-size: 11.5px; text-transform:uppercase; letter-spacing:.09em; color: var(--hue); }
+  .lesson-head .htext h2{ font-size: clamp(20px,2.6vw,26px); margin-top:2px; }
+  .lesson-progress{
+    margin-left:auto; text-align:right; flex: 0 0 auto;
+  }
+  .lesson-progress .ring-label{ font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); }
+  .lesson-progress .bar{
+    width: 90px; height: 6px; border-radius: 4px; background: var(--surface);
+    border: 1px solid var(--border); overflow:hidden; margin-top:6px;
+  }
+  .lesson-progress .bar-fill{ height:100%; background: var(--hue); width:0%; transition: width .3s ease; }
+
+  .rules-box{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 16px;
+  }
+  .rules-box h3{ font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-family: var(--font-mono); color: var(--hue); margin-bottom: 10px; }
+  .rules-box ul{ margin:0; padding-left: 20px; color: var(--ink-soft); font-size: 14.5px; }
+  .rules-box li{ margin-bottom: 5px; }
+  .rules-box li::marker{ color: var(--hue); }
+  .trick-box{ background: color-mix(in srgb, var(--hue) 10%, var(--surface)); border: 1px dashed var(--hue); border-radius: var(--radius); padding: 14px 22px; margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-start; }
+  .trick-box .trick-tag{ font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); white-space: nowrap; padding-top: 2px; }
+  .trick-box .trick-text{ color: var(--ink-soft); font-size: 14.5px; }
+  .trick-box .trick-text b{ color: var(--ink); }
+  .diagram-box{ background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 16px; display:flex; justify-content:center; align-items:center; overflow-x:auto; }
+  .diagram-box svg{ width: 100%; max-width: 620px; height: auto; display:block; }
+  .diagram-box{ flex-direction: column; gap: 8px; }
+  .diagram-caption{ font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); text-align:center; max-width: 620px; }
+  .comic-box{ background: var(--surface-2); border: 2px dashed var(--hue); border-radius: var(--radius); padding: 18px 20px 16px; margin-bottom: 16px; display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .comic-box .comic-tag{ font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); align-self:flex-start; }
+  .comic-box svg{ width: 100%; max-width: 460px; height: auto; display:block; }
+  .comic-box .comic-caption{ font-family: var(--font-body); font-style: italic; font-size: 14px; color: var(--ink-soft); text-align:center; max-width: 560px; }
+  .comic-box text{ fill: var(--ink); font-family: var(--font-mono); }
+  .comic-box .cm-face{ fill: var(--tint); stroke: var(--hue); }
+  .comic-box .cm-face2{ fill: var(--surface); stroke: var(--ink-soft); }
+  .comic-box .cm-line{ stroke: var(--ink); fill:none; }
+  .comic-box .cm-fill{ fill: var(--hue); }
+  .comic-box .cm-bad{ fill: var(--bad-tint); stroke: var(--bad); }
+  .comic-box .cm-good{ fill: var(--good-tint); stroke: var(--good); }
+  .comic-box .cm-bad-fill{ fill: var(--bad); stroke: none; }
+  .comic-box .cm-good-fill{ fill: var(--good); stroke: none; }
+  .comic-box .cm-soft{ fill: var(--ink-faint); }
+
+  .remember-box{
+    background: color-mix(in srgb, var(--hue) 7%, var(--surface));
+    border: 1px solid var(--hue);
+    border-left: 5px solid var(--hue);
+    border-radius: var(--radius);
+    padding: 16px 20px 14px;
+    margin-bottom: 20px;
+  }
+  .remember-box h3{ font-family: var(--font-mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); margin-bottom: 10px; }
+  .remember-box ul{ margin:0; padding-left:0; list-style:none; }
+  .remember-box li{ position:relative; padding-left: 26px; margin-bottom: 7px; color: var(--ink-soft); font-size: 14.5px; }
+  .remember-box li:last-child{ margin-bottom:0; }
+  .remember-box li::before{ content:"\2713"; position:absolute; left:4px; top:0; color: var(--hue); font-weight:700; }
+  .remember-box li b{ color: var(--ink); }
+
+  .cheatsheet{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px 28px;
+    margin-top: 36px;
+  }
+  .cheatsheet h2{ font-size: 24px; margin-bottom: 4px; }
+  .cheatsheet .cs-sub{ color: var(--ink-faint); font-size: 13px; font-family: var(--font-mono); margin-bottom: 18px; }
+  .cs-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+  .cs-card{ background: var(--surface-2); border: 1px solid var(--border); border-top: 3px solid var(--hue); border-radius: var(--radius); padding: 14px 16px; }
+  .cs-card h4{ font-size: 14.5px; display:flex; gap:8px; align-items:center; margin-bottom: 9px; font-family: var(--font-body); font-weight:700; }
+  .cs-card .cs-letter{ font-family: var(--font-mono); font-size: 11px; background: var(--tint); color: var(--hue); border:1px solid var(--hue); border-radius: 6px; padding: 2px 7px; }
+  .cs-card ul{ margin:0; padding-left: 18px; color: var(--ink-soft); font-size: 13.5px; }
+  .cs-card li{ margin-bottom: 5px; }
+  .cs-card li:last-child{ margin-bottom:0; }
+  .cs-card li::marker{ color: var(--hue); }
+  .cs-card li b{ color: var(--ink); }
+  .diagram-box .dg-line{ stroke: var(--hue); fill: none; }
+  .diagram-box .dg-fill{ fill: var(--hue); }
+  .diagram-box .dg-tint{ fill: var(--tint); stroke: var(--hue); }
+  .diagram-box .dg-ink{ fill: var(--ink); }
+  .diagram-box .dg-ink-line{ stroke: var(--ink-soft); fill:none; }
+  .diagram-box .dg-soft{ fill: var(--ink-soft); }
+  .diagram-box .dg-good{ fill: var(--good); stroke: var(--good); }
+  .diagram-box .dg-bad{ fill: var(--bad); stroke: var(--bad); }
+  .diagram-box text{ fill: var(--ink); font-family: var(--font-mono); }
+
+  .example-card{
+    background: var(--surface);
+    border: 1.5px dashed var(--border-strong);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 22px;
+  }
+  .example-card h3{
+    font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-family: var(--font-mono);
+    color: var(--ink-faint); margin-bottom: 10px; display:flex; align-items:center; gap:8px;
+  }
+  .example-card h3::before{ content:"✎"; color: var(--accent-2); font-size:14px; }
+  .example-prob{ font-family: var(--font-mono); font-size: 15.5px; margin-bottom: 12px; color: var(--ink); }
+  .example-steps{ display:flex; flex-direction:column; gap: 6px; }
+  .example-steps .step{
+    display:grid; grid-template-columns: 20px 1fr; gap: 10px;
+    font-size: 14.5px; color: var(--ink-soft); align-items:baseline;
+  }
+  .example-steps .step .n{ font-family: var(--font-mono); color: var(--hue); font-size: 12.5px; }
+  .example-steps .step .expr{ color: var(--ink); }
+  .example-answer{
+    margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border);
+    font-size: 14.5px; color: var(--good); font-family: var(--font-mono); font-weight:600;
+  }
+
+  /* ============ EXERCISE GRID ============ */
+  .ex-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 720px){ .ex-grid{ grid-template-columns: 1fr; } }
+
+  .ex-card{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display:flex; flex-direction:column; gap:10px;
+    transition: border-color .2s ease;
+  }
+  .ex-card.correct{ border-color: var(--good); background: color-mix(in srgb, var(--good-tint) 60%, var(--surface)); }
+  .ex-card.wrong{ border-color: var(--bad); }
+
+  .ex-top{ display:flex; align-items:flex-start; gap:10px; }
+  .ex-num{
+    font-family: var(--font-mono); font-size: 12.5px; font-weight:700;
+    color: var(--hue); background: var(--tint); border:1px solid color-mix(in srgb, var(--hue) 40%, transparent);
+    border-radius: 6px; padding: 2px 7px; flex:0 0 auto; margin-top:2px;
+  }
+  .ex-prompt{ font-size: 14.5px; color: var(--ink); line-height:1.5; }
+  .ex-prompt .expr{ font-size: 14.5px; }
+
+  .ex-input-row{ display:flex; gap:8px; }
+  .ex-input{
+    flex:1; min-width:0;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+  }
+  .ex-input::placeholder{ color: var(--ink-faint); }
+  .ex-check{
+    font-family: var(--font-mono); font-size: 12.5px; font-weight:600;
+    padding: 8px 14px; border-radius: 8px; border: 1px solid var(--hue);
+    background: var(--hue); color: var(--accent-ink);
+    white-space:nowrap;
+  }
+  .ex-check:hover{ filter: brightness(1.06); }
+
+  .ex-feedback{ font-size: 13px; font-family: var(--font-mono); min-height: 4px; }
+  .ex-feedback.correct{ color: var(--good); }
+  .ex-feedback.wrong{ color: var(--bad); }
+
+  .ex-foot{ display:flex; justify-content: space-between; align-items:center; margin-top:2px; }
+  .ex-toggle{
+    background:none; border:none; padding:0; font-size: 12.5px;
+    font-family: var(--font-mono); color: var(--ink-faint); text-decoration: underline; text-underline-offset:3px;
+  }
+  .ex-toggle:hover{ color: var(--hue); }
+  .ex-solution{
+    display:none; margin-top: 4px; padding: 12px 14px;
+    background: var(--surface-2); border-radius: 8px;
+    font-size: 13.5px; color: var(--ink-soft);
+  }
+  .ex-solution.open{ display:block; }
+  .ex-solution .sol-step{ margin-bottom: 4px; }
+  .ex-solution .sol-final{ margin-top:8px; color: var(--good); font-weight:700; font-family: var(--font-mono); }
+
+  .open-note{ font-size: 11.5px; color: var(--ink-faint); font-family: var(--font-mono); }
+
+  sup{ font-size: 0.7em; }
+
+  footer{
+    text-align:center; padding: 30px 20px 50px;
+    color: var(--ink-faint); font-size: 13px; font-family: var(--font-mono);
+  }
+
+  .toast{
+    position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color: var(--bg);
+    padding: 10px 18px; border-radius: 999px; font-family: var(--font-mono); font-size: 13px;
+    opacity: 0; pointer-events:none; transition: opacity .25s ease, transform .25s ease;
+    z-index: 100; white-space: nowrap;
+  }
+  .toast.show{ opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+
+<div class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="eyebrow"><span class="dot"></span>IB MYP Extended Mathematics &middot; Grade 9 (MYP 4) &middot; Unit 1</div>
+    <div class="title-row">
+      <div>
+        <h1>Unit 1: Real Numbers &amp; Radicals</h1>
+        <div class="subtitle">Extended Mathematics workbook &mdash; the real number system, properties of numbers, interval notation, absolute value &amp; radicals (surds). Six lessons, 120 exercises, two worked examples and two illustrations per lesson.</div>
+      </div>
+      <div class="student-tag">Prepared for <b>Devon</b> &middot; Extended Math track</div>
+    </div>
+    <div class="meta-strip">
+      <span>Global context: <b>Scientific and technical innovation</b></span>
+      <span>Key concept: <b>Logic</b></span>
+      <span>Related concept: <b>Generalization</b></span>
+      <span>Criteria: <b>A &middot; B &middot; D</b></span>
+    </div>
+  </div>
+</div>
+
+<div class="scoreboard">
+  <div class="wrap scoreboard-inner" id="scoreboardInner">
+    <span class="score-total"><b id="totalDone">0</b>/120 done</span>
+    <!-- chips injected by JS -->
+    <button class="reset-btn" id="resetBtn" title="Clear saved progress">reset progress</button>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <details class="intro-card" id="introCard">
+    <summary>Unit reference &mdash; Statement of Inquiry, inquiry questions &amp; how to use this guide<span class="arrow">&#9660;</span></summary>
+    <div class="intro-grid">
+      <p class="soi">&ldquo;Recognizing the properties that classify and connect numbers lets us generalize, justify, and extend mathematical rules with confidence.&rdquo;</p>
+
+      <div class="intro-block">
+        <h4>How this guide works</h4>
+        <p>Each lesson (A&ndash;F) opens with the core rules and a diagram, then two fully worked examples, a short <b>Rules to remember</b> checklist, a <b>math meme break</b>, and 20 practice exercises. Every lesson's checklist is collected again in the <b>Rules to remember</b> cheat sheet at the bottom of the page. Type an answer and press <b>Check</b> for instant feedback, or open <b>Show solution</b> to see the steps. For an answer with a square root, type it using <code>sqrt</code> &mdash; for example, write 3&radic;5 as <code>3sqrt5</code> (the checker also accepts the &radic; symbol). Your progress is saved automatically in this browser.</p>
+      </div>
+      <div class="intro-block">
+        <h4>IB learner profile</h4>
+        <p><b>Thinkers</b> &mdash; Lesson E's right-triangle puzzle and Lesson F's tower problem both ask you to reason through more than one possible path before settling on a final, justified answer.</p>
+      </div>
+
+      <div class="iq-table">
+        <div class="iq-row"><span class="tag">Factual</span><p>What is the difference between a rational and an irrational number?</p></div>
+        <div class="iq-row"><span class="tag">Factual</span><p>What are the rules for simplifying a radical (surd)?</p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>Why must every solution to a radical equation be checked in the original equation?</p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>How is rationalizing a denominator similar to multiplying a fraction by 1?</p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>How do the properties of real numbers let us generalize arithmetic rules into algebra?</p></div>
+        <div class="iq-row"><span class="tag">Debatable</span><p>Can good decisions be calculated by using a mathematical model? <em>(see Lesson F, Exercise 10)</em></p></div>
+      </div>
+    </div>
+  </details>
+
+  <div id="lessons"></div>
+
+  <section class="cheatsheet" id="cheatsheet">
+    <h2>Rules to remember</h2>
+    <div class="cs-sub">The whole unit on one page &mdash; read this before a test</div>
+    <div class="cs-grid" id="csGrid"></div>
+  </section>
+
+</main>
+
+<footer>Real Numbers &amp; Radicals &middot; Extended Math Unit 1 study workbook &middot; built for Devon</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------------------------------------------------------
+     DATA
+  --------------------------------------------------------------- */
+  var LESSONS = [
+    {
+      letter: "A", hueVar: "--hueA", title: "The Real Number System",
+      rules: [
+        "The <b>real numbers</b> (&#8477;) split into two non-overlapping groups: <b>rational</b> numbers (can be written a/b, with a, b integers and b&ne;0) and <b>irrational</b> numbers (cannot).",
+        "Rational numbers always have a decimal that <b>terminates</b> (0.14) or <b>repeats</b> (0.888...). Irrational decimals go on forever with no repeating pattern (&pi;, &radic;2).",
+        "A root of a whole number is rational only if that number is a perfect square, cube, etc.: &radic;36 = 6 is rational, but &radic;10 is irrational because 10 isn't a perfect square.",
+        "To place or compare an irrational root without a calculator, bracket it between the two nearest perfect squares: 36 &lt; 45 &lt; 49, so 6 &lt; &radic;45 &lt; 7."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 300 140" width="300" height="140">
+        <rect x="8" y="8" width="284" height="124" rx="14" class="dg-tint" stroke-width="2"/>
+        <text x="20" y="26" font-size="11" font-weight="bold">Real Numbers &#8477;</text>
+        <ellipse cx="86" cy="90" rx="58" ry="38" class="dg-tint" stroke-width="2"/>
+        <text x="86" y="78" text-anchor="middle" font-size="10" font-weight="bold">Irrational</text>
+        <text x="86" y="94" text-anchor="middle" font-size="9">&radic;2, &pi;</text>
+        <text x="86" y="108" text-anchor="middle" font-size="9">&#8731;16, &radic;45</text>
+        <ellipse cx="216" cy="90" rx="62" ry="38" class="dg-tint" stroke-width="2"/>
+        <text x="216" y="70" text-anchor="middle" font-size="10" font-weight="bold">Rational &#8474;</text>
+        <ellipse cx="216" cy="101" rx="45" ry="19" class="dg-tint" stroke-width="1.5"/>
+        <text x="216" y="98" text-anchor="middle" font-size="8" font-weight="bold">Integers &#8484;</text>
+        <text x="216" y="111" text-anchor="middle" font-size="8">6, -3, &radic;36</text>
+      </svg>`,
+        `<svg viewBox="0 0 300 140" width="300" height="140">
+        <line x1="30" y1="70" x2="270" y2="70" class="dg-ink-line" stroke-width="1.5"/>
+        <line x1="90" y1="70" x2="210" y2="70" class="dg-line" stroke-width="3"/>
+        <line x1="90" y1="62" x2="90" y2="78" class="dg-ink-line" stroke-width="1.5"/>
+        <line x1="210" y1="62" x2="210" y2="78" class="dg-ink-line" stroke-width="1.5"/>
+        <circle cx="90" cy="70" r="4" class="dg-fill"/>
+        <text x="90" y="95" text-anchor="middle" font-size="13">11</text>
+        <circle cx="210" cy="70" r="4" class="dg-fill"/>
+        <text x="210" y="95" text-anchor="middle" font-size="13">12</text>
+        <circle cx="138" cy="70" r="5" class="dg-good"/>
+        <line x1="138" y1="54" x2="138" y2="64" class="dg-ink-line" stroke-width="1"/>
+        <text x="138" y="46" text-anchor="middle" font-size="12">&radic;130</text>
+        <text x="150" y="120" text-anchor="middle" font-size="11">11&sup2;=121 &lt; 130 &lt; 144=12&sup2;</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "Real numbers split into rational and irrational; integers sit inside the rationals.",
+        "Bracketing &radic;130 between the nearest perfect squares, 121 and 144."
+      ],
+      trick: "Ask one question &mdash; \"can I write this as a fraction of integers, or does its decimal terminate/repeat?\" Yes &rarr; rational. To sandwich a surd between integers, find the nearest perfect squares above and below it &mdash; no calculator needed.",
+      examples: [
+        {
+          problem: "Classify each as rational or irrational: &radic;36, &#8731;16, 0.888..., 3&pi;/2",
+          steps: [
+            "&radic;36 = 6, a whole number &rarr; rational (write as 6/1)",
+            "&#8731;16 is not a perfect cube (&#8731;8 = 2, &#8731;27 = 3) &rarr; irrational",
+            "0.888... is a repeating decimal &rarr; rational (it equals 8/9)",
+            "3&pi;/2: &pi; is irrational, and a nonzero rational number times an irrational number is always irrational &rarr; irrational"
+          ],
+          answer: "&radic;36 and 0.888... are rational; &#8731;16 and 3&pi;/2 are irrational"
+        },
+        {
+          problem: "Between which two consecutive integers does &radic;130 lie?",
+          steps: [
+            "List perfect squares near 130: 11&sup2; = 121 and 12&sup2; = 144",
+            "121 &lt; 130 &lt; 144, so 11 &lt; &radic;130 &lt; 12",
+            "130 is much closer to 121 than to 144, so &radic;130 is only a little above 11"
+          ],
+          answer: "11 &lt; &radic;130 &lt; 12"
+        }
+      ],
+      remember: [
+        "<b>Fraction test:</b> if you can write it as a/b with integers (b&ne;0), it is rational. If the decimal never ends <i>and</i> never repeats, it is irrational.",
+        "A root is rational <b>only</b> if what is underneath is a perfect square/cube: &radic;49 &#10003;, &radic;50 &#10007;.",
+        "rational &times; irrational = <b>irrational</b> (as long as the rational part isn't 0); rational + irrational = irrational too.",
+        "<b>Sandwich rule:</b> to place &radic;n, name the perfect square just below it and just above it &mdash; 49 &lt; 60 &lt; 64 so 7 &lt; &radic;60 &lt; 8."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 190" width="460" height="190">
+        <rect x="12" y="8" width="192" height="44" rx="11" class="cm-good" stroke-width="2"/>
+        <polygon points="100,52 116,52 108,78" class="cm-good" stroke-width="2"/>
+        <text x="108" y="27" text-anchor="middle" font-size="11">&ldquo;0.75. Done.</text>
+        <text x="108" y="43" text-anchor="middle" font-size="11">I know when to stop.&rdquo;</text>
+        <circle cx="108" cy="118" r="34" class="cm-face" stroke-width="2"/>
+        <circle cx="96" cy="110" r="3.5" class="cm-fill"/>
+        <circle cx="120" cy="110" r="3.5" class="cm-fill"/>
+        <path d="M94 126 Q108 140 122 126" class="cm-line" stroke-width="2"/>
+        <text x="108" y="172" text-anchor="middle" font-size="12" font-weight="bold">3/4 &mdash; rational</text>
+        <rect x="256" y="8" width="192" height="44" rx="11" class="cm-bad" stroke-width="2"/>
+        <polygon points="344,52 360,52 352,78" class="cm-bad" stroke-width="2"/>
+        <text x="352" y="27" text-anchor="middle" font-size="11">&ldquo;1.41421356237...</text>
+        <text x="352" y="43" text-anchor="middle" font-size="11">...still going!!&rdquo;</text>
+        <circle cx="352" cy="118" r="34" class="cm-face" stroke-width="2"/>
+        <circle cx="340" cy="110" r="6" class="cm-line" stroke-width="2"/>
+        <circle cx="364" cy="110" r="6" class="cm-line" stroke-width="2"/>
+        <path d="M338 130 q7 -8 14 0 t14 0" class="cm-line" stroke-width="2"/>
+        <path d="M390 100 q7 11 0 15 q-7 -4 0 -15" class="cm-line" stroke-width="1.5"/>
+        <text x="352" y="172" text-anchor="middle" font-size="12" font-weight="bold">&radic;2 &mdash; irrational</text>
+      </svg>`,
+        caption: "Rational numbers know when to stop (or at least when to repeat themselves). Irrational numbers never learned that trick &mdash; which is exactly why you can never squeeze &radic;2 into a fraction."
+      },
+      exercises: [
+        { prompt: "Classify 12/99 as rational or irrational.", accept: ["rational"],
+          solution: ["12/99 is already written as a fraction of two integers", "Rational"] },
+        { prompt: "Classify &radic;20 as rational or irrational.", accept: ["irrational"],
+          solution: ["20 is not a perfect square (4&sup2;=16, 5&sup2;=25)", "Its decimal never terminates or repeats &rarr; irrational"] },
+        { prompt: "Evaluate &radic;5 &times; &radic;5.", value: 5,
+          solution: ["&radic;5 &times; &radic;5 = &radic;(5&times;5) = &radic;25 = 5"] },
+        { prompt: "Evaluate 2 + &radic;16.", value: 6,
+          solution: ["&radic;16 = 4 (perfect square)", "2 + 4 = 6"] },
+        { prompt: "Write the terminating decimal 0.14 as a fraction in lowest terms (enter it as a/b).", accept: ["7/50"],
+          solution: ["0.14 = 14/100", "Divide top and bottom by 2: 7/50"] },
+        { prompt: "Between which two consecutive integers does &radic;45 lie? Enter the smaller integer, then the larger, separated by a comma.", valueSet: [6, 7],
+          solution: ["6&sup2; = 36 and 7&sup2; = 49", "36 &lt; 45 &lt; 49, so 6 &lt; &radic;45 &lt; 7"] },
+        { prompt: "Between which two consecutive integers does &radic;87 lie? Enter the smaller integer, then the larger, separated by a comma.", valueSet: [9, 10],
+          solution: ["9&sup2; = 81 and 10&sup2; = 100", "81 &lt; 87 &lt; 100, so 9 &lt; &radic;87 &lt; 10"] },
+        { prompt: "Between which two consecutive integers does &radic;125 lie? Enter the smaller integer, then the larger, separated by a comma.", valueSet: [11, 12],
+          solution: ["11&sup2; = 121 and 12&sup2; = 144", "121 &lt; 125 &lt; 144, so 11 &lt; &radic;125 &lt; 12"] },
+        { prompt: "True or false: the product of two irrational numbers is always irrational. Justify with an example.", open: true,
+          solution: ["Sample response: False &mdash; sometimes irrational. &radic;2 is irrational, but &radic;2 &times; &radic;2 = 2, which is rational. So the product can go either way."] },
+        { prompt: "Classify (&minus;10)&sup2; as rational or irrational, then give its value. Enter the value only, as a number.", value: 100,
+          solution: ["(&minus;10)&sup2; = (&minus;10)&times;(&minus;10) = 100", "100 is a whole number &rarr; rational"] },
+        { prompt: "Evaluate &radic;20 &times; &radic;5.", value: 10,
+          solution: ["&radic;20 &times; &radic;5 = &radic;(20&times;5) = &radic;100 = 10"] },
+        { prompt: "Classify 22/7 as rational or irrational. (It's a common approximation for &pi;, but is it equal to &pi;?)", accept: ["rational"],
+          solution: ["22/7 is a ratio of two integers, so by definition it is rational", "(&pi; itself is irrational &mdash; 22/7 is only an approximation)"] },
+        { prompt: "The decimal 0.101101110... never repeats the same block, it just keeps adding one more 1 each time. Is it rational or irrational?", accept: ["irrational"],
+          solution: ["A decimal is rational only if it terminates or eventually REPEATS the same block forever", "This one has a pattern, but never truly repeats &rarr; irrational"] },
+        { prompt: "Write the repeating decimal 0.6666... as a fraction in lowest terms.", accept: ["2/3"],
+          solution: ["Let x = 0.666...", "10x = 6.666... so 10x &minus; x = 6, giving 9x = 6", "x = 6/9 = 2/3"] },
+        { prompt: "Classify the repeating decimal 12.121212... as rational or irrational.", accept: ["rational"],
+          solution: ["It repeats the block \"12\" forever &rarr; every repeating decimal is rational", "(It equals the fraction 400/33)"] },
+        { prompt: "Between which two consecutive integers does &radic;180 lie? Enter the smaller integer, then the larger, separated by a comma.", valueSet: [13, 14],
+          solution: ["13&sup2; = 169 and 14&sup2; = 196", "169 &lt; 180 &lt; 196, so 13 &lt; &radic;180 &lt; 14"] },
+        { prompt: "Between which two consecutive integers does &radic;288 lie? Enter the smaller integer, then the larger, separated by a comma.", valueSet: [16, 17],
+          solution: ["16&sup2; = 256 and 17&sup2; = 289", "256 &lt; 288 &lt; 289, so 16 &lt; &radic;288 &lt; 17 (very close to 17)"] },
+        { prompt: "Arrange in ascending order: &radic;5, 2&sup3;, 3&radic;2, 3.12, 5/&radic;2, &pi;/2.", open: true,
+          solution: ["Evaluate each: &radic;5&asymp;2.24, 2&sup3;=8, 3&radic;2&asymp;4.24, 3.12, 5/&radic;2&asymp;3.54, &pi;/2&asymp;1.57", "Ascending order: &pi;/2, &radic;5, 3.12, 5/&radic;2, 3&radic;2, 2&sup3;"] },
+        { prompt: "Is &pi;/6 rational or irrational?", accept: ["irrational"],
+          solution: ["&pi; is irrational, and dividing an irrational number by a nonzero rational number (6) is still irrational", "Irrational"] },
+        { prompt: "True or false: the sum of a rational number and an irrational number is always irrational. Justify with reasoning.", open: true,
+          solution: ["Sample response: True. If rational + irrational = some rational number R, then irrational = R &minus; rational, but subtracting two rationals always gives a rational number &mdash; a contradiction. So the sum must be irrational."] }
+      ]
+    },
+    {
+      letter: "B", hueVar: "--hueB", title: "Properties &amp; Inverses of Real Numbers",
+      rules: [
+        "<b>Commutative</b>: a+b = b+a and a&times;b = b&times;a &mdash; order doesn't matter for addition or multiplication (it does for subtraction and division).",
+        "<b>Associative</b>: a+(b+c) = (a+b)+c and a&times;(b&times;c) = (a&times;b)&times;c &mdash; grouping doesn't matter.",
+        "<b>Distributive</b>: a&times;(b+c) = a&times;b + a&times;c &mdash; multiplication spreads across addition/subtraction inside brackets.",
+        "<b>Additive inverse</b> (opposite): a + (&minus;a) = 0. <b>Multiplicative inverse</b> (reciprocal): a &times; 1/a = 1 (a&ne;0) &mdash; zero has no reciprocal."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 300 152" width="300" height="152">
+        <text x="150" y="16" text-anchor="middle" font-size="9">additive inverse (flip the sign)</text>
+        <line x1="90" y1="38" x2="197" y2="38" class="dg-line" stroke-width="2"/>
+        <polygon points="197,32 197,44 210,38" class="dg-fill"/>
+        <line x1="20" y1="62" x2="280" y2="62" class="dg-ink-line" stroke-width="1.5"/>
+        <line x1="90" y1="62" x2="90" y2="42" class="dg-ink-line" stroke-width="1" stroke-dasharray="2 2"/>
+        <line x1="210" y1="62" x2="210" y2="42" class="dg-ink-line" stroke-width="1" stroke-dasharray="2 2"/>
+        <circle cx="90" cy="62" r="4" class="dg-fill"/>
+        <text x="90" y="80" text-anchor="middle" font-size="11">7</text>
+        <circle cx="210" cy="62" r="4" class="dg-fill"/>
+        <text x="210" y="80" text-anchor="middle" font-size="11">-7</text>
+        <rect x="62" y="92" width="60" height="36" rx="6" class="dg-tint" stroke-width="2"/>
+        <text x="92" y="115" text-anchor="middle" font-size="14">3/4</text>
+        <text x="150" y="115" text-anchor="middle" font-size="14">&rarr;</text>
+        <rect x="178" y="92" width="60" height="36" rx="6" class="dg-tint" stroke-width="2"/>
+        <text x="208" y="115" text-anchor="middle" font-size="14">4/3</text>
+        <text x="150" y="145" text-anchor="middle" font-size="9">multiplicative inverse (flip it)</text>
+      </svg>`,
+        `<svg viewBox="0 0 300 140" width="300" height="140">
+        <text x="150" y="18" text-anchor="middle" font-size="10" font-weight="bold">Commutative: order doesn't matter</text>
+        <rect x="90" y="28" width="120" height="34" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="150" y="50" text-anchor="middle" font-size="15">a + b</text>
+        <text x="150" y="82" text-anchor="middle" font-size="14">=</text>
+        <rect x="90" y="92" width="120" height="34" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="150" y="114" text-anchor="middle" font-size="15">b + a</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "Flipping the sign (additive inverse) vs. flipping the fraction (multiplicative inverse).",
+        "Commutative property: swapping the order gives the same result."
+      ],
+      trick: "Same job, opposite direction: the <b>additive</b> inverse just flips the sign; the <b>multiplicative</b> inverse flips the fraction (swap numerator and denominator, keep the sign). Zero breaks the second rule &mdash; there's no number you can multiply 0 by to get 1.",
+      examples: [
+        {
+          problem: "Find the additive and multiplicative inverses of &minus;3.2 and 11/8.",
+          steps: [
+            "Write &minus;3.2 as a fraction: &minus;3.2 = &minus;16/5",
+            "Additive inverse of &minus;16/5: flip the sign &rarr; 16/5 (= 3.2)",
+            "Multiplicative inverse of &minus;16/5: flip the fraction, keep the sign &rarr; &minus;5/16",
+            "For 11/8: additive inverse = &minus;11/8; multiplicative inverse = 8/11"
+          ],
+          answer: "&minus;3.2 &rarr; additive 3.2, multiplicative &minus;5/16; 11/8 &rarr; additive &minus;11/8, multiplicative 8/11"
+        },
+        {
+          problem: "Use the associative property to evaluate 1/2 + (1/3 + 1/4) by regrouping.",
+          steps: [
+            "Regroup as (1/2 + 1/3) + 1/4 &mdash; associative property says this gives the same answer",
+            "1/2 + 1/3 = 3/6 + 2/6 = 5/6",
+            "5/6 + 1/4 = 10/12 + 3/12 = 13/12"
+          ],
+          answer: "13/12"
+        }
+      ],
+      remember: [
+        "<b>Additive</b> inverse flips the <b>sign</b>; <b>multiplicative</b> inverse flips the <b>fraction</b>. a + (&minus;a) = 0 and a &times; 1/a = 1.",
+        "Zero is the odd one out: it has an additive inverse (itself) but <b>no reciprocal</b> &mdash; nothing times 0 gives 1.",
+        "<b>Commutative</b> = order can change. <b>Associative</b> = grouping can change. <b>Distributive</b> = share the multiplier with everyone inside the bracket.",
+        "Subtraction and division are <b>neither</b> commutative nor associative: 8 &minus; 3 &ne; 3 &minus; 8, and (12 &divide; 6) &divide; 2 &ne; 12 &divide; (6 &divide; 2)."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 190" width="460" height="190">
+        <text x="230" y="20" text-anchor="middle" font-size="13" font-weight="bold">7 + (&minus;7) = 0</text>
+        <line x1="230" y1="30" x2="230" y2="152" class="cm-line" stroke-width="2" stroke-dasharray="6 6"/>
+        <text x="230" y="172" text-anchor="middle" font-size="10" class="cm-soft">the mirror</text>
+        <circle cx="118" cy="88" r="36" class="cm-face" stroke-width="2"/>
+        <circle cx="106" cy="80" r="3.5" class="cm-fill"/>
+        <circle cx="130" cy="80" r="3.5" class="cm-fill"/>
+        <path d="M104 96 Q118 110 132 96" class="cm-line" stroke-width="2"/>
+        <text x="118" y="150" text-anchor="middle" font-size="17" font-weight="bold">7</text>
+        <circle cx="342" cy="88" r="36" class="cm-face" stroke-width="2"/>
+        <path d="M318 68 l16 7" class="cm-line" stroke-width="2"/>
+        <path d="M366 68 l-16 7" class="cm-line" stroke-width="2"/>
+        <circle cx="330" cy="82" r="3.5" class="cm-fill"/>
+        <circle cx="354" cy="82" r="3.5" class="cm-fill"/>
+        <path d="M328 104 Q342 92 356 104" class="cm-line" stroke-width="2"/>
+        <text x="342" y="150" text-anchor="middle" font-size="17" font-weight="bold">&minus;7</text>
+        <text x="196" y="92" text-anchor="middle" font-size="16">&#8596;</text>
+        <text x="264" y="92" text-anchor="middle" font-size="16">&#8596;</text>
+      </svg>`,
+        caption: "Every number has an evil twin waiting in the mirror. Add the pair together and &mdash; poof &mdash; nothing is left but zero. Flip the fraction instead of the sign and you meet the other twin, the one that multiplies to 1."
+      },
+      exercises: [
+        { prompt: "Find the additive inverse of 123.", value: -123,
+          solution: ["Flip the sign: &minus;123"] },
+        { prompt: "Find the multiplicative inverse (reciprocal) of &minus;32. Enter it as a fraction a/b.", value: -1/32, tol: 0.001,
+          solution: ["Write &minus;32 as &minus;32/1", "Flip it: &minus;1/32"] },
+        { prompt: "Find the multiplicative inverse of 0.3. (Hint: write 0.3 as a fraction first.)", value: 10/3, tol: 0.01, accept: ["10/3"],
+          solution: ["0.3 = 3/10", "Flip it: 10/3"] },
+        { prompt: "Use the distributive property to expand and simplify: 6&times;(x+2) &minus; 5&times;(x&minus;3). Enter the simplified expression (e.g. 2x+7).", accept: ["x+27","27+x","1x+27"],
+          solution: ["Distribute: 6x + 12 &minus; 5x + 15", "Combine like terms: x + 27"] },
+        { prompt: "Simplify: &minus;3y + 7 &minus; (&minus;8) + 3y.", value: 15, accept: ["15"],
+          solution: ["&minus;3y and +3y cancel out", "7 &minus; (&minus;8) = 7 + 8 = 15"] },
+        { prompt: "Simplify: 34x &minus; 22y + 12x + 38y. Enter the simplified expression (e.g. 5x+2y).", accept: ["46x+16y","16y+46x"],
+          solution: ["Combine the x-terms: 34x + 12x = 46x", "Combine the y-terms: &minus;22y + 38y = 16y", "Result: 46x + 16y"] },
+        { prompt: "Find the additive inverse of &pi; + 2. Enter your answer symbolically, without brackets (e.g. &minus;a&minus;b).", accept: ["-pi-2","-π-2","-2-pi","-2-π"],
+          solution: ["Flip the sign of the whole expression: &minus;(&pi; + 2), i.e. &minus;&pi; &minus; 2"] },
+        { prompt: "Find the multiplicative inverse of &radic;15. Enter your answer symbolically.", accept: ["1/sqrt15","1/√15","sqrt15/15","√15/15"],
+          solution: ["Flip it: 1/&radic;15", "Rationalized (see Lesson F): &radic;15/15"] },
+        { prompt: "Is there an identity element for the division operation (a number e so that a &divide; e = e &divide; a = a for every a)? Answer yes or no and justify briefly.", open: true,
+          solution: ["Sample response: No. 1 works from the right (a &divide; 1 = a) but not from the left (1 &divide; a &ne; a in general), and division isn't even commutative, so there's no true two-sided identity."] },
+        { prompt: "Do the natural numbers &#8469; have the closure property for subtraction? Answer yes or no.", accept: ["no"],
+          solution: ["3 and 5 are both natural numbers, but 3 &minus; 5 = &minus;2, which is not a natural number", "So &#8469; is NOT closed under subtraction &mdash; no"] },
+        { prompt: "Use the associative property to evaluate 3 &times; (4 &times; 5) by regrouping as (3&times;4) &times; 5.", value: 60,
+          solution: ["(3&times;4)&times;5 = 12&times;5 = 60", "Same result as 3&times;(4&times;5) = 3&times;20 = 60"] },
+        { prompt: "Use the associative property to evaluate (0.2 + 0.5) + 1.2 by regrouping as 0.2 + (0.5 + 1.2).", value: 1.9,
+          solution: ["0.5 + 1.2 = 1.7", "0.2 + 1.7 = 1.9"] },
+        { prompt: "Use the distributive property to expand and simplify: 9 &times; (12 &minus; 3).", value: 81,
+          solution: ["9&times;12 &minus; 9&times;3 = 108 &minus; 27 = 81", "(Or simply 9&times;9 = 81)"] },
+        { prompt: "Use the distributive property to expand and simplify: 1.2 &times; (0.2 + 0.3).", value: 0.6,
+          solution: ["1.2&times;0.2 + 1.2&times;0.3 = 0.24 + 0.36 = 0.6"] },
+        { prompt: "Simplify (11/12 + 3/5) + 2/5 by regrouping the fifths first (associative property). Enter as a fraction or decimal.", value: 1.9167, tol: 0.01, accept: ["23/12"],
+          solution: ["Regroup: 11/12 + (3/5 + 2/5)", "3/5 + 2/5 = 1", "11/12 + 1 = 23/12"] },
+        { prompt: "Find the additive inverse of 12.35.", value: -12.35,
+          solution: ["Flip the sign: &minus;12.35"] },
+        { prompt: "Find the multiplicative inverse of &pi;/4. Enter your answer symbolically.", accept: ["4/pi","4/π"],
+          solution: ["Flip the fraction: 4/&pi;"] },
+        { prompt: "Simplify: 5(x+3) &minus; 2(x&minus;1). Enter the simplified expression (e.g. 2x+7).", accept: ["3x+17","17+3x"],
+          solution: ["Distribute: 5x + 15 &minus; 2x + 2", "Combine like terms: 3x + 17"] },
+        { prompt: "Do the integers &#8484; have the closure property for division? Answer yes or no.", accept: ["no"],
+          solution: ["3 and 2 are both integers, but 3 &divide; 2 = 1.5, which is not an integer", "So &#8484; is NOT closed under division &mdash; no"] },
+        { prompt: "Is there an identity element for subtraction (a number e so that a &minus; e = e &minus; a = a for every a)? Answer yes or no and justify briefly.", open: true,
+          solution: ["Sample response: No. 0 works from the right (a &minus; 0 = a) but not from the left (0 &minus; a = &minus;a, not a, unless a = 0), so there's no true two-sided identity."] }
+      ]
+    },
+    {
+      letter: "C", hueVar: "--hueC", title: "Interval &amp; Set-Builder Notation",
+      rules: [
+        "Interval notation describes a range with two endpoints: a <b>parenthesis</b> ( or ) means the endpoint is <b>excluded</b>; a <b>bracket</b> [ or ] means it is <b>included</b>.",
+        "Set-builder notation writes the same range as {x | condition}, read \"the set of all x such that...\" &mdash; e.g. {x | &minus;19 &le; x &lt; 2}.",
+        "On a number line, an <b>open</b> circle matches a parenthesis (can't touch that value); a <b>closed/filled</b> circle matches a bracket (can touch it).",
+        "Infinity (&infin; or &minus;&infin;) is never a number you can reach, so it always takes a parenthesis, never a bracket: (5, &infin;), never (5, &infin;]."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 300 140" width="300" height="140">
+        <line x1="30" y1="70" x2="270" y2="70" class="dg-ink-line" stroke-width="1.5"/>
+        <line x1="87" y1="70" x2="220" y2="70" class="dg-line" stroke-width="4"/>
+        <circle cx="80" cy="70" r="6" fill="var(--surface)" class="dg-line" stroke-width="2"/>
+        <text x="80" y="95" text-anchor="middle" font-size="11">a (open)</text>
+        <circle cx="220" cy="70" r="6" class="dg-fill"/>
+        <text x="220" y="95" text-anchor="middle" font-size="11">b (closed)</text>
+        <text x="150" y="35" text-anchor="middle" font-size="12">(a, b]</text>
+        <text x="150" y="120" text-anchor="middle" font-size="10">{x | a &lt; x &le; b}</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 170" width="380" height="170">
+        <text x="14" y="24" font-size="11" font-weight="bold">(a,b)</text>
+        <line x1="110" y1="20" x2="230" y2="20" class="dg-ink-line" stroke-width="1"/>
+        <line x1="135" y1="20" x2="205" y2="20" class="dg-line" stroke-width="3"/>
+        <circle cx="130" cy="20" r="4" fill="var(--surface)" class="dg-line" stroke-width="2"/>
+        <circle cx="210" cy="20" r="4" fill="var(--surface)" class="dg-line" stroke-width="2"/>
+        <text x="14" y="64" font-size="11" font-weight="bold">[a,b]</text>
+        <line x1="110" y1="60" x2="230" y2="60" class="dg-ink-line" stroke-width="1"/>
+        <circle cx="130" cy="60" r="4" class="dg-fill"/>
+        <circle cx="210" cy="60" r="4" class="dg-fill"/>
+        <line x1="130" y1="60" x2="210" y2="60" class="dg-line" stroke-width="3"/>
+        <text x="14" y="104" font-size="11" font-weight="bold">[a,&#8734;)</text>
+        <line x1="110" y1="100" x2="256" y2="100" class="dg-ink-line" stroke-width="1"/>
+        <line x1="130" y1="100" x2="246" y2="100" class="dg-line" stroke-width="3"/>
+        <polygon points="246,95 246,105 258,100" class="dg-fill"/>
+        <circle cx="130" cy="100" r="4" class="dg-fill"/>
+        <text x="14" y="144" font-size="11" font-weight="bold">{1,2,3}</text>
+        <line x1="110" y1="140" x2="230" y2="140" class="dg-ink-line" stroke-width="1"/>
+        <circle cx="150" cy="140" r="4" class="dg-fill"/>
+        <circle cx="180" cy="140" r="4" class="dg-fill"/>
+        <circle cx="210" cy="140" r="4" class="dg-fill"/>
+        <line x1="232" y1="140" x2="252" y2="140" class="dg-ink-line" stroke-width="1"/>
+        <text x="261" y="144" font-size="11" fill="var(--bad)">not an interval</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "Endpoint markers: hollow &#9675; = excluded (parenthesis), filled &#9679; = included (bracket).",
+        "Interval shapes compared &mdash; a discrete set of dots is never an interval."
+      ],
+      trick: "Parenthesis = hollow circle = can't touch it. Bracket = solid circle = can touch it. And infinity always gets a parenthesis &mdash; you can never actually arrive there.",
+      examples: [
+        {
+          problem: "Write {x | &minus;19 &le; x &lt; 2} in interval notation.",
+          steps: [
+            "&le; at &minus;19 means &minus;19 IS included &rarr; use a bracket: [&minus;19",
+            "&lt; at 2 means 2 is NOT included &rarr; use a parenthesis: 2)",
+            "Put them together: [&minus;19, 2)",
+            "On a number line: filled circle at &minus;19, open circle at 2, shaded between"
+          ],
+          answer: "[&minus;19, 2)"
+        },
+        {
+          problem: "Is the set {1, 2, 3, 4, 5} (only whole numbers 1 through 5) the same as the interval [1, 5]?",
+          steps: [
+            "[1, 5] contains EVERY real number from 1 to 5 inclusive &mdash; like 1.5, 2.73, &pi;, etc.",
+            "{1, 2, 3, 4, 5} contains only the 5 whole numbers listed &mdash; nothing in between",
+            "They share the same endpoints, but one is continuous and one is discrete"
+          ],
+          answer: "No &mdash; [1,5] is continuous; {1,2,3,4,5} is discrete."
+        }
+      ],
+      remember: [
+        "<b>( ) = hollow circle = keep out.</b> <b>[ ] = solid circle = come in.</b> The bracket shape and the circle shape always match.",
+        "&infin; and &minus;&infin; <b>always</b> get a parenthesis &mdash; you can never actually arrive at infinity.",
+        "Write the small number first: [&minus;3, 5) is fine, [5, &minus;3) is nonsense.",
+        "A list like {1, 2, 3} is a <b>set, not an interval</b>: an interval holds <i>every</i> number in between, decimals included."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 195" width="460" height="195">
+        <rect x="186" y="24" width="88" height="128" rx="8" class="cm-face" stroke-width="2"/>
+        <text x="230" y="50" text-anchor="middle" font-size="10" font-weight="bold">CLUB</text>
+        <text x="230" y="66" text-anchor="middle" font-size="10" font-weight="bold">INTERVAL</text>
+        <text x="230" y="106" text-anchor="middle" font-size="20">&#9834;</text>
+        <text x="230" y="136" text-anchor="middle" font-size="9" class="cm-soft">members only</text>
+        <circle cx="72" cy="74" r="26" fill="none" class="cm-line" stroke-width="3"/>
+        <circle cx="63" cy="68" r="3" class="cm-fill"/>
+        <circle cx="81" cy="68" r="3" class="cm-fill"/>
+        <path d="M61 88 Q72 78 83 88" class="cm-line" stroke-width="2"/>
+        <text x="72" y="126" text-anchor="middle" font-size="14" font-weight="bold">( open</text>
+        <text x="72" y="146" text-anchor="middle" font-size="9.5">&ldquo;you're JUST outside&rdquo;</text>
+        <line x1="120" y1="60" x2="152" y2="92" class="cm-bad" stroke-width="4"/>
+        <line x1="152" y1="60" x2="120" y2="92" class="cm-bad" stroke-width="4"/>
+        <circle cx="388" cy="74" r="26" class="cm-fill"/>
+        <circle cx="379" cy="68" r="3" fill="var(--surface)"/>
+        <circle cx="397" cy="68" r="3" fill="var(--surface)"/>
+        <path d="M377 82 Q388 95 399 82" stroke="var(--surface)" fill="none" stroke-width="2"/>
+        <text x="388" y="126" text-anchor="middle" font-size="14" font-weight="bold">] closed</text>
+        <text x="388" y="146" text-anchor="middle" font-size="9.5">&ldquo;you're on the list&rdquo;</text>
+        <line x1="352" y1="76" x2="300" y2="76" class="cm-good" stroke-width="4"/>
+        <polygon points="288,76 304,68 304,84" class="cm-good-fill"/>
+      </svg>`,
+        caption: "A parenthesis is the bouncer stopping you right at the door &mdash; so close, still outside. A square bracket checks the list and waves you straight in. And nobody, ever, gets a bracket next to infinity."
+      },
+      exercises: [
+        { prompt: "A number line has filled (closed) dots at 0 and at 5, shaded between. Write this in interval notation.", accept: ["[0,5]"],
+          solution: ["Both endpoints are filled/closed &rarr; both get brackets", "[0, 5]"] },
+        { prompt: "A number line has an open circle at &minus;2 and a filled dot at 1, shaded between. Write this in interval notation.", accept: ["-2,1]"],
+          solution: ["&minus;2 is open &rarr; parenthesis; 1 is closed &rarr; bracket", "(&minus;2, 1]"] },
+        { prompt: "A number line has open circles at both 7 and 11, shaded between. Write this in interval notation.", accept: ["7,11"],
+          solution: ["Both endpoints are open &rarr; both get parentheses", "(7, 11)"] },
+        { prompt: "A number line has a filled dot at 4 and an open circle at 8, shaded between. Write this in interval notation.", accept: ["[4,8"],
+          solution: ["4 is closed &rarr; bracket; 8 is open &rarr; parenthesis", "[4, 8)"] },
+        { prompt: "A number line shows a ray starting with a filled dot at 5, extending right forever. Write this in interval notation.", accept: ["[5,∞","[5,infinity","[5,inf"],
+          solution: ["5 is closed &rarr; bracket; the ray never ends &rarr; &infin; with a parenthesis", "[5, &infin;)"] },
+        { prompt: "A number line shows a ray starting with an open circle at 1, extending right forever. Write this in interval notation.", accept: ["1,∞","1,infinity","1,inf"],
+          solution: ["1 is open &rarr; parenthesis; &infin; always takes a parenthesis", "(1, &infin;)"] },
+        { prompt: "Write {x | &minus;19 &le; x &lt; 2} in interval notation.", accept: ["[-19,2"],
+          solution: ["&le; at &minus;19 &rarr; bracket; &lt; at 2 &rarr; parenthesis", "[&minus;19, 2)"] },
+        { prompt: "Write {x | 0 &lt; x &lt; 19} in interval notation.", accept: ["0,19"],
+          solution: ["Both are strict inequalities &rarr; both get parentheses", "(0, 19)"] },
+        { prompt: "Convert the interval [2.3, 5.9] into set-builder notation.", open: true,
+          solution: ["Both endpoints are included (brackets) &rarr; use &le; on both sides", "{x | 2.3 &le; x &le; 5.9}"] },
+        { prompt: "Is [&minus;1, 1) the same set as {x | &minus;1 &le; x &lt; 1}? Answer yes or no.", accept: ["yes"],
+          solution: ["[&minus;1 means &minus;1 is included &rarr; &minus;1 &le; x", "1) means 1 is excluded &rarr; x &lt; 1", "Yes &mdash; they describe the same set"] },
+        { prompt: "Write {x | 2/3 &le; x &le; 12} in interval notation.", accept: ["[2/3,12]"],
+          solution: ["&le; on both sides &rarr; both get brackets", "[2/3, 12]"] },
+        { prompt: "Write {x | &pi;/2 &lt; x &le; 4&pi;} in interval notation (leave &pi; as pi).", accept: ["pi/2,4pi]"],
+          solution: ["&lt; at &pi;/2 &rarr; parenthesis; &le; at 4&pi; &rarr; bracket", "(pi/2, 4pi]"] },
+        { prompt: "Is (&minus;1/2, &minus;5) a valid interval in standard notation? Answer yes or no, and explain why or why not.", open: true,
+          solution: ["Sample response: No. In (a, b) the first number must be SMALLER than the second, but here &minus;1/2 &gt; &minus;5. This would need to be written (&minus;5, &minus;1/2) instead."] },
+        { prompt: "Convert (&minus;5, 11/2] into set-builder notation.", open: true,
+          solution: ["( at &minus;5 &rarr; strict &lt;; ] at 11/2 &rarr; &le;", "{x | &minus;5 &lt; x &le; 11/2}"] },
+        { prompt: "A number line shows a ray with an open circle at 15, extending LEFT forever (through smaller numbers). Write this in interval notation.", accept: ["-∞,15","-infinity,15","-inf,15"],
+          solution: ["The ray never ends on the left &rarr; &minus;&infin; with a parenthesis; 15 is open &rarr; parenthesis", "(&minus;&infin;, 15)"] },
+        { prompt: "A number line shows six isolated dots at exactly &minus;5, &minus;4, &minus;3, &minus;2, &minus;1, 0, with NO line connecting them. Can this set be written using interval notation? Answer yes or no.", accept: ["no"],
+          solution: ["Interval notation only describes a CONTINUOUS, unbroken range of numbers", "This is a discrete set of 6 separate points, so it cannot be written as an interval &mdash; no (it can only be listed as a set)"] },
+        { prompt: "Write {x | x &le; &minus;3} in interval notation.", accept: ["-∞,-3]","-infinity,-3]","-inf,-3]"],
+          solution: ["&le; at &minus;3 &rarr; bracket; unbounded on the left &rarr; &minus;&infin; with a parenthesis", "(&minus;&infin;, &minus;3]"] },
+        { prompt: "Write (&minus;&infin;, 7) in set-builder notation.", open: true,
+          solution: ["No lower bound; 7 is excluded (parenthesis) &rarr; strict &lt;", "{x | x &lt; 7}"] },
+        { prompt: "True or false: every interval can be written in set-builder notation, but not every set can be written in interval notation.", accept: ["true"],
+          solution: ["Every interval has a describable condition, e.g. [a,b] = {x | a&le;x&le;b} &mdash; always works", "But a discrete set like {1,2,3} has gaps, so it can never be written as one continuous interval &mdash; true"] },
+        { prompt: "A number line has a closed dot at &minus;6 and an open circle at 3, shaded between. Write this in interval notation.", accept: ["[-6,3"],
+          solution: ["&minus;6 is closed &rarr; bracket; 3 is open &rarr; parenthesis", "[&minus;6, 3)"] }
+      ]
+    },
+    {
+      letter: "D", hueVar: "--hueD", title: "Absolute Value &amp; the Division Algorithm",
+      rules: [
+        "Absolute value: |a| = a if a &ge; 0, or &minus;a if a &lt; 0. It's a <b>distance from zero</b>, so |a| is never negative.",
+        "To solve |expression| = k with k &gt; 0: split into two cases, expression = k OR expression = &minus;k, then solve both.",
+        "|expression| = (a negative number) has <b>no solution</b> &mdash; a distance can never be negative.",
+        "Division Algorithm: for integers a, b (b &gt; 0), a = bq + r where 0 &le; r &lt; b. q is the quotient (how many times b fits in), r is the leftover remainder."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 300 140" width="300" height="140">
+        <line x1="20" y1="70" x2="280" y2="70" class="dg-ink-line" stroke-width="1.5"/>
+        <circle cx="70" cy="70" r="4" class="dg-fill"/>
+        <text x="70" y="95" text-anchor="middle" font-size="11">-2</text>
+        <circle cx="170" cy="70" r="4" class="dg-good"/>
+        <text x="170" y="95" text-anchor="middle" font-size="11">3</text>
+        <circle cx="270" cy="70" r="4" class="dg-fill"/>
+        <text x="270" y="95" text-anchor="middle" font-size="11">8</text>
+        <line x1="70" y1="55" x2="170" y2="55" class="dg-line" stroke-width="2"/>
+        <text x="120" y="45" text-anchor="middle" font-size="10">distance 5</text>
+        <line x1="170" y1="55" x2="270" y2="55" class="dg-line" stroke-width="2"/>
+        <text x="220" y="45" text-anchor="middle" font-size="10">distance 5</text>
+        <text x="150" y="120" text-anchor="middle" font-size="10">|x - 3| = 5  &rarr;  x = -2 or x = 8</text>
+      </svg>`,
+        `<svg viewBox="0 0 300 166" width="300" height="166">
+        <rect x="90" y="8" width="120" height="32" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="150" y="29" text-anchor="middle" font-size="11">|expression| = k</text>
+        <path d="M150 40 L150 50 M75 50 L225 50 M75 50 L75 58 M225 50 L225 58" class="dg-line" stroke-width="1.5" style="fill:none"/>
+        <polygon points="71,57 79,57 75,63" class="dg-fill"/>
+        <polygon points="221,57 229,57 225,63" class="dg-fill"/>
+        <rect x="10" y="62" width="130" height="32" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="75" y="83" text-anchor="middle" font-size="10.5">expr = k</text>
+        <rect x="160" y="62" width="130" height="32" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="225" y="83" text-anchor="middle" font-size="10.5">expr = &minus;k</text>
+        <path d="M75 94 L75 106 M225 94 L225 106 M75 106 L225 106 M150 106 L150 112" class="dg-line" stroke-width="1.5" style="fill:none"/>
+        <polygon points="146,111 154,111 150,118" class="dg-fill"/>
+        <rect x="55" y="120" width="190" height="34" rx="8" class="dg-good"/>
+        <text x="150" y="142" text-anchor="middle" font-size="10.5" style="fill:var(--surface)">check both in original</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "|x&minus;3|=5 as two equal distances (5 units each) from 3 on the number line.",
+        "The two-case method for solving any absolute value equation."
+      ],
+      trick: "Absolute value bars are a fork in the road: split into a + branch and a &minus; branch, solve both, then plug each answer back into the <i>original</i> equation &mdash; one branch sometimes turns out to be impossible. For the division algorithm: r is always smaller than b and never negative &mdash; if it isn't, adjust q.",
+      examples: [
+        {
+          problem: "Find the value(s) of x if |x &minus; 3| = 5.",
+          steps: [
+            "Split into two cases: x &minus; 3 = 5 OR x &minus; 3 = &minus;5",
+            "Case 1: x &minus; 3 = 5 &rarr; x = 8",
+            "Case 2: x &minus; 3 = &minus;5 &rarr; x = &minus;2",
+            "Check: |8&minus;3| = |5| = 5 &#10003; and |&minus;2&minus;3| = |&minus;5| = 5 &#10003;"
+          ],
+          answer: "x = 8 or x = &minus;2"
+        },
+        {
+          problem: "Solve for x: |4x &minus; 8| = 0.",
+          steps: [
+            "An absolute value can equal 0 only when the inside expression is exactly 0 &mdash; there's no '+k / &minus;k' split when k = 0",
+            "4x &minus; 8 = 0",
+            "4x = 8",
+            "x = 2"
+          ],
+          answer: "x = 2 (exactly one solution)"
+        }
+      ],
+      remember: [
+        "|x| is a <b>distance</b>, so it is never negative. |x| = k splits into <b>two branches</b>: x = k and x = &minus;k.",
+        "|x| = a negative number has <b>no solution</b>; |x| = 0 has <b>exactly one</b>.",
+        "<b>Division algorithm:</b> a = bq + r with 0 &le; r &lt; b. The remainder is never negative and never as big as the divisor.",
+        "Always substitute <b>both</b> branches back into the original equation before you write the final answer."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 185" width="460" height="185">
+        <text x="230" y="20" text-anchor="middle" font-size="13" font-weight="bold">17 slices &divide; 5 friends</text>
+        <circle cx="52" cy="72" r="22" class="cm-face" stroke-width="2"/>
+        <text x="52" y="78" text-anchor="middle" font-size="15" font-weight="bold">3</text>
+        <circle cx="120" cy="72" r="22" class="cm-face" stroke-width="2"/>
+        <text x="120" y="78" text-anchor="middle" font-size="15" font-weight="bold">3</text>
+        <circle cx="188" cy="72" r="22" class="cm-face" stroke-width="2"/>
+        <text x="188" y="78" text-anchor="middle" font-size="15" font-weight="bold">3</text>
+        <circle cx="256" cy="72" r="22" class="cm-face" stroke-width="2"/>
+        <text x="256" y="78" text-anchor="middle" font-size="15" font-weight="bold">3</text>
+        <circle cx="324" cy="72" r="22" class="cm-face" stroke-width="2"/>
+        <text x="324" y="78" text-anchor="middle" font-size="15" font-weight="bold">3</text>
+        <rect x="366" y="46" width="82" height="54" rx="11" class="cm-bad" stroke-width="2" stroke-dasharray="5 4"/>
+        <text x="407" y="72" text-anchor="middle" font-size="16" font-weight="bold">2</text>
+        <text x="407" y="90" text-anchor="middle" font-size="9">left over</text>
+        <text x="407" y="116" text-anchor="middle" font-size="9" class="cm-soft">(cue the fight)</text>
+        <text x="230" y="140" text-anchor="middle" font-size="15" font-weight="bold">17 = 5 &times; 3 + 2</text>
+        <text x="230" y="164" text-anchor="middle" font-size="10.5" class="cm-soft">a = bq + r &mdash; the leftover r is always smaller than b</text>
+      </svg>`,
+        caption: "Five friends, seventeen slices: everyone walks away with 3 and two slices start a war. That war is the remainder &mdash; and it is always smaller than the number of friends, otherwise somebody forgot to hand one out."
+      },
+      exercises: [
+        { prompt: "Find |&minus;12|.", value: 12,
+          solution: ["Distance from 0 to &minus;12 is 12", "|&minus;12| = 12"] },
+        { prompt: "Find |&radic;5| (to 3 decimal places).", value: 2.236, tol: 0.01,
+          solution: ["&radic;5 is already positive, so absolute value doesn't change it", "&radic;5 &asymp; 2.236"] },
+        { prompt: "If x&sup2; = 4, what is |x|?", value: 2,
+          solution: ["|x| = &radic;(x&sup2;) = &radic;4 = 2"] },
+        { prompt: "Solve for x: |x| = 3. Enter both solutions separated by a comma.", valueSet: [3, -3],
+          solution: ["x could be positive or negative 3", "x = 3 or x = &minus;3"] },
+        { prompt: "Solve for x: 2|x| &minus; 1 = 17. Enter both solutions separated by a comma.", valueSet: [9, -9],
+          solution: ["Add 1: 2|x| = 18", "Divide by 2: |x| = 9", "x = 9 or x = &minus;9"] },
+        { prompt: "Solve for x: |2x + 1| = 7. Enter both solutions separated by a comma.", valueSet: [3, -4],
+          solution: ["Case 1: 2x + 1 = 7 &rarr; 2x = 6 &rarr; x = 3", "Case 2: 2x + 1 = &minus;7 &rarr; 2x = &minus;8 &rarr; x = &minus;4"] },
+        { prompt: "Solve for x: |x + 4| = &minus;2. How many solutions are there? (Enter 0 if none.)", value: 0,
+          solution: ["Absolute value can never equal a negative number", "There are 0 solutions"] },
+        { prompt: "Find the quotient and remainder when 113 is divided by 4. Enter q then r, separated by a comma.", valueSet: [28, 1],
+          solution: ["4 &times; 28 = 112, and 113 &minus; 112 = 1", "113 = 4(28) + 1, so q = 28, r = 1"] },
+        { prompt: "Find the quotient and remainder when 89 is divided by 7. Enter q then r, separated by a comma.", valueSet: [12, 5],
+          solution: ["7 &times; 12 = 84, and 89 &minus; 84 = 5", "89 = 7(12) + 5, so q = 12, r = 5"] },
+        { prompt: "Find the quotient and remainder when 208 is divided by 4. Enter q then r, separated by a comma.", valueSet: [52, 0],
+          solution: ["4 &times; 52 = 208 exactly", "208 = 4(52) + 0, so q = 52, r = 0"] },
+        { prompt: "Find |&pi; &minus; 5| (&pi; &asymp; 3.14).", value: 1.858, tol: 0.01,
+          solution: ["&pi; &minus; 5 is negative (about &minus;1.858), so |&pi;&minus;5| = 5 &minus; &pi;", "5 &minus; 3.14159... &asymp; 1.858"] },
+        { prompt: "Solve for x: |x &minus; 7| = 2. Enter both solutions separated by a comma.", valueSet: [9, 5],
+          solution: ["Case 1: x &minus; 7 = 2 &rarr; x = 9", "Case 2: x &minus; 7 = &minus;2 &rarr; x = 5"] },
+        { prompt: "Solve for x: |3x &minus; 2| = 10. Enter both solutions separated by a comma.", valueSet: [4, -2.667], tol: 0.01,
+          solution: ["Case 1: 3x &minus; 2 = 10 &rarr; 3x = 12 &rarr; x = 4", "Case 2: 3x &minus; 2 = &minus;10 &rarr; 3x = &minus;8 &rarr; x = &minus;8/3 &asymp; &minus;2.667"] },
+        { prompt: "Solve for x: 3|x + 1| + 2 = 14. Enter both solutions separated by a comma.", valueSet: [3, -5],
+          solution: ["Subtract 2: 3|x+1| = 12", "Divide by 3: |x+1| = 4", "x + 1 = 4 &rarr; x = 3, or x + 1 = &minus;4 &rarr; x = &minus;5"] },
+        { prompt: "Solve for x: |x &minus; 4| = 0. How many solutions are there? (Enter a number.)", value: 1,
+          solution: ["|x&minus;4| = 0 only when x&minus;4 = 0 exactly", "x = 4 &mdash; exactly one solution (not two, since there's no + / &minus; split when k = 0)"] },
+        { prompt: "Simplify: |5| + |&minus;5| &minus; |0|.", value: 10,
+          solution: ["|5| = 5, |&minus;5| = 5, |0| = 0", "5 + 5 &minus; 0 = 10"] },
+        { prompt: "Find the quotient and remainder when 250 is divided by 6. Enter q then r, separated by a comma.", valueSet: [41, 4],
+          solution: ["6 &times; 41 = 246, and 250 &minus; 246 = 4", "250 = 6(41) + 4, so q = 41, r = 4"] },
+        { prompt: "Find the quotient and remainder when 500 is divided by 23. Enter q then r, separated by a comma.", valueSet: [21, 17],
+          solution: ["23 &times; 21 = 483, and 500 &minus; 483 = 17", "500 = 23(21) + 17, so q = 21, r = 17"] },
+        { prompt: "If a = 7q + r with 0 &le; r &lt; 7, and a = 100, find q and r. Enter q then r, separated by a comma.", valueSet: [14, 2],
+          solution: ["7 &times; 14 = 98, and 100 &minus; 98 = 2", "100 = 7(14) + 2, so q = 14, r = 2"] },
+        { prompt: "True or false: for all real numbers a, |a| = |&minus;a|.", accept: ["true"],
+          solution: ["Both |a| and |&minus;a| measure the distance from 0, and a and &minus;a are always the same distance from 0 (just opposite directions)", "True"] }
+      ]
+    },
+    {
+      letter: "E", hueVar: "--hueE", title: "Simplifying &amp; Operating on Surds",
+      rules: [
+        "<b>Product rule</b>: &radic;a &times; &radic;b = &radic;(ab). <b>Quotient rule</b>: &radic;a &divide; &radic;b = &radic;(a/b) (a &ge; 0 and b &gt; 0 &mdash; you can never divide by &radic;0).",
+        "To <b>simplify</b> &radic;n: find its largest perfect-square factor and split it out &mdash; &radic;(a&sup2;&times;b) = a&radic;b.",
+        "<b>Like surds</b> (same number under the root) combine like algebra terms: a&radic;n &plusmn; b&radic;n = (a&plusmn;b)&radic;n. Unlike surds cannot be combined by adding/subtracting.",
+        "(&radic;a)&sup2; = a for a &ge; 0. This makes (&radic;a+&radic;b)(&radic;a&minus;&radic;b) = a &minus; b &mdash; a difference of squares where the surds disappear."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 300 140" width="300" height="140">
+        <text x="150" y="30" text-anchor="middle" font-size="16">&radic;45</text>
+        <text x="150" y="55" text-anchor="middle" font-size="12">=</text>
+        <rect x="58" y="65" width="70" height="40" rx="6" class="dg-tint" stroke-width="2"/>
+        <text x="93" y="90" text-anchor="middle" font-size="14">&radic;9</text>
+        <text x="150" y="90" text-anchor="middle" font-size="16">&times;</text>
+        <rect x="172" y="65" width="70" height="40" rx="6" class="dg-tint" stroke-width="2"/>
+        <text x="207" y="90" text-anchor="middle" font-size="14">&radic;5</text>
+        <text x="150" y="128" text-anchor="middle" font-size="13">= 3&radic;5</text>
+      </svg>`,
+        `<svg viewBox="0 0 300 140" width="300" height="140">
+        <text x="150" y="14" text-anchor="middle" font-size="10" font-weight="bold">Like vs. unlike surds</text>
+        <rect x="15" y="26" width="120" height="34" rx="8" class="dg-good"/>
+        <text x="75" y="48" text-anchor="middle" font-size="11" style="fill:var(--surface)">3&radic;5 + 7&radic;5</text>
+        <text x="152" y="48" text-anchor="middle" font-size="15">=</text>
+        <rect x="170" y="26" width="100" height="34" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="220" y="48" text-anchor="middle" font-size="12">10&radic;5</text>
+        <text x="150" y="76" text-anchor="middle" font-size="9.5">same root &rarr; can combine</text>
+        <rect x="15" y="92" width="120" height="34" rx="8" class="dg-bad"/>
+        <text x="75" y="114" text-anchor="middle" font-size="11" style="fill:var(--surface)">3&radic;5 + 7&radic;2</text>
+        <text x="152" y="114" text-anchor="middle" font-size="15">&ne;</text>
+        <rect x="170" y="92" width="100" height="34" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="220" y="114" text-anchor="middle" font-size="9.5">one term</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "Simplifying &radic;45 by pulling out its largest perfect-square factor, 9.",
+        "Only surds with the SAME number under the root can be combined by adding or subtracting."
+      ],
+      trick: "Every simplification is a perfect-square scavenger hunt: keep dividing out the largest perfect square you can find (4, 9, 16, 25, 36...) until nothing's left to pull out. For adding/subtracting, simplify EVERYTHING first, then combine only the matching surds.",
+      examples: [
+        {
+          problem: "Simplify &radic;45 &minus; 2&radic;20 + &radic;125",
+          steps: [
+            "&radic;45 = &radic;(9&times;5) = 3&radic;5",
+            "&radic;20 = &radic;(4&times;5) = 2&radic;5, so 2&radic;20 = 2(2&radic;5) = 4&radic;5",
+            "&radic;125 = &radic;(25&times;5) = 5&radic;5",
+            "Combine like surds: 3&radic;5 &minus; 4&radic;5 + 5&radic;5 = (3&minus;4+5)&radic;5 = 4&radic;5"
+          ],
+          answer: "4&radic;5"
+        },
+        {
+          problem: "Expand and simplify (&radic;7 + &radic;5)(&radic;7 &minus; &radic;5)",
+          steps: [
+            "This matches the pattern (&radic;a+&radic;b)(&radic;a&minus;&radic;b) = a &minus; b",
+            "Here a = 7, b = 5",
+            "Result: 7 &minus; 5 = 2"
+          ],
+          answer: "2"
+        }
+      ],
+      remember: [
+        "&radic;a &times; &radic;b = &radic;(ab) and &radic;a &divide; &radic;b = &radic;(a/b) &mdash; but &radic;(a+b) is <b>never</b> &radic;a + &radic;b.",
+        "<b>Perfect-square scavenger hunt:</b> pull out the largest perfect square you can find. &radic;72 = &radic;36 &times; &radic;2 = 6&radic;2.",
+        "Only <b>like surds</b> combine: 3&radic;5 + 7&radic;5 = 10&radic;5, but 3&radic;5 + 7&radic;2 just stays as it is.",
+        "(&radic;a + &radic;b)(&radic;a &minus; &radic;b) = a &minus; b &mdash; the surds wipe each other out. This is the whole idea behind conjugates."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 185" width="460" height="185">
+        <text x="118" y="72" text-anchor="middle" font-size="34" font-weight="bold">&radic;72</text>
+        <circle cx="118" cy="62" r="52" fill="none" class="cm-line" stroke-width="3" opacity="0.65"/>
+        <line x1="155" y1="99" x2="186" y2="130" class="cm-line" stroke-width="7" stroke-linecap="round"/>
+        <text x="118" y="150" text-anchor="middle" font-size="12">72 = <tspan font-weight="bold">36</tspan> &times; 2</text>
+        <text x="118" y="172" text-anchor="middle" font-size="15" font-weight="bold">&radic;72 = 6&radic;2</text>
+        <rect x="230" y="14" width="216" height="46" rx="11" class="cm-good" stroke-width="2"/>
+        <polygon points="344,60 360,60 352,84" class="cm-good" stroke-width="2"/>
+        <text x="338" y="34" text-anchor="middle" font-size="11">&ldquo;Found you, 36! Hiding</text>
+        <text x="338" y="50" text-anchor="middle" font-size="11">inside 72 the whole time.&rdquo;</text>
+        <circle cx="352" cy="126" r="32" class="cm-face" stroke-width="2"/>
+        <circle cx="340" cy="118" r="3.5" class="cm-fill"/>
+        <circle cx="364" cy="118" r="3.5" class="cm-fill"/>
+        <path d="M336 132 Q352 152 368 132 Z" class="cm-line" stroke-width="2"/>
+        <path d="M320 106 l14 -5" class="cm-line" stroke-width="2"/>
+        <path d="M384 106 l-14 -5" class="cm-line" stroke-width="2"/>
+      </svg>`,
+        caption: "Simplifying a surd is a stakeout: somewhere under that root sign a perfect square is hiding. Keep looking until nothing square is left &mdash; then, and only then, is the surd properly simplified."
+      },
+      exercises: [
+        { prompt: "Simplify &radic;72. Enter as, e.g., 4sqrt3.", accept: ["6sqrt2","6√2"],
+          solution: ["72 = 36 &times; 2, and 36 is a perfect square", "&radic;72 = &radic;36 &times; &radic;2 = 6&radic;2"] },
+        { prompt: "Simplify &radic;90 &divide; &radic;10.", value: 3,
+          solution: ["&radic;90 &divide; &radic;10 = &radic;(90/10) = &radic;9 = 3"] },
+        { prompt: "Simplify &radic;98. Enter as, e.g., 4sqrt3.", accept: ["7sqrt2","7√2"],
+          solution: ["98 = 49 &times; 2, and 49 is a perfect square", "&radic;98 = 7&radic;2"] },
+        { prompt: "Simplify &radic;48 + &radic;12 &minus; 2&radic;27.", value: 0,
+          solution: ["&radic;48 = 4&radic;3, &radic;12 = 2&radic;3, &radic;27 = 3&radic;3 so 2&radic;27 = 6&radic;3", "4&radic;3 + 2&radic;3 &minus; 6&radic;3 = 0"] },
+        { prompt: "Simplify 3&radic;8 + 2&radic;18 &minus; &radic;50. Enter as, e.g., 4sqrt3.", accept: ["7sqrt2","7√2"],
+          solution: ["&radic;8 = 2&radic;2 so 3&radic;8 = 6&radic;2", "&radic;18 = 3&radic;2 so 2&radic;18 = 6&radic;2", "&radic;50 = 5&radic;2", "6&radic;2 + 6&radic;2 &minus; 5&radic;2 = 7&radic;2"] },
+        { prompt: "Expand and simplify (&radic;5 &minus; &radic;3)(&radic;5 + &radic;3).", value: 2,
+          solution: ["This is a difference of squares: (&radic;5)&sup2; &minus; (&radic;3)&sup2;", "= 5 &minus; 3 = 2"] },
+        { prompt: "Expand (&radic;n + &radic;2)(&radic;n &minus; &radic;2). Enter your answer symbolically (in terms of n).", accept: ["n-2"],
+          solution: ["Difference of squares: (&radic;n)&sup2; &minus; (&radic;2)&sup2;", "= n &minus; 2"] },
+        { prompt: "Multiply out (2&radic;3)(5&radic;6). Enter as, e.g., 4sqrt3.", accept: ["30sqrt2","30√2"],
+          solution: ["2 &times; 5 = 10, and &radic;3 &times; &radic;6 = &radic;18 = 3&radic;2", "10 &times; 3&radic;2 = 30&radic;2"] },
+        { prompt: "Simplify &radic;(a&sup2;b&sup2;), given a, b &gt; 0. Enter your answer symbolically.", accept: ["ab","ba","a*b"],
+          solution: ["&radic;(a&sup2;b&sup2;) = &radic;(a&sup2;) &times; &radic;(b&sup2;) = a &times; b = ab"] },
+        { prompt: "The two shorter sides of a right triangle are &radic;n+&radic;3 and &radic;n&minus;&radic;3, and both the hypotenuse c and n are integers. Find all possible values of n less than 50 (there are four) &mdash; list them separated by commas.", valueSet: [5, 15, 29, 47],
+          solution: ["By Pythagoras: (&radic;n+&radic;3)&sup2; + (&radic;n&minus;&radic;3)&sup2; = c&sup2;", "Expand: (n + 2&radic;(3n) + 3) + (n &minus; 2&radic;(3n) + 3) = c&sup2;", "The &radic;(3n) terms cancel: 2n + 6 = c&sup2;", "c&sup2; must be even, so c is even. Try c = 4, 6, 8, 10:", "c=4 &rarr; n=5;  c=6 &rarr; n=15;  c=8 &rarr; n=29;  c=10 &rarr; n=47 (c=12 gives n=69, too big)"] },
+        { prompt: "Simplify &radic;50. Enter as, e.g., 4sqrt3.", accept: ["5sqrt2","5√2"],
+          solution: ["50 = 25 &times; 2, and 25 is a perfect square", "&radic;50 = &radic;25 &times; &radic;2 = 5&radic;2"] },
+        { prompt: "Simplify (&radic;2)&sup2;.", value: 2,
+          solution: ["Squaring a square root cancels it out: (&radic;2)&sup2; = 2"] },
+        { prompt: "Simplify (&radic;(ab))&sup2;, given a, b &gt; 0. Enter your answer symbolically.", accept: ["ab","ba","a*b"],
+          solution: ["Squaring a square root cancels it out: (&radic;(ab))&sup2; = ab"] },
+        { prompt: "Multiply out and simplify (&radic;3 + 1)(&radic;3 &minus; 1).", value: 2,
+          solution: ["Difference of squares: (&radic;3)&sup2; &minus; 1&sup2;", "= 3 &minus; 1 = 2"] },
+        { prompt: "Multiply out (1 + &radic;2)(1 + &radic;3). Enter your answer symbolically.", open: true,
+          solution: ["FOIL: 1 + &radic;3 + &radic;2 + &radic;2&times;&radic;3", "= 1 + &radic;2 + &radic;3 + &radic;6 (no like surds to combine &mdash; this is fully simplified)"] },
+        { prompt: "Multiply out and simplify (&radic;5 + 1)&sup2;. Enter as, e.g., 7+3sqrt2.", accept: ["6+2sqrt5","6+2√5","2sqrt5+6","2√5+6"],
+          solution: ["(&radic;5+1)&sup2; = (&radic;5)&sup2; + 2(&radic;5)(1) + 1&sup2;", "= 5 + 2&radic;5 + 1 = 6 + 2&radic;5"] },
+        { prompt: "Multiply out and simplify (2&radic;2 &minus; &radic;3)&sup2;. Enter as, e.g., 9-2sqrt7.", accept: ["11-4sqrt6","11-4√6"],
+          solution: ["(2&radic;2)&sup2; &minus; 2(2&radic;2)(&radic;3) + (&radic;3)&sup2;", "= 8 &minus; 4&radic;6 + 3 = 11 &minus; 4&radic;6"] },
+        { prompt: "Simplify &radic;490 &minus; &radic;250 + 2&radic;40. Enter as, e.g., 5sqrt7.", accept: ["6sqrt10","6√10"],
+          solution: ["&radic;490 = 7&radic;10 (490=49&times;10), &radic;250 = 5&radic;10 (250=25&times;10), &radic;40 = 2&radic;10 so 2&radic;40 = 4&radic;10", "7&radic;10 &minus; 5&radic;10 + 4&radic;10 = 6&radic;10"] },
+        { prompt: "Simplify &radic;80 + &radic;125 &minus; &radic;180. Enter as, e.g., 2sqrt7.", accept: ["3sqrt5","3√5"],
+          solution: ["&radic;80 = 4&radic;5 (80=16&times;5), &radic;125 = 5&radic;5, &radic;180 = 6&radic;5 (180=36&times;5)", "4&radic;5 + 5&radic;5 &minus; 6&radic;5 = 3&radic;5"] },
+        { prompt: "Is the sum of two irrational numbers always irrational, sometimes irrational, or always rational? Justify with an example.", open: true,
+          solution: ["Sample response: Sometimes irrational. &radic;2 + (&minus;&radic;2) = 0, which is rational; but &radic;2 + &radic;3 is irrational. So it depends on the two numbers."] }
+      ]
+    },
+    {
+      letter: "F", hueVar: "--hueF", title: "Rationalizing Denominators &amp; Radical Equations",
+      rules: [
+        "A denominator is <b>rationalized</b> when it has no surds left in it. For a/&radic;b, multiply top and bottom by &radic;b: a/&radic;b = a&radic;b/b.",
+        "For a binomial denominator like a/(&radic;b + c), multiply top and bottom by the <b>conjugate</b> (&radic;b &minus; c) so the difference-of-squares pattern removes the surd.",
+        "To solve a radical equation: isolate the radical, square both sides, solve, then ALWAYS check every solution in the ORIGINAL equation.",
+        "Squaring can create <b>extraneous</b> (fake) solutions, because &radic;(expression) is only defined &mdash; and always non-negative &mdash; when expression &ge; 0."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 300 140" width="300" height="140">
+        <rect x="10" y="18" width="128" height="40" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="74" y="42" text-anchor="middle" font-size="10.5">isolate &amp; square</text>
+        <text x="150" y="42" text-anchor="middle" font-size="16">&rarr;</text>
+        <rect x="162" y="18" width="128" height="40" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="226" y="42" text-anchor="middle" font-size="11">solve for x</text>
+        <path d="M226 58 L226 74 L150 74 L150 84" class="dg-line" stroke-width="1.5" style="fill:none"/>
+        <polygon points="146,83 154,83 150,90" class="dg-fill"/>
+        <rect x="45" y="90" width="210" height="40" rx="8" class="dg-good"/>
+        <text x="150" y="115" text-anchor="middle" font-size="11" style="fill:var(--surface)">check BOTH in original</text>
+      </svg>`,
+        `<svg viewBox="0 0 300 140" width="300" height="140">
+        <text x="150" y="18" text-anchor="middle" font-size="10" font-weight="bold">Multiply by the conjugate</text>
+        <rect x="20" y="32" width="115" height="34" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="77" y="54" text-anchor="middle" font-size="12">&radic;b + c</text>
+        <text x="150" y="54" text-anchor="middle" font-size="16">&times;</text>
+        <rect x="165" y="32" width="115" height="34" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="222" y="54" text-anchor="middle" font-size="12">&radic;b &minus; c</text>
+        <text x="150" y="86" text-anchor="middle" font-size="14">&darr;</text>
+        <rect x="65" y="94" width="170" height="34" rx="8" class="dg-good"/>
+        <text x="150" y="116" text-anchor="middle" font-size="11.5" style="fill:var(--surface)">b &minus; c&sup2; (no surd left!)</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "Isolate, square, solve, then check both candidate solutions in the original equation.",
+        "A binomial surd denominator times its conjugate always cancels the root."
+      ],
+      trick: "Rationalizing is multiplying by a clever form of 1. For radical equations: isolate &rarr; square &rarr; check &mdash; and an answer that makes the original equation false (usually because a side goes negative) gets thrown out as extraneous.",
+      examples: [
+        {
+          problem: "Solve &radic;(x+4) + 2 = x, and check for extraneous roots.",
+          steps: [
+            "Isolate the radical: &radic;(x+4) = x &minus; 2",
+            "Square both sides: x + 4 = (x&minus;2)&sup2; = x&sup2; &minus; 4x + 4",
+            "Rearrange: 0 = x&sup2; &minus; 5x, so 0 = x(x&minus;5)",
+            "So x = 0 or x = 5",
+            "Check x=0: &radic;4 + 2 = 4, but the right side is 0 &rarr; 4&ne;0, REJECTED",
+            "Check x=5: &radic;9 + 2 = 5, and the right side is 5 &rarr; 5=5, ACCEPTED"
+          ],
+          answer: "x = 5 (x = 0 is extraneous)"
+        },
+        {
+          problem: "Rationalize 1/(&radic;3 + 1) using the conjugate.",
+          steps: [
+            "Multiply top and bottom by the conjugate, &radic;3 &minus; 1: [1 &times; (&radic;3&minus;1)] / [(&radic;3+1)(&radic;3&minus;1)]",
+            "Denominator: (&radic;3)&sup2; &minus; 1&sup2; = 3 &minus; 1 = 2",
+            "Result: (&radic;3 &minus; 1)/2"
+          ],
+          answer: "(&radic;3 &minus; 1)/2"
+        }
+      ],
+      remember: [
+        "Rationalize a single surd by multiplying top and bottom by that surd; for a denominator like &radic;b + c use the <b>conjugate</b> &radic;b &minus; c.",
+        "Multiplying by &radic;b/&radic;b is multiplying by <b>1</b> &mdash; the value never changes, only the way it looks.",
+        "<b>Radical equations, four steps:</b> isolate &rarr; square &rarr; solve &rarr; <b>check</b>.",
+        "Squaring both sides can invent answers that were never true. A solution only counts if it survives substitution into the <i>original</i> equation."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 202" width="460" height="202">
+        <rect x="128" y="8" width="204" height="188" rx="6" class="cm-face" stroke-width="2"/>
+        <text x="230" y="36" text-anchor="middle" font-size="19" font-weight="bold" letter-spacing="3">WANTED</text>
+        <line x1="150" y1="46" x2="310" y2="46" class="cm-line" stroke-width="1.5"/>
+        <circle cx="230" cy="90" r="30" class="cm-face2" stroke-width="2"/>
+        <circle cx="220" cy="82" r="3" class="cm-fill"/>
+        <circle cx="240" cy="82" r="3" class="cm-fill"/>
+        <path d="M216 98 Q230 112 244 98" class="cm-line" stroke-width="2" style="fill:none"/>
+        <text x="230" y="146" text-anchor="middle" font-size="17" font-weight="bold">x = 0</text>
+        <text x="230" y="164" text-anchor="middle" font-size="9.5">for impersonating a solution</text>
+        <text x="230" y="179" text-anchor="middle" font-size="9" class="cm-soft">last seen failing the check step</text>
+        <text x="64" y="84" text-anchor="middle" font-size="11">&radic;(x+4) + 2 = x</text>
+        <text x="64" y="104" text-anchor="middle" font-size="10" class="cm-soft">squaring gave</text>
+        <text x="64" y="120" text-anchor="middle" font-size="11">x = 0 and x = 5</text>
+        <text x="396" y="84" text-anchor="middle" font-size="11" font-weight="bold">check both!</text>
+        <text x="396" y="104" text-anchor="middle" font-size="10" class="cm-soft">only x = 5</text>
+        <text x="396" y="120" text-anchor="middle" font-size="10" class="cm-soft">survives</text>
+      </svg>`,
+        caption: "Squaring both sides quietly invites impostors to the party. x = 0 looks like a perfectly respectable solution right up until you plug it back in &mdash; which is exactly why the check step is not optional."
+      },
+      exercises: [
+        { prompt: "Rewrite 5/&radic;3 with a rational denominator. Enter as, e.g., 6sqrt2/2.", accept: ["5sqrt3/3","5√3/3"],
+          solution: ["Multiply top and bottom by &radic;3: (5&radic;3)/(&radic;3&times;&radic;3)", "= 5&radic;3/3"] },
+        { prompt: "Rewrite 2/&radic;5 with a rational denominator. Enter as, e.g., 6sqrt2/2.", accept: ["2sqrt5/5","2√5/5"],
+          solution: ["Multiply top and bottom by &radic;5: (2&radic;5)/(&radic;5&times;&radic;5)", "= 2&radic;5/5"] },
+        { prompt: "Rewrite 4/(3&radic;2) with a rational denominator, fully simplified. Enter as, e.g., 6sqrt2/2.", accept: ["2sqrt2/3","2√2/3"],
+          solution: ["Multiply top and bottom by &radic;2: (4&radic;2)/(3&times;2) = 4&radic;2/6", "Simplify the fraction: 2&radic;2/3"] },
+        { prompt: "Solve &radic;(x+3) = 5 for x, and check for extraneous roots.", value: 22,
+          solution: ["Square both sides: x + 3 = 25", "x = 22", "Check: &radic;25 = 5 &#10003;"] },
+        { prompt: "Solve &radic;(2x&minus;1) = 7 for x, and check for extraneous roots.", value: 25,
+          solution: ["Square both sides: 2x &minus; 1 = 49", "2x = 50 &rarr; x = 25", "Check: &radic;49 = 7 &#10003;"] },
+        { prompt: "Solve &radic;(2x+3) = x for x. Only one solution is valid &mdash; enter it.", value: 3,
+          solution: ["Square both sides: 2x + 3 = x&sup2;", "Rearrange: x&sup2; &minus; 2x &minus; 3 = 0 &rarr; (x&minus;3)(x+1) = 0", "x = 3 or x = &minus;1", "Check x=3: &radic;9 = 3 &#10003;.  Check x=&minus;1: &radic;1 = 1, but x=&minus;1 &rarr; REJECTED"] },
+        { prompt: "Solve &radic;(3x+1) = x&minus;1 for x. Only one solution is valid &mdash; enter it.", value: 5,
+          solution: ["Square both sides: 3x + 1 = x&sup2; &minus; 2x + 1", "Rearrange: 0 = x&sup2; &minus; 5x &rarr; x(x&minus;5) = 0", "x = 0 or x = 5", "Check x=0: &radic;1=1, but x&minus;1=&minus;1 &rarr; REJECTED.  Check x=5: &radic;16=4, and x&minus;1=4 &#10003;"] },
+        { prompt: "Simplify (3+&radic;2)(4&minus;&radic;2). Enter as, e.g., 8+sqrt3.", accept: ["10+sqrt2","10+√2"],
+          solution: ["FOIL: 3&times;4 + 3&times;(&minus;&radic;2) + &radic;2&times;4 + &radic;2&times;(&minus;&radic;2)", "= 12 &minus; 3&radic;2 + 4&radic;2 &minus; 2", "= 10 + &radic;2"] },
+        { prompt: "Simplify (&radic;7+2)(&radic;7&minus;2).", value: 3,
+          solution: ["Difference of squares: (&radic;7)&sup2; &minus; 2&sup2;", "= 7 &minus; 4 = 3"] },
+        { prompt: "Debatable: a lookout tower's sightline to the horizon (in km) is modeled by d = &radic;(13h), where h is the tower's height in metres. A city wants a 39 km sightline. Solve &radic;(13h) = 39 for h (in metres), then decide: is this a realistic, buildable height?", value: 117,
+          solution: ["Square both sides: 13h = 39&sup2; = 1521", "Divide by 13: h = 117", "Sample response: a 117 m tower is realistic &mdash; shorter than the Eiffel Tower &mdash; so here the model gives a genuinely usable answer, though it can't account for cost, terrain, or local building limits."] },
+        { prompt: "Rewrite 1/&radic;7 with a rational denominator. Enter as, e.g., sqrt2/2.", accept: ["sqrt7/7","√7/7"],
+          solution: ["Multiply top and bottom by &radic;7: &radic;7/(&radic;7&times;&radic;7)", "= &radic;7/7"] },
+        { prompt: "Rewrite 3/&radic;6 with a rational denominator, fully simplified. Enter as, e.g., sqrt3/3.", accept: ["sqrt6/2","√6/2"],
+          solution: ["Multiply top and bottom by &radic;6: (3&radic;6)/6", "Simplify the fraction: &radic;6/2"] },
+        { prompt: "Rationalize and simplify 10/(2&radic;5). Enter as, e.g., sqrt3.", accept: ["sqrt5","√5"], value: 2.236, tol: 0.01,
+          solution: ["10/(2&radic;5) = 5/&radic;5", "Multiply top and bottom by &radic;5: (5&radic;5)/5", "Simplify: &radic;5"] },
+        { prompt: "Solve &radic;(x+7) = 4 for x, and check for extraneous roots.", value: 9,
+          solution: ["Square both sides: x + 7 = 16", "x = 9", "Check: &radic;16 = 4 &#10003;"] },
+        { prompt: "Solve &radic;(5x+1) = 6 for x, and check for extraneous roots.", value: 7,
+          solution: ["Square both sides: 5x + 1 = 36", "5x = 35 &rarr; x = 7", "Check: &radic;36 = 6 &#10003;"] },
+        { prompt: "Solve &radic;(x+1) = x&minus;1 for x. Only one solution is valid &mdash; enter it.", value: 3,
+          solution: ["Square both sides: x + 1 = x&sup2; &minus; 2x + 1", "Rearrange: 0 = x&sup2; &minus; 3x &rarr; x(x&minus;3) = 0", "x = 0 or x = 3", "Check x=0: &radic;1=1, but x&minus;1=&minus;1 &rarr; REJECTED.  Check x=3: &radic;4=2, and x&minus;1=2 &#10003;"] },
+        { prompt: "Solve &radic;(3x+4) = x for x. Only one solution is valid &mdash; enter it.", value: 4,
+          solution: ["Square both sides: 3x + 4 = x&sup2;", "Rearrange: x&sup2; &minus; 3x &minus; 4 = 0 &rarr; (x&minus;4)(x+1) = 0", "x = 4 or x = &minus;1", "Check x=4: &radic;16=4 &#10003;.  Check x=&minus;1: &radic;1=1, but x=&minus;1 &rarr; REJECTED"] },
+        { prompt: "Rationalize and simplify 1/(&radic;6 &minus; 2), using the conjugate. Enter your answer symbolically.", accept: ["sqrt6+2/2","√6+2/2"],
+          solution: ["Multiply top and bottom by the conjugate (&radic;6+2): (&radic;6+2)/[(&radic;6&minus;2)(&radic;6+2)]", "Denominator: (&radic;6)&sup2; &minus; 2&sup2; = 6 &minus; 4 = 2", "Result: (&radic;6+2)/2"] },
+        { prompt: "Rationalize and simplify 3/(&radic;5 + 1), using the conjugate. Enter your answer symbolically.", accept: ["3sqrt5-3/4","3√5-3/4"],
+          solution: ["Multiply top and bottom by the conjugate (&radic;5&minus;1): 3(&radic;5&minus;1)/[(&radic;5+1)(&radic;5&minus;1)]", "Denominator: (&radic;5)&sup2; &minus; 1&sup2; = 5 &minus; 1 = 4", "Result: (3&radic;5&minus;3)/4"] },
+        { prompt: "A falling-object model says t = &radic;(d/16), where t is the fall time in seconds and d is the distance fallen in feet. A video shows an object falling for 3 seconds. Solve for d (in feet), then comment: does this simple model likely match real-world air resistance?", value: 144,
+          solution: ["Square both sides: t&sup2; = d/16", "9 = d/16", "d = 144", "Sample response: 144 ft matches the classic physics formula d=16t&sup2; well for a dense, compact object over a short fall, but air resistance would slow a light or spread-out object, so the model gets less accurate the longer the fall."] }
+      ]
+    }
+  ];
+
+  /* ---------------------------------------------------------------
+     STORAGE
+  --------------------------------------------------------------- */
+  var STORE_KEY = "g9ext_u1_progress_v2";
+  function loadProgress(){
+    try{
+      var raw = localStorage.getItem(STORE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    }catch(e){ return {}; }
+  }
+  function saveProgress(p){
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(p)); }catch(e){ /* ignore */ }
+  }
+  var progress = loadProgress();
+
+  /* ---------------------------------------------------------------
+     ANSWER CHECKING
+  --------------------------------------------------------------- */
+  function parseNum(s){
+    if(s == null) return null;
+    s = String(s).trim();
+    var fracM = s.match(/^(-?\d+(?:\.\d+)?)\s*\/\s*(-?\d+(?:\.\d+)?)$/);
+    if(fracM){
+      var a = parseFloat(fracM[1]), b = parseFloat(fracM[2]);
+      if(b === 0) return null;
+      return a / b;
+    }
+    var v = parseFloat(s);
+    return isNaN(v) ? null : v;
+  }
+  function normalize(raw){
+    return String(raw).toLowerCase().replace(/[\s()]/g,"");
+  }
+  function checkAnswer(ex, raw){
+    if(!raw || !String(raw).trim()) return false;
+    var norm = normalize(raw);
+    if(ex.accept && ex.accept.indexOf(norm) > -1) return true;
+    if(typeof ex.value === "number"){
+      var v = parseNum(raw);
+      if(v !== null && Math.abs(v - ex.value) < (ex.tol || 0.02)) return true;
+    }
+    if(ex.valueSet){
+      var parts = String(raw).toLowerCase().split(/,|or|and/).map(parseNum).filter(function(x){ return x !== null; });
+      if(parts.length === ex.valueSet.length){
+        var remaining = ex.valueSet.slice();
+        var ok = parts.every(function(p){
+          var idx = -1;
+          for(var i=0;i<remaining.length;i++){
+            if(Math.abs(remaining[i]-p) < (ex.tol||0.02)){ idx=i; break; }
+          }
+          if(idx>-1){ remaining.splice(idx,1); return true; }
+          return false;
+        });
+        if(ok) return true;
+      }
+    }
+    return false;
+  }
+
+  /* ---------------------------------------------------------------
+     RENDER
+  --------------------------------------------------------------- */
+  var lessonsEl = document.getElementById("lessons");
+  var scoreboardInner = document.getElementById("scoreboardInner");
+  var resetBtn = document.getElementById("resetBtn");
+  var totalDoneEl = document.getElementById("totalDone");
+
+  function exId(li, ei){ return "L" + li + "E" + ei; }
+
+  function buildChips(){
+    LESSONS.forEach(function(lesson, li){
+      var a = document.createElement("a");
+      a.href = "#lesson-" + lesson.letter;
+      a.className = "chip";
+      a.style.setProperty("--chip-hue", "var(" + lesson.hueVar + "-solid)");
+      a.style.setProperty("--chip-tint", "var(" + lesson.hueVar + "-tint)");
+      a.id = "chip-" + li;
+      a.innerHTML = '<span class="letter">' + lesson.letter + '</span><span class="frac" data-frac>0/' + lesson.exercises.length + '</span>';
+      scoreboardInner.insertBefore(a, resetBtn);
+    });
+  }
+
+  function lessonDoneCount(li){
+    var lesson = LESSONS[li];
+    var n = 0;
+    lesson.exercises.forEach(function(ex, ei){
+      if(progress[exId(li,ei)]) n++;
+    });
+    return n;
+  }
+
+  function updateAllProgressUI(){
+    var total = 0;
+    LESSONS.forEach(function(lesson, li){
+      var n = lessonDoneCount(li);
+      total += n;
+      var lessonTotal = lesson.exercises.length;
+      var chip = document.getElementById("chip-" + li);
+      if(chip){
+        chip.querySelector("[data-frac]").textContent = n + "/" + lessonTotal;
+        chip.classList.toggle("done", n === lessonTotal);
+      }
+      var ring = document.getElementById("ring-" + li);
+      if(ring){
+        ring.querySelector(".ring-label").textContent = n + " / " + lessonTotal;
+        ring.querySelector(".bar-fill").style.width = (n / lessonTotal * 100) + "%";
+      }
+    });
+    totalDoneEl.textContent = total;
+  }
+
+  function showToast(msg){
+    var t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(showToast._h);
+    showToast._h = setTimeout(function(){ t.classList.remove("show"); }, 1600);
+  }
+
+  function buildLessons(){
+    LESSONS.forEach(function(lesson, li){
+      var section = document.createElement("section");
+      section.className = "lesson";
+      section.id = "lesson-" + lesson.letter;
+      section.style.setProperty("--hue", "var(" + lesson.hueVar + "-solid)");
+      section.style.setProperty("--tint", "var(" + lesson.hueVar + "-tint)");
+
+      var head = document.createElement("div");
+      head.className = "lesson-head";
+      head.innerHTML =
+        '<div class="big-letter">' + lesson.letter + '</div>' +
+        '<div class="htext"><div class="kicker">Lesson ' + lesson.letter + '</div><h2>' + lesson.title + '</h2></div>' +
+        '<div class="lesson-progress" id="ring-' + li + '">' +
+          '<div class="ring-label">0 / ' + lesson.exercises.length + '</div>' +
+          '<div class="bar"><div class="bar-fill"></div></div>' +
+        '</div>';
+      section.appendChild(head);
+
+      var rulesBox = document.createElement("div");
+      rulesBox.className = "rules-box";
+      rulesBox.innerHTML = '<h3>The rules</h3><ul>' + lesson.rules.map(function(r){ return "<li>" + r + "</li>"; }).join("") + "</ul>";
+      section.appendChild(rulesBox);
+
+      var diagramList = lesson.diagrams || (lesson.diagram ? [lesson.diagram] : []);
+      var diagramCaptions = lesson.diagramCaptions || [];
+      if(diagramList[0]){
+        var diagramBox = document.createElement("div");
+        diagramBox.className = "diagram-box";
+        diagramBox.innerHTML = diagramList[0] + (diagramCaptions[0] ? '<div class="diagram-caption">' + diagramCaptions[0] + '</div>' : '');
+        section.appendChild(diagramBox);
+      }
+
+      if(lesson.trick){
+        var trickBox = document.createElement("div");
+        trickBox.className = "trick-box";
+        trickBox.innerHTML = '<span class="trick-tag">Rule of thumb</span><span class="trick-text">' + lesson.trick + '</span>';
+        section.appendChild(trickBox);
+      }
+
+      var exampleList = lesson.examples || (lesson.example ? [lesson.example] : []);
+
+      function buildExampleCard(exampleObj, idx){
+        var card = document.createElement("div");
+        card.className = "example-card";
+        card.innerHTML =
+          '<h3>Worked example' + (exampleList.length > 1 ? " " + (idx+1) : "") + '</h3>' +
+          '<div class="example-prob expr">' + exampleObj.problem + '</div>' +
+          '<div class="example-steps">' +
+            exampleObj.steps.map(function(s, i){
+              return '<div class="step"><span class="n">' + (i+1) + '.</span><span class="expr">' + s + '</span></div>';
+            }).join("") +
+          '</div>' +
+          '<div class="example-answer">Answer: ' + exampleObj.answer + '</div>';
+        return card;
+      }
+
+      if(exampleList[0]) section.appendChild(buildExampleCard(exampleList[0], 0));
+
+      if(diagramList[1]){
+        var diagramBox2 = document.createElement("div");
+        diagramBox2.className = "diagram-box";
+        diagramBox2.innerHTML = diagramList[1] + (diagramCaptions[1] ? '<div class="diagram-caption">' + diagramCaptions[1] + '</div>' : '');
+        section.appendChild(diagramBox2);
+      }
+
+      if(exampleList[1]) section.appendChild(buildExampleCard(exampleList[1], 1));
+
+      if(lesson.remember && lesson.remember.length){
+        var rememberBox = document.createElement("div");
+        rememberBox.className = "remember-box";
+        rememberBox.innerHTML = '<h3>Rules to remember</h3><ul>' +
+          lesson.remember.map(function(r){ return "<li>" + r + "</li>"; }).join("") + '</ul>';
+        section.appendChild(rememberBox);
+      }
+
+      if(lesson.comic){
+        var comicBox = document.createElement("div");
+        comicBox.className = "comic-box";
+        comicBox.innerHTML =
+          '<span class="comic-tag">Math meme break</span>' +
+          lesson.comic.svg +
+          '<div class="comic-caption">' + lesson.comic.caption + '</div>';
+        section.appendChild(comicBox);
+      }
+
+      var grid = document.createElement("div");
+      grid.className = "ex-grid";
+
+      lesson.exercises.forEach(function(exObj, ei){
+        var id = exId(li, ei);
+        var card = document.createElement("div");
+        card.className = "ex-card";
+        card.id = "card-" + id;
+
+        var inputRow = exObj.open
+          ? '<div class="open-note">Open response &mdash; there\'s no single right answer. Try it yourself, then compare with the sample.</div>'
+          : '<div class="ex-input-row">' +
+              '<input class="ex-input" type="text" placeholder="your answer" id="input-' + id + '" autocomplete="off" />' +
+              '<button class="ex-check" data-id="' + id + '" data-li="' + li + '" data-ei="' + ei + '">Check</button>' +
+            '</div>' +
+            '<div class="ex-feedback" id="fb-' + id + '"></div>';
+
+        card.innerHTML =
+          '<div class="ex-top"><span class="ex-num">' + (ei+1) + '</span><div class="ex-prompt expr">' + exObj.prompt + '</div></div>' +
+          inputRow +
+          '<div class="ex-foot">' +
+            '<button class="ex-toggle" data-target="sol-' + id + '">' + (exObj.open ? "Show sample response" : "Show solution") + '</button>' +
+          '</div>' +
+          '<div class="ex-solution" id="sol-' + id + '">' +
+            exObj.solution.map(function(s){ return '<div class="sol-step">' + s + '</div>'; }).join("") +
+          '</div>';
+
+        grid.appendChild(card);
+      });
+
+      section.appendChild(grid);
+      lessonsEl.appendChild(section);
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     EVENTS (delegated)
+  --------------------------------------------------------------- */
+  function wireEvents(){
+    lessonsEl.addEventListener("click", function(e){
+      var checkBtn = e.target.closest(".ex-check");
+      if(checkBtn){
+        var li = parseInt(checkBtn.getAttribute("data-li"), 10);
+        var ei = parseInt(checkBtn.getAttribute("data-ei"), 10);
+        var id = checkBtn.getAttribute("data-id");
+        var exObj = LESSONS[li].exercises[ei];
+        var input = document.getElementById("input-" + id);
+        var fb = document.getElementById("fb-" + id);
+        var card = document.getElementById("card-" + id);
+        var ok = checkAnswer(exObj, input.value);
+        card.classList.remove("correct","wrong");
+        fb.classList.remove("correct","wrong");
+        if(ok){
+          card.classList.add("correct");
+          fb.classList.add("correct");
+          fb.textContent = "Correct!";
+          progress[id] = true;
+          saveProgress(progress);
+          updateAllProgressUI();
+        } else {
+          card.classList.add("wrong");
+          fb.classList.add("wrong");
+          fb.textContent = "Not quite — try again or check the solution.";
+        }
+        return;
+      }
+      var toggleBtn = e.target.closest(".ex-toggle");
+      if(toggleBtn){
+        var targetId = toggleBtn.getAttribute("data-target");
+        var sol = document.getElementById(targetId);
+        var willOpen = !sol.classList.contains("open");
+        sol.classList.toggle("open");
+        toggleBtn.textContent = willOpen
+          ? (toggleBtn.textContent.indexOf("sample") > -1 ? "Hide sample response" : "Hide solution")
+          : (toggleBtn.textContent.indexOf("sample") > -1 ? "Show sample response" : "Show solution");
+
+        // mark open-response exercises as "done" once viewed
+        var cardEl = toggleBtn.closest(".ex-card");
+        if(willOpen && cardEl){
+          var idMatch = targetId.replace("sol-","");
+          var liEi = idMatch.match(/^L(\d+)E(\d+)$/);
+          if(liEi){
+            var li2 = parseInt(liEi[1],10), ei2 = parseInt(liEi[2],10);
+            if(LESSONS[li2].exercises[ei2].open){
+              progress[idMatch] = true;
+              saveProgress(progress);
+              updateAllProgressUI();
+            }
+          }
+        }
+        return;
+      }
+    });
+
+    lessonsEl.addEventListener("keydown", function(e){
+      if(e.key === "Enter" && e.target.classList.contains("ex-input")){
+        var id = e.target.id.replace("input-","");
+        var btn = document.querySelector('.ex-check[data-id="' + id + '"]');
+        if(btn) btn.click();
+      }
+    });
+
+    resetBtn.addEventListener("click", function(){
+      if(!confirm("Clear all saved progress on this device?")) return;
+      progress = {};
+      saveProgress(progress);
+      document.querySelectorAll(".ex-card").forEach(function(c){ c.classList.remove("correct","wrong"); });
+      document.querySelectorAll(".ex-feedback").forEach(function(f){ f.textContent = ""; f.classList.remove("correct","wrong"); });
+      updateAllProgressUI();
+      showToast("Progress cleared");
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     HUE SOLID/TINT CSS VARS (derived once, injected as a style tag)
+  --------------------------------------------------------------- */
+  function injectHueVars(){
+    var style = document.createElement("style");
+    var letters = ["A","B","C","D","E","F"];
+    var css = ":root{";
+    letters.forEach(function(L){
+      var hv = "--hue" + L;
+      css += hv + "-solid: hsl(var(" + hv + ") var(--lsat) var(--llight));";
+      css += hv + "-tint: hsl(var(" + hv + ") var(--lsat) var(--ltint));";
+    });
+    css += "}";
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
+  function buildCheatSheet(){
+    var grid = document.getElementById("csGrid");
+    if(!grid) return;
+    LESSONS.forEach(function(lesson){
+      if(!lesson.remember || !lesson.remember.length) return;
+      var card = document.createElement("div");
+      card.className = "cs-card";
+      card.style.setProperty("--hue", "var(" + lesson.hueVar + "-solid)");
+      card.style.setProperty("--tint", "var(" + lesson.hueVar + "-tint)");
+      card.innerHTML =
+        '<h4><span class="cs-letter">' + lesson.letter + '</span>' + lesson.title + '</h4>' +
+        '<ul>' + lesson.remember.map(function(r){ return "<li>" + r + "</li>"; }).join("") + '</ul>';
+      grid.appendChild(card);
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     INIT
+  --------------------------------------------------------------- */
+  injectHueVars();
+  buildChips();
+  buildLessons();
+  buildCheatSheet();
+  wireEvents();
+  updateAllProgressUI();
+
+})();
+</script>

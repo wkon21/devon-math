@@ -1,0 +1,747 @@
+<title>Unit 2: How Many Forms Has a Quadratic?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #F5F6F2;
+    --surface: #FFFFFF;
+    --surface-2: #ECEFE7;
+    --ink: #1B222C;
+    --ink-soft: #545E6B;
+    --ink-faint: #8A93A0;
+    --accent: #2957A4;
+    --accent-ink: #ffffff;
+    --accent-2: #C1841B;
+    --good: #2C8A57;
+    --good-tint: #E4F3EA;
+    --bad: #C0453A;
+    --bad-tint: #FBEAE8;
+    --border: #DBDFD4;
+    --border-strong: #C4CABC;
+    --radius: 14px;
+
+    --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --font-body: "Karla", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+
+    --hueA: 214; --hueB: 187; --hueC: 30; --hueD: 350; --hueE: 150;
+    --lsat: 58%; --llight: 38%; --ltint: 94%;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #12151A; --surface: #191D24; --surface-2: #1F252E;
+      --ink: #E9ECF1; --ink-soft: #A7B0BE; --ink-faint: #6E7787;
+      --accent: #7DA3E8; --accent-ink: #0D1420; --accent-2: #E3AE55;
+      --good: #57C489; --good-tint: #16261E; --bad: #E5847A; --bad-tint: #2A1917;
+      --border: #2A303B; --border-strong: #3A4250;
+      --lsat: 62%; --llight: 68%; --ltint: 16%;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #12151A; --surface: #191D24; --surface-2: #1F252E;
+    --ink: #E9ECF1; --ink-soft: #A7B0BE; --ink-faint: #6E7787;
+    --accent: #7DA3E8; --accent-ink: #0D1420; --accent-2: #E3AE55;
+    --good: #57C489; --good-tint: #16261E; --bad: #E5847A; --bad-tint: #2A1917;
+    --border: #2A303B; --border-strong: #3A4250;
+    --lsat: 62%; --llight: 68%; --ltint: 16%;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior: auto; } *{ animation: none !important; transition: none !important; } }
+
+  body{ margin:0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a{ color: var(--accent); }
+  ::selection{ background: color-mix(in srgb, var(--accent) 30%, transparent); }
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 20px; }
+  h1,h2,h3,h4{ font-family: var(--font-display); font-weight: 600; text-wrap: balance; margin: 0; color: var(--ink); }
+  code, .mono, .expr{ font-family: var(--font-mono); }
+  button{ font-family: var(--font-body); cursor:pointer; }
+  button:focus-visible, input:focus-visible, a:focus-visible{ outline: 2.5px solid var(--accent); outline-offset: 2px; }
+
+  .masthead{ background: var(--surface); border-bottom: 1px solid var(--border); position: relative; }
+  .masthead-inner{ padding: 34px 20px 22px; display:flex; flex-direction:column; gap:16px; }
+  .eyebrow{ font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-faint); display:flex; align-items:center; gap:10px; }
+  .eyebrow .dot{ width:5px; height:5px; border-radius:50%; background: var(--accent-2); }
+  .eyebrow a{ color: var(--ink-faint); text-decoration: none; }
+  .eyebrow a:hover{ color: var(--accent); text-decoration: underline; }
+  .title-row{ display:flex; justify-content: space-between; align-items:flex-end; gap: 24px; flex-wrap: wrap; }
+  .title-row h1{ font-size: clamp(28px, 4vw, 40px); line-height: 1.08; }
+  .title-row .subtitle{ color: var(--ink-soft); font-size: 15.5px; max-width: 48ch; margin-top:6px;}
+  .student-tag{ font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 7px 14px; white-space: nowrap; }
+  .student-tag b{ color: var(--ink); }
+  .meta-strip{ display:flex; flex-wrap:wrap; gap: 10px 28px; font-size: 13.5px; color: var(--ink-soft); padding-top: 4px; border-top: 1px dashed var(--border); margin-top: 4px; padding-top: 14px; }
+  .meta-strip span b{ color: var(--ink); font-weight:600; }
+
+  .scoreboard{ position: sticky; top:0; z-index: 40; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px) saturate(1.1); -webkit-backdrop-filter: blur(10px) saturate(1.1); border-bottom: 1px solid var(--border); }
+  .scoreboard-inner{ display:flex; align-items:center; gap:10px; padding: 10px 20px; overflow-x: auto; scrollbar-width: none; }
+  .scoreboard-inner::-webkit-scrollbar{ display:none; }
+  .score-total{ font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-soft); white-space: nowrap; padding-right: 8px; border-right: 1px solid var(--border); margin-right: 4px; }
+  .score-total b{ color: var(--ink); }
+  .chip{ flex: 0 0 auto; display:flex; align-items:center; gap:8px; padding: 7px 12px 7px 8px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--ink-soft); font-family: var(--font-mono); font-size: 13px; text-decoration: none; transition: border-color .15s ease, color .15s ease, transform .1s ease; }
+  .chip:hover{ border-color: var(--chip-hue); color: var(--ink); }
+  .chip:active{ transform: translateY(1px); }
+  .chip .letter{ width: 22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size: 12px; font-weight: 700; background: var(--chip-tint); color: var(--chip-hue); border: 1px solid color-mix(in srgb, var(--chip-hue) 45%, transparent); }
+  .chip .frac{ font-variant-numeric: tabular-nums; font-size: 12px; }
+  .chip.done{ border-color: var(--good); }
+  .chip.done .letter{ background: var(--good-tint); color: var(--good); border-color: var(--good); }
+  .reset-btn{ margin-left: auto; flex: 0 0 auto; font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint); background: transparent; border: 1px solid transparent; padding: 6px 8px; border-radius: 8px; }
+  .reset-btn:hover{ color: var(--bad); border-color: var(--border); }
+
+  main{ padding: 30px 0 90px; }
+  .intro-card{ margin: 26px 0 40px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; }
+  .intro-card summary{ cursor: pointer; font-family: var(--font-display); font-weight: 600; font-size: 18px; list-style: none; display:flex; align-items:center; justify-content: space-between; gap: 12px; }
+  .intro-card summary::-webkit-details-marker{ display:none; }
+  .intro-card summary .arrow{ font-family: var(--font-mono); color: var(--ink-faint); font-size: 13px; transition: transform .2s ease; }
+  .intro-card[open] summary .arrow{ transform: rotate(180deg); }
+  .intro-grid{ margin-top: 18px; display:grid; grid-template-columns: 1fr 1fr; gap: 20px 28px; }
+  @media (max-width: 640px){ .intro-grid{ grid-template-columns: 1fr; } }
+  .intro-block h4{ font-size: 12.5px; text-transform: uppercase; letter-spacing:.08em; color: var(--ink-faint); font-family: var(--font-mono); font-weight:600; margin-bottom:8px;}
+  .intro-block p{ margin:0; color: var(--ink-soft); font-size: 14.5px; }
+  .soi{ font-family: var(--font-display); font-style: italic; font-size: 17px; color: var(--ink); grid-column: 1 / -1; padding: 14px 16px; background: var(--surface-2); border-left: 3px solid var(--accent-2); border-radius: 6px; }
+  .iq-table{ grid-column: 1/-1; display:grid; gap:8px; }
+  .iq-row{ display:grid; grid-template-columns: 90px 1fr; gap:12px; font-size: 14px; align-items:baseline; }
+  .iq-row .tag{ font-family: var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color: var(--ink-faint); }
+  .iq-row p{ margin:0; color: var(--ink-soft); }
+
+  .lesson{ scroll-margin-top: 64px; margin-bottom: 56px; }
+  .lesson-head{ display:flex; align-items: center; gap: 16px; padding: 18px 20px; border-radius: var(--radius); background: var(--tint); border: 1px solid color-mix(in srgb, var(--hue) 35%, transparent); margin-bottom: 18px; }
+  .lesson-head .big-letter{ font-family: var(--font-display); font-weight:700; font-size: 34px; color: var(--hue); width: 52px; height:52px; flex:0 0 auto; border-radius: 12px; background: var(--surface); display:flex; align-items:center; justify-content:center; border: 1px solid color-mix(in srgb, var(--hue) 40%, transparent); }
+  .lesson-head .htext .kicker{ font-family: var(--font-mono); font-size: 11.5px; text-transform:uppercase; letter-spacing:.09em; color: var(--hue); }
+  .lesson-head .htext h2{ font-size: clamp(20px,2.6vw,26px); margin-top:2px; }
+  .lesson-progress{ margin-left:auto; text-align:right; flex: 0 0 auto; }
+  .lesson-progress .ring-label{ font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); }
+  .lesson-progress .bar{ width: 90px; height: 6px; border-radius: 4px; background: var(--surface); border: 1px solid var(--border); overflow:hidden; margin-top:6px; }
+  .lesson-progress .bar-fill{ height:100%; background: var(--hue); width:0%; transition: width .3s ease; }
+
+  .rules-box{ background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 22px; margin-bottom: 16px; }
+  .rules-box h3{ font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-family: var(--font-mono); color: var(--hue); margin-bottom: 10px; }
+  .rules-box ul{ margin:0; padding-left: 20px; color: var(--ink-soft); font-size: 14.5px; }
+  .rules-box li{ margin-bottom: 5px; }
+  .rules-box li::marker{ color: var(--hue); }
+  .trick-box{ background: color-mix(in srgb, var(--hue) 10%, var(--surface)); border: 1px dashed var(--hue); border-radius: var(--radius); padding: 14px 22px; margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-start; }
+  .trick-box .trick-tag{ font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); white-space: nowrap; padding-top: 2px; }
+  .trick-box .trick-text{ color: var(--ink-soft); font-size: 14.5px; }
+  .trick-box .trick-text b{ color: var(--ink); }
+  .diagram-box{ background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 16px; display:flex; justify-content:center; align-items:center; overflow-x:auto; }
+  .diagram-box svg{ max-width: 100%; height: auto; display:block; }
+  .diagram-box .dg-line{ stroke: var(--hue); fill: none; }
+  .diagram-box .dg-fill{ fill: var(--hue); }
+  .diagram-box .dg-tint{ fill: var(--tint); stroke: var(--hue); }
+  .diagram-box .dg-ink{ fill: var(--ink); }
+  .diagram-box .dg-ink-line{ stroke: var(--ink-soft); fill:none; }
+  .diagram-box .dg-soft{ fill: var(--ink-soft); }
+  .diagram-box .dg-good{ fill: var(--good); stroke: var(--good); }
+  .diagram-box .dg-bad{ fill: var(--bad); stroke: var(--bad); }
+  .diagram-box text{ fill: var(--ink); font-family: var(--font-mono); }
+
+  .example-card{ background: var(--surface); border: 1.5px dashed var(--border-strong); border-radius: var(--radius); padding: 18px 22px; margin-bottom: 22px; }
+  .example-card h3{ font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-family: var(--font-mono); color: var(--ink-faint); margin-bottom: 10px; display:flex; align-items:center; gap:8px; }
+  .example-card h3::before{ content:"✎"; color: var(--accent-2); font-size:14px; }
+  .example-prob{ font-family: var(--font-mono); font-size: 15.5px; margin-bottom: 12px; color: var(--ink); }
+  .example-steps{ display:flex; flex-direction:column; gap: 6px; }
+  .example-steps .step{ display:grid; grid-template-columns: 20px 1fr; gap: 10px; font-size: 14.5px; color: var(--ink-soft); align-items:baseline; }
+  .example-steps .step .n{ font-family: var(--font-mono); color: var(--hue); font-size: 12.5px; }
+  .example-steps .step .expr{ color: var(--ink); }
+  .example-answer{ margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border); font-size: 14.5px; color: var(--good); font-family: var(--font-mono); font-weight:600; }
+
+  .ex-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 720px){ .ex-grid{ grid-template-columns: 1fr; } }
+  .ex-card{ background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; display:flex; flex-direction:column; gap:10px; transition: border-color .2s ease; }
+  .ex-card.correct{ border-color: var(--good); background: color-mix(in srgb, var(--good-tint) 60%, var(--surface)); }
+  .ex-card.wrong{ border-color: var(--bad); }
+  .ex-top{ display:flex; align-items:flex-start; gap:10px; }
+  .ex-num{ font-family: var(--font-mono); font-size: 12.5px; font-weight:700; color: var(--hue); background: var(--tint); border:1px solid color-mix(in srgb, var(--hue) 40%, transparent); border-radius: 6px; padding: 2px 7px; flex:0 0 auto; margin-top:2px; }
+  .ex-prompt{ font-size: 14.5px; color: var(--ink); line-height:1.5; }
+  .ex-prompt .expr{ font-size: 14.5px; }
+  .ex-input-row{ display:flex; gap:8px; }
+  .ex-input{ flex:1; min-width:0; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border-strong); background: var(--bg); color: var(--ink); font-family: var(--font-mono); font-size: 13.5px; }
+  .ex-input::placeholder{ color: var(--ink-faint); }
+  .ex-check{ font-family: var(--font-mono); font-size: 12.5px; font-weight:600; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--hue); background: var(--hue); color: var(--accent-ink); white-space:nowrap; }
+  .ex-check:hover{ filter: brightness(1.06); }
+  .ex-feedback{ font-size: 13px; font-family: var(--font-mono); min-height: 4px; }
+  .ex-feedback.correct{ color: var(--good); }
+  .ex-feedback.wrong{ color: var(--bad); }
+  .ex-foot{ display:flex; justify-content: space-between; align-items:center; margin-top:2px; }
+  .ex-toggle{ background:none; border:none; padding:0; font-size: 12.5px; font-family: var(--font-mono); color: var(--ink-faint); text-decoration: underline; text-underline-offset:3px; }
+  .ex-toggle:hover{ color: var(--hue); }
+  .ex-solution{ display:none; margin-top: 4px; padding: 12px 14px; background: var(--surface-2); border-radius: 8px; font-size: 13.5px; color: var(--ink-soft); }
+  .ex-solution.open{ display:block; }
+  .ex-solution .sol-step{ margin-bottom: 4px; }
+  .open-note{ font-size: 11.5px; color: var(--ink-faint); font-family: var(--font-mono); }
+  sup{ font-size: 0.7em; }
+  footer{ text-align:center; padding: 30px 20px 50px; color: var(--ink-faint); font-size: 13px; font-family: var(--font-mono); }
+  .toast{ position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: 999px; font-family: var(--font-mono); font-size: 13px; opacity: 0; pointer-events:none; transition: opacity .25s ease, transform .25s ease; z-index: 100; white-space: nowrap; }
+  .toast.show{ opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+
+<div class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="eyebrow"><span class="dot"></span>IB MYP Standard Mathematics B &middot; Grade 9 &middot; Unit 2 &middot; <a href="https://claude.ai/code/artifact/74db3449-33a4-488f-a662-0023faf1baa4">&uarr; Course hub</a></div>
+    <div class="title-row">
+      <div>
+        <h1>Unit 2: How Many Forms Has a Quadratic?</h1>
+        <div class="subtitle">Unit 2 study workbook — Thinking with Models: Functions. Five lessons on expanding, factorizing, solving and graphing quadratics.</div>
+      </div>
+      <div class="student-tag">Prepared for <b>Devon</b> &middot; Starts Week 3, October &middot; 8 weeks</div>
+    </div>
+    <div class="meta-strip">
+      <span>Global context: <b>Globalization and sustainability</b></span>
+      <span>Key concept: <b>Relationships</b></span>
+      <span>Related concepts: <b>Models, Representation</b></span>
+      <span>Criteria: <b>A &middot; D</b></span>
+    </div>
+  </div>
+</div>
+
+<div class="scoreboard">
+  <div class="wrap scoreboard-inner" id="scoreboardInner">
+    <span class="score-total"><b id="totalDone">0</b>/50 done</span>
+    <button class="reset-btn" id="resetBtn" title="Clear saved progress">reset progress</button>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <details class="intro-card" id="introCard">
+    <summary>Unit reference &mdash; Statement of Inquiry, inquiry questions &amp; how to use this guide<span class="arrow">&#9660;</span></summary>
+    <div class="intro-grid">
+      <p class="soi">&ldquo;Representing relationships visually and algebraically can allow us to find and optimize &lsquo;best case scenarios&rsquo; and sustainable solutions.&rdquo;</p>
+
+      <div class="intro-block">
+        <h4>How this guide works</h4>
+        <p>Each lesson (A&ndash;E) opens with the core rules, then one fully worked example, then 10 practice exercises. Type an answer and press <b>Check</b> for instant feedback, or open <b>Show solution</b> to see the steps. Your progress is saved automatically in this browser.</p>
+      </div>
+      <div class="intro-block">
+        <h4>IB learner profile</h4>
+        <p><b>Risk-takers (Courageous)</b> &mdash; the unit warm-up "Expressions Mashup" and every lesson below builds toward factorizing, solving, and graphing quadratics for the Criterion B investigation.</p>
+      </div>
+
+      <div class="iq-table">
+        <div class="iq-row"><span class="tag">Factual</span><p>What determines equivalence?</p></div>
+        <div class="iq-row"><span class="tag">Factual</span><p>What kind of patterns exist?</p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>How can relationships be represented effectively?</p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>How does equivalence affect representations?</p></div>
+        <div class="iq-row"><span class="tag">Debatable</span><p>To what extent does understanding patterns allow you to understand the natural world?</p></div>
+      </div>
+    </div>
+  </details>
+
+  <div id="lessons"></div>
+
+</main>
+
+<footer>How Many Forms Has a Quadratic? &middot; Unit 2 study workbook &middot; built for Devon</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var LESSONS = [
+    {
+      letter: "A", hueVar: "--hueA", title: "Algebraic Expansion",
+      rules: [
+        "The distributive property: a(b + c) = ab + ac. Every term inside the bracket gets multiplied.",
+        "For two binomials, multiply every term in the first bracket by every term in the second (\"FOIL\": First, Outer, Inner, Last), then collect like terms.",
+        "Perfect square pattern: (x + a)&sup2; = x&sup2; + 2ax + a&sup2;, and (x &minus; a)&sup2; = x&sup2; &minus; 2ax + a&sup2;.",
+        "Difference of squares pattern: (x + a)(x &minus; a) = x&sup2; &minus; a&sup2; &mdash; the middle terms always cancel."
+      ],
+      diagram: `<svg viewBox="0 0 300 140" width="300" height="140">
+        <rect x="60" y="20" width="80" height="60" class="dg-tint" stroke-width="2"/>
+        <text x="100" y="55" text-anchor="middle" font-size="13">x&#178;</text>
+        <rect x="140" y="20" width="50" height="60" class="dg-tint" stroke-width="2" fill-opacity="0.6"/>
+        <text x="165" y="55" text-anchor="middle" font-size="12">3x</text>
+        <rect x="60" y="80" width="80" height="40" class="dg-tint" stroke-width="2" fill-opacity="0.6"/>
+        <text x="100" y="103" text-anchor="middle" font-size="12">2x</text>
+        <rect x="140" y="80" width="50" height="40" class="dg-tint" stroke-width="2" fill-opacity="0.3"/>
+        <text x="165" y="103" text-anchor="middle" font-size="12">6</text>
+        <text x="35" y="55" font-size="12">x</text>
+        <text x="35" y="103" font-size="12">2</text>
+        <text x="100" y="15" text-anchor="middle" font-size="12">x</text>
+        <text x="165" y="15" text-anchor="middle" font-size="12">3</text>
+        <text x="220" y="70" font-size="11">(x+2)(x+3)</text>
+      </svg>`,
+      trick: "Say it out loud: <b>F</b>irst, <b>O</b>uter, <b>I</b>nner, <b>L</b>ast. And a perfect square is <i>never</i> just x&sup2;+a&sup2; &mdash; the middle term 2ax always shows up. Forgetting it is the single most common algebra slip (sometimes called the \"freshman's dream\").",
+      example: {
+        problem: "Expand and simplify:&nbsp; (2x + 3)(x &minus; 4)",
+        steps: [
+          "First: 2x &times; x = 2x&sup2;",
+          "Outer: 2x &times; (&minus;4) = &minus;8x",
+          "Inner: 3 &times; x = 3x",
+          "Last: 3 &times; (&minus;4) = &minus;12",
+          "Collect like terms: 2x&sup2; &minus; 8x + 3x &minus; 12"
+        ],
+        answer: "2x&sup2; &minus; 5x &minus; 12"
+      },
+      exercises: [
+        { prompt: "Expand: &nbsp;3(x + 5)", accept:["3x+15"],
+          solution: ["Distribute the 3 to both terms: 3(x) + 3(5)", "= 3x + 15"] },
+        { prompt: "Expand: &nbsp;(x + 2)(x + 7)", accept:["x^2+9x+14","x2+9x+14"],
+          solution: ["FOIL: x&sup2; + 7x + 2x + 14", "= x&sup2; + 9x + 14"] },
+        { prompt: "Expand: &nbsp;(x &minus; 3)(x + 3)", accept:["x^2-9","x2-9"],
+          solution: ["Difference of squares pattern: x&sup2; &minus; 3&sup2;", "= x&sup2; &minus; 9"] },
+        { prompt: "Expand: &nbsp;(x + 5)&sup2;", accept:["x^2+10x+25","x2+10x+25"],
+          solution: ["Perfect square pattern: x&sup2; + 2(5)x + 5&sup2;", "= x&sup2; + 10x + 25"] },
+        { prompt: "Expand: &nbsp;(2x &minus; 1)(3x + 4)", accept:["6x^2+5x-4","6x2+5x-4"],
+          solution: ["FOIL: 6x&sup2; + 8x &minus; 3x &minus; 4", "= 6x&sup2; + 5x &minus; 4"] },
+        { prompt: "Expand: &nbsp;(x &minus; 6)&sup2;", accept:["x^2-12x+36","x2-12x+36"],
+          solution: ["Perfect square pattern: x&sup2; &minus; 2(6)x + 6&sup2;", "= x&sup2; &minus; 12x + 36"] },
+        { prompt: "Expand and simplify: &nbsp;2(x + 3)(x &minus; 1)", accept:["2x^2+4x-6","2x2+4x-6"],
+          solution: ["Expand the brackets first: (x+3)(x&minus;1) = x&sup2; + 2x &minus; 3", "Multiply by 2: 2x&sup2; + 4x &minus; 6"] },
+        { prompt: "Expand: &nbsp;(x + 4)(x + 9)", accept:["x^2+13x+36","x2+13x+36"],
+          solution: ["FOIL: x&sup2; + 9x + 4x + 36", "= x&sup2; + 13x + 36"] },
+        { prompt: "Expand: &nbsp;(3x &minus; 2)&sup2;", accept:["9x^2-12x+4","9x2-12x+4"],
+          solution: ["Perfect square pattern: (3x)&sup2; &minus; 2(3x)(2) + 2&sup2;", "= 9x&sup2; &minus; 12x + 4"] },
+        { prompt: "Expand and simplify: &nbsp;(x + 1)(x + 2) + (x + 3)(x &minus; 1)", accept:["2x^2+5x-1","2x2+5x-1"],
+          solution: ["First product: x&sup2; + 3x + 2", "Second product: x&sup2; + 2x &minus; 3", "Add: 2x&sup2; + 5x &minus; 1"] }
+      ]
+    },
+    {
+      letter: "B", hueVar: "--hueB", title: "Quadratic Factorization",
+      rules: [
+        "Factorizing is the inverse of expanding: it turns a trinomial back into a product of two brackets.",
+        "For x&sup2; + bx + c, find two numbers that multiply to c and add to b &mdash; those become the constants in each bracket.",
+        "Recognize the pattern first: perfect square, difference of squares, or a general trinomial &mdash; the form tells you which method to use.",
+        "For a leading coefficient other than 1 (e.g. 2x&sup2;+7x+3), the two numbers must multiply to a&times;c and add to b, then split the middle term."
+      ],
+      diagram: `<svg viewBox="0 0 300 140" width="300" height="140">
+        <text x="150" y="30" text-anchor="middle" font-size="13">x&#178; + bx + c</text>
+        <circle cx="90" cy="80" r="30" class="dg-tint" stroke-width="2"/>
+        <text x="90" y="75" text-anchor="middle" font-size="11">two numbers</text>
+        <text x="90" y="90" text-anchor="middle" font-size="11">p, q</text>
+        <circle cx="210" cy="80" r="30" class="dg-tint" stroke-width="2"/>
+        <text x="210" y="75" text-anchor="middle" font-size="10">p&#215;q = c</text>
+        <text x="210" y="90" text-anchor="middle" font-size="10">p+q = b</text>
+        <line x1="120" y1="80" x2="180" y2="80" class="dg-line" stroke-width="2"/>
+        <text x="150" y="125" text-anchor="middle" font-size="11">factors: (x+p)(x+q)</text>
+      </svg>`,
+      trick: "Always hunt for the two numbers in this order: <b>multiply first, then check the sum</b>. List the factor pairs of c, then pick the pair that adds to b. Same signs as c if c is positive; opposite signs if c is negative &mdash; and the bigger number takes the sign of b.",
+      example: {
+        problem: "Factorize:&nbsp; x&sup2; + 7x + 12",
+        steps: [
+          "Need two numbers that multiply to 12 and add to 7",
+          "3 &times; 4 = 12 and 3 + 4 = 7 &mdash; those are the numbers",
+          "Write as two brackets using 3 and 4"
+        ],
+        answer: "(x + 3)(x + 4)"
+      },
+      exercises: [
+        { prompt: "Factorize: &nbsp;x&sup2; + 5x + 6", accept:["(x+2)(x+3)","(x+3)(x+2)"],
+          solution: ["Need two numbers multiplying to 6, adding to 5: 2 and 3", "(x + 2)(x + 3)"] },
+        { prompt: "Factorize: &nbsp;x&sup2; &minus; x &minus; 12", accept:["(x-4)(x+3)","(x+3)(x-4)"],
+          solution: ["Need two numbers multiplying to &minus;12, adding to &minus;1: &minus;4 and 3", "(x &minus; 4)(x + 3)"] },
+        { prompt: "Factorize: &nbsp;x&sup2; &minus; 9", accept:["(x-3)(x+3)","(x+3)(x-3)"],
+          solution: ["Difference of squares: x&sup2; &minus; 3&sup2;", "(x &minus; 3)(x + 3)"] },
+        { prompt: "Factorize: &nbsp;x&sup2; + 10x + 25", accept:["(x+5)^2","(x+5)²","(x+5)(x+5)"],
+          solution: ["Perfect square trinomial: x&sup2; + 2(5)x + 5&sup2;", "(x + 5)&sup2;"] },
+        { prompt: "Factorize: &nbsp;x&sup2; &minus; 8x + 16", accept:["(x-4)^2","(x-4)²","(x-4)(x-4)"],
+          solution: ["Perfect square trinomial: x&sup2; &minus; 2(4)x + 4&sup2;", "(x &minus; 4)&sup2;"] },
+        { prompt: "Factorize: &nbsp;2x&sup2; + 7x + 3", accept:["(2x+1)(x+3)","(x+3)(2x+1)"],
+          solution: ["a&times;c = 6; need two numbers multiplying to 6, adding to 7: 1 and 6", "Split: 2x&sup2; + x + 6x + 3 &rarr; x(2x+1) + 3(2x+1)", "(2x + 1)(x + 3)"] },
+        { prompt: "Factorize: &nbsp;3x&sup2; &minus; 11x + 6", accept:["(3x-2)(x-3)","(x-3)(3x-2)"],
+          solution: ["a&times;c = 18; need two numbers multiplying to 18, adding to &minus;11: &minus;2 and &minus;9", "Split: 3x&sup2; &minus; 2x &minus; 9x + 6 &rarr; x(3x&minus;2) &minus; 3(3x&minus;2)", "(3x &minus; 2)(x &minus; 3)"] },
+        { prompt: "Factorize: &nbsp;x&sup2; &minus; 49", accept:["(x-7)(x+7)","(x+7)(x-7)"],
+          solution: ["Difference of squares: x&sup2; &minus; 7&sup2;", "(x &minus; 7)(x + 7)"] },
+        { prompt: "Factorize: &nbsp;x&sup2; + 2x &minus; 15", accept:["(x+5)(x-3)","(x-3)(x+5)"],
+          solution: ["Need two numbers multiplying to &minus;15, adding to 2: 5 and &minus;3", "(x + 5)(x &minus; 3)"] },
+        { prompt: "Extension (B.2): factorize the sum of cubes &nbsp;x&sup3; + 8", accept:["(x+2)(x^2-2x+4)","(x+2)(x2-2x+4)"],
+          solution: ["Sum of cubes pattern: a&sup3;+b&sup3; = (a+b)(a&sup2;&minus;ab+b&sup2;), with a=x, b=2", "(x + 2)(x&sup2; &minus; 2x + 4)"] }
+      ]
+    },
+    {
+      letter: "C", hueVar: "--hueC", title: "Solutions to Quadratic Equations I",
+      rules: [
+        "A quadratic equation can have up to <b>two</b> solutions &mdash; both values that make the equation true.",
+        "Square root method: if x&sup2; = k, then x = &plusmn;&radic;k (remember both the positive and negative root).",
+        "Zero product principle: if two factors multiply to give zero, at least one of them must be zero &mdash; this is why we factorize before solving.",
+        "Choose your method based on the form: a simple x&sup2;=k form suits square roots; a trinomial suits factorizing first."
+      ],
+      diagram: `<svg viewBox="0 0 300 140" width="300" height="140">
+        <line x1="20" y1="70" x2="280" y2="70" class="dg-ink-line" stroke-width="1.5"/>
+        <path d="M40,120 Q150,10 260,120" class="dg-line" stroke-width="2.5" fill="none"/>
+        <circle cx="90" cy="70" r="5" class="dg-good"/>
+        <circle cx="210" cy="70" r="5" class="dg-good"/>
+        <text x="90" y="90" text-anchor="middle" font-size="10">x&#8321;</text>
+        <text x="210" y="90" text-anchor="middle" font-size="10">x&#8322;</text>
+        <text x="150" y="135" text-anchor="middle" font-size="11">solutions = x-intercepts</text>
+      </svg>`,
+      trick: "The moment you take a square root to solve an equation, write &plusmn; immediately &mdash; forgetting the negative root is the most common mark lost on this topic. And the zero product principle only works when one side is <b>exactly 0</b>, so move everything there first before factorizing.",
+      example: {
+        problem: "Solve:&nbsp; x&sup2; + 2x &minus; 15 = 0",
+        steps: [
+          "Factorize the left side: (x + 5)(x &minus; 3) = 0",
+          "Apply the zero product principle: x + 5 = 0 or x &minus; 3 = 0",
+          "Solve each: x = &minus;5 or x = 3"
+        ],
+        answer: "x = &minus;5 or x = 3"
+      },
+      exercises: [
+        { prompt: "Solve: &nbsp;x&sup2; = 49", accept:["±7","7,-7","-7,7"], valueSet:[7,-7],
+          solution: ["Take the square root of both sides: x = &plusmn;&radic;49", "x = &plusmn;7"] },
+        { prompt: "Solve: &nbsp;x&sup2; &minus; 5 = 20", valueSet:[5,-5],
+          solution: ["Add 5: x&sup2; = 25", "x = &plusmn;5"] },
+        { prompt: "Solve: &nbsp;(x &minus; 2)&sup2; = 9", valueSet:[5,-1],
+          solution: ["Take the square root: x &minus; 2 = &plusmn;3", "x = 2+3=5 or x = 2&minus;3=&minus;1"] },
+        { prompt: "Solve by factoring: &nbsp;x&sup2; + 7x + 12 = 0", valueSet:[-3,-4],
+          solution: ["Factorize: (x+3)(x+4) = 0", "x = &minus;3 or x = &minus;4"] },
+        { prompt: "Solve: &nbsp;x&sup2; &minus; x &minus; 6 = 0", valueSet:[3,-2],
+          solution: ["Factorize: (x&minus;3)(x+2) = 0", "x = 3 or x = &minus;2"] },
+        { prompt: "Solve: &nbsp;x&sup2; &minus; 64 = 0", valueSet:[8,-8],
+          solution: ["x&sup2; = 64", "x = &plusmn;8"] },
+        { prompt: "Solve: &nbsp;x&sup2; + 6x + 9 = 0", value: -3,
+          solution: ["Factorize: (x+3)&sup2; = 0", "x = &minus;3 (a repeated / double root)"] },
+        { prompt: "Solve: &nbsp;2x&sup2; &minus; 8 = 0", valueSet:[2,-2],
+          solution: ["Add 8, divide by 2: x&sup2; = 4", "x = &plusmn;2"] },
+        { prompt: "Solve: &nbsp;x&sup2; &minus; 3x &minus; 10 = 0", valueSet:[5,-2],
+          solution: ["Factorize: (x&minus;5)(x+2) = 0", "x = 5 or x = &minus;2"] },
+        { prompt: "A square garden has area 81 m&sup2;. Find the side length (positive solution only).", value: 9,
+          solution: ["x&sup2; = 81 &rarr; x = &plusmn;9", "Reject the negative root &mdash; a length can't be negative", "x = 9 m"] }
+      ]
+    },
+    {
+      letter: "D", hueVar: "--hueD", title: "Solutions to Quadratic Equations II",
+      rules: [
+        "Completing the square turns x&sup2; + bx into a perfect square: add and subtract (b/2)&sup2;.",
+        "To solve x&sup2; + bx + c = 0 by completing the square: move c to the other side, add (b/2)&sup2; to both sides, then take square roots.",
+        "This method also converts standard form into <b>vertex form</b> y = (x &minus; h)&sup2; + k, which directly reveals the vertex (h, k).",
+        "Real-life area and projectile problems (e.g. \"Will it hit the hoop?\") are often modeled with quadratics &mdash; the vertex tells you a maximum or minimum."
+      ],
+      diagram: `<svg viewBox="0 0 300 140" width="300" height="140">
+        <text x="150" y="55" text-anchor="middle" font-size="14">x = (&minus;b &#177; &#8730;(b&#178;&minus;4ac)) / 2a</text>
+        <rect x="95" y="70" width="110" height="20" class="dg-tint" stroke-width="1.5" fill-opacity="0.4"/>
+        <text x="150" y="84" text-anchor="middle" font-size="10">discriminant: b&#178;&minus;4ac</text>
+        <text x="150" y="115" text-anchor="middle" font-size="9">positive=2 roots &middot; zero=1 root &middot; negative=0 real roots</text>
+      </svg>`,
+      trick: "The whole method is three words: <b>halve it, square it</b> (then add it to both sides). Whatever you halved the x-coefficient to is exactly h in vertex form y=(x&minus;h)&sup2;+k &mdash; so completing the square and finding the vertex are the same calculation.",
+      example: {
+        problem: "Solve by completing the square:&nbsp; x&sup2; + 6x + 2 = 0",
+        steps: [
+          "Move the constant: x&sup2; + 6x = &minus;2",
+          "Add (6/2)&sup2; = 9 to both sides: x&sup2; + 6x + 9 = &minus;2 + 9",
+          "Factor the perfect square: (x + 3)&sup2; = 7",
+          "Take square roots: x + 3 = &plusmn;&radic;7"
+        ],
+        answer: "x = &minus;3 &plusmn; &radic;7"
+      },
+      exercises: [
+        { prompt: "What number completes the square for &nbsp;x&sup2; + 8x + ___?", value: 16,
+          solution: ["Take half of 8, then square it: (8/2)&sup2;", "= 16"] },
+        { prompt: "What number completes the square for &nbsp;x&sup2; &minus; 10x + ___?", value: 25,
+          solution: ["Take half of &minus;10, then square it: (&minus;10/2)&sup2;", "= 25"] },
+        { prompt: "Solve by completing the square: &nbsp;x&sup2; + 4x &minus; 5 = 0", valueSet:[1,-5],
+          solution: ["x&sup2; + 4x = 5 &rarr; add (4/2)&sup2;=4: x&sup2;+4x+4 = 9", "(x+2)&sup2; = 9 &rarr; x+2 = &plusmn;3", "x = 1 or x = &minus;5"] },
+        { prompt: "Solve by completing the square (leave in radical form): &nbsp;x&sup2; &minus; 6x + 1 = 0", accept:["3±2√2","3+2√2,3-2√2","3+2sqrt2,3-2sqrt2"], open:true,
+          solution: ["x&sup2;&minus;6x = &minus;1 &rarr; add 9: x&sup2;&minus;6x+9 = 8", "(x&minus;3)&sup2; = 8 &rarr; x&minus;3 = &plusmn;&radic;8 = &plusmn;2&radic;2", "x = 3 &plusmn; 2&radic;2"] },
+        { prompt: "Solve by completing the square: &nbsp;x&sup2; + 2x &minus; 8 = 0", valueSet:[2,-4],
+          solution: ["x&sup2;+2x = 8 &rarr; add 1: x&sup2;+2x+1 = 9", "(x+1)&sup2; = 9 &rarr; x+1 = &plusmn;3", "x = 2 or x = &minus;4"] },
+        { prompt: "Convert to vertex form by completing the square: &nbsp;y = x&sup2; &minus; 4x + 7", accept:["y=(x-2)^2+3","y=(x-2)²+3"],
+          solution: ["Half of &minus;4 is &minus;2, squared is 4: x&sup2;&minus;4x+4&minus;4+7", "(x&minus;2)&sup2; + 3"] },
+        { prompt: "Convert to vertex form: &nbsp;y = x&sup2; + 6x + 5", accept:["y=(x+3)^2-4","y=(x+3)²-4"],
+          solution: ["Half of 6 is 3, squared is 9: x&sup2;+6x+9&minus;9+5", "(x+3)&sup2; &minus; 4"] },
+        { prompt: "A rectangular garden's length is 4 m more than its width, and its area is 60 m&sup2;. Solve w&sup2;+4w&minus;60=0 for the width w.", value: 6,
+          solution: ["w&sup2;+4w = 60 &rarr; add 4: (w+2)&sup2; = 64", "w+2 = &plusmn;8 &rarr; w = 6 or w = &minus;10", "Reject the negative &mdash; width is 6 m"] },
+        { prompt: "A ball's path is modeled by h = &minus;x&sup2; + 6x + 1. Complete the square to find the maximum height.", value: 10,
+          solution: ["h = &minus;(x&sup2;&minus;6x) + 1 = &minus;(x&sup2;&minus;6x+9&minus;9)+1", "h = &minus;(x&minus;3)&sup2; + 9 + 1 = &minus;(x&minus;3)&sup2; + 10", "Maximum height is 10 (at x=3)"] },
+        { prompt: "Solve by completing the square (leave answer with a radical): &nbsp;x&sup2; + 3x &minus; 1 = 0", accept:["(-3±√13)/2","(-3+√13)/2,(-3-√13)/2"], open:true,
+          solution: ["x&sup2;+3x = 1 &rarr; add 9/4: (x+3/2)&sup2; = 1 + 9/4 = 13/4", "x + 3/2 = &plusmn;&radic;13/2", "x = (&minus;3 &plusmn; &radic;13)/2"] }
+      ]
+    },
+    {
+      letter: "E", hueVar: "--hueE", title: "Graphs of Quadratic Functions",
+      rules: [
+        "Intercept (factored) form y = a(x&minus;p)(x&minus;q) directly shows the x-intercepts, x = p and x = q.",
+        "Every parabola is symmetric &mdash; the axis of symmetry passes through the vertex and sits exactly halfway between the two x-intercepts.",
+        "To find the vertex: find the axis of symmetry first (the average of the roots), then substitute back in to get the y-coordinate.",
+        "Function notation f(x) means \"the output of function f when the input is x\" &mdash; f(3) means substitute x=3."
+      ],
+      diagram: `<svg viewBox="0 0 300 140" width="300" height="140">
+        <line x1="20" y1="120" x2="280" y2="120" class="dg-ink-line" stroke-width="1.5"/>
+        <line x1="150" y1="120" x2="150" y2="20" class="dg-ink-line" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <path d="M50,120 Q150,25 250,120" class="dg-line" stroke-width="2.5" fill="none"/>
+        <circle cx="150" cy="30" r="5" class="dg-good"/>
+        <text x="160" y="27" font-size="10">vertex</text>
+        <text x="155" y="70" font-size="9">axis of symmetry</text>
+        <circle cx="20" cy="105" r="4" class="dg-fill"/>
+        <text x="15" y="98" font-size="9">y-int</text>
+      </svg>`,
+      trick: "The axis of symmetry is just the <b>average</b> of the two x-intercepts: add them, divide by 2 &mdash; no formula to memorize. Once you have that x-value, plug it back into the equation to get the vertex's y-coordinate for free.",
+      example: {
+        problem: "For &nbsp;y = (x &minus; 2)(x &minus; 6),&nbsp; find the x-intercepts, axis of symmetry, and vertex.",
+        steps: [
+          "x-intercepts: set each factor to 0 &rarr; x = 2 and x = 6",
+          "Axis of symmetry: the average of the roots &rarr; x = (2+6)/2 = 4",
+          "Vertex y-value: substitute x=4 &rarr; y = (4&minus;2)(4&minus;6) = (2)(&minus;2) = &minus;4"
+        ],
+        answer: "x-intercepts: 2, 6 &middot; axis: x=4 &middot; vertex: (4, &minus;4)"
+      },
+      exercises: [
+        { prompt: "Find the x-intercepts of &nbsp;y = (x + 1)(x &minus; 5)", valueSet:[-1,5],
+          solution: ["Set each factor to zero: x+1=0 or x&minus;5=0", "x = &minus;1 or x = 5"] },
+        { prompt: "Find the axis of symmetry of &nbsp;y = (x &minus; 3)(x + 7)", value: -2,
+          solution: ["Roots are x=3 and x=&minus;7", "Axis: (3 + (&minus;7))/2 = &minus;2"] },
+        { prompt: "Find the vertex of &nbsp;y = (x &minus; 1)(x &minus; 5)", accept:["(3,-4)","3,-4"],
+          solution: ["Axis of symmetry: (1+5)/2 = 3", "y = (3&minus;1)(3&minus;5) = (2)(&minus;2) = &minus;4", "Vertex: (3, &minus;4)"] },
+        { prompt: "Find the y-intercept of &nbsp;y = (x + 2)(x &minus; 4)", value: -8,
+          solution: ["Set x=0: y = (2)(&minus;4)", "y = &minus;8"] },
+        { prompt: "Given f(x) = x&sup2; &minus; 4x + 3, evaluate f(5).", value: 8,
+          solution: ["f(5) = (5)&sup2; &minus; 4(5) + 3", "= 25 &minus; 20 + 3 = 8"] },
+        { prompt: "Given f(x) = 2x&sup2; + x &minus; 1, evaluate f(&minus;2).", value: 5,
+          solution: ["f(&minus;2) = 2(4) + (&minus;2) &minus; 1", "= 8 &minus; 2 &minus; 1 = 5"] },
+        { prompt: "Write &nbsp;y = (x &minus; 4)(x + 2)&nbsp; in standard form.", accept:["y=x^2-2x-8","y=x2-2x-8"],
+          solution: ["Expand: x&sup2; + 2x &minus; 4x &minus; 8", "y = x&sup2; &minus; 2x &minus; 8"] },
+        { prompt: "A parabola has x-intercepts at x=&minus;3 and x=1, and passes through (0,&minus;3). Write its equation in intercept form.", accept:["y=(x+3)(x-1)","y=1(x+3)(x-1)"],
+          solution: ["y = a(x+3)(x&minus;1); substitute (0,&minus;3): a(3)(&minus;1) = &minus;3", "&minus;3a = &minus;3 &rarr; a = 1", "y = (x + 3)(x &minus; 1)"] },
+        { prompt: "Does &nbsp;y = &minus;2(x &minus; 1)(x + 5)&nbsp; open upward or downward?", accept:["downward","down"],
+          solution: ["The leading coefficient a = &minus;2 is negative", "A negative leading coefficient means the parabola opens downward"] },
+        { prompt: "Describe the key features of &nbsp;y = (x &minus; 2)(x + 6): x-intercepts, axis of symmetry, and vertex.", open:true,
+          solution: ["x-intercepts: x=2 and x=&minus;6", "Axis of symmetry: (2+(&minus;6))/2 = &minus;2", "Vertex: y=(&minus;2&minus;2)(&minus;2+6) = (&minus;4)(4) = &minus;16 &rarr; (&minus;2, &minus;16)", "Opens upward (a=1 &gt; 0)"] }
+      ]
+    }
+  ];
+
+  var STORE_KEY = "u2_progress_v1";
+  function loadProgress(){ try{ var raw = localStorage.getItem(STORE_KEY); return raw ? JSON.parse(raw) : {}; }catch(e){ return {}; } }
+  function saveProgress(p){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(p)); }catch(e){} }
+  var progress = loadProgress();
+
+  function parseNum(s){
+    if(s == null) return null;
+    s = String(s).trim();
+    var fracM = s.match(/^(-?\d+(?:\.\d+)?)\s*\/\s*(-?\d+(?:\.\d+)?)$/);
+    if(fracM){ var a = parseFloat(fracM[1]), b = parseFloat(fracM[2]); if(b === 0) return null; return a / b; }
+    var v = parseFloat(s);
+    return isNaN(v) ? null : v;
+  }
+  function normalize(raw){ return String(raw).toLowerCase().replace(/[\s()]/g,"").replace(/\*\*/g,"^").replace(/²/g,"^2").replace(/√/g,"sqrt"); }
+  function checkAnswer(ex, raw){
+    if(!raw || !String(raw).trim()) return false;
+    var norm = normalize(raw);
+    if(ex.accept){
+      var acceptedNorm = ex.accept.map(normalize);
+      if(acceptedNorm.indexOf(norm) > -1) return true;
+    }
+    if(typeof ex.value === "number"){
+      var v = parseNum(raw);
+      if(v !== null && Math.abs(v - ex.value) < (ex.tol || 0.02)) return true;
+    }
+    if(ex.valueSet){
+      var parts = String(raw).toLowerCase().replace(/±/g,",-,").split(/,|or|and/).map(function(s){return s.replace(/^-,?$/,"-");}).map(parseNum).filter(function(x){ return x !== null; });
+      if(parts.length === ex.valueSet.length){
+        var remaining = ex.valueSet.slice();
+        var ok = parts.every(function(p){
+          var idx = -1;
+          for(var i=0;i<remaining.length;i++){ if(Math.abs(remaining[i]-p) < (ex.tol||0.02)){ idx=i; break; } }
+          if(idx>-1){ remaining.splice(idx,1); return true; }
+          return false;
+        });
+        if(ok) return true;
+      }
+    }
+    return false;
+  }
+
+  var lessonsEl = document.getElementById("lessons");
+  var scoreboardInner = document.getElementById("scoreboardInner");
+  var resetBtn = document.getElementById("resetBtn");
+  var totalDoneEl = document.getElementById("totalDone");
+
+  function exId(li, ei){ return "L" + li + "E" + ei; }
+
+  function buildChips(){
+    LESSONS.forEach(function(lesson, li){
+      var a = document.createElement("a");
+      a.href = "#lesson-" + lesson.letter;
+      a.className = "chip";
+      a.style.setProperty("--chip-hue", "var(" + lesson.hueVar + "-solid)");
+      a.style.setProperty("--chip-tint", "var(" + lesson.hueVar + "-tint)");
+      a.id = "chip-" + li;
+      a.innerHTML = '<span class="letter">' + lesson.letter + '</span><span class="frac" data-frac>0/10</span>';
+      scoreboardInner.insertBefore(a, resetBtn);
+    });
+  }
+
+  function lessonDoneCount(li){
+    var lesson = LESSONS[li];
+    var n = 0;
+    lesson.exercises.forEach(function(ex, ei){ if(progress[exId(li,ei)]) n++; });
+    return n;
+  }
+
+  function updateAllProgressUI(){
+    var total = 0;
+    LESSONS.forEach(function(lesson, li){
+      var n = lessonDoneCount(li);
+      total += n;
+      var chip = document.getElementById("chip-" + li);
+      if(chip){ chip.querySelector("[data-frac]").textContent = n + "/10"; chip.classList.toggle("done", n === 10); }
+      var ring = document.getElementById("ring-" + li);
+      if(ring){ ring.querySelector(".ring-label").textContent = n + " / 10"; ring.querySelector(".bar-fill").style.width = (n*10) + "%"; }
+    });
+    totalDoneEl.textContent = total;
+  }
+
+  function showToast(msg){
+    var t = document.getElementById("toast");
+    t.textContent = msg; t.classList.add("show");
+    clearTimeout(showToast._h);
+    showToast._h = setTimeout(function(){ t.classList.remove("show"); }, 1600);
+  }
+
+  function buildLessons(){
+    LESSONS.forEach(function(lesson, li){
+      var section = document.createElement("section");
+      section.className = "lesson";
+      section.id = "lesson-" + lesson.letter;
+      section.style.setProperty("--hue", "var(" + lesson.hueVar + "-solid)");
+      section.style.setProperty("--tint", "var(" + lesson.hueVar + "-tint)");
+
+      var head = document.createElement("div");
+      head.className = "lesson-head";
+      head.innerHTML =
+        '<div class="big-letter">' + lesson.letter + '</div>' +
+        '<div class="htext"><div class="kicker">Lesson ' + lesson.letter + '</div><h2>' + lesson.title + '</h2></div>' +
+        '<div class="lesson-progress" id="ring-' + li + '"><div class="ring-label">0 / 10</div><div class="bar"><div class="bar-fill"></div></div></div>';
+      section.appendChild(head);
+
+      var rulesBox = document.createElement("div");
+      rulesBox.className = "rules-box";
+      rulesBox.innerHTML = '<h3>The rules</h3><ul>' + lesson.rules.map(function(r){ return "<li>" + r + "</li>"; }).join("") + "</ul>";
+      section.appendChild(rulesBox);
+
+      if(lesson.diagram){
+        var diagramBox = document.createElement("div");
+        diagramBox.className = "diagram-box";
+        diagramBox.innerHTML = lesson.diagram;
+        section.appendChild(diagramBox);
+      }
+
+      if(lesson.trick){
+        var trickBox = document.createElement("div");
+        trickBox.className = "trick-box";
+        trickBox.innerHTML = '<span class="trick-tag">Rule of thumb</span><span class="trick-text">' + lesson.trick + '</span>';
+        section.appendChild(trickBox);
+      }
+
+      var ex = document.createElement("div");
+      ex.className = "example-card";
+      ex.innerHTML =
+        '<h3>Worked example</h3>' +
+        '<div class="example-prob expr">' + lesson.example.problem + '</div>' +
+        '<div class="example-steps">' + lesson.example.steps.map(function(s, i){ return '<div class="step"><span class="n">' + (i+1) + '.</span><span class="expr">' + s + '</span></div>'; }).join("") + '</div>' +
+        '<div class="example-answer">Answer: ' + lesson.example.answer + '</div>';
+      section.appendChild(ex);
+
+      var grid = document.createElement("div");
+      grid.className = "ex-grid";
+
+      lesson.exercises.forEach(function(exObj, ei){
+        var id = exId(li, ei);
+        var card = document.createElement("div");
+        card.className = "ex-card";
+        card.id = "card-" + id;
+
+        var inputRow = exObj.open
+          ? '<div class="open-note">Open response &mdash; check your work against the sample steps.</div>'
+          : '<div class="ex-input-row"><input class="ex-input" type="text" placeholder="your answer" id="input-' + id + '" autocomplete="off" /><button class="ex-check" data-id="' + id + '" data-li="' + li + '" data-ei="' + ei + '">Check</button></div>' +
+            '<div class="ex-feedback" id="fb-' + id + '"></div>';
+
+        card.innerHTML =
+          '<div class="ex-top"><span class="ex-num">' + (ei+1) + '</span><div class="ex-prompt expr">' + exObj.prompt + '</div></div>' +
+          inputRow +
+          '<div class="ex-foot"><button class="ex-toggle" data-target="sol-' + id + '">' + (exObj.open ? "Show sample response" : "Show solution") + '</button></div>' +
+          '<div class="ex-solution" id="sol-' + id + '">' + exObj.solution.map(function(s){ return '<div class="sol-step">' + s + '</div>'; }).join("") + '</div>';
+
+        grid.appendChild(card);
+      });
+
+      section.appendChild(grid);
+      lessonsEl.appendChild(section);
+    });
+  }
+
+  function wireEvents(){
+    lessonsEl.addEventListener("click", function(e){
+      var checkBtn = e.target.closest(".ex-check");
+      if(checkBtn){
+        var li = parseInt(checkBtn.getAttribute("data-li"), 10);
+        var ei = parseInt(checkBtn.getAttribute("data-ei"), 10);
+        var id = checkBtn.getAttribute("data-id");
+        var exObj = LESSONS[li].exercises[ei];
+        var input = document.getElementById("input-" + id);
+        var fb = document.getElementById("fb-" + id);
+        var card = document.getElementById("card-" + id);
+        var ok = checkAnswer(exObj, input.value);
+        card.classList.remove("correct","wrong");
+        fb.classList.remove("correct","wrong");
+        if(ok){
+          card.classList.add("correct"); fb.classList.add("correct"); fb.textContent = "Correct!";
+          progress[id] = true; saveProgress(progress); updateAllProgressUI();
+        } else {
+          card.classList.add("wrong"); fb.classList.add("wrong"); fb.textContent = "Not quite — try again or check the solution.";
+        }
+        return;
+      }
+      var toggleBtn = e.target.closest(".ex-toggle");
+      if(toggleBtn){
+        var targetId = toggleBtn.getAttribute("data-target");
+        var sol = document.getElementById(targetId);
+        var willOpen = !sol.classList.contains("open");
+        sol.classList.toggle("open");
+        toggleBtn.textContent = willOpen
+          ? (toggleBtn.textContent.indexOf("sample") > -1 ? "Hide sample response" : "Hide solution")
+          : (toggleBtn.textContent.indexOf("sample") > -1 ? "Show sample response" : "Show solution");
+        var cardEl = toggleBtn.closest(".ex-card");
+        if(willOpen && cardEl){
+          var idMatch = targetId.replace("sol-","");
+          var liEi = idMatch.match(/^L(\d+)E(\d+)$/);
+          if(liEi){
+            var li2 = parseInt(liEi[1],10), ei2 = parseInt(liEi[2],10);
+            if(LESSONS[li2].exercises[ei2].open){ progress[idMatch] = true; saveProgress(progress); updateAllProgressUI(); }
+          }
+        }
+        return;
+      }
+    });
+
+    lessonsEl.addEventListener("keydown", function(e){
+      if(e.key === "Enter" && e.target.classList.contains("ex-input")){
+        var id = e.target.id.replace("input-","");
+        var btn = document.querySelector('.ex-check[data-id="' + id + '"]');
+        if(btn) btn.click();
+      }
+    });
+
+    resetBtn.addEventListener("click", function(){
+      if(!confirm("Clear all saved progress on this device?")) return;
+      progress = {}; saveProgress(progress);
+      document.querySelectorAll(".ex-card").forEach(function(c){ c.classList.remove("correct","wrong"); });
+      document.querySelectorAll(".ex-feedback").forEach(function(f){ f.textContent = ""; f.classList.remove("correct","wrong"); });
+      updateAllProgressUI(); showToast("Progress cleared");
+    });
+  }
+
+  function injectHueVars(){
+    var style = document.createElement("style");
+    var letters = ["A","B","C","D","E"];
+    var css = ":root{";
+    letters.forEach(function(L){
+      var hv = "--hue" + L;
+      css += hv + "-solid: hsl(var(" + hv + ") var(--lsat) var(--llight));";
+      css += hv + "-tint: hsl(var(" + hv + ") var(--lsat) var(--ltint));";
+    });
+    css += "}";
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
+  injectHueVars();
+  buildChips();
+  buildLessons();
+  wireEvents();
+  updateAllProgressUI();
+
+})();
+</script>

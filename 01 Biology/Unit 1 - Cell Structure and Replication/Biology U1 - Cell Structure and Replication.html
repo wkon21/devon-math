@@ -1,0 +1,2309 @@
+<title>Bio Unit 1: Cell Structure &amp; Replication — IB MYP Grade 9</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --bg: #F5F6F2;
+    --surface: #FFFFFF;
+    --surface-2: #ECEFE7;
+    --ink: #1B222C;
+    --ink-soft: #545E6B;
+    --ink-faint: #8A93A0;
+    --accent: #2957A4;
+    --accent-ink: #ffffff;
+    --accent-2: #C1841B;
+    --good: #2C8A57;
+    --good-tint: #E4F3EA;
+    --bad: #C0453A;
+    --bad-tint: #FBEAE8;
+    --border: #DBDFD4;
+    --border-strong: #C4CABC;
+    --shadow: 220 25% 20%;
+    --radius: 14px;
+
+    --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --font-body: "Karla", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+
+    /* per-lesson hues (light) */
+    --hueA: 214; --hueB: 187; --hueC: 262; --hueD: 30; --hueE: 350; --hueF: 150; --hueG: 95;
+    --lsat: 58%; --llight: 38%; --ltint: 94%;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #12151A;
+      --surface: #191D24;
+      --surface-2: #1F252E;
+      --ink: #E9ECF1;
+      --ink-soft: #A7B0BE;
+      --ink-faint: #6E7787;
+      --accent: #7DA3E8;
+      --accent-ink: #0D1420;
+      --accent-2: #E3AE55;
+      --good: #57C489;
+      --good-tint: #16261E;
+      --bad: #E5847A;
+      --bad-tint: #2A1917;
+      --border: #2A303B;
+      --border-strong: #3A4250;
+      --lsat: 62%; --llight: 68%; --ltint: 16%;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #12151A;
+    --surface: #191D24;
+    --surface-2: #1F252E;
+    --ink: #E9ECF1;
+    --ink-soft: #A7B0BE;
+    --ink-faint: #6E7787;
+    --accent: #7DA3E8;
+    --accent-ink: #0D1420;
+    --accent-2: #E3AE55;
+    --good: #57C489;
+    --good-tint: #16261E;
+    --bad: #E5847A;
+    --bad-tint: #2A1917;
+    --border: #2A303B;
+    --border-strong: #3A4250;
+    --lsat: 62%; --llight: 68%; --ltint: 16%;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior: auto; } *{ animation: none !important; transition: none !important; } }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: var(--accent); }
+
+  ::selection{ background: color-mix(in srgb, var(--accent) 30%, transparent); }
+
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+  h1,h2,h3,h4{ font-family: var(--font-display); font-weight: 600; text-wrap: balance; margin: 0; color: var(--ink); }
+
+  code, .mono, .expr{ font-family: var(--font-mono); }
+
+  button{ font-family: var(--font-body); cursor:pointer; }
+  button:focus-visible, input:focus-visible, a:focus-visible{
+    outline: 2.5px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ============ TOP MASTHEAD ============ */
+  .masthead{
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .masthead-inner{
+    padding: 34px 20px 22px;
+    display:flex; flex-direction:column; gap:16px;
+  }
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow .dot{ width:5px; height:5px; border-radius:50%; background: var(--accent-2); }
+  .title-row{
+    display:flex; justify-content: space-between; align-items:flex-end; gap: 24px; flex-wrap: wrap;
+  }
+  .title-row h1{ font-size: clamp(30px, 4.4vw, 44px); line-height: 1.05; }
+  .title-row .subtitle{ color: var(--ink-soft); font-size: 15.5px; max-width: 46ch; margin-top:6px;}
+  .student-tag{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-soft);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 7px 14px;
+    white-space: nowrap;
+  }
+  .student-tag b{ color: var(--ink); }
+
+  .meta-strip{
+    display:flex; flex-wrap:wrap; gap: 10px 28px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    padding-top: 4px;
+    border-top: 1px dashed var(--border);
+    margin-top: 4px;
+    padding-top: 14px;
+  }
+  .meta-strip span b{ color: var(--ink); font-weight:600; }
+
+  /* ============ SCOREBOARD NAV (sticky) ============ */
+  .scoreboard{
+    position: sticky; top:0; z-index: 40;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px) saturate(1.1);
+    -webkit-backdrop-filter: blur(10px) saturate(1.1);
+    border-bottom: 1px solid var(--border);
+  }
+  .scoreboard-inner{
+    display:flex; align-items:center; gap:10px;
+    padding: 10px 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .scoreboard-inner::-webkit-scrollbar{ display:none; }
+  .score-total{
+    font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-soft);
+    white-space: nowrap; padding-right: 8px; border-right: 1px solid var(--border);
+    margin-right: 4px;
+  }
+  .score-total b{ color: var(--ink); }
+  .chip{
+    flex: 0 0 auto;
+    display:flex; align-items:center; gap:8px;
+    padding: 7px 12px 7px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-decoration: none;
+    transition: border-color .15s ease, color .15s ease, transform .1s ease;
+  }
+  .chip:hover{ border-color: var(--chip-hue); color: var(--ink); }
+  .chip:active{ transform: translateY(1px); }
+  .chip .letter{
+    width: 22px; height:22px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 12px; font-weight: 700;
+    background: var(--chip-tint); color: var(--chip-hue);
+    border: 1px solid color-mix(in srgb, var(--chip-hue) 45%, transparent);
+  }
+  .chip .frac{ font-variant-numeric: tabular-nums; font-size: 12px; }
+  .chip.done{ border-color: var(--good); }
+  .chip.done .letter{ background: var(--good-tint); color: var(--good); border-color: var(--good); }
+  .reset-btn{
+    margin-left: auto; flex: 0 0 auto;
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--ink-faint); background: transparent; border: 1px solid transparent;
+    padding: 6px 8px; border-radius: 8px;
+  }
+  .reset-btn:hover{ color: var(--bad); border-color: var(--border); }
+
+  /* ============ INTRO / REFERENCE CARD ============ */
+  main{ padding: 30px 0 90px; }
+  .intro-card{
+    margin: 26px 0 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+  }
+  .intro-card summary{
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 18px;
+    list-style: none;
+    display:flex; align-items:center; justify-content: space-between;
+    gap: 12px;
+  }
+  .intro-card summary::-webkit-details-marker{ display:none; }
+  .intro-card summary .arrow{
+    font-family: var(--font-mono); color: var(--ink-faint); font-size: 13px;
+    transition: transform .2s ease;
+  }
+  .intro-card[open] summary .arrow{ transform: rotate(180deg); }
+  .intro-grid{
+    margin-top: 18px;
+    display:grid; grid-template-columns: 1fr 1fr; gap: 20px 28px;
+  }
+  @media (max-width: 640px){ .intro-grid{ grid-template-columns: 1fr; } }
+  .intro-block h4{ font-size: 12.5px; text-transform: uppercase; letter-spacing:.08em; color: var(--ink-faint); font-family: var(--font-mono); font-weight:600; margin-bottom:8px;}
+  .intro-block p{ margin:0; color: var(--ink-soft); font-size: 14.5px; }
+  .soi{
+    font-family: var(--font-display); font-style: italic; font-size: 17px; color: var(--ink);
+    grid-column: 1 / -1;
+    padding: 14px 16px;
+    background: var(--surface-2);
+    border-left: 3px solid var(--accent-2);
+    border-radius: 6px;
+  }
+  .iq-table{ grid-column: 1/-1; display:grid; gap:8px; }
+  .iq-row{ display:grid; grid-template-columns: 90px 1fr; gap:12px; font-size: 14px; align-items:baseline; }
+  .iq-row .tag{ font-family: var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color: var(--ink-faint); }
+  .iq-row p{ margin:0; color: var(--ink-soft); }
+
+  /* ============ LESSON SECTION ============ */
+  .lesson{
+    scroll-margin-top: 64px;
+    margin-bottom: 56px;
+  }
+  .lesson-head{
+    display:flex; align-items: center; gap: 16px;
+    padding: 18px 20px;
+    border-radius: var(--radius);
+    background: var(--tint);
+    border: 1px solid color-mix(in srgb, var(--hue) 35%, transparent);
+    margin-bottom: 18px;
+  }
+  .lesson-head .big-letter{
+    font-family: var(--font-display); font-weight:700; font-size: 34px;
+    color: var(--hue);
+    width: 52px; height:52px; flex:0 0 auto;
+    border-radius: 12px;
+    background: var(--surface);
+    display:flex; align-items:center; justify-content:center;
+    border: 1px solid color-mix(in srgb, var(--hue) 40%, transparent);
+  }
+  .lesson-head .htext .kicker{ font-family: var(--font-mono); font-size: 11.5px; text-transform:uppercase; letter-spacing:.09em; color: var(--hue); }
+  .lesson-head .htext h2{ font-size: clamp(20px,2.6vw,26px); margin-top:2px; }
+  .lesson-progress{
+    margin-left:auto; text-align:right; flex: 0 0 auto;
+  }
+  .lesson-progress .ring-label{ font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); }
+  .lesson-progress .bar{
+    width: 90px; height: 6px; border-radius: 4px; background: var(--surface);
+    border: 1px solid var(--border); overflow:hidden; margin-top:6px;
+  }
+  .lesson-progress .bar-fill{ height:100%; background: var(--hue); width:0%; transition: width .3s ease; }
+
+  .rules-box{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 16px;
+  }
+  .rules-box h3{ font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-family: var(--font-mono); color: var(--hue); margin-bottom: 10px; }
+  .rules-box ul{ margin:0; padding-left: 20px; color: var(--ink-soft); font-size: 14.5px; }
+  .rules-box li{ margin-bottom: 5px; }
+  .rules-box li::marker{ color: var(--hue); }
+  .trick-box{ background: color-mix(in srgb, var(--hue) 10%, var(--surface)); border: 1px dashed var(--hue); border-radius: var(--radius); padding: 14px 22px; margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-start; }
+  .trick-box .trick-tag{ font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); white-space: nowrap; padding-top: 2px; }
+  .trick-box .trick-text{ color: var(--ink-soft); font-size: 14.5px; }
+  .trick-box .trick-text b{ color: var(--ink); }
+  .diagram-box{ background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 16px; display:flex; justify-content:center; align-items:center; overflow-x:auto; }
+  .diagram-box svg{ width: 100%; max-width: 620px; height: auto; display:block; }
+  .diagram-box{ flex-direction: column; gap: 8px; }
+  .diagram-caption{ font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); text-align:center; max-width: 620px; }
+  .comic-box{ background: var(--surface-2); border: 2px dashed var(--hue); border-radius: var(--radius); padding: 18px 20px 16px; margin-bottom: 16px; display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .comic-box .comic-tag{ font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); align-self:flex-start; }
+  .comic-box svg{ width: 100%; max-width: 460px; height: auto; display:block; }
+  .comic-box .comic-caption{ font-family: var(--font-body); font-style: italic; font-size: 14px; color: var(--ink-soft); text-align:center; max-width: 560px; }
+  .comic-box text{ fill: var(--ink); font-family: var(--font-mono); }
+  .comic-box .cm-face{ fill: var(--tint); stroke: var(--hue); }
+  .comic-box .cm-face2{ fill: var(--surface); stroke: var(--ink-soft); }
+  .comic-box .cm-line{ stroke: var(--ink); fill:none; }
+  .comic-box .cm-fill{ fill: var(--hue); }
+  .comic-box .cm-bad{ fill: var(--bad-tint); stroke: var(--bad); }
+  .comic-box .cm-good{ fill: var(--good-tint); stroke: var(--good); }
+  .comic-box .cm-bad-fill{ fill: var(--bad); stroke: none; }
+  .comic-box .cm-good-fill{ fill: var(--good); stroke: none; }
+  .comic-box .cm-soft{ fill: var(--ink-faint); }
+
+  .remember-box{
+    background: color-mix(in srgb, var(--hue) 7%, var(--surface));
+    border: 1px solid var(--hue);
+    border-left: 5px solid var(--hue);
+    border-radius: var(--radius);
+    padding: 16px 20px 14px;
+    margin-bottom: 20px;
+  }
+  .remember-box h3{ font-family: var(--font-mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); margin-bottom: 10px; }
+  .remember-box ul{ margin:0; padding-left:0; list-style:none; }
+  .remember-box li{ position:relative; padding-left: 26px; margin-bottom: 7px; color: var(--ink-soft); font-size: 14.5px; }
+  .remember-box li:last-child{ margin-bottom:0; }
+  .remember-box li::before{ content:"\2713"; position:absolute; left:4px; top:0; color: var(--hue); font-weight:700; }
+  .remember-box li b{ color: var(--ink); }
+
+  .cheatsheet{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px 28px;
+    margin-top: 36px;
+  }
+  .cheatsheet h2{ font-size: 24px; margin-bottom: 4px; }
+  .cheatsheet .cs-sub{ color: var(--ink-faint); font-size: 13px; font-family: var(--font-mono); margin-bottom: 18px; }
+  .cs-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+  .cs-card{ background: var(--surface-2); border: 1px solid var(--border); border-top: 3px solid var(--hue); border-radius: var(--radius); padding: 14px 16px; }
+  .cs-card h4{ font-size: 14.5px; display:flex; gap:8px; align-items:center; margin-bottom: 9px; font-family: var(--font-body); font-weight:700; }
+  .cs-card .cs-letter{ font-family: var(--font-mono); font-size: 11px; background: var(--tint); color: var(--hue); border:1px solid var(--hue); border-radius: 6px; padding: 2px 7px; }
+  .cs-card ul{ margin:0; padding-left: 18px; color: var(--ink-soft); font-size: 13.5px; }
+  .cs-card li{ margin-bottom: 5px; }
+  .cs-card li:last-child{ margin-bottom:0; }
+  .cs-card li::marker{ color: var(--hue); }
+  .cs-card li b{ color: var(--ink); }
+  .diagram-box .dg-line{ stroke: var(--hue); fill: none; }
+  .diagram-box .dg-fill{ fill: var(--hue); }
+  .diagram-box .dg-tint{ fill: var(--tint); stroke: var(--hue); }
+  .diagram-box .dg-ink{ fill: var(--ink); }
+  .diagram-box .dg-ink-line{ stroke: var(--ink-soft); fill:none; }
+  .diagram-box .dg-soft{ fill: var(--ink-soft); }
+  .diagram-box .dg-good{ fill: var(--good); stroke: var(--good); }
+  .diagram-box .dg-bad{ fill: var(--bad); stroke: var(--bad); }
+  .diagram-box text{ fill: var(--ink); font-family: var(--font-mono); }
+
+  .example-card{
+    background: var(--surface);
+    border: 1.5px dashed var(--border-strong);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 22px;
+  }
+  .example-card h3{
+    font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-family: var(--font-mono);
+    color: var(--ink-faint); margin-bottom: 10px; display:flex; align-items:center; gap:8px;
+  }
+  .example-card h3::before{ content:"✎"; color: var(--accent-2); font-size:14px; }
+  .example-prob{ font-family: var(--font-mono); font-size: 15.5px; margin-bottom: 12px; color: var(--ink); }
+  .example-steps{ display:flex; flex-direction:column; gap: 6px; }
+  .example-steps .step{
+    display:grid; grid-template-columns: 20px 1fr; gap: 10px;
+    font-size: 14.5px; color: var(--ink-soft); align-items:baseline;
+  }
+  .example-steps .step .n{ font-family: var(--font-mono); color: var(--hue); font-size: 12.5px; }
+  .example-steps .step .expr{ color: var(--ink); }
+  .example-answer{
+    margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border);
+    font-size: 14.5px; color: var(--good); font-family: var(--font-mono); font-weight:600;
+  }
+
+  /* ============ EXERCISE GRID ============ */
+  .ex-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 720px){ .ex-grid{ grid-template-columns: 1fr; } }
+
+  .ex-card{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display:flex; flex-direction:column; gap:10px;
+    transition: border-color .2s ease;
+  }
+  .ex-card.correct{ border-color: var(--good); background: color-mix(in srgb, var(--good-tint) 60%, var(--surface)); }
+  .ex-card.wrong{ border-color: var(--bad); }
+
+  .ex-top{ display:flex; align-items:flex-start; gap:10px; }
+  .ex-num{
+    font-family: var(--font-mono); font-size: 12.5px; font-weight:700;
+    color: var(--hue); background: var(--tint); border:1px solid color-mix(in srgb, var(--hue) 40%, transparent);
+    border-radius: 6px; padding: 2px 7px; flex:0 0 auto; margin-top:2px;
+  }
+  .ex-prompt{ font-size: 14.5px; color: var(--ink); line-height:1.5; }
+  .ex-prompt .expr{ font-size: 14.5px; }
+
+  .ex-input-row{ display:flex; gap:8px; }
+  .ex-input{
+    flex:1; min-width:0;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+  }
+  .ex-input::placeholder{ color: var(--ink-faint); }
+  .ex-check{
+    font-family: var(--font-mono); font-size: 12.5px; font-weight:600;
+    padding: 8px 14px; border-radius: 8px; border: 1px solid var(--hue);
+    background: var(--hue); color: var(--accent-ink);
+    white-space:nowrap;
+  }
+  .ex-check:hover{ filter: brightness(1.06); }
+
+  .ex-feedback{ font-size: 13px; font-family: var(--font-mono); min-height: 4px; }
+  .ex-feedback.correct{ color: var(--good); }
+  .ex-feedback.wrong{ color: var(--bad); }
+
+  .ex-foot{ display:flex; justify-content: space-between; align-items:center; margin-top:2px; }
+  .ex-toggle{
+    background:none; border:none; padding:0; font-size: 12.5px;
+    font-family: var(--font-mono); color: var(--ink-faint); text-decoration: underline; text-underline-offset:3px;
+  }
+  .ex-toggle:hover{ color: var(--hue); }
+  .ex-solution{
+    display:none; margin-top: 4px; padding: 12px 14px;
+    background: var(--surface-2); border-radius: 8px;
+    font-size: 13.5px; color: var(--ink-soft);
+  }
+  .ex-solution.open{ display:block; }
+  .ex-solution .sol-step{ margin-bottom: 4px; }
+  .ex-solution .sol-final{ margin-top:8px; color: var(--good); font-weight:700; font-family: var(--font-mono); }
+
+  .open-note{ font-size: 11.5px; color: var(--ink-faint); font-family: var(--font-mono); }
+
+  sup{ font-size: 0.7em; }
+
+  footer{
+    text-align:center; padding: 30px 20px 50px;
+    color: var(--ink-faint); font-size: 13px; font-family: var(--font-mono);
+  }
+
+  .toast{
+    position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color: var(--bg);
+    padding: 10px 18px; border-radius: 999px; font-family: var(--font-mono); font-size: 13px;
+    opacity: 0; pointer-events:none; transition: opacity .25s ease, transform .25s ease;
+    z-index: 100; white-space: nowrap;
+  }
+  .toast.show{ opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+
+<div class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="eyebrow"><span class="dot"></span>IB MYP Sciences &middot; Biology &middot; Grade 9 (MYP 4) &middot; Unit 1</div>
+    <div class="title-row">
+      <div>
+        <h1>Cell Structure &amp; Replication</h1>
+        <div class="subtitle">Cells, tissues, organs and systems &mdash; then cell division and reproduction. Rebuilt to follow Ms. Luna's unit slides: seven lessons, 140 exercises, two diagrams and two worked examples in every lesson.</div>
+      </div>
+      <div class="student-tag">Prepared for <b>Devon</b> &middot; Grade 9 Biology</div>
+    </div>
+    <div class="meta-strip">
+      <span>Statement of inquiry: <b>form &amp; function in cells</b></span>
+      <span>Criteria: <b>A &middot; B &middot; C &middot; D</b></span>
+      <span>Summative: <b>Criterion D &middot; 14 Sept</b></span>
+      <span>Then: <b>Criterion A &middot; 16 Sept</b></span>
+    </div>
+  </div>
+</div>
+
+<div class="scoreboard">
+  <div class="wrap scoreboard-inner" id="scoreboardInner">
+    <span class="score-total"><b id="totalDone">0</b>/156 done</span>
+    <!-- chips injected by JS -->
+    <button class="reset-btn" id="resetBtn" title="Clear saved progress">reset progress</button>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <details class="intro-card" id="introCard">
+    <summary>Unit reference &mdash; Statement of Inquiry, inquiry questions, assessment dates &amp; how to use this guide<span class="arrow">&#9660;</span></summary>
+    <div class="intro-grid">
+      <p class="soi">&ldquo;Cells exhibit specific forms and specialised functions that enable them to carry out the fundamental processes of life.&rdquo;</p>
+
+      <div class="intro-block">
+        <h4>How this guide works</h4>
+        <p>Each lesson (A&ndash;G) opens with the core rules and a diagram, then two fully worked examples, a short <b>Rules to remember</b> checklist, a <b>biology meme break</b>, and 20+ practice exercises. Type an answer and press <b>Check</b> for instant feedback, or open <b>Show solution</b> to see the reasoning. Spelling is forgiving &mdash; capitals and spaces are ignored &mdash; but biological terms need to be the right term. Every checklist is collected again in the <b>Rules to remember</b> cheat sheet at the bottom of the page, and your progress saves automatically in this browser.</p>
+      </div>
+      <div class="intro-block">
+        <h4>Assessment dates for this unit</h4>
+        <p>Formative <b>Criterion B</b> (designing an investigation) &mdash; 31 August. Formative <b>Criterion D</b> (science in context) &mdash; 7 September. <b>Summative Criterion D</b> &mdash; 14 September. Formative <b>Criterion A</b> (knowing &amp; understanding) &mdash; 16 September. The Criterion A test is the one that covers everything in this workbook.</p>
+      </div>
+
+      <div class="iq-table">
+        <div class="iq-row"><span class="tag">Factual</span><p>What are the characteristics of living things? What are cells and how are they structured?</p></div>
+        <div class="iq-row"><span class="tag">Factual</span><p>What are the characteristics and functions of different cells, tissues and organs? How do multicellular organisms reproduce?</p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>How does cell structure relate to function?</p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>What does it mean for organisms to be related? What does the structure of DNA reveal about its function?</p></div>
+        <div class="iq-row"><span class="tag">Debatable</span><p>Are humans a special form of life? Will it be possible to create artificial life?</p></div>
+        <div class="iq-row"><span class="tag">Debatable</span><p>To what extent should humans manipulate human reproduction or genetic characteristics?</p></div>
+      </div>
+    </div>
+  </details>
+
+  <div id="lessons"></div>
+
+
+
+  <section class="cheatsheet" id="thisweek">
+    <h2>This week in class</h2>
+    <div class="cs-sub">What Ms. Luna set &mdash; and where in this workbook each piece lives</div>
+    <div class="cs-grid">
+      <div class="cs-card" style="--hue: var(--hueF-solid); --tint: var(--hueF-tint);">
+        <h4><span class="cs-letter">1</span>Mitosis &mdash; slides 70&ndash;73</h4>
+        <ul>
+          <li>Take notes, underlining or highlighting the key vocabulary: <b>chromosome, chromatid, centromere, interphase, spindle, equator, cytokinesis</b>.</li>
+          <li>Answer the <b>two short questions on slide 71</b> &mdash; they are Lesson F, exercises 19 and 24 here.</li>
+          <li>Everything on those slides is in <b>Lesson F</b>, including the cell cycle diagram.</li>
+        </ul>
+      </div>
+      <div class="cs-card" style="--hue: var(--hueF-solid); --tint: var(--hueF-tint);">
+        <h4><span class="cs-letter">2</span>Annotate the stages &mdash; slides 74&ndash;76</h4>
+        <ul>
+          <li>Annotate what happens at <b>every stage</b> on the diagram. One sentence per stage, in your own words.</li>
+          <li>The seven labels to know: <b>cell membrane, cytoplasm, nuclear membrane, centriole, spindle fibre, chromosome/chromatid, centromere</b>.</li>
+          <li>Slide 76 shows the stages under the microscope &mdash; Lesson F exercises 25 and 26 are exactly that skill.</li>
+          <li><b><a href="https://claude.ai/artifact/KefhEhHHTpwa9R5S89AWaQ" style="color:var(--hue)">Open the Mitosis label &amp; colour lab</a></b> &mdash; all five cells, all seven labels, a colour key, and the sentence to write beside each stage. Do it there first, then fill in the paper sheet.</li>
+        </ul>
+      </div>
+      <div class="cs-card" style="--hue: var(--hueG-solid); --tint: var(--hueG-tint);">
+        <h4><span class="cs-letter">3</span>Meiosis &mdash; slides 77&ndash;80</h4>
+        <ul>
+          <li>Take notes on meiosis: gametes, halving, <b>diploid</b> and <b>haploid</b>, fertilisation, the zygote.</li>
+          <li>The three sources of variation: <b>random assortment</b>, <b>crossing over</b>, <b>random fusion of gametes</b>.</li>
+          <li>All of it is <b>Lesson G</b>, and the notes scaffold below is built for the homework.</li>
+        </ul>
+      </div>
+      <div class="cs-card" style="--hue: var(--hueA-solid); --tint: var(--hueA-tint);">
+        <h4><span class="cs-letter">&#9998;</span>Monday: notebook check</h4>
+        <ul>
+          <li><b>Every task completed and signed.</b> Work back through the unit and find the gaps before Monday, not on Monday.</li>
+          <li>Criterion B feedback comes back Monday, Criterion D on Wednesday.</li>
+          <li><b>Homework:</b> written notes on meiosis.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="cheatsheet" id="notes-scaffold">
+    <h2>Meiosis notes &mdash; a scaffold for the homework</h2>
+    <div class="cs-sub">Headings and prompts only &mdash; the writing is yours, in your own words</div>
+    <div class="cs-grid">
+      <div class="cs-card" style="--hue: var(--hueG-solid); --tint: var(--hueG-tint);">
+        <h4><span class="cs-letter">1</span>What meiosis is and what it makes</h4>
+        <ul>
+          <li>Define meiosis in one sentence. Which kind of reproduction is it used for?</li>
+          <li>What does it produce? Name both human gametes.</li>
+          <li>How many cells come out of one parent cell, and are they identical to each other?</li>
+        </ul>
+      </div>
+      <div class="cs-card" style="--hue: var(--hueG-solid); --tint: var(--hueG-tint);">
+        <h4><span class="cs-letter">2</span>The halving, and why it matters</h4>
+        <ul>
+          <li>Diploid and haploid &mdash; define both, and say which is the body cell and which is the gamete.</li>
+          <li>Human numbers: body cell ___ chromosomes, gamete ___ chromosomes, zygote ___ chromosomes.</li>
+          <li>Finish this sentence: <i>if the number did not halve, then every generation...</i></li>
+        </ul>
+      </div>
+      <div class="cs-card" style="--hue: var(--hueG-solid); --tint: var(--hueG-tint);">
+        <h4><span class="cs-letter">3</span>Where the variation comes from</h4>
+        <ul>
+          <li><b>Random assortment</b> &mdash; what gets shared out randomly?</li>
+          <li><b>Crossing over</b> &mdash; what is exchanged, and between which chromosomes? Draw it.</li>
+          <li><b>Random fusion of gametes</b> &mdash; why does it matter that any sperm can fertilise any egg?</li>
+        </ul>
+      </div>
+      <div class="cs-card" style="--hue: var(--hueF-solid); --tint: var(--hueF-tint);">
+        <h4><span class="cs-letter">4</span>Mitosis vs meiosis</h4>
+        <ul>
+          <li>Draw the table: number of divisions, cells produced, identical or different, chromosome number, what it is used for.</li>
+          <li>One sentence on what the two processes have in common.</li>
+          <li>One sentence on the single biggest difference.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="cheatsheet" id="toolkit">
+    <h2>Lab &amp; exam toolkit</h2>
+    <div class="cs-sub">The command terms Ms. Luna uses, and what a full Criterion B report needs</div>
+    <div class="cs-grid">
+      <div class="cs-card" style="--hue: var(--hueA-solid); --tint: var(--hueA-tint);">
+        <h4><span class="cs-letter">&#9998;</span>Command terms in science</h4>
+        <ul>
+          <li><b>State</b> &mdash; give a specific name, value or brief answer. No explanation, no working.</li>
+          <li><b>Outline</b> &mdash; give a brief account or summary.</li>
+          <li><b>Describe</b> &mdash; give a detailed account of a situation, event, pattern or process.</li>
+          <li><b>Apply</b> &mdash; use an idea, equation, principle or theory in a given situation.</li>
+          <li><b>Suggest</b> &mdash; propose a solution, hypothesis or other possible answer.</li>
+          <li>Read the command term first and answer at that depth &mdash; writing a paragraph for &ldquo;state&rdquo; wins no marks, and one line for &ldquo;describe&rdquo; loses them.</li>
+        </ul>
+      </div>
+      <div class="cs-card" style="--hue: var(--hueC-solid); --tint: var(--hueC-tint);">
+        <h4><span class="cs-letter">B</span>Criterion B report checklist</h4>
+        <ul>
+          <li><b>Research question</b> &mdash; names both the independent and the dependent variable, and is specific enough that someone else could design the same investigation.</li>
+          <li><b>Variables</b> &mdash; independent variable with <b>5 conditions</b>; dependent variable with the measuring device and its units; <b>2 or more control variables</b>, each with how you control it.</li>
+          <li><b>Hypothesis</b> &mdash; a testable prediction of the effect of the IV on the DV, justified with scientific reasoning.</li>
+          <li><b>Materials</b> &mdash; a point-form list with sizes and quantities specified.</li>
+          <li><b>Method</b> &mdash; a numbered list of direct instructions, covering all 5 conditions and <b>at least 3 trials</b>, stating that a mean will be calculated.</li>
+          <li><b>Safety</b> &mdash; more than 2 hazards, each with its preventative measure and action plan.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="cheatsheet" id="cheatsheet">
+    <h2>Rules to remember</h2>
+    <div class="cs-sub">The whole unit on one page &mdash; read this before a test</div>
+    <div class="cs-grid" id="csGrid"></div>
+  </section>
+
+</main>
+
+<footer>Cell Structure &amp; Replication &middot; Grade 9 Biology Unit 1 study workbook &middot; built for Devon</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------------------------------------------------------
+     DATA
+  --------------------------------------------------------------- */
+  var LESSONS = [
+    {
+      letter: "A", hueVar: "--hueA", title: "Cell Theory &amp; the Characteristics of Life",
+      rules: [
+        "<b>Cell theory</b> has three parts: (1) the cell is the fundamental unit of <b>structure and function</b> in living things; (2) all organisms are made of <b>one or more cells</b>; (3) cells arise from <b>other cells</b> through cell division.",
+        "Living things are organised from the simplest level to the most complex, but every one of them is built from the same basic building block &mdash; the cell.",
+        "Structures found inside cells are called <b>organelles</b>. They may be <b>membrane-bound</b> (surrounded by their own membrane, like the nucleus or a mitochondrion) or <b>non-membrane-bound</b> (like ribosomes), and each performs a specialised function.",
+        "Your body has more than <b>250 types of cell</b>. A cell carries extra copies of whichever organelle its job demands &mdash; muscle cells are packed with <b>mitochondria</b> because contracting takes energy.",
+        "<b>Viruses are not cells and are not alive.</b> They are particles that must invade a host cell to reproduce &mdash; they fail cell theory at every point.",
+        "The characteristics of living things are remembered as <b>MRS GREN</b>: Movement, Respiration, Sensitivity, Growth, Reproduction, Excretion, Nutrition."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 440 170" width="440" height="170">
+        <text x="220" y="18" text-anchor="middle" font-size="12" font-weight="bold">The cell theory</text>
+        <rect x="8" y="30" width="136" height="72" rx="10" class="dg-tint" stroke-width="2"/>
+        <text x="76" y="52" text-anchor="middle" font-size="9" font-weight="bold">1. Unit of</text>
+        <text x="76" y="66" text-anchor="middle" font-size="9" font-weight="bold">structure &amp; function</text>
+        <text x="76" y="86" text-anchor="middle" font-size="8.5">the smallest living part</text>
+        <rect x="152" y="30" width="136" height="72" rx="10" class="dg-tint" stroke-width="2"/>
+        <text x="220" y="52" text-anchor="middle" font-size="9" font-weight="bold">2. All organisms</text>
+        <text x="220" y="66" text-anchor="middle" font-size="9" font-weight="bold">are made of cells</text>
+        <text x="220" y="86" text-anchor="middle" font-size="8.5">one cell, or trillions</text>
+        <rect x="296" y="30" width="136" height="72" rx="10" class="dg-tint" stroke-width="2"/>
+        <text x="364" y="52" text-anchor="middle" font-size="9" font-weight="bold">3. Cells come from</text>
+        <text x="364" y="66" text-anchor="middle" font-size="9" font-weight="bold">other cells</text>
+        <text x="364" y="86" text-anchor="middle" font-size="8.5">by cell division</text>
+        <text x="220" y="128" text-anchor="middle" font-size="9">Hooke saw the first cells &middot; Leeuwenhoek saw living ones</text>
+        <text x="220" y="144" text-anchor="middle" font-size="9">Pasteur showed they only come from other cells</text>
+        <line x1="76" y1="106" x2="76" y2="114" class="dg-line" stroke-width="1.5"/>
+        <line x1="220" y1="106" x2="220" y2="114" class="dg-line" stroke-width="1.5"/>
+        <line x1="364" y1="106" x2="364" y2="114" class="dg-line" stroke-width="1.5"/>
+        <line x1="76" y1="114" x2="364" y2="114" class="dg-line" stroke-width="1.5"/>
+      </svg>`,
+        `<svg viewBox="0 0 380 180" width="380" height="180">
+        <text x="95" y="18" text-anchor="middle" font-size="11" font-weight="bold">A cell &mdash; alive</text>
+        <text x="285" y="18" text-anchor="middle" font-size="11" font-weight="bold">A virus &mdash; not alive</text>
+        <circle cx="95" cy="82" r="52" class="dg-tint" stroke-width="2"/>
+        <circle cx="95" cy="74" r="25" class="dg-fill"/>
+        <text x="95" y="77" text-anchor="middle" font-size="9" style="fill:var(--surface)">nucleus</text>
+        <ellipse cx="62" cy="104" rx="13" ry="7" class="dg-tint" stroke-width="1.5"/>
+        <ellipse cx="126" cy="102" rx="13" ry="7" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="64" cy="50" r="3" class="dg-fill"/>
+        <circle cx="126" cy="48" r="3" class="dg-fill"/>
+        <text x="95" y="152" text-anchor="middle" font-size="9">membrane &middot; cytoplasm &middot; organelles</text>
+        <text x="95" y="167" text-anchor="middle" font-size="9">can divide on its own</text>
+        <polygon points="285,42 315,60 315,96 285,114 255,96 255,60" class="dg-bad" fill-opacity="0.25" stroke-width="2"/>
+        <path d="M270 66 q15 12 30 0 q-15 14 -30 0" class="dg-ink-line" stroke-width="2"/>
+        <line x1="255" y1="96" x2="243" y2="118" class="dg-bad" stroke-width="2"/>
+        <line x1="285" y1="114" x2="285" y2="132" class="dg-bad" stroke-width="2"/>
+        <line x1="315" y1="96" x2="327" y2="118" class="dg-bad" stroke-width="2"/>
+        <text x="285" y="152" text-anchor="middle" font-size="9">protein coat + genetic material</text>
+        <text x="285" y="167" text-anchor="middle" font-size="9">needs a host cell to copy itself</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "The three statements of cell theory, and the scientists whose observations built each one.",
+        "A cell has everything it needs to live and divide. A virus has only instructions and a coat &mdash; it must hijack a cell."
+      ],
+      trick: "Run any &ldquo;is it alive?&rdquo; question through <b>MRS GREN</b> and cell theory together. If a thing is not made of cells and cannot reproduce without borrowing somebody else's, it is not alive &mdash; which is exactly the case a virus fails.",
+      examples: [
+        {
+          problem: "Use cell theory to explain why a virus is not classified as a living organism.",
+          steps: [
+            "Cell theory part 2 says all organisms are made of one or more cells &mdash; a virus is not a cell, it is a particle of genetic material inside a protein coat",
+            "Cell theory part 1 says the cell is the unit of structure and function &mdash; a virus has no cytoplasm, no membrane-bound organelles and carries out no reactions of its own",
+            "Cell theory part 3 says cells arise from other cells by division &mdash; a virus cannot divide; it can only be copied by machinery inside a host cell",
+            "It fails all three statements, so it sits outside the definition of a living organism"
+          ],
+          answer: "A virus is not made of cells, performs no life processes itself, and cannot reproduce without a host, so it fails all three parts of cell theory."
+        },
+        {
+          problem: "A cell in the pancreas produces and exports very large amounts of digestive enzyme (a protein). Suggest which organelles it will contain in abundance, and justify each choice.",
+          steps: [
+            "Enzymes are proteins, and proteins are assembled on <b>ribosomes</b> &rarr; expect very many ribosomes",
+            "Proteins for export are threaded into the <b>rough endoplasmic reticulum</b> &rarr; expect extensive rough ER",
+            "The <b>Golgi apparatus</b> modifies and packages proteins for secretion &rarr; expect a large Golgi",
+            "All of this costs energy, so expect plenty of <b>mitochondria</b> as well",
+            "The pattern is always the same: match the abundant organelle to the job the cell does"
+          ],
+          answer: "Ribosomes, rough ER, Golgi apparatus and mitochondria &mdash; the organelles of protein synthesis, packaging and energy release."
+        }
+      ],
+      remember: [
+        "<b>Cell theory, three parts:</b> the cell is the unit of structure and function; all organisms are made of one or more cells; every cell comes from another cell.",
+        "<b>MRS GREN</b> &mdash; Movement, Respiration, Sensitivity, Growth, Reproduction, Excretion, Nutrition.",
+        "Viruses are <b>not alive</b>: not made of cells, no life processes of their own, cannot reproduce without a host.",
+        "<b>Structure follows function.</b> Whatever job a cell does, it carries extra copies of the organelle that does it &mdash; muscle &rarr; mitochondria, gland cell &rarr; ribosomes and Golgi."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 190" width="460" height="190">
+        <circle cx="140" cy="104" r="60" class="cm-face" stroke-width="2"/>
+        <circle cx="140" cy="98" r="18" class="cm-fill"/>
+        <circle cx="130" cy="94" r="2.5" fill="var(--surface)"/>
+        <circle cx="150" cy="94" r="2.5" fill="var(--surface)"/>
+        <path d="M130 104 Q140 114 150 104" stroke="var(--surface)" fill="none" stroke-width="2"/>
+        <text x="140" y="178" text-anchor="middle" font-size="11" font-weight="bold">a cell (alive)</text>
+        <polygon points="330,66 356,80 356,110 330,124 304,110 304,80" class="cm-bad" stroke-width="2"/>
+        <circle cx="320" cy="90" r="3" class="cm-fill"/>
+        <circle cx="340" cy="90" r="3" class="cm-fill"/>
+        <path d="M318 104 Q330 96 342 104" class="cm-line" stroke-width="2"/>
+        <line x1="304" y1="110" x2="292" y2="132" class="cm-line" stroke-width="2"/>
+        <line x1="330" y1="124" x2="330" y2="146" class="cm-line" stroke-width="2"/>
+        <line x1="356" y1="110" x2="368" y2="132" class="cm-line" stroke-width="2"/>
+        <text x="330" y="178" text-anchor="middle" font-size="11" font-weight="bold">a virus (not alive)</text>
+        <rect x="212" y="10" width="236" height="44" rx="11" class="cm-bad" stroke-width="2"/>
+        <polygon points="318,54 340,54 324,66" class="cm-bad" stroke-width="2"/>
+        <text x="330" y="29" text-anchor="middle" font-size="11">&ldquo;Hi! Not technically alive,</text>
+        <text x="330" y="45" text-anchor="middle" font-size="11">but can I borrow your ribosomes?&rdquo;</text>
+      </svg>`,
+        caption: "This is the entire personality of a virus: it owns instructions and a coat, and nothing that can read them. Everything it does, it does with somebody else's equipment &mdash; which is precisely why it is not on the guest list of living things."
+      },
+      exercises: [
+        { prompt: "State all three parts of the cell theory.", open: true,
+          solution: ["Sample response: (1) The cell is the fundamental unit of structure and function in living things. (2) All organisms are made up of one or more cells. (3) Cells arise from other cells through cellular division."] },
+        { prompt: "Which scientist first observed and named &ldquo;cells&rdquo;, in a thin slice of cork?", accept: ["hooke","roberthooke"],
+          solution: ["Robert Hooke, in 1665, thought the empty boxes in cork looked like the small rooms (cells) monks lived in", "Robert Hooke"] },
+        { prompt: "Which scientist first observed living micro-organisms through a simple microscope?", accept: ["leeuwenhoek","antonievanleeuwenhoek","vanleeuwenhoek"],
+          solution: ["Antonie van Leeuwenhoek ground his own lenses and described living &ldquo;animalcules&rdquo;", "Antonie van Leeuwenhoek"] },
+        { prompt: "Whose experiments supported the idea that cells arise only from other cells, rather than appearing spontaneously?", accept: ["pasteur","louispasteur"],
+          solution: ["Louis Pasteur's flask experiments showed that broth stayed sterile unless existing micro-organisms reached it", "Louis Pasteur"] },
+        { prompt: "What does the mnemonic MRS GREN stand for?", open: true,
+          solution: ["Movement, Respiration, Sensitivity, Growth, Reproduction, Excretion, Nutrition &mdash; the seven characteristics shared by all living organisms."] },
+        { prompt: "Are viruses alive? Answer yes or no.", accept: ["no","notalive","nottheyarenotalive"],
+          solution: ["Viruses are particles, not cells, and cannot reproduce without a host cell", "No"] },
+        { prompt: "Muscle cells contain large numbers of one organelle so that they can release the energy needed to contract. Name that organelle.", accept: ["mitochondria","mitochondrion","mitocondria"],
+          solution: ["Aerobic respiration &mdash; the energy-releasing reaction &mdash; happens in the mitochondria", "Mitochondria"] },
+        { prompt: "What is the general term for a structure inside a cell that carries out a specific function?", accept: ["organelle","organelles","anorganelle"],
+          solution: ["The structures found within cells are called organelles", "Organelle"] },
+        { prompt: "Ribosomes are not surrounded by their own membrane. Are they described as membrane-bound or non-membrane-bound organelles?", accept: ["nonmembranebound","non-membranebound","nonmembraneboundorganelles","nonmembrane-bound"],
+          solution: ["Only organelles with their own surrounding membrane (nucleus, mitochondrion, chloroplast, Golgi, ER, vacuole) are membrane-bound", "Non-membrane-bound"] },
+        { prompt: "Approximately how many different types of cell are there in the human body, according to your class notes? Enter a number.", value: 250, tol: 0.5,
+          solution: ["The notes state more than 250 types of cell, each with a specific role", "250"] },
+        { prompt: "True or false: an organism can be made of just one cell.", accept: ["true","t"],
+          solution: ["Cell theory says organisms are made of one OR MORE cells &mdash; bacteria, yeast and amoeba are unicellular", "True"] },
+        { prompt: "Which part of cell theory (1, 2 or 3) tells you that a new cell can only be produced by an existing cell? Enter the number.", value: 3, tol: 0.5,
+          solution: ["Part 3: cells arise from other cells through cellular division", "3"] },
+        { prompt: "Name one process a virus cannot carry out without invading a host cell.", accept: ["reproduce","reproduction","replicate","replication","copyitself","divide","division","makecopies"],
+          solution: ["A virus has no ribosomes or enzymes of its own, so it cannot copy its genetic material or build new protein coats alone", "Reproduce / replicate"] },
+        { prompt: "A bacterium is a single cell with no nucleus. Is it a living organism? Answer yes or no.", accept: ["yes","y","living","alive"],
+          solution: ["It is made of a cell, carries out all of MRS GREN, and divides to produce new cells &mdash; a nucleus is not required to be alive", "Yes"] },
+        { prompt: "A gland cell exports huge amounts of protein. Name the organelle on which those proteins are actually assembled.", accept: ["ribosome","ribosomes"],
+          solution: ["Protein synthesis takes place on ribosomes, free in the cytoplasm or attached to the rough ER", "Ribosomes"] },
+        { prompt: "Explain the difference between a unicellular and a multicellular organism, giving one example of each.", open: true,
+          solution: ["Sample response: A unicellular organism is made of a single cell that carries out every life process itself (e.g. an amoeba or a yeast cell). A multicellular organism is built from many cells that specialise and divide the work between them (e.g. a human or an oak tree)."] },
+        { prompt: "A sperm cell must swim a long distance. Which organelle would you expect to find in unusually large numbers in its mid-piece?", accept: ["mitochondria","mitochondrion"],
+          solution: ["Swimming demands a continuous energy supply, released by aerobic respiration in mitochondria", "Mitochondria"] },
+        { prompt: "A palisade cell near the top surface of a leaf is packed with one organelle. Name it.", accept: ["chloroplast","chloroplasts"],
+          solution: ["Palisade cells carry out most of a leaf's photosynthesis, which happens in chloroplasts", "Chloroplasts"] },
+        { prompt: "Debatable question from the unit: are humans a special form of life? Give a reasoned answer that considers both sides.", open: true,
+          solution: ["Sample response: Biologically, humans follow exactly the same rules as every other organism &mdash; the same cell theory, the same DNA code, the same cell division. What is unusual is the degree of language, abstract reasoning and cultural transmission we show, which lets us change environments rather than only adapt to them. So we are ordinary in structure and unusual in behaviour; whether that makes us &lsquo;special&rsquo; depends on which criterion you decide matters."] },
+        { prompt: "Suggest why scientists describe a virus as a &ldquo;particle&rdquo; rather than as an organism.", open: true,
+          solution: ["Sample response: A particle is simply a small piece of matter with structure but no metabolism. A virus has genetic material and a protein coat but no cytoplasm, no organelles and no reactions of its own, so it does nothing at all until it is inside a cell &mdash; which fits the description of a particle far better than that of an organism."] }
+      ]
+    },
+    {
+      letter: "B", hueVar: "--hueB", title: "Cell Organelles: Prokaryotic vs Eukaryotic, Plant vs Animal",
+      rules: [
+        "<b>Prokaryotic cells</b> (bacteria) have <b>no nucleus</b> and <b>no membrane-bound organelles</b>. Their single circular DNA molecule sits loose in a region called the <b>nucleoid</b>, they carry small extra rings of DNA called <b>plasmids</b>, they have ribosomes and a cell wall, and they are tiny &mdash; about <b>1&ndash;10 &micro;m</b> across.",
+        "<b>Eukaryotic cells</b> (animals, plants, fungi, protists) have a <b>true nucleus</b> and a full set of <b>membrane-bound organelles</b>, and are much bigger &mdash; about <b>10&ndash;100 &micro;m</b> across.",
+        "<b>Plant cells only:</b> a <b>cell wall</b> made of cellulose, <b>chloroplasts</b>, and one <b>large permanent vacuole</b>. <b>Animal cells only:</b> <b>centrioles</b>. Everything else &mdash; nucleus, cell membrane, cytoplasm, mitochondria, ribosomes, rough and smooth ER, Golgi &mdash; is shared by both.",
+        "Control and boundaries: the <b>nucleus</b> holds the DNA and controls the cell; the <b>cell membrane</b> is <b>partially permeable</b> and controls what enters and leaves; the <b>cell wall</b> gives support and shape; the <b>cytoplasm</b> is the jelly where the reactions happen.",
+        "Energy and food: the <b>mitochondrion</b> carries out <b>aerobic respiration</b> and releases energy; the <b>chloroplast</b> carries out <b>photosynthesis</b> and contains the green pigment <b>chlorophyll</b>; the <b>vacuole</b> stores <b>cell sap</b> and keeps the cell <b>turgid</b>.",
+        "The protein production line: <b>ribosomes</b> build proteins &rarr; the <b>rough ER</b> (studded with ribosomes) transports them &rarr; the <b>Golgi apparatus</b> modifies and packages them for export. The <b>smooth ER</b> makes lipids, and <b>centrioles</b> form the spindle in cell division."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 190" width="380" height="190">
+        <text x="95" y="14" text-anchor="middle" font-size="11" font-weight="bold">Animal cell</text>
+        <text x="290" y="14" text-anchor="middle" font-size="11" font-weight="bold">Plant cell</text>
+        <ellipse cx="95" cy="75" rx="74" ry="50" class="dg-tint" stroke-width="2"/>
+        <circle cx="78" cy="62" r="16" class="dg-fill"/>
+        <text x="78" y="66" text-anchor="middle" font-size="11" style="fill:var(--surface)">N</text>
+        <ellipse cx="125" cy="60" rx="15" ry="8" class="dg-tint" stroke-width="1.5"/>
+        <text x="125" y="64" text-anchor="middle" font-size="9">M</text>
+        <ellipse cx="60" cy="100" rx="16" ry="7" class="dg-tint" stroke-width="1.5"/>
+        <text x="60" y="104" text-anchor="middle" font-size="9">G</text>
+        <ellipse cx="110" cy="96" rx="17" ry="8" class="dg-tint" stroke-width="1.5"/>
+        <text x="110" y="100" text-anchor="middle" font-size="9">E</text>
+        <circle cx="45" cy="76" r="2.5" class="dg-fill"/>
+        <circle cx="52" cy="88" r="2.5" class="dg-fill"/>
+        <circle cx="140" cy="86" r="2.5" class="dg-fill"/>
+        <text x="42" y="66" text-anchor="middle" font-size="9">R</text>
+        <rect x="88" y="105" width="5" height="10" rx="1" class="dg-fill"/>
+        <rect x="96" y="105" width="5" height="10" rx="1" class="dg-fill"/>
+        <text x="110" y="114" text-anchor="middle" font-size="9">C</text>
+        <rect x="213" y="25" width="154" height="100" rx="6" class="dg-line" fill="none" stroke-width="3"/>
+        <rect x="219" y="31" width="142" height="88" rx="5" class="dg-ink-line" fill="none" stroke-width="1.5"/>
+        <text x="196" y="49" text-anchor="middle" font-size="10">W</text>
+        <line x1="203" y1="45" x2="215" y2="45" class="dg-line" stroke-width="1.5"/>
+        <circle cx="248" cy="56" r="14" class="dg-fill"/>
+        <text x="248" y="60" text-anchor="middle" font-size="11" style="fill:var(--surface)">N</text>
+        <ellipse cx="300" cy="52" rx="13" ry="7" class="dg-good" fill-opacity="0.35" stroke-width="1.5"/>
+        <text x="300" y="56" text-anchor="middle" font-size="9">Ch</text>
+        <ellipse cx="315" cy="75" rx="13" ry="7" class="dg-good" fill-opacity="0.35" stroke-width="1.5"/>
+        <text x="315" y="79" text-anchor="middle" font-size="9">Ch</text>
+        <ellipse cx="238" cy="78" rx="12" ry="7" class="dg-tint" stroke-width="1.5"/>
+        <text x="238" y="82" text-anchor="middle" font-size="9">M</text>
+        <ellipse cx="268" cy="75" rx="14" ry="7" class="dg-tint" stroke-width="1.5"/>
+        <text x="268" y="79" text-anchor="middle" font-size="9">G</text>
+        <ellipse cx="343" cy="99" rx="12" ry="7" class="dg-tint" stroke-width="1.5"/>
+        <text x="343" y="103" text-anchor="middle" font-size="9">E</text>
+        <rect x="228" y="89" width="96" height="24" rx="8" class="dg-tint" stroke-width="1.5"/>
+        <text x="276" y="105" text-anchor="middle" font-size="11">V</text>
+        <circle cx="330" cy="44" r="2.5" class="dg-fill"/>
+        <circle cx="340" cy="62" r="2.5" class="dg-fill"/>
+        <text x="345" y="48" text-anchor="middle" font-size="9">R</text>
+        <text x="190" y="145" text-anchor="middle" font-size="9">N nucleus &middot; M mitochondrion &middot; R ribosome &middot; G Golgi &middot; E ER</text>
+        <text x="190" y="161" text-anchor="middle" font-size="9">Animal only: C = centrioles</text>
+        <text x="190" y="177" text-anchor="middle" font-size="9">Plant only: W = cell wall &middot; Ch = chloroplast &middot; V = large vacuole</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 170" width="380" height="170">
+        <text x="95" y="16" text-anchor="middle" font-size="11" font-weight="bold">Prokaryote &mdash; a bacterium</text>
+        <text x="285" y="16" text-anchor="middle" font-size="11" font-weight="bold">Eukaryote &mdash; animal or plant</text>
+        <rect x="8" y="24" width="176" height="90" rx="45" class="dg-line" fill="none" stroke-width="2.5"/>
+        <rect x="14" y="30" width="164" height="78" rx="39" class="dg-tint" stroke-width="1.5"/>
+        <ellipse cx="86" cy="50" rx="36" ry="14" class="dg-line" fill="none" stroke-width="2"/>
+        <text x="86" y="54" text-anchor="middle" font-size="9.5">nucleoid</text>
+        <circle cx="146" cy="46" r="6" class="dg-line" fill="none" stroke-width="1.5"/>
+        <circle cx="152" cy="64" r="5" class="dg-line" fill="none" stroke-width="1.5"/>
+        <text x="140" y="86" text-anchor="middle" font-size="9.5">plasmids</text>
+        <circle cx="38" cy="46" r="2.5" class="dg-fill"/>
+        <circle cx="48" cy="66" r="2.5" class="dg-fill"/>
+        <circle cx="40" cy="86" r="2.5" class="dg-fill"/>
+        <text x="72" y="94" text-anchor="middle" font-size="9.5">ribosomes</text>
+        <circle cx="285" cy="68" r="46" class="dg-tint" stroke-width="2"/>
+        <circle cx="285" cy="56" r="26" class="dg-fill"/>
+        <text x="285" y="60" text-anchor="middle" font-size="9" style="fill:var(--surface)">nucleus</text>
+        <ellipse cx="265" cy="92" rx="14" ry="7" class="dg-tint" stroke-width="1.5"/>
+        <ellipse cx="306" cy="92" rx="13" ry="7" class="dg-tint" stroke-width="1.5"/>
+        <circle cx="250" cy="46" r="2.5" class="dg-fill"/>
+        <circle cx="320" cy="54" r="2.5" class="dg-fill"/>
+        <text x="95" y="126" text-anchor="middle" font-size="9">no nucleus &middot; DNA in a nucleoid</text>
+        <text x="95" y="141" text-anchor="middle" font-size="9">plasmids &middot; ribosomes &middot; cell wall</text>
+        <text x="95" y="156" text-anchor="middle" font-size="9">about 1&ndash;10 &micro;m across</text>
+        <text x="285" y="126" text-anchor="middle" font-size="9">nucleus + membrane-bound organelles</text>
+        <text x="285" y="141" text-anchor="middle" font-size="9">mitochondria, ER, Golgi, vacuoles</text>
+        <text x="285" y="156" text-anchor="middle" font-size="9">about 10&ndash;100 &micro;m across</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "The shared kit is the same in both. A plant cell simply adds three things &mdash; wall, chloroplasts, big vacuole &mdash; and drops the centrioles.",
+        "A prokaryote keeps its DNA loose in the cytoplasm and owns no membrane-bound organelles at all. A eukaryote packs its DNA in a nucleus and runs separate compartments for separate jobs."
+      ],
+      trick: "Two questions, asked in this order, sort any organelle. First: <b>does it need a membrane?</b> If yes it is eukaryotic only &mdash; nucleus, mitochondria, chloroplast, ER, Golgi, vacuole. Only ribosomes, DNA, cytoplasm, cell membrane and cell wall are also found in prokaryotes. Second: <b>plant or animal?</b> Only the letters <b>WCV</b> are plant-only (Wall, Chloroplast, big Vacuole) and only <b>centrioles</b> are animal-only. Everything else is &ldquo;both&rdquo;.",
+      examples: [
+        {
+          problem: "Classify the chloroplast, the ribosome and the centriole using the teacher's two columns: prokaryotic / eukaryotic / both, and animal / plant / both.",
+          steps: [
+            "<b>Chloroplast</b> &mdash; it is membrane-bound, so it cannot be prokaryotic &rarr; <b>eukaryotic</b>. It carries out photosynthesis, which only plants do &rarr; <b>plant</b>",
+            "<b>Ribosome</b> &mdash; it has no membrane of its own, and bacteria make proteins too &rarr; <b>both</b> prokaryotic and eukaryotic. Every cell makes protein &rarr; <b>both</b> animal and plant",
+            "<b>Centriole</b> &mdash; found only in eukaryotic cells &rarr; <b>eukaryotic</b>, and only in animal cells, where it forms the spindle &rarr; <b>animal</b>",
+            "Check each answer against the rule: membrane-bound &rarr; eukaryotic only; WCV &rarr; plant only; centrioles &rarr; animal only"
+          ],
+          answer: "Chloroplast: eukaryotic, plant. Ribosome: both, both. Centriole: eukaryotic, animal."
+        },
+        {
+          problem: "A student looks at an unknown cell and reports: a rigid outer boundary, one very large fluid-filled space taking up most of the middle, a distinct nucleus pushed to one side, and no green discs. Identify the cell as fully as you can, and justify each observation.",
+          steps: [
+            "A <b>distinct nucleus</b> means the cell is <b>eukaryotic</b> &mdash; a bacterium would have no nucleus at all",
+            "A <b>rigid outer boundary</b> outside the membrane is a <b>cell wall</b>, and the huge central space is a <b>large permanent vacuole</b> &mdash; both are plant-only, and the vacuole is exactly what pushes the nucleus to the edge",
+            "<b>No chloroplasts</b> does not rule out a plant &mdash; only cells that receive light need them, so root cells and cells inside a stem have none",
+            "So: a eukaryotic plant cell, taken from a part of the plant that does not photosynthesise"
+          ],
+          answer: "A eukaryotic plant cell from a non-photosynthetic tissue such as a root &mdash; the wall and large permanent vacuole make it a plant cell, and the absence of chloroplasts places it away from the light."
+        }
+      ],
+      remember: [
+        "<b>Prokaryote = no nucleus, no membrane-bound organelles, 1&ndash;10 &micro;m.</b> Circular DNA in a nucleoid, plus plasmids, ribosomes and a cell wall.",
+        "<b>Plant only: WCV</b> &mdash; cell Wall (cellulose), Chloroplasts, big permanent Vacuole. <b>Animal only: centrioles.</b>",
+        "<b>Protein production line:</b> ribosome builds it &rarr; rough ER transports it &rarr; Golgi modifies and packages it for export. Smooth ER makes lipids instead.",
+        "<b>Membrane, wall, vacuole are three different things.</b> Membrane = partially permeable gatekeeper (every cell). Wall = support and shape (plants). Vacuole = stores cell sap and keeps the cell turgid (plants)."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 215" width="460" height="215">
+        <rect x="20" y="112" width="118" height="58" rx="29" class="cm-face" stroke-width="2"/>
+        <circle cx="60" cy="134" r="3.5" class="cm-fill"/>
+        <circle cx="84" cy="134" r="3.5" class="cm-fill"/>
+        <path d="M56 148 Q72 160 88 148" class="cm-line" fill="none" stroke-width="2"/>
+        <path d="M20 141 q-13 -13 -18 3" class="cm-line" fill="none" stroke-width="2"/>
+        <text x="79" y="188" text-anchor="middle" font-size="11" font-weight="bold">bacterium</text>
+        <text x="79" y="204" text-anchor="middle" font-size="10" class="cm-soft">prokaryote, 2 &micro;m</text>
+        <circle cx="366" cy="112" r="58" class="cm-face" stroke-width="2"/>
+        <circle cx="366" cy="104" r="20" class="cm-fill"/>
+        <circle cx="358" cy="100" r="3" fill="var(--surface)"/>
+        <circle cx="374" cy="100" r="3" fill="var(--surface)"/>
+        <path d="M356 112 Q366 106 376 112" stroke="var(--surface)" fill="none" stroke-width="2"/>
+        <ellipse cx="334" cy="140" rx="15" ry="8" class="cm-face2" stroke-width="1.5"/>
+        <ellipse cx="398" cy="140" rx="15" ry="8" class="cm-face2" stroke-width="1.5"/>
+        <text x="366" y="188" text-anchor="middle" font-size="11" font-weight="bold">eukaryote</text>
+        <rect x="12" y="22" width="250" height="44" rx="11" class="cm-good" stroke-width="2"/>
+        <polygon points="46,66 68,66 40,108" class="cm-good" stroke-width="2"/>
+        <text x="137" y="41" text-anchor="middle" font-size="11">&ldquo;No nucleus, no organelles.</text>
+        <text x="137" y="59" text-anchor="middle" font-size="11">I travel light. DNA in my pocket.&rdquo;</text>
+        <rect x="284" y="12" width="172" height="32" rx="10" class="cm-good" stroke-width="2"/>
+        <polygon points="356,44 378,44 366,60" class="cm-good" stroke-width="2"/>
+        <text x="370" y="33" text-anchor="middle" font-size="10">&ldquo;...I have 14 suitcases.&rdquo;</text>
+      </svg>`,
+        caption: "The bacterium is not wrong: a prokaryote carries its circular DNA loose in the cytoplasm and owns no membrane-bound organelles at all. The eukaryote pays for its extra luggage in size &mdash; and gets separate compartments for separate jobs in return."
+      },
+      exercises: [
+        { prompt: "Name the organelle that contains the cell's DNA and controls the cell's activities.", accept: ["nucleus","thenucleus","nuclei"],
+          solution: ["The nucleus stores the genetic material and directs everything the cell does", "Nucleus"] },
+        { prompt: "Which structure is partially permeable and controls what enters and leaves the cell?", accept: ["cellmembrane","plasmamembrane","membrane","thecellmembrane"],
+          solution: ["The cell membrane is partially permeable &mdash; it lets some substances through and blocks others", "Cell membrane"] },
+        { prompt: "Name the jelly-like substance that fills the cell and is where most chemical reactions take place.", accept: ["cytoplasm","thecytoplasm"],
+          solution: ["The cytoplasm holds the organelles and is where the cell's reactions happen", "Cytoplasm"] },
+        { prompt: "Which organelle carries out aerobic respiration and releases energy for the cell?", accept: ["mitochondria","mitochondrion","mitochondrionmitochondria"],
+          solution: ["Aerobic respiration takes place in the mitochondria, releasing the energy the cell needs", "Mitochondria"] },
+        { prompt: "Which organelle is the site of protein synthesis?", accept: ["ribosome","ribosomes","theribosome"],
+          solution: ["Ribosomes assemble amino acids into proteins &mdash; free in the cytoplasm or attached to the rough ER", "Ribosomes"] },
+        { prompt: "Which organelle carries out photosynthesis?", accept: ["chloroplast","chloroplasts"],
+          solution: ["Chloroplasts trap light energy and use it to make glucose", "Chloroplasts"] },
+        { prompt: "Which carbohydrate is a plant cell wall made of?", accept: ["cellulose"],
+          solution: ["Plant cell walls are built from cellulose fibres, which give support and a fixed shape", "Cellulose"] },
+        { prompt: "Which plant organelle stores cell sap and keeps the cell turgid?", accept: ["vacuole","permanentvacuole","largepermanentvacuole","largevacuole","thevacuole"],
+          solution: ["The large permanent vacuole fills with cell sap and presses outwards on the wall, keeping the cell firm", "The large permanent vacuole"] },
+        { prompt: "Which organelle modifies and packages proteins ready to be exported from the cell?", accept: ["golgi","golgiapparatus","golgibody","thegolgiapparatus"],
+          solution: ["The Golgi apparatus is the packing and dispatch department of the cell", "Golgi apparatus"] },
+        { prompt: "The rough endoplasmic reticulum is described as &ldquo;rough&rdquo; because its surface is studded with which organelle?", accept: ["ribosomes","ribosome"],
+          solution: ["Ribosomes attached to the ER membrane give it a rough, bumpy appearance under the electron microscope", "Ribosomes"] },
+        { prompt: "Which organelle makes lipids?", accept: ["smoothendoplasmicreticulum","smoother","ser","smoothendoplasmicreticulumser"],
+          solution: ["The smooth ER has no ribosomes attached; its job is making lipids", "Smooth endoplasmic reticulum"] },
+        { prompt: "Which animal-only organelles form the spindle during cell division?", accept: ["centriole","centrioles","thecentrioles"],
+          solution: ["Centrioles organise the spindle fibres that pull the chromatids apart", "Centrioles"] },
+        { prompt: "What is the region of a bacterial cell that holds its single circular DNA molecule called?", accept: ["nucleoid","thenucleoid"],
+          solution: ["A prokaryote has no nucleus &mdash; its DNA sits loose in a region called the nucleoid", "Nucleoid"] },
+        { prompt: "Bacteria also carry small extra rings of DNA, separate from the main chromosome. Name them.", accept: ["plasmid","plasmids"],
+          solution: ["Plasmids are small circular DNA rings that bacteria can copy and swap with each other", "Plasmids"] },
+        { prompt: "Classify the <b>chloroplast</b>: prokaryotic, eukaryotic, or both?", accept: ["eukaryotic","eukaryote","eukaryoticonly","eucaryotic"],
+          solution: ["A chloroplast is membrane-bound, and prokaryotes have no membrane-bound organelles", "Eukaryotic"] },
+        { prompt: "Classify <b>ribosomes</b>: prokaryotic, eukaryotic, or both?", accept: ["both","bothprokaryoticandeukaryotic","prokaryoticandeukaryotic"],
+          solution: ["Ribosomes are not membrane-bound, and every cell &mdash; including a bacterium &mdash; must make proteins", "Both"] },
+        { prompt: "Classify <b>centrioles</b>: animal, plant, or both?", accept: ["animal","animalonly","animalcell","animalcells"],
+          solution: ["Centrioles form the spindle in animal cells; plant cells organise their spindle without them", "Animal"] },
+        { prompt: "An animal cell is 60 &micro;m across and a bacterium is 3 &micro;m across. How many times wider is the animal cell?", value: 20, tol: 0.5, accept: ["20times","twentytimes","x20"],
+          solution: ["Divide the larger by the smaller: 60 &divide; 3", "= 20 times wider &mdash; which is why prokaryotes are described as 1&ndash;10 &micro;m and eukaryotes as 10&ndash;100 &micro;m", "20"] },
+        { prompt: "Complete the teacher's table for these six organelles &mdash; nucleus, cell wall, chloroplast, mitochondrion, ribosome, centriole &mdash; giving for each: its function, whether it is prokaryotic / eukaryotic / both, and whether it is animal / plant / both.", open: true,
+          solution: ["Sample response: <b>Nucleus</b> &mdash; holds the DNA and controls the cell; eukaryotic; both. <b>Cell wall</b> &mdash; support and shape; both (bacteria have one too, though not made of cellulose); plant. <b>Chloroplast</b> &mdash; photosynthesis, contains chlorophyll; eukaryotic; plant. <b>Mitochondrion</b> &mdash; aerobic respiration, releases energy; eukaryotic; both. <b>Ribosome</b> &mdash; protein synthesis; both; both. <b>Centriole</b> &mdash; forms the spindle in cell division; eukaryotic; animal."] },
+        { prompt: "A cell in a gland exports huge amounts of protein. Name the organelles you would expect to be unusually abundant, and explain the job of each in the order the protein passes through them.", open: true,
+          solution: ["Sample response: Ribosomes first, because proteins are assembled there. Then rough ER, which is studded with those ribosomes and transports the new protein through the cell. Then the Golgi apparatus, which modifies and packages the protein into vesicles for export. Throughout, plenty of mitochondria, because building and moving protein costs energy released by aerobic respiration."] }
+      ]
+    },
+    {
+      letter: "C", hueVar: "--hueC", title: "The Microscope: Magnification, Resolution &amp; Drawings",
+      rules: [
+        "<b>Total magnification = eyepiece &times; objective.</b> The eyepiece is almost always &times;10, so a &times;40 objective gives 10 &times; 40 = <b>&times;400</b>. Both numbers are printed on the lenses &mdash; you never have to guess them.",
+        "<b>Magnification and resolution are not the same thing.</b> Magnification is <b>how many times bigger</b> the image looks. <b>Resolution</b> is the ability to tell <b>two close points apart</b> as two separate points. Magnifying beyond the resolution limit just gives you a bigger blur.",
+        "A light microscope is called a <b>compound</b> microscope because it uses <b>two lens systems</b> &mdash; the eyepiece and the objective &mdash; magnifying one after the other. Its resolution stops at about <b>200 nm</b>, which is why a virus can only be seen with an <b>electron microscope</b>.",
+        "<b>Always start on the lowest-power objective.</b> It gives the widest field of view so you can find the specimen, and it cannot be driven down into the slide. Focus roughly with the <b>coarse focus</b>, sharpen with the <b>fine focus</b>, then move up in power.",
+        "<b>Actual size = image size &divide; magnification</b> (and rearranged: magnification = image &divide; actual; image = actual &times; magnification). Get both sizes into the <b>same unit</b> first: <b>1 mm = 1000 &micro;m</b>, and 1 &micro;m = 1000 nm.",
+        "<b>A scientific drawing</b> uses a sharp pencil and clear, continuous lines &mdash; <b>no shading</b> and no sketchy double lines. Label lines are drawn <b>with a ruler</b>, they <b>do not cross</b> each other, and each ends exactly on the structure named. Every drawing gets a <b>title</b> and the <b>magnification</b> it was drawn at."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 200" width="380" height="200">
+        <text x="190" y="14" text-anchor="middle" font-size="11" font-weight="bold">Parts of the compound light microscope</text>
+        <rect x="70" y="170" width="110" height="14" rx="6" class="dg-tint" stroke-width="2"/>
+        <rect x="150" y="70" width="16" height="100" rx="6" class="dg-tint" stroke-width="2"/>
+        <rect x="106" y="24" width="28" height="22" rx="5" class="dg-fill"/>
+        <rect x="110" y="44" width="20" height="42" rx="4" class="dg-tint" stroke-width="2"/>
+        <rect x="130" y="54" width="20" height="12" rx="4" class="dg-tint" stroke-width="2"/>
+        <circle cx="120" cy="92" r="13" class="dg-tint" stroke-width="2"/>
+        <rect x="106" y="100" width="10" height="18" rx="3" class="dg-tint" stroke-width="1.5"/>
+        <rect x="124" y="100" width="10" height="14" rx="3" class="dg-tint" stroke-width="1.5"/>
+        <rect x="88" y="122" width="76" height="9" rx="2" class="dg-fill"/>
+        <rect x="100" y="115" width="40" height="5" rx="1" class="dg-ink-line" fill="none" stroke-width="1.5"/>
+        <circle cx="126" cy="150" r="9" class="dg-line" fill="none" stroke-width="2"/>
+        <line x1="126" y1="136" x2="126" y2="141" class="dg-line" stroke-width="1.5"/>
+        <line x1="114" y1="145" x2="118" y2="147" class="dg-line" stroke-width="1.5"/>
+        <line x1="138" y1="145" x2="134" y2="147" class="dg-line" stroke-width="1.5"/>
+        <circle cx="170" cy="118" r="11" class="dg-tint" stroke-width="2"/>
+        <circle cx="170" cy="140" r="7" class="dg-tint" stroke-width="2"/>
+        <line x1="62" y1="124" x2="86" y2="124" class="dg-ink-line" stroke-width="1"/>
+        <text x="58" y="127" text-anchor="end" font-size="9">stage</text>
+        <line x1="62" y1="152" x2="116" y2="152" class="dg-ink-line" stroke-width="1"/>
+        <text x="58" y="155" text-anchor="end" font-size="8">light source</text>
+        <line x1="136" y1="34" x2="192" y2="34" class="dg-ink-line" stroke-width="1"/>
+        <text x="196" y="38" font-size="9">eyepiece lens &times;10</text>
+        <line x1="102" y1="64" x2="109" y2="64" class="dg-ink-line" stroke-width="1"/>
+        <text x="98" y="67" text-anchor="end" font-size="9">body tube</text>
+        <line x1="168" y1="84" x2="192" y2="84" class="dg-ink-line" stroke-width="1"/>
+        <text x="196" y="88" font-size="9">arm</text>
+        <line x1="104" y1="108" x2="98" y2="108" class="dg-ink-line" stroke-width="1"/>
+        <text x="94" y="111" text-anchor="end" font-size="9">objective lenses</text>
+        <line x1="182" y1="124" x2="192" y2="130" class="dg-ink-line" stroke-width="1"/>
+        <text x="196" y="134" font-size="9">coarse focus &mdash; big knob</text>
+        <line x1="178" y1="146" x2="192" y2="152" class="dg-ink-line" stroke-width="1"/>
+        <text x="196" y="156" font-size="9">fine focus &mdash; small knob</text>
+        <line x1="182" y1="177" x2="192" y2="177" class="dg-ink-line" stroke-width="1"/>
+        <text x="196" y="181" font-size="9">base</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 180" width="380" height="180">
+        <rect x="12" y="22" width="86" height="30" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="55" y="41" text-anchor="middle" font-size="10">eyepiece &times;10</text>
+        <text x="108" y="43" text-anchor="middle" font-size="12" class="dg-soft">&times;</text>
+        <rect x="120" y="22" width="94" height="30" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="167" y="41" text-anchor="middle" font-size="10">objective &times;40</text>
+        <text x="224" y="43" text-anchor="middle" font-size="12" class="dg-soft">=</text>
+        <rect x="236" y="22" width="90" height="30" rx="8" class="dg-fill"/>
+        <text x="281" y="42" text-anchor="middle" font-size="11" style="fill:var(--surface)">total &times;400</text>
+        <line x1="12" y1="66" x2="368" y2="66" class="dg-ink-line" stroke-width="1"/>
+        <text x="12" y="84" font-size="9">Now measure the drawing and divide:</text>
+        <ellipse cx="70" cy="118" rx="52" ry="26" class="dg-tint" stroke-width="2"/>
+        <text x="70" y="121" text-anchor="middle" font-size="9">drawing</text>
+        <line x1="20" y1="152" x2="120" y2="152" class="dg-line" stroke-width="1.5"/>
+        <polygon points="18,152 26,148 26,156" class="dg-fill"/>
+        <polygon points="122,152 114,148 114,156" class="dg-fill"/>
+        <text x="70" y="170" text-anchor="middle" font-size="10">image = 60 mm</text>
+        <text x="152" y="115" text-anchor="middle" font-size="12">&divide;</text>
+        <text x="152" y="132" text-anchor="middle" font-size="11">&times;400</text>
+        <ellipse cx="222" cy="118" rx="14" ry="8" class="dg-tint" stroke-width="1.5"/>
+        <line x1="209" y1="152" x2="235" y2="152" class="dg-line" stroke-width="1.5"/>
+        <polygon points="207,152 215,148 215,156" class="dg-fill"/>
+        <polygon points="237,152 229,148 229,156" class="dg-fill"/>
+        <text x="222" y="170" text-anchor="middle" font-size="10">0.15 mm</text>
+        <text x="262" y="122" text-anchor="middle" font-size="13" class="dg-soft">&rarr;</text>
+        <text x="322" y="102" text-anchor="middle" font-size="9">actual size</text>
+        <text x="322" y="122" text-anchor="middle" font-size="12" class="dg-good">150 &micro;m</text>
+        <text x="322" y="144" text-anchor="middle" font-size="9">1 mm = 1000 &micro;m</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "The parts you must be able to name and use. Start on the lowest-power objective, find the specimen with the coarse focus, then sharpen with the fine focus.",
+        "Two lenses multiply to give the total magnification; then the same number divides the measured image size back down to the real size of the cell."
+      ],
+      trick: "Write the triangle <b>I over M &times; A</b> &mdash; Image size on top, Magnification and Actual size underneath. Cover the quantity you want and read off what to do: cover I and you multiply, cover A and you divide. Before you divide anything, force both sizes into the <b>same unit</b>; almost every lost mark in this topic is a mm/&micro;m slip, not a maths slip.",
+      examples: [
+        {
+          problem: "A student uses a &times;10 eyepiece with the &times;40 objective. Their drawing of one cell measures 60 mm across. Calculate the total magnification, then the actual width of the cell in millimetres and in micrometres.",
+          steps: [
+            "Total magnification = eyepiece &times; objective = 10 &times; 40 = <b>&times;400</b>",
+            "Actual size = image size &divide; magnification = 60 mm &divide; 400",
+            "= <b>0.15 mm</b>",
+            "Convert to micrometres: mm &rarr; &micro;m means multiply by 1000, so 0.15 &times; 1000 = <b>150 &micro;m</b>",
+            "Sanity check: 150 &micro;m is in the 10&ndash;100 &micro;m-ish range expected for a eukaryotic cell, so the answer is believable"
+          ],
+          answer: "Total magnification &times;400; actual width 0.15 mm, which is 150 &micro;m."
+        },
+        {
+          problem: "A virus is about 100 nm across. Explain why it cannot be seen with a light microscope, even if you build one with a total magnification of &times;5000.",
+          steps: [
+            "A light microscope can resolve points about <b>200 nm</b> apart &mdash; closer than that, two points merge into one blur",
+            "The whole virus is 100 nm across, which is <b>smaller than the resolution limit</b>, so its edges cannot be separated from each other",
+            "Adding magnification does not help: magnification only makes the image bigger, it adds no new detail &mdash; you get a bigger blur, not a sharper one",
+            "An <b>electron microscope</b> uses electron beams instead of light and resolves detail far below 1 nm, so it can image the virus"
+          ],
+          answer: "Because 100 nm is below the light microscope's ~200 nm resolution limit. Magnification without resolution just enlarges a blur, so an electron microscope is needed."
+        }
+      ],
+      remember: [
+        "<b>Total magnification = eyepiece &times; objective.</b> Eyepiece &times;10 with a &times;40 objective = &times;400.",
+        "<b>Magnification &ne; resolution.</b> Magnification = how much bigger. Resolution = how close two points can be and still look like two. Light microscopes stop at about 200 nm &mdash; a virus needs an electron microscope.",
+        "<b>Actual = image &divide; magnification.</b> Same units first: <b>1 mm = 1000 &micro;m</b>.",
+        "<b>Drawing rules:</b> sharp pencil, clear continuous lines, <b>no shading</b>, ruled label lines that never cross, a title, and the magnification stated."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 200" width="460" height="200">
+        <rect x="60" y="150" width="90" height="12" rx="6" class="cm-face" stroke-width="2"/>
+        <rect x="128" y="66" width="14" height="86" rx="6" class="cm-face" stroke-width="2"/>
+        <rect x="86" y="30" width="30" height="22" rx="6" class="cm-fill"/>
+        <rect x="92" y="50" width="18" height="40" rx="4" class="cm-face" stroke-width="2"/>
+        <circle cx="101" cy="98" r="14" class="cm-face" stroke-width="2"/>
+        <circle cx="95" cy="96" r="3" class="cm-fill"/>
+        <circle cx="107" cy="96" r="3" class="cm-fill"/>
+        <path d="M94 106 Q101 100 108 106" class="cm-line" fill="none" stroke-width="2"/>
+        <rect x="72" y="120" width="60" height="8" rx="2" class="cm-fill"/>
+        <text x="101" y="184" text-anchor="middle" font-size="11" font-weight="bold">light microscope</text>
+        <text x="376" y="98" text-anchor="middle" font-size="10" class="cm-soft">resolution limit &asymp; 200 nm</text>
+        <line x1="306" y1="108" x2="450" y2="108" class="cm-line" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <circle cx="398" cy="134" r="8" class="cm-bad" stroke-width="2"/>
+        <line x1="398" y1="126" x2="398" y2="119" class="cm-line" stroke-width="1.5"/>
+        <line x1="406" y1="134" x2="413" y2="134" class="cm-line" stroke-width="1.5"/>
+        <line x1="398" y1="142" x2="398" y2="149" class="cm-line" stroke-width="1.5"/>
+        <line x1="390" y1="134" x2="383" y2="134" class="cm-line" stroke-width="1.5"/>
+        <text x="398" y="168" text-anchor="middle" font-size="10" font-weight="bold">a virus</text>
+        <text x="398" y="184" text-anchor="middle" font-size="9" class="cm-soft">100 nm</text>
+        <rect x="146" y="14" width="254" height="46" rx="11" class="cm-bad" stroke-width="2"/>
+        <polygon points="164,60 186,60 158,80" class="cm-bad" stroke-width="2"/>
+        <text x="273" y="33" text-anchor="middle" font-size="11">&ldquo;I can magnify you &times;5000.</text>
+        <text x="273" y="51" text-anchor="middle" font-size="11">You will just be a bigger smudge.&rdquo;</text>
+      </svg>`,
+        caption: "The microscope is being honest, not rude. Past its 200 nm resolution limit, extra magnification adds size but no detail &mdash; so a 100 nm virus stays a smudge until you switch to an electron microscope."
+      },
+      exercises: [
+        { prompt: "An eyepiece lens of &times;10 is used with a &times;40 objective. Calculate the total magnification.", value: 400, tol: 0.5, accept: ["x400","400x","400times"],
+          solution: ["Total magnification = eyepiece &times; objective", "= 10 &times; 40 = 400", "&times;400"] },
+        { prompt: "An eyepiece lens of &times;10 is used with the lowest-power &times;4 objective. Calculate the total magnification.", value: 40, tol: 0.5, accept: ["x40","40x","40times"],
+          solution: ["Total = 10 &times; 4", "= 40", "&times;40"] },
+        { prompt: "A microscope has a &times;15 eyepiece and a &times;40 objective. Calculate the total magnification.", value: 600, tol: 0.5, accept: ["x600","600x","600times"],
+          solution: ["Total = 15 &times; 40", "= 600", "&times;600"] },
+        { prompt: "With a &times;10 eyepiece, which objective lens gives a total magnification of &times;1000? Enter the objective's magnification as a number.", value: 100, tol: 0.5, accept: ["x100","100x","100times"],
+          solution: ["Objective = total &divide; eyepiece", "= 1000 &divide; 10 = 100, so the &times;100 oil-immersion objective", "&times;100"] },
+        { prompt: "You keep the &times;10 eyepiece and swap the &times;10 objective for the &times;40 objective. By what factor does the total magnification increase?", value: 4, tol: 0.05, accept: ["x4","4x","4times","fourtimes"],
+          solution: ["Before: 10 &times; 10 = 100. After: 10 &times; 40 = 400", "Factor = 400 &divide; 100 = 4", "4 times"] },
+        { prompt: "Which term means the ability to tell two very close points apart as two separate points?", accept: ["resolution","resolvingpower","resolution/resolvingpower"],
+          solution: ["Resolution is about detail, not size &mdash; it is the smallest separation at which two points still look like two", "Resolution"] },
+        { prompt: "Which term means simply how many times larger than life the image appears?", accept: ["magnification","totalmagnification"],
+          solution: ["Magnification is the size ratio between image and specimen; it says nothing about detail", "Magnification"] },
+        { prompt: "How many lens systems does a compound light microscope use? Enter a number.", value: 2, tol: 0.05, accept: ["two"],
+          solution: ["It is called <b>compound</b> because the eyepiece and the objective magnify one after the other &mdash; two lens systems in series", "2"] },
+        { prompt: "A virus is smaller than the ~200 nm resolution limit of a light microscope. What type of microscope must be used to see it?", accept: ["electron","electronmicroscope","anelectronmicroscope","em"],
+          solution: ["Electron beams have a far shorter wavelength than light, so an electron microscope resolves detail far below 1 nm", "An electron microscope"] },
+        { prompt: "Which objective lens should you always use first when placing a new specimen on the stage &mdash; the lowest power or the highest power?", accept: ["lowest","lowestpower","thelowest","lowestpowerobjective","lowpower"],
+          solution: ["The lowest-power objective gives the widest field of view, so you can find the specimen, and it cannot be driven into the slide", "The lowest-power objective"] },
+        { prompt: "Which focus knob is used to make small, precise adjustments once the specimen is roughly in focus?", accept: ["fine","finefocus","thefinefocus","finefocusknob"],
+          solution: ["Coarse focus gets you close; the fine focus knob sharpens the image without crashing the lens into the slide", "The fine focus"] },
+        { prompt: "Which lens sits closest to the specimen: the eyepiece lens or the objective lens?", accept: ["objective","objectivelens","theobjectivelens","theobjective"],
+          solution: ["The objective sits on the nosepiece just above the slide; the eyepiece is the one you look into", "The objective lens"] },
+        { prompt: "Name the flat platform the microscope slide rests on.", accept: ["stage","thestage"],
+          solution: ["The stage holds the slide, usually under two clips, with the light passing up through a hole in its centre", "The stage"] },
+        { prompt: "A drawing of a cell measures 60 mm across and was made at a magnification of &times;400. Calculate the actual width of the cell in millimetres.", value: 0.15, tol: 0.005,
+          solution: ["Actual = image &divide; magnification", "= 60 &divide; 400 = 0.15 mm", "0.15 mm"] },
+        { prompt: "Convert that answer, 0.15 mm, into micrometres.", value: 150, tol: 0.5,
+          solution: ["mm &rarr; &micro;m: multiply by 1000", "0.15 &times; 1000 = 150 &micro;m", "150 &micro;m"] },
+        { prompt: "A specimen's real width is 0.02 mm and the image drawn of it is 40 mm wide. Calculate the magnification.", value: 2000, tol: 1, accept: ["x2000","2000x"],
+          solution: ["Magnification = image &divide; actual, with both in the same unit", "= 40 &divide; 0.02 = 2000", "&times;2000"] },
+        { prompt: "A cell is 50 &micro;m wide and is viewed at a total magnification of &times;200. How wide is the image, in millimetres?", value: 10, tol: 0.1,
+          solution: ["Image = actual &times; magnification = 50 &micro;m &times; 200 = 10000 &micro;m", "&micro;m &rarr; mm: divide by 1000, so 10000 &divide; 1000 = 10 mm", "10 mm"] },
+        { prompt: "Convert 750 &micro;m into millimetres.", value: 0.75, tol: 0.005,
+          solution: ["&micro;m &rarr; mm: divide by 1000", "750 &divide; 1000 = 0.75 mm", "0.75 mm"] },
+        { prompt: "List everything a scientific drawing of your specimen must include to earn full marks, following the rules from the slides.", open: true,
+          solution: ["Sample response: Drawn in sharp pencil with clear, continuous single lines &mdash; no shading, no sketchy double lines, no colouring in. Drawn large enough to see, and in proportion to what was actually observed. Label lines drawn with a ruler, running horizontally where possible, never crossing each other, each touching exactly the structure it names. A title saying what the specimen is, and the total magnification it was drawn at."] },
+        { prompt: "A student says: &ldquo;If I just keep increasing the magnification, I will keep seeing more detail.&rdquo; Explain why this is wrong, using the idea of resolution.", open: true,
+          solution: ["Sample response: Magnification only makes the image bigger; it does not add information. The detail available is set by the resolution &mdash; the smallest distance at which two points still appear separate. For a light microscope that limit is about 200 nm, set by the wavelength of visible light. Once the two points you are trying to separate are closer than that, they merge, and magnifying further just enlarges the same blur. Seeing more detail needs better resolution, which means an electron microscope, not a bigger number on the lens."] }
+      ]
+    },
+    {
+      letter: "D", hueVar: "--hueD", title: "Levels of Organization: Stem Cells, Tissues, Organs &amp; Systems",
+      rules: [
+        "Every multicellular organism begins life as <b>one cell</b>. That cell divides again and again to form a hollow ball called a <b>blastocyst</b>, and then an <b>embryo</b> &mdash; so cells still only ever arise by division of existing cells.",
+        "The cells of the early embryo are <b>embryonic stem cells</b>. They are <b>unspecialized</b> (they have not yet become any particular type), they can <b>divide repeatedly</b>, and they can <b>differentiate</b> into mature cell types such as muscle, blood and nerve cells.",
+        "Later in development most cells become the tissues and organs of the body, but <b>a few cells inside those tissues keep the stem-cell properties</b>. These are <b>adult stem cells</b>, and they are what lets you replace worn-out blood cells and heal a cut.",
+        "The <b>hierarchy of organization</b>: <b>cell &rarr; tissue &rarr; organ &rarr; organ system &rarr; organism</b>. A <b>tissue</b> is a group of <b>similar cells</b> working together (muscle, bone). An <b>organ</b> is a group of <b>tissues</b> working together (skin, heart, lungs). An <b>organ system</b> is a group of <b>organs</b> working together (digestive, circulatory, reproductive).",
+        "<b>Structure fits function.</b> A <b>red blood cell</b> is biconcave with no nucleus, so it is packed with <b>haemoglobin</b> and bends through capillaries. A <b>sperm cell</b> has a tail to swim, many <b>mitochondria</b> for energy, and digestive enzymes in its <b>acrosome</b> to break into the egg. A <b>root hair cell</b> has a long thin extension giving a <b>large surface area</b> for absorbing water.",
+        "More of the same idea: a <b>nerve cell</b> has a very long <b>axon</b> so one cell can carry a signal a long way; a <b>ciliated epithelial cell</b> has tiny hairs that sweep mucus out of the airways; a <b>palisade mesophyll cell</b> is packed with <b>chloroplasts</b> and sits at the top of the leaf where the light is."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 420 175" width="420" height="175">
+        <text x="210" y="14" text-anchor="middle" font-size="11" font-weight="bold">The hierarchy of organization</text>
+        <rect x="6" y="30" width="72" height="34" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="42" y="52" text-anchor="middle" font-size="10">cell</text>
+        <rect x="90" y="30" width="72" height="34" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="126" y="52" text-anchor="middle" font-size="10">tissue</text>
+        <rect x="174" y="30" width="72" height="34" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="210" y="52" text-anchor="middle" font-size="10">organ</text>
+        <rect x="258" y="30" width="72" height="34" rx="8" class="dg-tint" stroke-width="2"/>
+        <text x="294" y="45" text-anchor="middle" font-size="10">organ</text>
+        <text x="294" y="59" text-anchor="middle" font-size="10">system</text>
+        <rect x="342" y="30" width="72" height="34" rx="8" class="dg-fill"/>
+        <text x="378" y="52" text-anchor="middle" font-size="10" style="fill:var(--surface)">organism</text>
+        <polygon points="88,47 80,42 80,52" class="dg-fill"/>
+        <polygon points="172,47 164,42 164,52" class="dg-fill"/>
+        <polygon points="256,47 248,42 248,52" class="dg-fill"/>
+        <polygon points="340,47 332,42 332,52" class="dg-fill"/>
+        <line x1="42" y1="64" x2="42" y2="86" class="dg-ink-line" stroke-width="1"/>
+        <line x1="126" y1="64" x2="126" y2="86" class="dg-ink-line" stroke-width="1"/>
+        <line x1="210" y1="64" x2="210" y2="86" class="dg-ink-line" stroke-width="1"/>
+        <line x1="294" y1="64" x2="294" y2="86" class="dg-ink-line" stroke-width="1"/>
+        <line x1="378" y1="64" x2="378" y2="86" class="dg-ink-line" stroke-width="1"/>
+        <rect x="6" y="88" width="72" height="42" rx="8" class="dg-line" fill="none" stroke-width="1.5"/>
+        <text x="42" y="105" text-anchor="middle" font-size="9">muscle</text>
+        <text x="42" y="119" text-anchor="middle" font-size="9">cell</text>
+        <rect x="90" y="88" width="72" height="42" rx="8" class="dg-line" fill="none" stroke-width="1.5"/>
+        <text x="126" y="105" text-anchor="middle" font-size="9">muscle</text>
+        <text x="126" y="119" text-anchor="middle" font-size="9">tissue</text>
+        <rect x="174" y="88" width="72" height="42" rx="8" class="dg-line" fill="none" stroke-width="1.5"/>
+        <text x="210" y="113" text-anchor="middle" font-size="9">the heart</text>
+        <rect x="258" y="88" width="72" height="42" rx="8" class="dg-line" fill="none" stroke-width="1.5"/>
+        <text x="294" y="105" text-anchor="middle" font-size="9">circulatory</text>
+        <text x="294" y="119" text-anchor="middle" font-size="9">system</text>
+        <rect x="342" y="88" width="72" height="42" rx="8" class="dg-line" fill="none" stroke-width="1.5"/>
+        <text x="378" y="113" text-anchor="middle" font-size="9">one human</text>
+        <text x="210" y="152" text-anchor="middle" font-size="9">each level is built out of many copies of the level before it</text>
+        <text x="210" y="168" text-anchor="middle" font-size="9">similar cells &rarr; tissue &rarr; organ &rarr; system &rarr; organism</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 175" width="380" height="175">
+        <text x="190" y="14" text-anchor="middle" font-size="11" font-weight="bold">A stem cell: divide, or differentiate</text>
+        <circle cx="64" cy="88" r="30" class="dg-fill"/>
+        <text x="64" y="84" text-anchor="middle" font-size="10" style="fill:var(--surface)">stem</text>
+        <text x="64" y="98" text-anchor="middle" font-size="10" style="fill:var(--surface)">cell</text>
+        <text x="62" y="136" text-anchor="middle" font-size="9">unspecialized</text>
+        <text x="62" y="152" text-anchor="middle" font-size="9">embryonic or adult</text>
+        <line x1="94" y1="86" x2="250" y2="42" class="dg-line" stroke-width="1.5"/>
+        <line x1="94" y1="87" x2="255" y2="78" class="dg-line" stroke-width="1.5"/>
+        <line x1="94" y1="90" x2="248" y2="116" class="dg-line" stroke-width="1.5"/>
+        <line x1="94" y1="92" x2="253" y2="152" class="dg-line" stroke-width="1.5"/>
+        <ellipse cx="266" cy="40" rx="16" ry="9" class="dg-bad" fill-opacity="0.35" stroke-width="1.5"/>
+        <ellipse cx="266" cy="40" rx="6" ry="4" class="dg-bad" fill-opacity="0.5" stroke-width="1"/>
+        <text x="290" y="44" font-size="9">red blood cell</text>
+        <circle cx="264" cy="78" r="9" class="dg-tint" stroke-width="1.5"/>
+        <line x1="273" y1="78" x2="286" y2="78" class="dg-ink-line" stroke-width="1.5"/>
+        <text x="290" y="82" font-size="9">nerve cell</text>
+        <rect x="248" y="110" width="36" height="12" rx="6" class="dg-tint" stroke-width="1.5"/>
+        <text x="290" y="120" font-size="9">muscle cell</text>
+        <circle cx="264" cy="152" r="11" class="dg-fill"/>
+        <text x="290" y="156" font-size="9">more stem cells</text>
+        <text x="150" y="57" text-anchor="middle" font-size="9" class="dg-soft">differentiate</text>
+        <text x="186" y="160" text-anchor="middle" font-size="9" class="dg-soft">or divide again</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "Climb the ladder with one worked example: a muscle cell, many of them make muscle tissue, several tissues make the heart, several organs make the circulatory system, and the systems together make one organism.",
+        "A stem cell has exactly two options: divide into more stem cells, or differentiate into a mature specialised type. Embryonic stem cells can become anything; adult stem cells keep a narrower version of the same ability."
+      ],
+      trick: "For the ladder, say it out loud as a sentence with the word &ldquo;of&rdquo; in it: a tissue is a group of similar <b>cells</b>, an organ is a group of <b>tissues</b>, a system is a group of <b>organs</b>. Each level is named after what it is <b>made of</b>, so if a question gives you &ldquo;the heart&rdquo; you can climb in either direction. And for any &ldquo;why is this cell shaped like that?&rdquo; question, the answer is almost always <b>more surface area</b>, <b>more room for something useful</b>, or <b>more mitochondria for energy</b>.",
+      examples: [
+        {
+          problem: "Place the following in the correct hierarchy and name each level: haemoglobin-filled cells, blood, the heart, the circulatory system, a human being.",
+          steps: [
+            "A single red blood cell is one <b>cell</b> &mdash; the smallest living unit here",
+            "Blood is a group of similar cells working together, so it is a <b>tissue</b>",
+            "The heart is several different tissues &mdash; muscle tissue, nervous tissue, connective tissue &mdash; working together for one job, so it is an <b>organ</b>",
+            "The heart plus the blood vessels plus the blood form an <b>organ system</b>: the circulatory system",
+            "All the organ systems together make the <b>organism</b>"
+          ],
+          answer: "Red blood cell (cell) &rarr; blood (tissue) &rarr; heart (organ) &rarr; circulatory system (organ system) &rarr; human (organism)."
+        },
+        {
+          problem: "Explain how the structure of a sperm cell and a root hair cell each fit their function, and state what both examples show about differentiation.",
+          steps: [
+            "<b>Sperm cell:</b> a long tail lets it swim to the egg; the mid-piece is packed with <b>mitochondria</b> to release the energy that swimming costs; the <b>acrosome</b> at the tip carries digestive enzymes to break through the egg's outer layer",
+            "<b>Root hair cell:</b> a long thin extension pushes out between soil particles and gives a very <b>large surface area</b>, so water and minerals are absorbed much faster; it has no chloroplasts because it lives in the dark",
+            "In both cases the cell has gained the features its one job needs and lost anything it does not need",
+            "That is what <b>differentiation</b> means: an unspecialized stem cell develops the structure that fits a single specific function"
+          ],
+          answer: "Both are differentiated cells whose form is shaped by one job &mdash; the sperm for swimming and penetrating the egg, the root hair for absorbing water &mdash; which is exactly what differentiation produces."
+        }
+      ],
+      remember: [
+        "<b>Cell &rarr; tissue &rarr; organ &rarr; organ system &rarr; organism.</b> Similar cells make a tissue, tissues make an organ, organs make a system.",
+        "<b>Stem cells are unspecialized</b>, divide repeatedly, and can <b>differentiate</b>. Embryonic ones come from the blastocyst/embryo; a few kept inside tissues are <b>adult stem cells</b>.",
+        "<b>Structure fits function.</b> Red blood cell: biconcave, no nucleus, full of haemoglobin. Sperm: tail, many mitochondria, acrosome enzymes. Root hair: long extension = large surface area.",
+        "<b>Long things carry, flat things absorb, packed things store.</b> Nerve cell &rarr; long axon; root hair &rarr; surface area; palisade cell &rarr; chloroplasts."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 200" width="460" height="200">
+        <circle cx="92" cy="118" r="46" class="cm-face" stroke-width="2"/>
+        <circle cx="78" cy="112" r="4" class="cm-fill"/>
+        <circle cx="106" cy="112" r="4" class="cm-fill"/>
+        <path d="M76 130 Q92 122 108 130" class="cm-line" fill="none" stroke-width="2"/>
+        <text x="92" y="182" text-anchor="middle" font-size="11" font-weight="bold">stem cell</text>
+        <rect x="150" y="12" width="298" height="46" rx="11" class="cm-good" stroke-width="2"/>
+        <polygon points="162,58 184,58 156,78" class="cm-good" stroke-width="2"/>
+        <text x="299" y="31" text-anchor="middle" font-size="11">&ldquo;Careers fair? I have no idea what I want</text>
+        <text x="299" y="49" text-anchor="middle" font-size="11">to be. That is literally my whole job.&rdquo;</text>
+        <rect x="238" y="92" width="88" height="34" rx="8" class="cm-face2" stroke-width="1.5"/>
+        <text x="282" y="113" text-anchor="middle" font-size="10">MUSCLE</text>
+        <rect x="338" y="92" width="88" height="34" rx="8" class="cm-face2" stroke-width="1.5"/>
+        <text x="382" y="113" text-anchor="middle" font-size="10">NERVE</text>
+        <rect x="238" y="136" width="88" height="34" rx="8" class="cm-face2" stroke-width="1.5"/>
+        <text x="282" y="157" text-anchor="middle" font-size="10">BLOOD</text>
+        <rect x="338" y="136" width="88" height="34" rx="8" class="cm-face2" stroke-width="1.5"/>
+        <text x="382" y="157" text-anchor="middle" font-size="10">ROOT HAIR</text>
+        <text x="332" y="188" text-anchor="middle" font-size="9" class="cm-soft">differentiation: pick one, and it is permanent</text>
+      </svg>`,
+        caption: "Being undecided is a stem cell's actual qualification: unspecialized, still dividing, still able to become anything. The moment it differentiates it picks a stall at the fair &mdash; and mature cells do not get to change careers."
+      },
+      exercises: [
+        { prompt: "Write the levels of organization in order from smallest to largest, separated by commas: cell, tissue, organ, organ system, organism.", accept: ["cell,tissue,organ,organsystem,organism","celltissueorganorgansystemorganism","cell,tissue,organ,organsystem,organism."],
+          solution: ["Cell &rarr; tissue &rarr; organ &rarr; organ system &rarr; organism", "Each level is built from many copies of the level below it", "cell, tissue, organ, organ system, organism"] },
+        { prompt: "What is the name for a group of <b>similar cells</b> working together to perform one function, such as muscle or bone?", accept: ["tissue","atissue","tissues"],
+          solution: ["Similar cells grouped for one shared function make a tissue", "Tissue"] },
+        { prompt: "What is the name for a group of <b>tissues</b> working together, such as the skin, the heart or a lung?", accept: ["organ","anorgan","organs"],
+          solution: ["Several different tissues combined for one job make an organ", "Organ"] },
+        { prompt: "What is the name for a group of <b>organs</b> working together, such as the digestive or reproductive group?", accept: ["organsystem","organsystems","system","anorgansystem"],
+          solution: ["Organs that co-operate on one large function make an organ system", "Organ system"] },
+        { prompt: "After a fertilised egg divides repeatedly, it forms a hollow ball of cells. Name that structure.", accept: ["blastocyst","ablastocyst","theblastocyst"],
+          solution: ["Continuous division of the first cell produces a blastocyst, and then an embryo", "Blastocyst"] },
+        { prompt: "What name is given to the unspecialized cells of the early embryo, which can divide repeatedly and become any cell type?", accept: ["embryonicstemcells","embryonicstemcell","embryonic","stemcells","embryonicstem"],
+          solution: ["All the cells of the blastocyst and early embryo are embryonic stem cells", "Embryonic stem cells"] },
+        { prompt: "What is the name of the process by which an unspecialized cell develops into a mature type such as a muscle, blood or nerve cell?", accept: ["differentiation","differentiate","celldifferentiation","differentiating"],
+          solution: ["Differentiation is the switch from unspecialized to specialised, and in mature cells it is not reversed", "Differentiation"] },
+        { prompt: "A few cells inside adult tissues keep the properties of embryonic stem cells. What are these cells called?", accept: ["adultstemcells","adultstemcell","adult","adultstem"],
+          solution: ["Adult stem cells are what let the body replace worn-out blood cells and repair damaged tissue", "Adult stem cells"] },
+        { prompt: "How many levels are there in the hierarchy from a single cell up to the whole organism, counting both ends? Enter a number.", value: 5, tol: 0.05, accept: ["five"],
+          solution: ["Cell, tissue, organ, organ system, organism", "That is 5 levels", "5"] },
+        { prompt: "What word describes the flattened, dimpled disc shape of a red blood cell?", accept: ["biconcave","biconcavedisc","biconcaveshape"],
+          solution: ["The biconcave shape increases surface area for gas exchange and lets the cell bend through narrow capillaries", "Biconcave"] },
+        { prompt: "Name the protein that fills a red blood cell and carries the oxygen.", accept: ["haemoglobin","hemoglobin"],
+          solution: ["Losing its nucleus leaves the mature red blood cell more room for haemoglobin", "Haemoglobin"] },
+        { prompt: "A sperm cell's mid-piece is packed with one organelle so that it has the energy to swim. Name it.", accept: ["mitochondria","mitochondrion"],
+          solution: ["Aerobic respiration in the mitochondria releases the energy the tail needs", "Mitochondria"] },
+        { prompt: "Name the structure at the tip of a sperm cell that carries digestive enzymes for breaking into the egg.", accept: ["acrosome","theacrosome"],
+          solution: ["The acrosome releases enzymes that digest a path through the egg's outer layer", "Acrosome"] },
+        { prompt: "A root hair cell has a long, thin extension. What does this give it more of, so that it absorbs water faster?", accept: ["surfacearea","largesurfacearea","alargesurfacearea","increasedsurfacearea","biggersurfacearea","moresurfacearea"],
+          solution: ["The extension pushes between soil particles and greatly increases the surface area in contact with soil water", "A large surface area"] },
+        { prompt: "Name the very long extension of a nerve cell that carries the electrical signal.", accept: ["axon","theaxon","axons"],
+          solution: ["One long axon lets a single nerve cell carry a signal a long way without slow cell-to-cell hand-offs", "The axon"] },
+        { prompt: "A palisade mesophyll cell at the top of a leaf is packed with which organelle?", accept: ["chloroplast","chloroplasts"],
+          solution: ["Palisade cells sit where the light is strongest and are crammed with chloroplasts for photosynthesis", "Chloroplasts"] },
+        { prompt: "Which specialised cell lining the airways has tiny hairs that sweep mucus away from the lungs?", accept: ["ciliatedepithelialcell","ciliatedepithelial","ciliatedcell","ciliatedepithelium","ciliatedcells"],
+          solution: ["The cilia of a ciliated epithelial cell beat together to move mucus, and the trapped dust and bacteria with it, up and out", "A ciliated epithelial cell"] },
+        { prompt: "Take the heart and place it in the full hierarchy: name the level the heart occupies, one level below it and one level above it, with a named example of each.", open: true,
+          solution: ["Sample response: The heart is an <b>organ</b>. Below it: <b>tissues</b>, for example cardiac muscle tissue, which is itself made of individual <b>muscle cells</b>. Above it: the <b>circulatory system</b>, an organ system in which the heart works together with the blood vessels and the blood; and above that, the whole <b>organism</b>."] },
+        { prompt: "Choose any two specialised cells from this lesson and explain, feature by feature, how each one's structure fits its function.", open: true,
+          solution: ["Sample response: A <b>red blood cell</b> is biconcave, which increases its surface area for absorbing oxygen and lets it squeeze through capillaries; it has no nucleus, leaving more internal space for haemoglobin, the protein that actually binds oxygen. A <b>ciliated epithelial cell</b> has hundreds of tiny cilia on its exposed surface that beat in waves to sweep mucus, dust and bacteria up out of the airways, and plenty of mitochondria to power that constant beating."] },
+        { prompt: "Debatable question from the unit: to what extent should humans be allowed to use embryonic stem cells in medicine? Give a reasoned answer that considers both sides.", open: true,
+          solution: ["Sample response: In favour: embryonic stem cells can differentiate into any cell type, so they offer treatments for conditions where tissue is permanently lost &mdash; spinal injury, type 1 diabetes, some blood cancers &mdash; which adult stem cells, being more limited, may not reach. Against: obtaining them destroys a blastocyst, and people disagree about the moral status of an embryo at that stage; there are also practical risks such as uncontrolled division. A middle position is that research should continue under strict regulation, with adult and reprogrammed cells preferred wherever they work equally well &mdash; but the disagreement is about values, not about biology, which is why the biology alone cannot settle it."] }
+      ]
+    },
+    {
+      letter: "E", hueVar: "--hueE", title: "DNA, Genes, Chromosomes &amp; Alleles",
+      rules: [
+        "Every cell in an organism contains the molecule <b>DNA</b> &mdash; a set of <b>instructions</b> for the particular characteristics of a species. Your DNA is the reason you build a human body and an oak tree builds an oak tree.",
+        "DNA is <b>not stored as one long molecule</b>. It is divided into several individual lengths called <b>chromosomes</b>. Humans have <b>23 different chromosomes</b> &mdash; and because a body cell carries one copy of each from each parent, that means <b>23 pairs, 46 in total</b>. Chromosomes sit in the <b>nucleus</b>.",
+        "Each chromosome carries many lengths of genetic code. One such length is a <b>gene</b>: it codes for <b>one protein</b>, and through that protein it determines a characteristic. A gene is the <b>unit of inheritance</b> &mdash; the thing that is passed down from one generation to the next.",
+        "A <b>mutation</b> is a change to the DNA of an organism. It can create a <b>different version of the same gene</b>, and different versions of the same gene are called <b>alleles</b>. A mutation <b>may or may not</b> change the physical characteristics of the organism &mdash; its <b>phenotype</b>.",
+        "The slides' example: two alleles exist for eye colour, one <b>brown</b> and one <b>blue</b>. The blue allele exists because a mutation caused a <b>different pigment</b> to develop in the eye. Same gene, same position on the same chromosome &mdash; different spelling, different eye.",
+        "The structure underneath all of this: DNA is a <b>double helix</b> of <b>two strands</b>, joined by <b>base pairs</b>. <b>A always pairs with T</b> and <b>C always pairs with G</b>. Because the pairing is fixed, each strand is a template for the other &mdash; which is exactly what allows DNA to be <b>copied perfectly</b> before a cell divides."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 190" width="380" height="190">
+        <text x="190" y="15" text-anchor="middle" font-size="11" font-weight="bold">Zooming in: from organism to DNA</text>
+        <rect x="15" y="26" width="54" height="30" rx="7" class="dg-tint" stroke-width="2"/>
+        <text x="42" y="45" text-anchor="middle" font-size="8.5">organism</text>
+        <polygon points="70,37 77,41 70,45" class="dg-fill"/>
+        <rect x="79" y="26" width="40" height="30" rx="7" class="dg-tint" stroke-width="2"/>
+        <text x="99" y="45" text-anchor="middle" font-size="8.5">cell</text>
+        <polygon points="120,37 127,41 120,45" class="dg-fill"/>
+        <rect x="129" y="26" width="52" height="30" rx="7" class="dg-tint" stroke-width="2"/>
+        <text x="155" y="45" text-anchor="middle" font-size="8.5">nucleus</text>
+        <polygon points="182,37 189,41 182,45" class="dg-fill"/>
+        <rect x="191" y="26" width="64" height="30" rx="7" class="dg-tint" stroke-width="2"/>
+        <text x="223" y="45" text-anchor="middle" font-size="8.5">chromosome</text>
+        <polygon points="256,37 263,41 256,45" class="dg-fill"/>
+        <rect x="265" y="26" width="44" height="30" rx="7" class="dg-tint" stroke-width="2"/>
+        <text x="287" y="45" text-anchor="middle" font-size="8.5">gene</text>
+        <polygon points="310,37 317,41 310,45" class="dg-fill"/>
+        <rect x="319" y="26" width="46" height="30" rx="7" class="dg-fill"/>
+        <text x="342" y="45" text-anchor="middle" font-size="8.5" style="fill:var(--surface)">DNA</text>
+        <text x="190" y="72" text-anchor="middle" font-size="9">DNA is a double helix of two strands</text>
+        <path d="M40 118 Q75 60 110 118 T180 118 T250 118 T320 118" class="dg-line" stroke-width="2.5"/>
+        <path d="M40 118 Q75 176 110 118 T180 118 T250 118 T320 118" class="dg-line" stroke-width="2.5"/>
+        <line x1="75" y1="115" x2="75" y2="127" class="dg-ink-line" stroke-width="1.5"/>
+        <text x="75" y="111" text-anchor="middle" font-size="9">A</text>
+        <text x="75" y="138" text-anchor="middle" font-size="9">T</text>
+        <line x1="145" y1="115" x2="145" y2="127" class="dg-ink-line" stroke-width="1.5"/>
+        <text x="145" y="111" text-anchor="middle" font-size="9">C</text>
+        <text x="145" y="138" text-anchor="middle" font-size="9">G</text>
+        <line x1="215" y1="115" x2="215" y2="127" class="dg-ink-line" stroke-width="1.5"/>
+        <text x="215" y="111" text-anchor="middle" font-size="9">T</text>
+        <text x="215" y="138" text-anchor="middle" font-size="9">A</text>
+        <line x1="285" y1="115" x2="285" y2="127" class="dg-ink-line" stroke-width="1.5"/>
+        <text x="285" y="111" text-anchor="middle" font-size="9">G</text>
+        <text x="285" y="138" text-anchor="middle" font-size="9">C</text>
+        <text x="190" y="164" text-anchor="middle" font-size="9">base pairs: A&ndash;T and C&ndash;G, never any other way</text>
+        <text x="190" y="180" text-anchor="middle" font-size="9">so each strand is a template for the other</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 192" width="380" height="192">
+        <text x="190" y="15" text-anchor="middle" font-size="11" font-weight="bold">A homologous pair &mdash; same gene, different alleles</text>
+        <line x1="96" y1="88" x2="246" y2="88" class="dg-ink-line" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <rect x="100" y="30" width="28" height="118" rx="13" class="dg-tint" stroke-width="2"/>
+        <rect x="200" y="30" width="28" height="118" rx="13" class="dg-tint" stroke-width="2"/>
+        <rect x="100" y="48" width="28" height="12" class="dg-soft" opacity="0.35"/>
+        <rect x="200" y="48" width="28" height="12" class="dg-soft" opacity="0.35"/>
+        <rect x="100" y="118" width="28" height="12" class="dg-soft" opacity="0.35"/>
+        <rect x="200" y="118" width="28" height="12" class="dg-soft" opacity="0.35"/>
+        <rect x="100" y="80" width="28" height="17" class="dg-fill"/>
+        <text x="114" y="93" text-anchor="middle" font-size="11" style="fill:var(--surface)">B</text>
+        <rect x="200" y="80" width="28" height="17" class="dg-fill"/>
+        <text x="214" y="93" text-anchor="middle" font-size="11" style="fill:var(--surface)">b</text>
+        <text x="94" y="91" text-anchor="end" font-size="9">eye-colour gene</text>
+        <text x="250" y="91" text-anchor="start" font-size="9">same gene, same locus</text>
+        <text x="114" y="166" text-anchor="middle" font-size="9">from mother</text>
+        <text x="214" y="166" text-anchor="middle" font-size="9">from father</text>
+        <text x="190" y="185" text-anchor="middle" font-size="9">B = brown allele, b = blue allele from a mutation</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "Six zoom levels of the same thing. An organism is made of cells; each nucleus holds chromosomes; a chromosome is a length of DNA; a gene is a length of that code; and the code itself is written in A&ndash;T and C&ndash;G base pairs.",
+        "The two chromosomes of a pair carry the <i>same genes in the same places</i>. What can differ is the version &mdash; the allele &mdash; sitting at each place."
+      ],
+      trick: "Keep the four words in a chain and you will never mix them up: <b>chromosome &rarr; gene &rarr; allele &rarr; phenotype</b>. A chromosome is the whole book, a gene is one instruction in it, an allele is one <i>edition</i> of that instruction, and the phenotype is what you actually see when the instruction is carried out. And if a question mentions a <b>change to the DNA</b>, the word it is fishing for is <b>mutation</b>.",
+      examples: [
+        {
+          problem: "A student writes: &ldquo;Humans have 23 chromosomes.&rdquo; Explain what is right and what is missing in that statement, and give the number in a human body cell.",
+          steps: [
+            "The slides say humans have <b>23 different chromosomes</b> &mdash; that is 23 different <i>types</i>, numbered 1 to 22 plus the sex chromosome",
+            "A body cell inherits a full set from each parent, so it carries <b>two copies of every type</b>",
+            "Two copies of each of 23 types = <b>23 pairs</b>",
+            "23 &times; 2 = <b>46</b> chromosomes in total in a body cell",
+            "So the student's number is the number of <i>types</i>, not the number of chromosomes"
+          ],
+          answer: "There are 23 different chromosomes, carried as 23 pairs, giving 46 chromosomes in total in a human body cell."
+        },
+        {
+          problem: "A student says: &ldquo;Brown eyes and blue eyes must be caused by two different genes.&rdquo; Correct this, using the words gene, mutation, allele and phenotype.",
+          steps: [
+            "Eye colour is determined by <b>one gene</b>, sitting at one particular place on one particular chromosome",
+            "A <b>mutation</b> &mdash; a change to the DNA of that gene &mdash; produced a second version of it",
+            "Different versions of the same gene are <b>alleles</b>, so brown and blue are two <b>alleles</b> of the eye-colour gene, not two genes",
+            "This particular mutation caused a <b>different pigment</b> to develop in the eye, so it does change the <b>phenotype</b> &mdash; but plenty of mutations change nothing visible at all"
+          ],
+          answer: "It is one gene with two alleles. The blue allele arose by mutation and produces a different pigment, which changes the phenotype."
+        }
+      ],
+      remember: [
+        "<b>DNA</b> is the instruction set; it is divided into <b>chromosomes</b>. Humans: <b>23 different chromosomes</b> &rarr; <b>23 pairs</b> &rarr; <b>46 in a body cell</b>.",
+        "A <b>gene</b> is a length of genetic code that codes for <b>one protein</b>, and so for a characteristic. It is the <b>unit of inheritance</b>.",
+        "A <b>mutation</b> changes the DNA and creates a new version of a gene, called an <b>allele</b>. It <b>may or may not</b> change the <b>phenotype</b>.",
+        "<b>A pairs with T, C pairs with G.</b> That fixed pairing is why DNA can be copied exactly."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 192" width="460" height="192">
+        <rect x="68" y="64" width="42" height="104" rx="20" class="cm-face" stroke-width="2"/>
+        <circle cx="80" cy="90" r="3" class="cm-fill"/>
+        <circle cx="98" cy="90" r="3" class="cm-fill"/>
+        <path d="M80 104 Q89 112 98 104" class="cm-line" stroke-width="2"/>
+        <rect x="68" y="118" width="42" height="16" class="cm-fill"/>
+        <text x="89" y="131" text-anchor="middle" font-size="11" style="fill:var(--surface)">B</text>
+        <rect x="128" y="64" width="42" height="104" rx="20" class="cm-face" stroke-width="2"/>
+        <circle cx="140" cy="90" r="3" class="cm-fill"/>
+        <circle cx="158" cy="90" r="3" class="cm-fill"/>
+        <path d="M140 108 Q149 100 158 108" class="cm-line" stroke-width="2"/>
+        <rect x="128" y="118" width="42" height="16" class="cm-fill"/>
+        <text x="149" y="131" text-anchor="middle" font-size="11" style="fill:var(--surface)">b</text>
+        <text x="119" y="184" text-anchor="middle" font-size="10">one homologous pair</text>
+        <rect x="196" y="14" width="252" height="66" rx="12" class="cm-face2" stroke-width="2"/>
+        <polygon points="196,48 196,68 176,62" class="cm-face2" stroke-width="2"/>
+        <text x="322" y="36" text-anchor="middle" font-size="10">&ldquo;Same gene, same spot, one typo.&rdquo;</text>
+        <text x="322" y="54" text-anchor="middle" font-size="10">&ldquo;You say brown. I say blue.&rdquo;</text>
+        <text x="322" y="72" text-anchor="middle" font-size="10">&ldquo;We call that an allele.&rdquo;</text>
+      </svg>`,
+        caption: "Both chromosomes of a pair carry the eye-colour gene, in exactly the same place. A mutation rewrote one copy generations ago &mdash; and a rewritten version of a gene is an allele. Same instruction, different spelling, different eyes."
+      },
+      exercises: [
+        { prompt: "Name the molecule found in every cell that acts as a set of instructions for the characteristics of a species.", accept: ["dna","deoxyribonucleicacid"],
+          solution: ["Each cell in an organism contains DNA, the instruction set for that species", "DNA"] },
+        { prompt: "DNA is not stored as one long molecule. What name is given to each of the individual lengths it is divided into?", accept: ["chromosome","chromosomes","achromosome"],
+          solution: ["The DNA is divided into several individual lengths called chromosomes", "Chromosomes"] },
+        { prompt: "How many DIFFERENT chromosomes do humans have? Enter a number.", value: 23, tol: 0.5,
+          solution: ["The slides state that humans have 23 different chromosomes &mdash; that is, 23 different types", "23"] },
+        { prompt: "How many chromosomes are there IN TOTAL in a human body cell? Enter a number.", value: 46, tol: 0.5,
+          solution: ["A body cell carries one copy of each of the 23 types from each parent, so the chromosomes come in 23 pairs", "23 &times; 2 = 46"] },
+        { prompt: "In a eukaryotic cell, which organelle holds the chromosomes?", accept: ["nucleus","thenucleus"],
+          solution: ["The chromosomes are stored in the nucleus, which is why the nucleus controls the cell", "The nucleus"] },
+        { prompt: "A gene is a length of genetic code that codes for ONE of which type of molecule?", accept: ["protein","aprotein","proteins"],
+          solution: ["Each gene codes for a different protein, and it is the protein that produces the characteristic", "A protein"] },
+        { prompt: "Complete the sentence: a gene is the unit of ______, passed down from one generation to the next.", accept: ["inheritance","heredity"],
+          solution: ["A gene is the unit of inheritance &mdash; the piece of DNA actually handed on to offspring", "Inheritance"] },
+        { prompt: "What is the name for a change to the DNA of an organism?", accept: ["mutation","amutation","mutations"],
+          solution: ["Mutations, or changes to the DNA, create different versions of the same gene", "A mutation"] },
+        { prompt: "What word is used for different versions of the same gene?", accept: ["allele","alleles","anallele"],
+          solution: ["Different forms of the same gene are called alleles", "Alleles"] },
+        { prompt: "What word means the physical characteristics of an organism &mdash; the features you can actually observe?", accept: ["phenotype","thephenotype","phenotypes"],
+          solution: ["A mutation may or may not result in a change to the phenotype, the physical characteristics", "The phenotype"] },
+        { prompt: "The slides give two alleles for eye colour. One is brown. What is the other?", accept: ["blue"],
+          solution: ["Two alleles can exist for eye colour, one brown and another blue", "Blue"] },
+        { prompt: "The blue eye-colour allele exists because a mutation caused a different what to develop in the eye?", accept: ["pigment","adifferentpigment","differentpigment","pigments"],
+          solution: ["The mutation led to a different pigment developing in the eye, so the eye looks blue rather than brown", "A different pigment"] },
+        { prompt: "True or false: every mutation changes the phenotype of an organism.", accept: ["false","f"],
+          solution: ["A mutation may or may not result in a change to the physical characteristics &mdash; many alleles make no visible difference at all", "False"] },
+        { prompt: "What overall shape is the DNA molecule described as?", accept: ["doublehelix","adoublehelix","thedoublehelix"],
+          solution: ["Two strands twisted around one another give the double helix", "A double helix"] },
+        { prompt: "Which base always pairs with adenine (A)?", accept: ["thymine","t"],
+          solution: ["Complementary base pairing: A always pairs with T", "Thymine"] },
+        { prompt: "Which base always pairs with cytosine (C)?", accept: ["guanine","g"],
+          solution: ["Complementary base pairing: C always pairs with G", "Guanine"] },
+        { prompt: "One strand of DNA reads A-T-G-C-C. Write the complementary strand (letters only, in order).", accept: ["tacgg","t-a-c-g-g"],
+          solution: ["A&rarr;T, T&rarr;A, G&rarr;C, C&rarr;G, C&rarr;G", "T-A-C-G-G"] },
+        { prompt: "A sample of DNA is 28% adenine. Using the base-pairing rules, what percentage of it is cytosine? Enter a number.", value: 22, tol: 0.5,
+          solution: ["A pairs 1:1 with T, so %T = %A = 28", "A + T together = 28 + 28 = 56%", "That leaves 100 &minus; 56 = 44% for C and G together", "C pairs 1:1 with G, so each is 44 &divide; 2 = 22%"] },
+        { prompt: "Explain the difference between a gene and an allele, using eye colour as your example.", open: true,
+          solution: ["Sample response: A gene is a length of genetic code on a chromosome that codes for one protein and so determines a characteristic &mdash; for example, the gene for eye colour. An allele is one particular version of that gene. A mutation in the eye-colour gene produced a version that makes a different pigment, so there are now two alleles of the one gene: brown and blue. Gene = which instruction; allele = which edition of that instruction."] },
+        { prompt: "Explain why complementary base pairing (A with T, C with G) is what makes it possible for DNA to be copied exactly before a cell divides.", open: true,
+          solution: ["Sample response: Because each base can only pair with one specific partner, the sequence of one strand completely determines the sequence of the other. When the two strands are separated, each acts as a template: wherever there is an A on the template, only a T can be added to the new strand, and wherever there is a C, only a G. So the two new double helices are exact copies of the original, which is what lets a dividing cell give each daughter cell an identical set of instructions."] }
+      ]
+    },
+    {
+      letter: "F", hueVar: "--hueF", title: "Mitosis: Growth, Repair &amp; Identical Copies",
+      rules: [
+        "<b>Mitosis</b> is the type of cell division that produces <b>two genetically identical cells</b> from one parent cell, each with the <b>same number of chromosomes</b> as the parent. Your body uses it for <b>growth</b>, <b>repair</b> and <b>replacing worn-out cells</b>, and some organisms use it to reproduce <b>asexually</b>.",
+        "<b>First, the copying.</b> Cells normally contain <b>single-stranded</b> chromosomes. Before a cell can divide, each chromosome must copy its DNA to produce two identical strands. This <b>DNA replication happens during interphase</b>, and the result is a <b>double-stranded</b> chromosome. Each strand is called a <b>chromatid</b>, and the two chromatids are held together by a protein called the <b>centromere</b>.",
+        "<b>Prophase.</b> The chromosomes become shorter as they <b>condense</b>, so they are easier to move around, and they become <b>visible as distinct threads</b>. The <b>nuclear membrane breaks down</b> so the chromosomes can move freely in the cell. A series of protein fibres called the <b>spindle</b> forms and attaches to the <b>centromere</b> of each chromosome.",
+        "<b>Metaphase.</b> The spindle fibres move the chromosomes into place so that they <b>line up in the centre of the cell</b> &mdash; a line called the <b>equator</b>.",
+        "<b>Anaphase.</b> The spindle fibres <b>contract</b>. This separates the chromatids, which are <b>pulled to opposite ends of the cell</b>. <b>Telophase.</b> The <b>nuclear membrane reforms</b> around each group and the chromosomes <b>unwind</b> so they can get back to work.",
+        "The whole cell cycle has named phases: <b>G1</b> (the cell grows), <b>S</b> (DNA replication &mdash; the chromosomes are copied), <b>G2</b> (preparation for mitosis) and then <b>M</b> (mitosis and cytokinesis). G1, S and G2 together are <b>interphase</b>. A cell that has stopped dividing, such as a mature nerve cell, rests in <b>G0</b>.",
+        "Mitosis is <b>nuclear</b> division. Afterwards the <b>cytoplasm</b> divides in two in a process called <b>cytokinesis</b>, and one cell has become <b>two</b> &mdash; each a genetically identical copy of the parent cell."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 176" width="380" height="176">
+        <text x="190" y="15" text-anchor="middle" font-size="11" font-weight="bold">Mitosis: the four stages</text>
+        <circle cx="52" cy="70" r="42" class="dg-tint" stroke-width="2"/>
+        <line x1="16" y1="70" x2="40" y2="58" class="dg-ink-line" stroke-width="1"/>
+        <line x1="88" y1="70" x2="66" y2="86" class="dg-ink-line" stroke-width="1"/>
+        <line x1="34" y1="46" x2="50" y2="70" class="dg-line" stroke-width="2.5"/>
+        <line x1="50" y1="46" x2="34" y2="70" class="dg-line" stroke-width="2.5"/>
+        <line x1="56" y1="74" x2="72" y2="98" class="dg-line" stroke-width="2.5"/>
+        <line x1="72" y1="74" x2="56" y2="98" class="dg-line" stroke-width="2.5"/>
+        <circle cx="145" cy="70" r="42" class="dg-tint" stroke-width="2"/>
+        <line x1="145" y1="34" x2="145" y2="106" class="dg-ink-line" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <line x1="108" y1="70" x2="140" y2="56" class="dg-ink-line" stroke-width="1"/>
+        <line x1="182" y1="70" x2="150" y2="56" class="dg-ink-line" stroke-width="1"/>
+        <line x1="108" y1="70" x2="140" y2="88" class="dg-ink-line" stroke-width="1"/>
+        <line x1="182" y1="70" x2="150" y2="88" class="dg-ink-line" stroke-width="1"/>
+        <line x1="137" y1="43" x2="153" y2="65" class="dg-line" stroke-width="2.5"/>
+        <line x1="153" y1="43" x2="137" y2="65" class="dg-line" stroke-width="2.5"/>
+        <line x1="137" y1="77" x2="153" y2="99" class="dg-line" stroke-width="2.5"/>
+        <line x1="153" y1="77" x2="137" y2="99" class="dg-line" stroke-width="2.5"/>
+        <circle cx="238" cy="70" r="42" class="dg-tint" stroke-width="2"/>
+        <line x1="200" y1="70" x2="216" y2="58" class="dg-ink-line" stroke-width="1"/>
+        <line x1="276" y1="70" x2="260" y2="58" class="dg-ink-line" stroke-width="1"/>
+        <path d="M210 44 L218 56 L210 68" class="dg-line" stroke-width="2.5"/>
+        <path d="M210 74 L218 86 L210 98" class="dg-line" stroke-width="2.5"/>
+        <path d="M266 44 L258 56 L266 68" class="dg-line" stroke-width="2.5"/>
+        <path d="M266 74 L258 86 L266 98" class="dg-line" stroke-width="2.5"/>
+        <ellipse cx="331" cy="70" rx="44" ry="34" class="dg-tint" stroke-width="2"/>
+        <line x1="331" y1="36" x2="331" y2="104" class="dg-ink-line" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <circle cx="313" cy="70" r="15" class="dg-line" stroke-width="2"/>
+        <circle cx="349" cy="70" r="15" class="dg-line" stroke-width="2"/>
+        <path d="M306 66 q7 -6 14 0" class="dg-ink-line" stroke-width="1.5"/>
+        <path d="M306 76 q7 6 14 0" class="dg-ink-line" stroke-width="1.5"/>
+        <path d="M342 66 q7 -6 14 0" class="dg-ink-line" stroke-width="1.5"/>
+        <path d="M342 76 q7 6 14 0" class="dg-ink-line" stroke-width="1.5"/>
+        <text x="52" y="128" text-anchor="middle" font-size="9" font-weight="bold">prophase</text>
+        <text x="145" y="128" text-anchor="middle" font-size="9" font-weight="bold">metaphase</text>
+        <text x="238" y="128" text-anchor="middle" font-size="9" font-weight="bold">anaphase</text>
+        <text x="331" y="128" text-anchor="middle" font-size="9" font-weight="bold">telophase</text>
+        <text x="52" y="142" text-anchor="middle" font-size="8">condense, spindle</text>
+        <text x="145" y="142" text-anchor="middle" font-size="8">at the equator</text>
+        <text x="238" y="142" text-anchor="middle" font-size="8">pulled apart</text>
+        <text x="331" y="142" text-anchor="middle" font-size="8">membrane reforms</text>
+        <text x="190" y="166" text-anchor="middle" font-size="9">then cytokinesis &rarr; two identical cells</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 168" width="380" height="168">
+        <text x="190" y="15" text-anchor="middle" font-size="11" font-weight="bold">Getting ready: one chromosome copies itself</text>
+        <text x="75" y="36" text-anchor="middle" font-size="9">single-stranded chromosome</text>
+        <rect x="67" y="45" width="16" height="90" rx="8" class="dg-tint" stroke-width="2"/>
+        <circle cx="75" cy="88" r="6" class="dg-fill"/>
+        <line x1="105" y1="88" x2="228" y2="88" class="dg-ink-line" stroke-width="1.5"/>
+        <polygon points="228,82 242,88 228,94" class="dg-soft"/>
+        <text x="168" y="76" text-anchor="middle" font-size="9">DNA replication</text>
+        <text x="168" y="106" text-anchor="middle" font-size="9">happens in interphase</text>
+        <text x="268" y="36" text-anchor="middle" font-size="9">two identical chromatids</text>
+        <line x1="255" y1="40" x2="255" y2="46" class="dg-ink-line" stroke-width="1"/>
+        <line x1="281" y1="40" x2="281" y2="46" class="dg-ink-line" stroke-width="1"/>
+        <rect x="248" y="45" width="15" height="90" rx="7" class="dg-tint" stroke-width="2"/>
+        <rect x="273" y="45" width="15" height="90" rx="7" class="dg-tint" stroke-width="2"/>
+        <ellipse cx="268" cy="88" rx="22" ry="8" class="dg-fill"/>
+        <line x1="290" y1="88" x2="298" y2="88" class="dg-ink-line" stroke-width="1"/>
+        <text x="302" y="91" text-anchor="start" font-size="9">centromere</text>
+        <text x="190" y="158" text-anchor="middle" font-size="9">Still one chromosome &mdash; now with two identical copies.</text>
+      </svg>`,
+        `<svg viewBox="0 0 400 180" width="400" height="180">
+        <text x="200" y="15" text-anchor="middle" font-size="12" font-weight="bold">The cell cycle</text>
+        <rect x="22" y="26" width="78" height="34" rx="6" class="dg-tint" stroke-width="2"/>
+        <text x="61" y="42" text-anchor="middle" font-size="12" font-weight="bold">G1</text>
+        <text x="61" y="54" text-anchor="middle" font-size="8">cell grows</text>
+        <rect x="104" y="26" width="78" height="34" rx="6" class="dg-tint" stroke-width="2"/>
+        <text x="143" y="42" text-anchor="middle" font-size="12" font-weight="bold">S</text>
+        <text x="143" y="54" text-anchor="middle" font-size="8">DNA copied</text>
+        <rect x="186" y="26" width="78" height="34" rx="6" class="dg-tint" stroke-width="2"/>
+        <text x="225" y="42" text-anchor="middle" font-size="12" font-weight="bold">G2</text>
+        <text x="225" y="54" text-anchor="middle" font-size="8">gets ready</text>
+        <rect x="268" y="26" width="122" height="34" rx="6" class="dg-fill"/>
+        <text x="329" y="42" text-anchor="middle" font-size="12" font-weight="bold" style="fill:var(--surface)">M</text>
+        <text x="329" y="55" text-anchor="middle" font-size="8.5" style="fill:var(--surface)">mitosis + cytokinesis</text>
+        <line x1="22" y1="66" x2="264" y2="66" class="dg-ink-line" stroke-width="1.5"/>
+        <line x1="22" y1="62" x2="22" y2="66" class="dg-ink-line" stroke-width="1.5"/>
+        <line x1="264" y1="62" x2="264" y2="66" class="dg-ink-line" stroke-width="1.5"/>
+        <text x="143" y="79" text-anchor="middle" font-size="10">INTERPHASE &mdash; the long part</text>
+        <line x1="61" y1="88" x2="61" y2="96" class="dg-ink-line" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <polygon points="61,102 56,92 66,92" class="dg-soft"/>
+        <rect x="16" y="106" width="94" height="30" rx="6" class="dg-tint" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <text x="63" y="119" text-anchor="middle" font-size="10" font-weight="bold">G0 &mdash; resting</text>
+        <text x="63" y="130" text-anchor="middle" font-size="7.5">stops dividing</text>
+        <line x1="329" y1="62" x2="329" y2="166" class="dg-line" stroke-width="2"/>
+        <line x1="329" y1="166" x2="10" y2="166" class="dg-line" stroke-width="2"/>
+        <line x1="10" y1="166" x2="10" y2="43" class="dg-line" stroke-width="2"/>
+        <polygon points="20,43 8,38 8,48" class="dg-fill"/>
+        <text x="196" y="152" text-anchor="middle" font-size="9">the two new cells each start the cycle again</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "Prophase, metaphase, anaphase, telophase &mdash; then cytokinesis splits the cytoplasm. Watch the chromosomes: visible, lined up, pulled apart, wrapped up again.",
+        "Replication in interphase turns a single-stranded chromosome into a double-stranded one. The two identical strands are chromatids; the protein holding them together is the centromere.",
+        "The cell cycle by name: G1, S and G2 make up interphase; M is mitosis plus cytokinesis. A cell that stops dividing parks in G0."
+      ],
+      trick: "Learn the whole cycle as <b>I-PMAT</b>: <b>I</b>nterphase (copy the DNA), <b>P</b>rophase (chromosomes appear, spindle forms), <b>M</b>etaphase (middle &mdash; both words start with M), <b>A</b>naphase (apart &mdash; both start with A), <b>T</b>elophase (two nuclei). Metaphase = <b>M</b>iddle and Anaphase = <b>A</b>part are the two that students swap, and that one letter trick fixes it for good.",
+      examples: [
+        {
+          problem: "A cell in the lining of your stomach contains 46 chromosomes. It divides by mitosis. State (a) how many chromosomes each daughter cell will contain, (b) how many chromatids are present in the cell at metaphase, and (c) why the answer to (a) is not 23.",
+          steps: [
+            "(a) Mitosis produces daughter cells with the <b>same</b> chromosome number as the parent, so each gets <b>46</b>",
+            "(b) During interphase every chromosome was copied, so at metaphase all 46 are double-stranded",
+            "Each double-stranded chromosome is two chromatids: 46 &times; 2 = <b>92 chromatids</b>",
+            "(c) Halving only happens in <b>meiosis</b>, which makes gametes. Mitosis is for growth, repair and replacing cells &mdash; a new stomach lining cell must be a full, identical stomach lining cell"
+          ],
+          answer: "(a) 46 chromosomes. (b) 92 chromatids. (c) Mitosis keeps the chromosome number; only meiosis halves it."
+        },
+        {
+          problem: "Under a microscope, a cell shows short thick chromosomes arranged in a single line across the middle of the cell, each attached to fibres running to opposite ends. Name the stage, and describe what happens next.",
+          steps: [
+            "Chromosomes lined up in the centre of the cell is the definition of the <b>equator</b>, so this is <b>metaphase</b>",
+            "The fibres running to opposite ends are the <b>spindle</b>, attached to each <b>centromere</b>",
+            "Next is <b>anaphase</b>: the spindle fibres <b>contract</b>, separating the chromatids and pulling them to opposite ends of the cell",
+            "Then <b>telophase</b>: a nuclear membrane reforms around each group and the chromosomes unwind",
+            "Finally <b>cytokinesis</b> divides the cytoplasm, giving two genetically identical cells"
+          ],
+          answer: "Metaphase. Next the spindle contracts and pulls the chromatids to opposite poles (anaphase), then nuclei reform (telophase) and the cytoplasm divides (cytokinesis)."
+        }
+      ],
+      remember: [
+        "<b>I-PMAT:</b> Interphase, Prophase, Metaphase, Anaphase, Telophase &mdash; then cytokinesis.",
+        "<b>DNA replication happens in interphase</b>, before mitosis starts. Single-stranded chromosome &rarr; double-stranded: two <b>chromatids</b> joined by a <b>centromere</b>.",
+        "<b>M</b>etaphase = <b>m</b>iddle (the equator). <b>A</b>naphase = <b>a</b>part (spindle fibres contract).",
+        "Mitosis gives <b>two genetically identical</b> daughter cells with the <b>same chromosome number</b>: for growth, repair, replacing worn-out cells and asexual reproduction."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 192" width="460" height="192">
+        <rect x="150" y="60" width="160" height="100" rx="10" class="cm-face2" stroke-width="2"/>
+        <circle cx="205" cy="84" r="4" class="cm-fill"/>
+        <circle cx="255" cy="84" r="4" class="cm-fill"/>
+        <path d="M205 104 Q230 118 255 104" class="cm-line" stroke-width="2"/>
+        <text x="230" y="136" text-anchor="middle" font-size="10">MITOSIS-COPY 3000</text>
+        <rect x="180" y="144" width="100" height="7" rx="3" class="cm-line" stroke-width="1.5"/>
+        <line x1="88" y1="92" x2="112" y2="128" class="cm-line" stroke-width="3"/>
+        <line x1="112" y1="92" x2="88" y2="128" class="cm-line" stroke-width="3"/>
+        <line x1="120" y1="110" x2="140" y2="110" class="cm-line" stroke-width="2"/>
+        <polygon points="140,104 150,110 140,116" class="cm-fill"/>
+        <line x1="314" y1="110" x2="330" y2="94" class="cm-line" stroke-width="2"/>
+        <polygon points="326,88 338,88 334,100" class="cm-fill"/>
+        <line x1="314" y1="110" x2="330" y2="126" class="cm-line" stroke-width="2"/>
+        <polygon points="326,132 338,132 334,120" class="cm-fill"/>
+        <line x1="346" y1="72" x2="366" y2="100" class="cm-line" stroke-width="3"/>
+        <line x1="366" y1="72" x2="346" y2="100" class="cm-line" stroke-width="3"/>
+        <line x1="346" y1="120" x2="366" y2="148" class="cm-line" stroke-width="3"/>
+        <line x1="366" y1="120" x2="346" y2="148" class="cm-line" stroke-width="3"/>
+        <rect x="120" y="6" width="250" height="46" rx="11" class="cm-good" stroke-width="2"/>
+        <polygon points="212,52 236,52 218,66" class="cm-good" stroke-width="2"/>
+        <text x="245" y="25" text-anchor="middle" font-size="11">&ldquo;Two identical copies.&rdquo;</text>
+        <text x="245" y="43" text-anchor="middle" font-size="11">&ldquo;No smudges. Ever.&rdquo;</text>
+        <text x="100" y="176" text-anchor="middle" font-size="10">1 parent cell</text>
+        <text x="356" y="176" text-anchor="middle" font-size="10">2 daughter cells</text>
+      </svg>`,
+        caption: "Mitosis is supposed to be boring: every daughter cell walks out with exactly the chromosomes the parent had. If the copier ever did smudge, biology would have a different word for it &mdash; mutation."
+      },
+      exercises: [
+        { prompt: "How many cells does mitosis produce from one parent cell? Enter a number.", value: 2, tol: 0.1,
+          solution: ["Mitosis is a type of cell division that leads to the production of two cells", "2"] },
+        { prompt: "Are the two cells produced by mitosis genetically identical, or genetically different?", accept: ["identical","geneticallyidentical","thesame","same"],
+          solution: ["Each daughter cell is a genetically identical copy of the parent cell", "Genetically identical"] },
+        { prompt: "In which stage of the cell cycle does DNA replication take place?", accept: ["interphase","duringinterphase"],
+          solution: ["Before a cell can divide, each chromosome copies itself &mdash; this DNA replication occurs during interphase", "Interphase"] },
+        { prompt: "After replication, each of the two identical strands of a double-stranded chromosome is called a what?", accept: ["chromatid","chromatids","asisterchromatid","sisterchromatid","sisterchromatids"],
+          solution: ["Replication produces double-stranded chromosomes; each strand is called a chromatid", "A chromatid"] },
+        { prompt: "Name the protein that holds two chromatids together.", accept: ["centromere","acentromere","thecentromere","centromeres"],
+          solution: ["Chromatids are held together by a protein called a centromere", "The centromere"] },
+        { prompt: "In which stage of mitosis do the chromosomes condense, become visible as distinct threads, and the nuclear membrane break down?", accept: ["prophase","prophase1","inprophase"],
+          solution: ["Prophase: chromosomes shorten and become visible, and the nuclear membrane breaks down so they can move freely", "Prophase"] },
+        { prompt: "What is the name of the series of protein fibres that forms in prophase and attaches to each centromere?", accept: ["spindle","thespindle","spindlefibres","spindlefibers","spindlefibre","spindlefiber"],
+          solution: ["A series of protein fibres called the spindle forms and attaches to the centromere of each chromosome", "The spindle"] },
+        { prompt: "In which stage of mitosis do the chromosomes line up in the centre of the cell?", accept: ["metaphase","inmetaphase"],
+          solution: ["Metaphase: the spindle fibres move the chromosomes into place along the centre of the cell", "Metaphase"] },
+        { prompt: "What is the name given to the line across the centre of the cell where the chromosomes line up?", accept: ["equator","theequator","cellequator"],
+          solution: ["The centre line of the cell is called the equator", "The equator"] },
+        { prompt: "In which stage do the spindle fibres contract and pull the separated chromatids to opposite ends of the cell?", accept: ["anaphase","inanaphase"],
+          solution: ["Anaphase: the spindle fibres contract and separate the chromatids, which are pulled to opposite ends of the cell", "Anaphase"] },
+        { prompt: "In which stage does the nuclear membrane reform and the chromosomes unwind?", accept: ["telophase","intelophase"],
+          solution: ["Telophase: the nuclear membrane reforms and the chromosomes unwind so that they can carry out their function", "Telophase"] },
+        { prompt: "What is the name of the process, following nuclear division, in which the cytoplasm divides into two?", accept: ["cytokinesis","cytokenesis"],
+          solution: ["Following mitosis (nuclear division) the cytoplasm divides in a process known as cytokinesis, separating into two cells", "Cytokinesis"] },
+        { prompt: "A human cell containing 46 chromosomes divides by mitosis. How many chromosomes will each daughter cell contain? Enter a number.", value: 46, tol: 0.5,
+          solution: ["Mitosis keeps the chromosome number the same: one copy of each chromosome ends up in each new cell", "46"] },
+        { prompt: "A cell containing 12 chromosomes divides by mitosis. How many chromosomes will each daughter cell contain? Enter a number.", value: 12, tol: 0.5,
+          solution: ["Each chromosome was copied in interphase, then one copy went to each daughter cell, so the number is unchanged", "12"] },
+        { prompt: "That same cell has 12 chromosomes. At metaphase, how many chromatids are present in it altogether? Enter a number.", value: 24, tol: 0.5,
+          solution: ["By metaphase every chromosome is double-stranded, made of 2 chromatids", "12 &times; 2 = 24 chromatids"] },
+        { prompt: "Name one job mitosis does in the human body.", accept: ["growth","repair","togrow","replacewornoutcells","replacingwornoutcells","replacewornoutcell","replacement","replacingcells","replacecells","healing"],
+          solution: ["Mitosis is used in the body for growth, for repair, and to replace worn-out cells", "Growth (or repair, or replacing worn-out cells)"] },
+        { prompt: "Which type of reproduction &mdash; sexual or asexual &mdash; uses mitosis to produce offspring?", accept: ["asexual","asexualreproduction"],
+          solution: ["Some organisms use mitosis to reproduce asexually, which is why all their offspring are genetically identical", "Asexual reproduction"] },
+        { prompt: "Write out the five stages of the cell cycle in order using the mnemonic I-PMAT, and give one sentence on what happens in each.", open: true,
+          solution: ["Sample response: <b>Interphase</b> &mdash; each chromosome copies its DNA, producing double-stranded chromosomes. <b>Prophase</b> &mdash; the chromosomes condense and become visible, the nuclear membrane breaks down, and the spindle forms and attaches to each centromere. <b>Metaphase</b> &mdash; the chromosomes are moved into a line along the equator, the centre of the cell. <b>Anaphase</b> &mdash; the spindle fibres contract, separating the chromatids and pulling them to opposite ends of the cell. <b>Telophase</b> &mdash; the nuclear membrane reforms and the chromosomes unwind. Cytokinesis then divides the cytoplasm into two cells."] },
+        { prompt: "Explain why each chromosome must be copied during interphase, before mitosis can begin.", open: true,
+          solution: ["Sample response: Mitosis has to end with two cells that each carry a complete set of chromosomes. If the chromosomes were not copied first, the single set would simply be shared out between the two new cells and each would end up with half the instructions it needs. Copying first means every chromosome exists as two identical chromatids, so when they are pulled apart in anaphase each new cell receives one full, identical copy."] },
+        { prompt: "During anaphase of one cell, both chromatids of chromosome 7 are pulled to the same end of the cell instead of opposite ends. Describe the effect on the two daughter cells, and explain why this matters for the job mitosis is doing.", open: true,
+          solution: ["Sample response: One daughter cell would receive two copies of chromosome 7 and the other none, so the two cells would no longer be genetically identical to each other or to the parent. The cell with no copy is missing every gene on that chromosome and would almost certainly not survive or function; the cell with an extra copy has the wrong dose of those genes. That defeats the whole purpose of mitosis, which is to produce exact copies for growth, repair and replacing worn-out cells &mdash; a replacement cell is only useful if it can do the same job as the cell it replaced."] },
+        { prompt: "In which named phase of the cell cycle is the DNA actually copied? Give the letter.", accept: ["s","sphase","sstage"],
+          solution: ["G1 is growth, S is synthesis &mdash; the phase where DNA replication happens &mdash; and G2 is preparation for mitosis", "S"] },
+        { prompt: "A mature nerve cell has stopped dividing altogether. Which resting phase of the cell cycle is it parked in?", accept: ["g0","gzero","g0phase","g nought"],
+          solution: ["Cells that are no longer in the cycle leave it after G1 and sit in G0", "G0"] },
+        { prompt: "Put the four phases of the cell cycle in order, starting from growth. Enter them separated by commas.", accept: ["g1,s,g2,m"],
+          solution: ["G1 (growth) &rarr; S (DNA copied) &rarr; G2 (preparation) &rarr; M (mitosis and cytokinesis)", "G1, S, G2, M"] },
+        { prompt: "Why do the two new cells produced by mitosis need to contain identical copies of the original chromosomes? <i>(Task question 1 from the slides.)</i>", open: true,
+          solution: ["Sample response: Every cell needs the full set of instructions to work properly. The chromosomes carry the genes that tell the cell which proteins to build, so a cell that received only part of the set, or a faulty copy, could not carry out its job. Mitosis is used for growth, repair and replacing worn-out cells &mdash; a replacement cell is only useful if it is the same as the one it replaces."] },
+        { prompt: "Under the microscope, a plant cell shows its chromosomes lined up in a single row straight across the middle of the cell. Which stage of mitosis is it in?", accept: ["metaphase"],
+          solution: ["A single row across the equator is the signature of metaphase", "Metaphase"] },
+        { prompt: "Under the microscope, a cell shows two separate clumps of chromosomes at opposite ends, each one starting to be enclosed again. Which stage of mitosis is it in?", accept: ["telophase"],
+          solution: ["The chromosomes have finished being pulled apart (that was anaphase) and the nuclear membrane is reforming around each group", "Telophase"] },
+        { prompt: "On an annotated diagram of an animal cell in mitosis, what do you call the structure at each pole from which the spindle fibres radiate?", accept: ["centriole","centrioles"],
+          solution: ["Centrioles sit at the poles of an animal cell and organise the spindle. (Careful &mdash; the <i>centromere</i> is the protein joining two chromatids; different structure, similar name.)", "Centrioles"] },
+        { prompt: "On the colouring sheet, number 6 marks a dense round spot inside the nucleus, visible in interphase and telophase but gone in between. Name it.", accept: ["nucleolus","nucleoli"],
+          solution: ["The nucleolus makes ribosomes. It breaks down during prophase along with the nuclear membrane, and reappears in telophase", "Nucleolus"] },
+        { prompt: "In interphase the DNA is spread out as loose threads rather than visible chromosomes. What is the DNA called in that loose state?", accept: ["chromatin"],
+          solution: ["Chromatin is the uncondensed form. It only condenses into visible chromosomes in prophase", "Chromatin"] }
+      ]
+    },
+    {
+      letter: "G", hueVar: "--hueG", title: "Meiosis, Variation &amp; Reproduction",
+      rules: [
+        "<b>Meiosis</b> is the cell division used in <b>sexual reproduction</b>. It produces <b>gametes</b> &mdash; the <b>sperm</b> and the <b>ovum</b> &mdash; which fuse at fertilisation to form a <b>zygote</b>, and it leads to <b>genetic variation</b>.",
+        "During meiosis the number of chromosomes must <b>halve</b>, so that a gamete carries <b>one set</b> rather than two. <b>Fertilisation</b> &mdash; the <b>fusion of two gametes</b> &mdash; then forms a <b>zygote</b> with <b>two sets</b> again, one from each parent, and the zygote grows by mitosis. This is what <b>maintains the species' chromosome number</b>: 23 + 23 = 46 every time, instead of doubling to 92, 184, 368&hellip;",
+        "Meiosis creates <b>variation</b> in two ways. <b>Random (independent) assortment</b>: which chromosome of each pair ends up in a given gamete is decided independently, so the parental chromosomes are shuffled. <b>Crossing over</b>: genetic material &mdash; alleles &mdash; from one chromosome is exchanged for those of its pair. On top of both, the <b>fusion of gametes is random</b>: any sperm can fertilise the ovum.",
+        "Vocabulary the slides put in red: a body cell carries two of each chromosome and is <b>diploid</b>; a gamete carries one of each and is <b>haploid</b>. Fertilisation turns haploid + haploid back into diploid.",
+        "There is a third source of variation alongside random assortment and crossing over: the <b>random fusion of gametes</b> &mdash; any sperm can fertilise any egg. Which two happen to meet decides the genetic make-up of the offspring.",
+        "<b>Mitosis vs meiosis:</b> mitosis is <b>1 division</b> giving <b>2 genetically identical</b> cells with the <b>same</b> chromosome number, for <b>growth, repair and asexual reproduction</b>. Meiosis is <b>2 divisions</b> giving <b>4 genetically different</b> cells with <b>half</b> the chromosome number, to make <b>gametes</b>.",
+        "<b>Asexual reproduction</b> has <b>no gametes and no fertilisation</b>. Cells undergo <b>mitosis</b> and a structure breaks away from the main body and grows into a new organism, so all offspring are <b>genetically identical</b>. Examples: strawberry <b>runners</b>, <b>bulbs</b> that divide, potato <b>tubers</b>, a <b>yeast</b> cell that simply divides in two, and animals such as <b>greenfly</b> and the aquatic <b>hydra</b>.",
+        "Plants reproduce <b>sexually</b> when the environment is changing and variation helps them adapt, and <b>asexually</b> when conditions are stable and identical offspring will do. In animals, <b>external fertilisation</b> means gametes are released into the water (fish <b>spawning</b>); <b>internal fertilisation</b>, used by most land animals, means sperm is placed inside the female's body. Human gametes are adapted to very different jobs: the <b>sperm</b> is small, produced in huge numbers, and <b>motile</b> &mdash; a tail to swim and many <b>mitochondria</b> for energy; the <b>ovum</b> is large, <b>non-motile</b> and carries a <b>food store</b> for the early embryo."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 380 176" width="380" height="176">
+        <text x="190" y="15" text-anchor="middle" font-size="11" font-weight="bold">Meiosis halves, fertilisation restores</text>
+        <circle cx="44" cy="64" r="26" class="dg-tint" stroke-width="2"/>
+        <text x="44" y="69" text-anchor="middle" font-size="12">46</text>
+        <line x1="74" y1="64" x2="100" y2="64" class="dg-ink-line" stroke-width="1.5"/>
+        <polygon points="100,58 108,64 100,70" class="dg-soft"/>
+        <text x="90" y="52" text-anchor="middle" font-size="9">meiosis</text>
+        <text x="90" y="82" text-anchor="middle" font-size="8">2 rounds</text>
+        <circle cx="130" cy="42" r="16" class="dg-tint" stroke-width="2"/>
+        <text x="130" y="46" text-anchor="middle" font-size="10">23</text>
+        <circle cx="166" cy="42" r="16" class="dg-tint" stroke-width="2"/>
+        <text x="166" y="46" text-anchor="middle" font-size="10">23</text>
+        <circle cx="130" cy="86" r="16" class="dg-tint" stroke-width="2"/>
+        <text x="130" y="90" text-anchor="middle" font-size="10">23</text>
+        <circle cx="166" cy="86" r="16" class="dg-tint" stroke-width="2"/>
+        <text x="166" y="90" text-anchor="middle" font-size="10">23</text>
+        <line x1="190" y1="64" x2="252" y2="64" class="dg-ink-line" stroke-width="1.5"/>
+        <polygon points="252,58 260,64 252,70" class="dg-soft"/>
+        <text x="221" y="52" text-anchor="middle" font-size="9">fertilisation</text>
+        <circle cx="292" cy="64" r="28" class="dg-tint" stroke-width="2"/>
+        <text x="292" y="70" text-anchor="middle" font-size="13">46</text>
+        <text x="44" y="118" text-anchor="middle" font-size="9">body cell</text>
+        <text x="44" y="130" text-anchor="middle" font-size="9">2n = 46</text>
+        <text x="148" y="118" text-anchor="middle" font-size="9">4 gametes</text>
+        <text x="148" y="130" text-anchor="middle" font-size="9">n = 23</text>
+        <text x="292" y="118" text-anchor="middle" font-size="9">zygote</text>
+        <text x="292" y="130" text-anchor="middle" font-size="9">2n = 46</text>
+        <text x="190" y="152" text-anchor="middle" font-size="9">Each gamete gets one chromosome of each pair.</text>
+        <text x="190" y="168" text-anchor="middle" font-size="9">At fertilisation two sets meet again &mdash; not doubled.</text>
+      </svg>`,
+        `<svg viewBox="0 0 380 172" width="380" height="172">
+        <text x="190" y="15" text-anchor="middle" font-size="11" font-weight="bold">Crossing over: a pair swap matching pieces</text>
+        <rect x="70" y="40" width="14" height="90" rx="7" class="dg-fill"/>
+        <rect x="104" y="40" width="14" height="90" rx="7" class="dg-tint" stroke-width="2"/>
+        <line x1="84" y1="88" x2="104" y2="104" class="dg-ink-line" stroke-width="2"/>
+        <line x1="84" y1="104" x2="104" y2="88" class="dg-ink-line" stroke-width="2"/>
+        <line x1="150" y1="88" x2="228" y2="88" class="dg-ink-line" stroke-width="1.5"/>
+        <polygon points="228,82 240,88 228,94" class="dg-soft"/>
+        <text x="190" y="76" text-anchor="middle" font-size="9">alleles exchanged</text>
+        <rect x="255" y="40" width="14" height="90" rx="7" class="dg-fill"/>
+        <rect x="255" y="98" width="14" height="32" rx="7" class="dg-tint" stroke-width="2"/>
+        <rect x="289" y="40" width="14" height="90" rx="7" class="dg-tint" stroke-width="2"/>
+        <rect x="289" y="98" width="14" height="32" rx="7" class="dg-fill"/>
+        <text x="94" y="150" text-anchor="middle" font-size="9">before: the pair touch</text>
+        <text x="94" y="163" text-anchor="middle" font-size="9">at a chiasma</text>
+        <text x="279" y="150" text-anchor="middle" font-size="9">after: alleles swapped</text>
+        <text x="279" y="163" text-anchor="middle" font-size="9">new combinations</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "Meiosis halves 46 to 23 and makes four gametes; fertilisation fuses two of them so the zygote is back to 46. Without the halving step, the number would double every generation.",
+        "Where a chromosome and its pair touch, matching lengths are exchanged. Each chromosome leaves with a mixture of alleles it did not start with &mdash; that is crossing over."
+      ],
+      trick: "Every meiosis question comes down to one line: <b>meiosis halves, fertilisation restores</b>. If a question asks for the chromosome number in a gamete, <b>divide by two</b>; in a body cell or a zygote, don't. And to tell the two sources of variation apart: <b>assortment shuffles whole chromosomes</b>, <b>crossing over swaps pieces within a pair</b>.",
+      examples: [
+        {
+          problem: "A grasshopper body cell contains 24 chromosomes. State the number of chromosomes in (a) a grasshopper sperm cell, (b) a grasshopper zygote. (c) Explain what would happen over two generations if meiosis did not halve the number.",
+          steps: [
+            "(a) Meiosis halves the chromosome number to make gametes: 24 &divide; 2 = <b>12</b>",
+            "(b) Fertilisation fuses two gametes: 12 + 12 = <b>24</b> &mdash; the species number is restored",
+            "(c) If gametes kept the full 24, fertilisation would give 24 + 24 = <b>48</b> in the first generation",
+            "Those offspring would then make 48-chromosome gametes, giving 48 + 48 = <b>96</b> in the next generation",
+            "The number would double every generation, and the species could not stay the same species"
+          ],
+          answer: "(a) 12. (b) 24. (c) Without halving, the number would double each generation &mdash; 48, then 96 &mdash; instead of staying at 24."
+        },
+        {
+          problem: "A grower needs 200 strawberry plants that all fruit at exactly the same time, and a wheat breeder needs a crop that might survive a new fungal disease. Recommend a method of reproduction for each and justify it.",
+          steps: [
+            "The strawberry grower wants <b>identical</b> plants, so identical timing &mdash; that means <b>asexual reproduction</b>",
+            "Strawberries do this naturally with <b>runners</b>: cells divide by <b>mitosis</b>, a structure breaks away from the parent and grows into a new plant, and every offspring is genetically identical",
+            "The wheat breeder wants <b>variation</b>, because the useful thing about a changing environment is that some individuals happen to differ &mdash; that means <b>sexual reproduction</b>",
+            "Meiosis provides that variation through <b>random assortment</b> and <b>crossing over</b>, and fertilisation adds the random fusion of gametes, so some seedlings may carry alleles that resist the fungus",
+            "This is exactly the rule for plants generally: asexual when conditions are stable, sexual when the environment is changing"
+          ],
+          answer: "Strawberries: asexual reproduction by runners, for genetically identical plants. Wheat: sexual reproduction, because meiosis and random fertilisation create the variation that lets some plants survive a new disease."
+        }
+      ],
+      remember: [
+        "<b>Meiosis halves, fertilisation restores.</b> 46 &rarr; 23 in the gametes, then 23 + 23 = 46 in the zygote.",
+        "<b>Mitosis:</b> 1 division, 2 identical cells, number kept, for growth and repair. <b>Meiosis:</b> 2 divisions, 4 different cells, number halved, for gametes.",
+        "Two sources of variation in meiosis: <b>random assortment</b> of the parental chromosomes, and <b>crossing over</b> of alleles between a chromosome and its pair.",
+        "<b>Asexual</b> = no gametes, no fertilisation, mitosis only, offspring identical: runners, bulbs, tubers, yeast, greenfly, hydra."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 192" width="460" height="192">
+        <circle cx="70" cy="112" r="26" class="cm-face" stroke-width="2"/>
+        <circle cx="61" cy="106" r="3" class="cm-fill"/>
+        <circle cx="79" cy="106" r="3" class="cm-fill"/>
+        <path d="M61 120 Q70 128 79 120" class="cm-line" stroke-width="2"/>
+        <line x1="70" y1="138" x2="70" y2="158" class="cm-line" stroke-width="2"/>
+        <path d="M70 158 Q110 174 150 158" class="cm-line" stroke-width="2"/>
+        <circle cx="150" cy="116" r="22" class="cm-face" stroke-width="2"/>
+        <circle cx="142" cy="111" r="2.5" class="cm-fill"/>
+        <circle cx="158" cy="111" r="2.5" class="cm-fill"/>
+        <path d="M142 124 Q150 131 158 124" class="cm-line" stroke-width="2"/>
+        <line x1="150" y1="138" x2="150" y2="158" class="cm-line" stroke-width="2"/>
+        <rect x="18" y="8" width="200" height="46" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="62,54 84,54 68,80" class="cm-face2" stroke-width="2"/>
+        <text x="118" y="27" text-anchor="middle" font-size="10">&ldquo;Copy. Paste. Copy. Paste.&rdquo;</text>
+        <text x="118" y="45" text-anchor="middle" font-size="10">A runner, cloning itself.</text>
+        <ellipse cx="372" cy="112" rx="13" ry="8" class="cm-face" stroke-width="2"/>
+        <ellipse cx="372" cy="112" rx="13" ry="8" class="cm-face" stroke-width="2" transform="rotate(60 350 112)"/>
+        <ellipse cx="372" cy="112" rx="13" ry="8" class="cm-face" stroke-width="2" transform="rotate(120 350 112)"/>
+        <ellipse cx="372" cy="112" rx="13" ry="8" class="cm-face" stroke-width="2" transform="rotate(180 350 112)"/>
+        <ellipse cx="372" cy="112" rx="13" ry="8" class="cm-face" stroke-width="2" transform="rotate(240 350 112)"/>
+        <ellipse cx="372" cy="112" rx="13" ry="8" class="cm-face" stroke-width="2" transform="rotate(300 350 112)"/>
+        <circle cx="350" cy="112" r="14" class="cm-face2" stroke-width="2"/>
+        <circle cx="345" cy="108" r="2.5" class="cm-fill"/>
+        <circle cx="355" cy="108" r="2.5" class="cm-fill"/>
+        <path d="M344 116 Q350 122 356 116" class="cm-line" stroke-width="2"/>
+        <line x1="350" y1="141" x2="350" y2="162" class="cm-line" stroke-width="2"/>
+        <rect x="248" y="8" width="200" height="46" rx="11" class="cm-good" stroke-width="2"/>
+        <polygon points="334,54 356,54 344,74" class="cm-good" stroke-width="2"/>
+        <text x="348" y="27" text-anchor="middle" font-size="10">&ldquo;I make seeds instead.&rdquo;</text>
+        <text x="348" y="45" text-anchor="middle" font-size="10">&ldquo;Each one a different bet.&rdquo;</text>
+        <text x="110" y="182" text-anchor="middle" font-size="10">asexual: identical clones</text>
+        <text x="350" y="182" text-anchor="middle" font-size="10">sexual: variation</text>
+      </svg>`,
+        caption: "The runner is playing it safe: conditions are fine, so make another of exactly the same plant. The flower is gambling: every seed is a slightly different hand, and if the environment changes, one of those hands may be the winning one."
+      },
+      exercises: [
+        { prompt: "Which type of cell division produces gametes?", accept: ["meiosis"],
+          solution: ["Meiosis is the cell division used in sexual reproduction; it produces gametes", "Meiosis"] },
+        { prompt: "Name the female gamete in humans.", accept: ["ovum","egg","eggcell","theovum","ova"],
+          solution: ["The two gametes are the sperm and the ovum (egg)", "The ovum"] },
+        { prompt: "How many cells does meiosis produce from one parent cell? Enter a number.", value: 4, tol: 0.1,
+          solution: ["Meiosis involves two divisions, so one cell becomes four", "4"] },
+        { prompt: "A human body cell contains 46 chromosomes. How many chromosomes are in a human gamete? Enter a number.", value: 23, tol: 0.5,
+          solution: ["Meiosis halves the number so that a gamete carries one set rather than two", "46 &divide; 2 = 23"] },
+        { prompt: "A cell containing 12 chromosomes divides by meiosis. How many chromosomes will each of the resulting cells contain? Enter a number.", value: 6, tol: 0.5,
+          solution: ["Meiosis halves the chromosome number", "12 &divide; 2 = 6"] },
+        { prompt: "What is the name of the process in which two gametes fuse together?", accept: ["fertilisation","fertilization","fertilisationfusion"],
+          solution: ["Fertilisation is the fusion of two gametes", "Fertilisation"] },
+        { prompt: "What is the name of the cell formed when two gametes fuse?", accept: ["zygote","azygote","thezygote"],
+          solution: ["The fusion of two gametes forms a zygote, which has two sets of chromosomes", "A zygote"] },
+        { prompt: "Name the source of variation in which the parental chromosomes are shared out between the gametes at random. Two words.", accept: ["randomassortment","independentassortment","randomassortmentofchromosomes","randomassortmentofparentalchromosomes","assortment"],
+          solution: ["Meiosis leads to variation of offspring through random assortment of parental chromosomes", "Random assortment"] },
+        { prompt: "Name the other source of variation in meiosis, in which genetic material or alleles from one chromosome is exchanged for those of its pair. Two words.", accept: ["crossingover","crossover","crossingsover"],
+          solution: ["Crossing over exchanges alleles between a chromosome and its pair, making new combinations", "Crossing over"] },
+        { prompt: "In asexual reproduction, which type of cell division do the cells undergo?", accept: ["mitosis"],
+          solution: ["In asexual reproduction there are no gametes and no fertilisation; cells simply undergo mitosis", "Mitosis"] },
+        { prompt: "Are all the offspring produced by asexual reproduction genetically identical, or genetically different?", accept: ["identical","geneticallyidentical","same","thesame","clones"],
+          solution: ["All offspring produced by asexual reproduction are genetically identical &mdash; they are clones", "Genetically identical"] },
+        { prompt: "Name the structure a strawberry plant grows out sideways, which develops into a clone of the parent plant.", accept: ["runner","runners","arunner","stolon"],
+          solution: ["Strawberries produce runners which grow into clones of the parent plant", "A runner"] },
+        { prompt: "Potatoes reproduce asexually by splitting which underground structure?", accept: ["tuber","tubers","atuber","potatotuber"],
+          solution: ["Tubers such as potatoes can split to produce several genetically identical new plants", "A tuber"] },
+        { prompt: "Name one organism from the slides, other than a flowering plant, that reproduces asexually.", accept: ["yeast","greenfly","greenflies","hydra","aphid","aphids","yeastcell"],
+          solution: ["A yeast cell simply divides into two; among animals, greenfly and the aquatic hydra can reproduce asexually", "Yeast, greenfly or hydra"] },
+        { prompt: "Fish release their gametes into the water when spawning. What type of fertilisation is this?", accept: ["external","externalfertilisation","externalfertilization"],
+          solution: ["Gametes released into the water and fusing outside the body is external fertilisation", "External fertilisation"] },
+        { prompt: "Most animals that live on land reproduce using which type of fertilisation?", accept: ["internal","internalfertilisation","internalfertilization"],
+          solution: ["Most land animals use internal fertilisation, in which sperm is placed inside the female's body", "Internal fertilisation"] },
+        { prompt: "Compare mitosis and meiosis under four headings: number of divisions, number of cells produced, whether those cells are identical, and what happens to the chromosome number.", open: true,
+          solution: ["Sample response: <b>Number of divisions</b> &mdash; mitosis is one division, meiosis is two. <b>Cells produced</b> &mdash; mitosis gives 2, meiosis gives 4. <b>Identical or not</b> &mdash; mitosis gives genetically identical daughter cells, meiosis gives four genetically different cells because of crossing over and random assortment. <b>Chromosome number</b> &mdash; mitosis keeps it the same as the parent (46 &rarr; 46), meiosis halves it (46 &rarr; 23). Their purposes match: mitosis for growth, repair, replacing worn-out cells and asexual reproduction; meiosis to make gametes for sexual reproduction."] },
+        { prompt: "Explain why the chromosome number must be halved when gametes are made.", open: true,
+          solution: ["Sample response: At fertilisation two gametes fuse, so the zygote receives the chromosomes of both. If each gamete carried the full body-cell number of 46, the zygote would have 92, and the generation after that 184 &mdash; the number would double every generation and the cells could not work. By halving the number in meiosis so that each gamete carries one set of 23, fertilisation adds 23 + 23 back to 46, and the species' chromosome number is maintained from one generation to the next."] },
+        { prompt: "Human gametes are adapted to very different jobs. Describe how the sperm and the ovum are each adapted to their function.", open: true,
+          solution: ["Sample response: The <b>sperm</b> has to travel to the ovum and there is heavy competition, so it is very small, produced in enormous numbers, and motile: it has a tail to swim with, many mitochondria in its mid-piece to release the energy that swimming needs, and enzymes at its tip to break into the ovum. The <b>ovum</b> does not travel, so it is far larger and non-motile; the extra size is a food store of nutrients to supply the zygote and early embryo before it can obtain food any other way. It also has a protective outer layer that changes after one sperm has entered so that no second sperm can fertilise it."] },
+        { prompt: "A strawberry plant can reproduce both sexually, by flowering, and asexually, by runners. Explain the circumstances in which each method is the better strategy.", open: true,
+          solution: ["Sample response: Asexual reproduction by runners is better when conditions are <b>not changing</b>. The parent plant is already succeeding where it is, so producing genetically identical clones next to it is fast, needs no pollinator or partner, and every offspring is equally well suited to that spot. Sexual reproduction is better when the environment <b>is</b> changing &mdash; a new disease, a drier climate, a new competitor. Meiosis (random assortment and crossing over) and the random fusion of gametes produce seeds that are all genetically different, so even if most do badly, some may happen to carry a combination of alleles that copes with the new conditions. Clones cannot do that: if the change kills one of them it kills all of them."] },
+        { prompt: "A body cell carries two of each chromosome. What is the term for a cell like this?", accept: ["diploid","diploidcell","2n"],
+          solution: ["Two of each chromosome, one from each parent &mdash; diploid (written 2n)", "Diploid"] },
+        { prompt: "A gamete carries one of each chromosome. What is the term for a cell like this?", accept: ["haploid","haploidcell","n"],
+          solution: ["One set rather than two &mdash; haploid (written n)", "Haploid"] },
+        { prompt: "Besides random assortment and crossing over, the slides give a third source of variation: any sperm can fertilise any egg. What is this third source called?", accept: ["randomfusion","randomfusionofgametes","randomfertilisation","randomfertilization","fusionofgametes"],
+          solution: ["Which particular sperm reaches which particular egg is down to chance, and every gamete is genetically different, so the combination is unpredictable", "Random fusion of gametes"] },
+        { prompt: "Which type of reproduction &mdash; sexual or asexual &mdash; needs only one parent?", accept: ["asexual","asexualreproduction"],
+          solution: ["No gametes, no fertilisation, no second parent required", "Asexual"] },
+        { prompt: "Which type of reproduction produces variety in the offspring rather than clones?", accept: ["sexual","sexualreproduction"],
+          solution: ["Two parents, shuffled genes, random fusion of gametes &mdash; every offspring is different", "Sexual"] },
+        { prompt: "Which type of reproduction is common in bacteria?", accept: ["asexual","asexualreproduction"],
+          solution: ["Bacteria simply divide; there are no gametes and no cell fusion", "Asexual"] },
+        { prompt: "Build the comparison table the slides ask for: sexual versus asexual reproduction, across the features &mdash; number of parents, gametes, cell fusion, variety in the offspring, and which organisms do it.", open: true,
+          solution: ["Sample response:<br><b>Number of parents</b> &mdash; sexual: two; asexual: one.<br><b>Gametes made</b> &mdash; sexual: yes (ovum and sperm); asexual: none.<br><b>Cell fusion (fertilisation)</b> &mdash; sexual: yes; asexual: none.<br><b>Offspring</b> &mdash; sexual: all different, variety; asexual: genetically identical clones.<br><b>Cell division used</b> &mdash; sexual: meiosis to make the gametes; asexual: mitosis.<br><b>Who does it</b> &mdash; bacteria: asexual only; plants: both; most animals: sexual, though a few such as greenfly and hydra can manage asexually."] }
+      ]
+    }
+  ];
+
+  /* ---------------------------------------------------------------
+     STORAGE
+  --------------------------------------------------------------- */
+  var STORE_KEY = "bio_u1_progress_v2";
+  function loadProgress(){
+    try{
+      var raw = localStorage.getItem(STORE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    }catch(e){ return {}; }
+  }
+  function saveProgress(p){
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(p)); }catch(e){ /* ignore */ }
+  }
+  var progress = loadProgress();
+
+  /* ---------------------------------------------------------------
+     ANSWER CHECKING
+  --------------------------------------------------------------- */
+  function parseNum(s){
+    if(s == null) return null;
+    s = String(s).trim();
+    var fracM = s.match(/^(-?\d+(?:\.\d+)?)\s*\/\s*(-?\d+(?:\.\d+)?)$/);
+    if(fracM){
+      var a = parseFloat(fracM[1]), b = parseFloat(fracM[2]);
+      if(b === 0) return null;
+      return a / b;
+    }
+    var v = parseFloat(s);
+    return isNaN(v) ? null : v;
+  }
+  function normalize(raw){
+    return String(raw).toLowerCase().replace(/[\s()]/g,"");
+  }
+  function checkAnswer(ex, raw){
+    if(!raw || !String(raw).trim()) return false;
+    var norm = normalize(raw);
+    if(ex.accept && ex.accept.indexOf(norm) > -1) return true;
+    if(typeof ex.value === "number"){
+      var v = parseNum(raw);
+      if(v !== null && Math.abs(v - ex.value) < (ex.tol || 0.02)) return true;
+    }
+    if(ex.valueSet){
+      var parts = String(raw).toLowerCase().split(/,|or|and/).map(parseNum).filter(function(x){ return x !== null; });
+      if(parts.length === ex.valueSet.length){
+        var remaining = ex.valueSet.slice();
+        var ok = parts.every(function(p){
+          var idx = -1;
+          for(var i=0;i<remaining.length;i++){
+            if(Math.abs(remaining[i]-p) < (ex.tol||0.02)){ idx=i; break; }
+          }
+          if(idx>-1){ remaining.splice(idx,1); return true; }
+          return false;
+        });
+        if(ok) return true;
+      }
+    }
+    return false;
+  }
+
+  /* ---------------------------------------------------------------
+     RENDER
+  --------------------------------------------------------------- */
+  var lessonsEl = document.getElementById("lessons");
+  var scoreboardInner = document.getElementById("scoreboardInner");
+  var resetBtn = document.getElementById("resetBtn");
+  var totalDoneEl = document.getElementById("totalDone");
+
+  function exId(li, ei){ return "L" + li + "E" + ei; }
+
+  function buildChips(){
+    LESSONS.forEach(function(lesson, li){
+      var a = document.createElement("a");
+      a.href = "#lesson-" + lesson.letter;
+      a.className = "chip";
+      a.style.setProperty("--chip-hue", "var(" + lesson.hueVar + "-solid)");
+      a.style.setProperty("--chip-tint", "var(" + lesson.hueVar + "-tint)");
+      a.id = "chip-" + li;
+      a.innerHTML = '<span class="letter">' + lesson.letter + '</span><span class="frac" data-frac>0/' + lesson.exercises.length + '</span>';
+      scoreboardInner.insertBefore(a, resetBtn);
+    });
+  }
+
+  function lessonDoneCount(li){
+    var lesson = LESSONS[li];
+    var n = 0;
+    lesson.exercises.forEach(function(ex, ei){
+      if(progress[exId(li,ei)]) n++;
+    });
+    return n;
+  }
+
+  function updateAllProgressUI(){
+    var total = 0;
+    LESSONS.forEach(function(lesson, li){
+      var n = lessonDoneCount(li);
+      total += n;
+      var lessonTotal = lesson.exercises.length;
+      var chip = document.getElementById("chip-" + li);
+      if(chip){
+        chip.querySelector("[data-frac]").textContent = n + "/" + lessonTotal;
+        chip.classList.toggle("done", n === lessonTotal);
+      }
+      var ring = document.getElementById("ring-" + li);
+      if(ring){
+        ring.querySelector(".ring-label").textContent = n + " / " + lessonTotal;
+        ring.querySelector(".bar-fill").style.width = (n / lessonTotal * 100) + "%";
+      }
+    });
+    totalDoneEl.textContent = total;
+  }
+
+  function showToast(msg){
+    var t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(showToast._h);
+    showToast._h = setTimeout(function(){ t.classList.remove("show"); }, 1600);
+  }
+
+  function buildLessons(){
+    LESSONS.forEach(function(lesson, li){
+      var section = document.createElement("section");
+      section.className = "lesson";
+      section.id = "lesson-" + lesson.letter;
+      section.style.setProperty("--hue", "var(" + lesson.hueVar + "-solid)");
+      section.style.setProperty("--tint", "var(" + lesson.hueVar + "-tint)");
+
+      var head = document.createElement("div");
+      head.className = "lesson-head";
+      head.innerHTML =
+        '<div class="big-letter">' + lesson.letter + '</div>' +
+        '<div class="htext"><div class="kicker">Lesson ' + lesson.letter + '</div><h2>' + lesson.title + '</h2></div>' +
+        '<div class="lesson-progress" id="ring-' + li + '">' +
+          '<div class="ring-label">0 / ' + lesson.exercises.length + '</div>' +
+          '<div class="bar"><div class="bar-fill"></div></div>' +
+        '</div>';
+      section.appendChild(head);
+
+      var rulesBox = document.createElement("div");
+      rulesBox.className = "rules-box";
+      rulesBox.innerHTML = '<h3>The rules</h3><ul>' + lesson.rules.map(function(r){ return "<li>" + r + "</li>"; }).join("") + "</ul>";
+      section.appendChild(rulesBox);
+
+      var diagramList = lesson.diagrams || (lesson.diagram ? [lesson.diagram] : []);
+      var diagramCaptions = lesson.diagramCaptions || [];
+      if(diagramList[0]){
+        var diagramBox = document.createElement("div");
+        diagramBox.className = "diagram-box";
+        diagramBox.innerHTML = diagramList[0] + (diagramCaptions[0] ? '<div class="diagram-caption">' + diagramCaptions[0] + '</div>' : '');
+        section.appendChild(diagramBox);
+      }
+
+      if(lesson.trick){
+        var trickBox = document.createElement("div");
+        trickBox.className = "trick-box";
+        trickBox.innerHTML = '<span class="trick-tag">Rule of thumb</span><span class="trick-text">' + lesson.trick + '</span>';
+        section.appendChild(trickBox);
+      }
+
+      var exampleList = lesson.examples || (lesson.example ? [lesson.example] : []);
+
+      function buildExampleCard(exampleObj, idx){
+        var card = document.createElement("div");
+        card.className = "example-card";
+        card.innerHTML =
+          '<h3>Worked example' + (exampleList.length > 1 ? " " + (idx+1) : "") + '</h3>' +
+          '<div class="example-prob expr">' + exampleObj.problem + '</div>' +
+          '<div class="example-steps">' +
+            exampleObj.steps.map(function(s, i){
+              return '<div class="step"><span class="n">' + (i+1) + '.</span><span class="expr">' + s + '</span></div>';
+            }).join("") +
+          '</div>' +
+          '<div class="example-answer">Answer: ' + exampleObj.answer + '</div>';
+        return card;
+      }
+
+      if(exampleList[0]) section.appendChild(buildExampleCard(exampleList[0], 0));
+
+      if(diagramList[1]){
+        var diagramBox2 = document.createElement("div");
+        diagramBox2.className = "diagram-box";
+        diagramBox2.innerHTML = diagramList[1] + (diagramCaptions[1] ? '<div class="diagram-caption">' + diagramCaptions[1] + '</div>' : '');
+        section.appendChild(diagramBox2);
+      }
+
+      if(exampleList[1]) section.appendChild(buildExampleCard(exampleList[1], 1));
+
+      for(var di = 2; di < diagramList.length; di++){
+        var extraBox = document.createElement("div");
+        extraBox.className = "diagram-box";
+        extraBox.innerHTML = diagramList[di] + (diagramCaptions[di] ? '<div class="diagram-caption">' + diagramCaptions[di] + '</div>' : '');
+        section.appendChild(extraBox);
+      }
+
+      if(lesson.remember && lesson.remember.length){
+        var rememberBox = document.createElement("div");
+        rememberBox.className = "remember-box";
+        rememberBox.innerHTML = '<h3>Rules to remember</h3><ul>' +
+          lesson.remember.map(function(r){ return "<li>" + r + "</li>"; }).join("") + '</ul>';
+        section.appendChild(rememberBox);
+      }
+
+      if(lesson.comic){
+        var comicBox = document.createElement("div");
+        comicBox.className = "comic-box";
+        comicBox.innerHTML =
+          '<span class="comic-tag">Biology meme break</span>' +
+          lesson.comic.svg +
+          '<div class="comic-caption">' + lesson.comic.caption + '</div>';
+        section.appendChild(comicBox);
+      }
+
+      var grid = document.createElement("div");
+      grid.className = "ex-grid";
+
+      lesson.exercises.forEach(function(exObj, ei){
+        var id = exId(li, ei);
+        var card = document.createElement("div");
+        card.className = "ex-card";
+        card.id = "card-" + id;
+
+        var inputRow = exObj.open
+          ? '<div class="open-note">Open response &mdash; there\'s no single right answer. Try it yourself, then compare with the sample.</div>'
+          : '<div class="ex-input-row">' +
+              '<input class="ex-input" type="text" placeholder="your answer" id="input-' + id + '" autocomplete="off" />' +
+              '<button class="ex-check" data-id="' + id + '" data-li="' + li + '" data-ei="' + ei + '">Check</button>' +
+            '</div>' +
+            '<div class="ex-feedback" id="fb-' + id + '"></div>';
+
+        card.innerHTML =
+          '<div class="ex-top"><span class="ex-num">' + (ei+1) + '</span><div class="ex-prompt expr">' + exObj.prompt + '</div></div>' +
+          inputRow +
+          '<div class="ex-foot">' +
+            '<button class="ex-toggle" data-target="sol-' + id + '">' + (exObj.open ? "Show sample response" : "Show solution") + '</button>' +
+          '</div>' +
+          '<div class="ex-solution" id="sol-' + id + '">' +
+            exObj.solution.map(function(s){ return '<div class="sol-step">' + s + '</div>'; }).join("") +
+          '</div>';
+
+        grid.appendChild(card);
+      });
+
+      section.appendChild(grid);
+      lessonsEl.appendChild(section);
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     EVENTS (delegated)
+  --------------------------------------------------------------- */
+  function wireEvents(){
+    lessonsEl.addEventListener("click", function(e){
+      var checkBtn = e.target.closest(".ex-check");
+      if(checkBtn){
+        var li = parseInt(checkBtn.getAttribute("data-li"), 10);
+        var ei = parseInt(checkBtn.getAttribute("data-ei"), 10);
+        var id = checkBtn.getAttribute("data-id");
+        var exObj = LESSONS[li].exercises[ei];
+        var input = document.getElementById("input-" + id);
+        var fb = document.getElementById("fb-" + id);
+        var card = document.getElementById("card-" + id);
+        var ok = checkAnswer(exObj, input.value);
+        card.classList.remove("correct","wrong");
+        fb.classList.remove("correct","wrong");
+        if(ok){
+          card.classList.add("correct");
+          fb.classList.add("correct");
+          fb.textContent = "Correct!";
+          progress[id] = true;
+          saveProgress(progress);
+          updateAllProgressUI();
+        } else {
+          card.classList.add("wrong");
+          fb.classList.add("wrong");
+          fb.textContent = "Not quite — try again or check the solution.";
+        }
+        return;
+      }
+      var toggleBtn = e.target.closest(".ex-toggle");
+      if(toggleBtn){
+        var targetId = toggleBtn.getAttribute("data-target");
+        var sol = document.getElementById(targetId);
+        var willOpen = !sol.classList.contains("open");
+        sol.classList.toggle("open");
+        toggleBtn.textContent = willOpen
+          ? (toggleBtn.textContent.indexOf("sample") > -1 ? "Hide sample response" : "Hide solution")
+          : (toggleBtn.textContent.indexOf("sample") > -1 ? "Show sample response" : "Show solution");
+
+        // mark open-response exercises as "done" once viewed
+        var cardEl = toggleBtn.closest(".ex-card");
+        if(willOpen && cardEl){
+          var idMatch = targetId.replace("sol-","");
+          var liEi = idMatch.match(/^L(\d+)E(\d+)$/);
+          if(liEi){
+            var li2 = parseInt(liEi[1],10), ei2 = parseInt(liEi[2],10);
+            if(LESSONS[li2].exercises[ei2].open){
+              progress[idMatch] = true;
+              saveProgress(progress);
+              updateAllProgressUI();
+            }
+          }
+        }
+        return;
+      }
+    });
+
+    lessonsEl.addEventListener("keydown", function(e){
+      if(e.key === "Enter" && e.target.classList.contains("ex-input")){
+        var id = e.target.id.replace("input-","");
+        var btn = document.querySelector('.ex-check[data-id="' + id + '"]');
+        if(btn) btn.click();
+      }
+    });
+
+    resetBtn.addEventListener("click", function(){
+      if(!confirm("Clear all saved progress on this device?")) return;
+      progress = {};
+      saveProgress(progress);
+      document.querySelectorAll(".ex-card").forEach(function(c){ c.classList.remove("correct","wrong"); });
+      document.querySelectorAll(".ex-feedback").forEach(function(f){ f.textContent = ""; f.classList.remove("correct","wrong"); });
+      updateAllProgressUI();
+      showToast("Progress cleared");
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     HUE SOLID/TINT CSS VARS (derived once, injected as a style tag)
+  --------------------------------------------------------------- */
+  function injectHueVars(){
+    var style = document.createElement("style");
+    var letters = ["A","B","C","D","E","F","G"];
+    var css = ":root{";
+    letters.forEach(function(L){
+      var hv = "--hue" + L;
+      css += hv + "-solid: hsl(var(" + hv + ") var(--lsat) var(--llight));";
+      css += hv + "-tint: hsl(var(" + hv + ") var(--lsat) var(--ltint));";
+    });
+    css += "}";
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
+  function buildCheatSheet(){
+    var grid = document.getElementById("csGrid");
+    if(!grid) return;
+    LESSONS.forEach(function(lesson){
+      if(!lesson.remember || !lesson.remember.length) return;
+      var card = document.createElement("div");
+      card.className = "cs-card";
+      card.style.setProperty("--hue", "var(" + lesson.hueVar + "-solid)");
+      card.style.setProperty("--tint", "var(" + lesson.hueVar + "-tint)");
+      card.innerHTML =
+        '<h4><span class="cs-letter">' + lesson.letter + '</span>' + lesson.title + '</h4>' +
+        '<ul>' + lesson.remember.map(function(r){ return "<li>" + r + "</li>"; }).join("") + '</ul>';
+      grid.appendChild(card);
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     INIT
+  --------------------------------------------------------------- */
+  injectHueVars();
+  buildChips();
+  buildLessons();
+  buildCheatSheet();
+  wireEvents();
+  updateAllProgressUI();
+
+})();
+</script>

@@ -1,0 +1,344 @@
+<title>UBI Debate Prep — Proposition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF9F6; --surface:#FFFFFF; --surface-2:#F3F2ED;
+    --ink:#1C1B19; --ink-soft:#4A4843; --ink-faint:#8A8880;
+    --border:#E2E0D8; --border-strong:#CFCCC1;
+    --hue:hsl(214 62% 36%); --tint:hsl(214 62% 95%);
+    --warm:hsl(24 70% 42%); --warm-t:hsl(24 70% 95%);
+    --good:#2E7D4F; --good-tint:#E4F3EA; --bad:#B4402F; --bad-tint:#FBEAE8;
+    --font-display:"Fraunces",Georgia,serif;
+    --font-body:"Karla","Segoe UI",system-ui,sans-serif;
+    --font-mono:"JetBrains Mono",Consolas,monospace;
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+    --bg:#15161A; --surface:#1D1F24; --surface-2:#22242A;
+    --ink:#EFEDE7; --ink-soft:#BFBDB6; --ink-faint:#85837C;
+    --border:#31343B; --border-strong:#41454E;
+    --hue:hsl(214 66% 70%); --tint:hsl(214 40% 17%);
+    --warm:hsl(24 75% 65%); --warm-t:hsl(24 40% 17%);
+    --good:#69C68D; --good-tint:#16261E; --bad:#E3796A; --bad-tint:#2A1917;
+  }}
+  :root[data-theme="dark"]{
+    --bg:#15161A; --surface:#1D1F24; --surface-2:#22242A;
+    --ink:#EFEDE7; --ink-soft:#BFBDB6; --ink-faint:#85837C;
+    --border:#31343B; --border-strong:#41454E;
+    --hue:hsl(214 66% 70%); --tint:hsl(214 40% 17%);
+    --warm:hsl(24 75% 65%); --warm-t:hsl(24 40% 17%);
+    --good:#69C68D; --good-tint:#16261E; --bad:#E3796A; --bad-tint:#2A1917;
+  }
+  body{ background:var(--bg); color:var(--ink); font-family:var(--font-body); font-size:15.5px; line-height:1.6; }
+  .wrap{ max-width:900px; margin:0 auto; padding:42px 22px 80px; }
+  .eyebrow{ font-family:var(--font-mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:9px; }
+  h1{ font-family:var(--font-display); font-size:36px; font-weight:700; margin:0 0 10px; letter-spacing:-.01em; }
+  .lede{ color:var(--ink-soft); font-size:16.5px; max-width:64ch; }
+  h2{ font-family:var(--font-mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase;
+      color:var(--ink-faint); margin:40px 0 14px; font-weight:600; }
+  h3{ font-family:var(--font-display); font-size:21px; margin:0 0 6px; }
+
+  .thesis{ background:var(--tint); border:2px solid var(--hue); border-radius:var(--radius);
+    padding:22px 26px; margin:26px 0 6px; }
+  .thesis p{ font-family:var(--font-display); font-size:20px; line-height:1.45; margin:0; color:var(--ink); }
+  .thesis .lbl{ font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--hue); margin-bottom:9px; }
+
+  .panel{ background:var(--surface-2); border:1px solid var(--border); border-radius:var(--radius); padding:20px 24px; }
+  .card{ background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    padding:20px 24px; margin-bottom:14px; border-left:5px solid var(--c, var(--hue)); }
+  .card .tag{ display:inline-block; font-family:var(--font-mono); font-size:10.5px; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--c, var(--hue)); background:var(--ct, var(--tint));
+    border:1px solid var(--c, var(--hue)); border-radius:6px; padding:2px 9px; margin-bottom:10px; }
+  .row{ display:flex; gap:12px; margin-top:12px; align-items:flex-start; }
+  .row .k{ font-family:var(--font-mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--ink-faint); width:74px; flex:none; padding-top:3px; }
+  .row .v{ color:var(--ink-soft); font-size:14.5px; }
+  .row .v b{ color:var(--ink); }
+
+  table{ border-collapse:collapse; width:100%; font-size:13.8px; }
+  th{ text-align:left; font-family:var(--font-mono); font-size:10.5px; letter-spacing:.07em; text-transform:uppercase;
+    color:var(--ink-faint); font-weight:600; border-bottom:1.5px solid var(--border-strong); padding:0 12px 8px 0; }
+  td{ padding:10px 12px 10px 0; border-bottom:1px solid var(--border); color:var(--ink-soft); vertical-align:top; }
+  tr:last-child td{ border-bottom:none; }
+  td b{ color:var(--ink); }
+  .num{ font-family:var(--font-mono); color:var(--hue); font-weight:600; }
+
+  details.reb{ background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    padding:0; margin-bottom:10px; overflow:hidden; }
+  details.reb summary{ cursor:pointer; list-style:none; padding:15px 20px; font-weight:600; display:flex;
+    gap:12px; align-items:flex-start; }
+  details.reb summary::-webkit-details-marker{ display:none; }
+  details.reb summary .q{ font-family:var(--font-mono); font-size:11px; color:var(--bad);
+    background:var(--bad-tint); border-radius:6px; padding:3px 8px; flex:none; margin-top:1px; }
+  details.reb summary .arrow{ margin-left:auto; color:var(--ink-faint); font-family:var(--font-mono); font-size:12px; flex:none; }
+  details.reb[open] summary .arrow{ transform:rotate(90deg); }
+  details.reb .body{ padding:0 20px 18px 20px; color:var(--ink-soft); font-size:14.5px; }
+  details.reb .body .turn{ background:var(--good-tint); border-left:3px solid var(--good); border-radius:8px;
+    padding:11px 14px; margin-top:11px; color:var(--ink-soft); }
+  details.reb .body .turn b{ color:var(--good); }
+
+  .speech{ background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:22px 26px; }
+  .speech p{ margin:0 0 13px; }
+  .speech .beat{ font-family:var(--font-mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--hue); margin:20px 0 6px; }
+  .speech .beat:first-child{ margin-top:0; }
+  .speech .stage{ font-family:var(--font-mono); font-size:12.5px; color:var(--ink-faint); font-style:normal; }
+
+  ul{ padding-left:20px; color:var(--ink-soft); }
+  li{ margin-bottom:7px; }
+  li b{ color:var(--ink); }
+  li::marker{ color:var(--hue); }
+
+  .warn{ background:var(--warm-t); border:1px solid var(--warm); border-left:5px solid var(--warm);
+    border-radius:var(--radius); padding:18px 22px; color:var(--ink-soft); }
+  .warn b{ color:var(--ink); }
+  .warn h3{ color:var(--warm); font-size:19px; }
+
+  .srcs{ font-size:13.5px; color:var(--ink-soft); }
+  .srcs a{ color:var(--hue); }
+  .srcs li{ margin-bottom:9px; }
+  footer{ margin-top:40px; color:var(--ink-faint); font-family:var(--font-mono); font-size:12px; text-align:center; }
+  @media print{ .noprint{ display:none; } details.reb{ break-inside:avoid; } details.reb .body{ display:block !important; } }
+</style>
+
+<div class="wrap">
+  <div class="eyebrow">Debate prep &middot; Proposition &middot; Devon</div>
+  <h1>&ldquo;This house would introduce a Universal Basic Income&rdquo;</h1>
+  <p class="lede">You are arguing <b>for</b>. This is your case, your evidence, the attacks coming at you, and the answers. Read the rebuttals section twice &mdash; debates are won there, not in the opening speech.</p>
+
+  <div class="thesis">
+    <div class="lbl">Your case in one sentence</div>
+    <p>A basic income floor gives people the security to make better decisions &mdash; and the real-world evidence shows they keep working, spend it on essentials, and end up healthier and more employable, not less.</p>
+  </div>
+
+  <h2>Step 1 &mdash; define it before they do</h2>
+  <div class="panel">
+    <p style="margin-top:0"><b>Whoever defines the motion controls the debate.</b> Define UBI in your first thirty seconds, and define a <i>modest, funded</i> version. If you let the opposition define it, they will argue against $3,000 a month for everyone, funded by magic, and you will spend the whole debate defending something you never proposed.</p>
+    <p><b>The five features</b> &mdash; a payment that is:</p>
+    <ul>
+      <li><b>Universal</b> &mdash; everyone gets it, not just the poor</li>
+      <li><b>Unconditional</b> &mdash; no work requirement, no job-search test</li>
+      <li><b>Individual</b> &mdash; paid to the person, not the household</li>
+      <li><b>Periodic</b> &mdash; regular and predictable, not a one-off</li>
+      <li><b>Cash</b> &mdash; not vouchers, not food stamps; the recipient decides</li>
+    </ul>
+    <p style="margin-bottom:0"><b>The model you are proposing:</b> a modest monthly payment to every adult citizen &mdash; enough to cover basic food and housing costs, not enough to live comfortably without working. It <i>replaces</i> the patchwork of means-tested unemployment benefits it duplicates, keeps disability and healthcare support on top, and is funded by a mix of that consolidated spending plus taxes on the highest incomes, land, carbon and financial transactions. Say this once, clearly, and refer back to &ldquo;our model&rdquo; every time they attack a different one.</p>
+  </div>
+
+  <h2>Step 2 &mdash; your three arguments</h2>
+
+  <div class="card" style="--c:var(--hue); --ct:var(--tint)">
+    <span class="tag">Argument 1 &middot; your strongest</span>
+    <h3>Security makes people <i>more</i> productive, not less</h3>
+    <div class="row"><span class="k">Claim</span><span class="v">Poverty is not just a lack of money &mdash; it is a lack of predictability. You cannot take the better job across town, retrain, or leave a bad employer when missing one pay cheque means losing your home.</span></div>
+    <div class="row"><span class="k">Evidence</span><span class="v">In <b>Stockton, California</b>, 125 people received $500 a month for two years. Full-time employment among recipients rose from <b class="num">28% to 40%</b>, while the control group went from 32% to only 37%. The share who could cover an unexpected expense in cash rose from <b class="num">25% to 52%</b>. Depression and anxiety fell.</span></div>
+    <div class="row"><span class="k">Impact</span><span class="v">The money did not replace work. It bought the stability that made better work possible &mdash; people used it to take time off a dead-end job to interview for a real one.</span></div>
+  </div>
+
+  <div class="card" style="--c:var(--good); --ct:var(--good-tint)">
+    <span class="tag">Argument 2 &middot; kills their main attack</span>
+    <h3>The &ldquo;people will stop working&rdquo; fear is not what the permanent evidence shows</h3>
+    <div class="row"><span class="k">Claim</span><span class="v">The single biggest objection to UBI is that it destroys the incentive to work. We have actually tested this &mdash; including in a real place, permanently, for over forty years.</span></div>
+    <div class="row"><span class="k">Evidence</span><span class="v"><b>Alaska</b> has paid every resident an annual dividend from its oil fund since 1982. Economists Jones and Marinescu found it had <b>no effect on overall employment</b>, and actually increased part-time work by <b class="num">1.8 percentage points</b>. Their explanation matters: the cash gets spent locally, which creates jobs, offsetting any reduced work.<br><br>In <b>Kenya</b>, a study across about 200 villages found recipients were <b>not working less</b> &mdash; they shifted out of wage labour into running their own businesses. In <b>Finland</b>, 2,000 unemployed people given &euro;560 a month worked <b class="num">six days more</b> over the study year than the control group, and reported significantly less depression and loneliness.</span></div>
+    <div class="row"><span class="k">Impact</span><span class="v">Alaska is the strongest card in this debate because it is <b>universal, permanent and real</b> &mdash; not a two-year pilot. If UBI made people lazy, four decades of Alaskan data would show it. It does not.</span></div>
+  </div>
+
+  <div class="card" style="--c:var(--warm); --ct:var(--warm-t)">
+    <span class="tag">Argument 3 &middot; the systems argument</span>
+    <h3>It is simpler, cheaper to run, and more dignified than what we do now</h3>
+    <div class="row"><span class="k">Claim</span><span class="v">Means-tested welfare has three built-in failures: it is expensive to administer, it humiliates people who use it, and it punishes them for earning.</span></div>
+    <div class="row"><span class="k">Evidence</span><span class="v">The <b>poverty trap</b> is the key term to use: under means-testing, every extra pound earned withdraws benefits, so people face effective tax rates far higher than the rich pay. A universal payment never gets withdrawn, so work always pays. And because it goes to everyone automatically, there are no eligibility assessments, no forms, and no one missing out because they did not know they qualified &mdash; take-up of targeted benefits is often far below the number entitled.</span></div>
+    <div class="row"><span class="k">Impact</span><span class="v">This is the argument to reach for when they say &ldquo;just target help at the poor.&rdquo; We already do. It leaves people out, costs a fortune to police, and taxes the poor at the highest rate in the system.</span></div>
+  </div>
+
+  <h2>Step 3 &mdash; evidence locker</h2>
+  <div class="panel">
+    <table>
+      <tr><th>Study</th><th>What happened</th><th>The number to quote</th></tr>
+      <tr>
+        <td><b>Alaska Permanent Fund</b><br>1982&ndash;present, universal</td>
+        <td>Annual oil dividend to every resident. The only permanent, universal cash transfer in a rich country.</td>
+        <td><b>No effect on employment</b>; part-time work <b>+1.8pp</b></td>
+      </tr>
+      <tr>
+        <td><b>Stockton SEED</b><br>USA, 2019&ndash;21, $500/month</td>
+        <td>125 recipients in low-income neighbourhoods, 24 months.</td>
+        <td>Full-time work <b>28% &rarr; 40%</b>; under <b>1%</b> spent on alcohol or tobacco</td>
+      </tr>
+      <tr>
+        <td><b>Finland</b><br>2017&ndash;18, &euro;560/month</td>
+        <td>2,000 unemployed people, nationally randomised.</td>
+        <td><b>+6 days</b> employment; clearly better mental wellbeing</td>
+      </tr>
+      <tr>
+        <td><b>Kenya (GiveDirectly)</b><br>~200 villages, 12-year design</td>
+        <td>The largest UBI experiment ever run; compares monthly payments against lump sums.</td>
+        <td>No drop in work; shift into <b>self-employment</b>; lump-sum arm raised income ~<b>50%</b></td>
+      </tr>
+      <tr>
+        <td><b>OpenResearch</b><br>USA, 2020&ndash;23, $1,000/month</td>
+        <td>3,000 people in Texas and Illinois &mdash; <b>this one is the opposition's best card.</b> Read the rebuttal below.</td>
+        <td>Participation <b>&minus;4.2pp</b>; hours <b>&minus;1 to 2/week</b></td>
+      </tr>
+    </table>
+  </div>
+
+  <h2>Step 4 &mdash; rebuttals (click each one)</h2>
+  <p style="color:var(--ink-soft); font-size:14.5px; margin-top:-4px">Cover the attack, predict the answer, then check. If you can do all eight from memory you are ready.</p>
+
+  <details class="reb">
+    <summary><span class="q">Attack 1</span><span>&ldquo;People will stop working. It rewards laziness.&rdquo;</span><span class="arrow">&#9654;</span></summary>
+    <div class="body">
+      Go straight to <b>Alaska</b>: forty years, universal, permanent, no effect on employment. Then <b>Kenya</b>: no reduction in work, a shift into self-employment. Then <b>Finland</b>: six days <i>more</i> work.
+      <div class="turn"><b>Turn it around:</b> the current system is the one that punishes work &mdash; benefits are withdrawn as soon as you earn, so a person on means-tested support can lose most of every extra pound. UBI is never withdrawn. Under our model, work always pays more than not working. <i>&ldquo;My opponents say we should reward work. I agree &mdash; which is why I want to stop taxing the poor at 70% for taking a job.&rdquo;</i></div>
+    </div>
+  </details>
+
+  <details class="reb">
+    <summary><span class="q">Attack 2</span><span>&ldquo;It is unaffordable. The numbers do not add up.&rdquo;</span><span class="arrow">&#9654;</span></summary>
+    <div class="body">
+      Three moves, in order. <b>One:</b> the gross cost is not the net cost &mdash; most of the payment goes to people who pay it straight back in tax, so the real transfer is far smaller than the headline. <b>Two:</b> it replaces spending we already do, including the administration of means-testing. <b>Three:</b> compare like with like &mdash; ask them what the current system costs, including the cost of poverty itself: emergency healthcare, homelessness services, the police, and the lost productivity of people too insecure to retrain.
+      <div class="turn"><b>The honest version:</b> do not claim it is free. Say it is <b>a choice about priorities</b>, and that we already spend enormous sums managing poverty badly. That sounds like someone who has done the reading; &ldquo;it pays for itself&rdquo; does not.</div>
+    </div>
+  </details>
+
+  <details class="reb">
+    <summary><span class="q">Attack 3</span><span>&ldquo;It will cause inflation &mdash; prices just rise to swallow it.&rdquo;</span><span class="arrow">&#9654;</span></summary>
+    <div class="body">
+      Inflation comes from more money chasing the same goods. A UBI funded by <b>taxation</b> rather than by printing money moves existing money around; it does not create new money. Alaska has paid a dividend for four decades without runaway local inflation.
+      <div class="turn"><b>Concede the sliver:</b> in a market with fixed supply &mdash; housing in a crowded city &mdash; some of the money can be captured by landlords. The answer is to build more housing, which is a reason to pair UBI with housing supply policy, not a reason to leave people with nothing.</div>
+    </div>
+  </details>
+
+  <details class="reb">
+    <summary><span class="q">Attack 4</span><span>&ldquo;Why give money to millionaires? Target the poor instead.&rdquo;</span><span class="arrow">&#9654;</span></summary>
+    <div class="body">
+      The rich get the payment and hand it back through the tax system, so the net flow is still downward. Universality buys three things targeting cannot: <b>no cliff edge</b> (no sudden loss of support when you earn a little more), <b>no stigma</b> (it is not a handout if everyone gets it), and <b>no one falling through the cracks</b> because they could not navigate the forms.
+      <div class="turn"><b>The political point:</b> programmes only for the poor tend to be poorly funded, because the people who fund them do not benefit. Universal programmes &mdash; healthcare, schools, pensions &mdash; are the ones that survive.</div>
+    </div>
+  </details>
+
+  <details class="reb">
+    <summary><span class="q">Attack 5</span><span>&ldquo;People will waste it on alcohol, gambling and drugs.&rdquo;</span><span class="arrow">&#9654;</span></summary>
+    <div class="body">
+      This is the easiest one to win because the data is unambiguous. In Stockton, <b>less than 1%</b> went on alcohol or tobacco; the overwhelming majority went on food, utilities, clothing and car repairs. Reviews of cash transfer programmes across many countries find no evidence that cash increases spending on alcohol or tobacco.
+      <div class="turn"><b>Name the assumption:</b> this objection assumes poor people cannot be trusted with their own money. The evidence says they spend it on exactly what you would spend it on &mdash; because they know their situation better than a government office does.</div>
+    </div>
+  </details>
+
+  <details class="reb">
+    <summary><span class="q">Attack 6</span><span>&ldquo;Work gives life meaning. UBI takes away purpose.&rdquo;</span><span class="arrow">&#9654;</span></summary>
+    <div class="body">
+      UBI does not ban work &mdash; nobody is stopped from having a job. It changes <i>which</i> work is possible: caring for a relative, raising a child, studying, starting a business, making art. All of that is work; it is just unpaid work that the current system treats as nothing.
+      <div class="turn"><b>Sharp line:</b> <i>&ldquo;The opposition says work gives meaning. Then they should explain why we only count it as work when someone is willing to pay for it.&rdquo;</i></div>
+    </div>
+  </details>
+
+  <details class="reb">
+    <summary><span class="q">Attack 7</span><span>&ldquo;It would attract immigrants / everyone would move here.&rdquo;</span><span class="arrow">&#9654;</span></summary>
+    <div class="body">
+      Eligibility is a design choice, not a flaw in the idea. Our model pays citizens and long-term legal residents, exactly as pensions and existing benefits already do. Every country already has rules about who qualifies for public support; UBI uses the same ones.
+    </div>
+  </details>
+
+  <details class="reb">
+    <summary><span class="q">Attack 8</span><span>&ldquo;The biggest study found people worked LESS.&rdquo; &mdash; their best card</span><span class="arrow">&#9654;</span></summary>
+    <div class="body">
+      <b>Be ready for this, and do not pretend it does not exist.</b> The OpenResearch study &mdash; 3,000 people, $1,000 a month for three years, the largest US cash study &mdash; found labour market participation fell by <b>4.2 percentage points</b> and people worked <b>one to two hours less per week</b>. If you deny it and they have the paper, you lose the round.
+      <p style="margin:11px 0 0">Three honest answers, in order of strength:</p>
+      <ul style="margin-top:6px">
+        <li><b>It was temporary, and that matters.</b> A three-year payment is a windfall you can take a break during. A permanent floor changes your whole life plan instead. The permanent case &mdash; Alaska &mdash; shows no employment effect at all.</li>
+        <li><b>Look at where the hours went.</b> The reduction was small, and time went into education, job searching, caring and rest. Someone leaving a bad job to find a better one shows up in this data as &ldquo;working less.&rdquo;</li>
+        <li><b>Ask what we are buying.</b> A one-to-two hour reduction is a real cost. Set it against what the same studies found: less financial distress, better health, better parenting, more entrepreneurship. That is the trade, and we say it is worth it.</li>
+      </ul>
+      <div class="turn"><b>Judges reward this.</b> Conceding a real finding and arguing it is worth the price is far more persuasive than pretending the evidence is all one way. It also makes everything else you said more believable.</div>
+    </div>
+  </details>
+
+  <h2>Step 5 &mdash; questions to ask them</h2>
+  <div class="panel">
+    <ul style="margin:0">
+      <li><b>&ldquo;What is the effective tax rate on someone moving from benefits into a low-paid job today?&rdquo;</b> Most opponents do not know it can exceed the rate paid by the rich. This sets up the poverty-trap argument.</li>
+      <li><b>&ldquo;Alaska has paid every resident a dividend since 1982. Has Alaska collapsed?&rdquo;</b> Forces them to engage with the one permanent real-world case.</li>
+      <li><b>&ldquo;You say target the poor. How many people entitled to benefits today actually claim them?&rdquo;</b> Exposes that targeting misses people.</li>
+      <li><b>&ldquo;If automation removes a large share of routine jobs in the next twenty years, what is your plan?&rdquo;</b> Puts them on the defensive about the future, where your case is strongest.</li>
+      <li><b>&ldquo;Do you trust a government office to know what a family needs better than the family does?&rdquo;</b> Reframes UBI as trusting people rather than as charity.</li>
+    </ul>
+  </div>
+
+  <h2>Step 6 &mdash; your speech, written out</h2>
+  <p style="color:var(--ink-soft); font-size:14.5px; margin-top:-4px">About three and a half minutes at debate pace. The bracketed notes are stage directions &mdash; do not read them out. Print this page and the speech comes out formatted.</p>
+
+  <div class="speech">
+    <div class="beat">Hook</div>
+    <p>Imagine you're offered a better job. Better pay, real prospects. But it starts in three weeks, and it's on the other side of the city. Today, you turn it down &mdash; because three weeks without pay means you lose your flat.</p>
+    <p>That person isn't lazy. They're not unambitious. They just have no floor to stand on. And our entire welfare system is built on the assumption that what they need is more pressure.</p>
+    <p class="stage">[pause]</p>
+
+    <div class="beat">Definition &mdash; take this ground before they do</div>
+    <p>We propose a Universal Basic Income: a regular cash payment to every adult. Universal &mdash; everyone gets it. Unconditional &mdash; no work test. Paid in cash, because the person receiving it knows their life better than a government office does.</p>
+    <p>And let me be specific, because my opponents will try to argue against something we haven't proposed. We are not proposing a fortune. We propose a modest payment &mdash; enough for food and rent, not enough to live comfortably without working. It replaces the tangle of means-tested unemployment benefits it duplicates. Disability and health support stay on top. And it's funded by that consolidated spending, plus taxes on the highest incomes, on land, and on carbon.</p>
+    <p>That's our model. I'd ask the opposition to argue against it, rather than against one they've invented.</p>
+
+    <div class="beat">Argument 1 &mdash; security</div>
+    <p><b>My first argument: security makes people more productive, not less.</b></p>
+    <p>In Stockton, California, people were given five hundred dollars a month for two years. Full-time employment among them rose from twenty-eight per cent to forty. The control group went from thirty-two to thirty-seven. The number who could cover an emergency expense in cash doubled &mdash; from a quarter of them to over half.</p>
+    <p>They didn't stop working. They finally had the stability to work <i>better</i>. One of them used it to take unpaid time off to attend an interview. You cannot do that when you're one missed shift from disaster.</p>
+
+    <div class="beat">Argument 2 &mdash; pre-empt their whole case</div>
+    <p><b>My second argument answers the objection you're about to hear.</b></p>
+    <p>The opposition will tell you people will stop working. We don't have to guess. Alaska has paid every single resident a dividend, every year, since 1982 &mdash; universal, unconditional, permanent, for over forty years. Economists at the National Bureau of Economic Research studied it and found no effect on employment whatsoever. None.</p>
+    <p>In Kenya, across roughly two hundred villages, the largest experiment ever run found people weren't working less &mdash; they were leaving wage labour to start their own businesses. In Finland, two thousand unemployed people receiving five hundred and sixty euros a month worked <i>six days more</i> than the control group, and were measurably less depressed and less lonely.</p>
+    <p class="stage">[slow down here &mdash; this next part is the most important thing you say]</p>
+    <p>I'll be honest with this house, because the evidence deserves it. One large American study did find a small reduction &mdash; about an hour or two a week. And the hours went into education, job hunting, and caring for family. We accept that cost. We say a person who works one hour less and is no longer terrified is a better outcome than a person who works one hour more because they're frightened.</p>
+
+    <div class="beat">Argument 3 &mdash; the system we already have</div>
+    <p><b>My third argument: the system we have now is worse.</b></p>
+    <p>Today, if you're on benefits and you earn an extra pound, support is withdrawn. The poorest people in this country face higher effective tax rates than the richest. We built a system that punishes work and then we complain that people don't work.</p>
+    <p>We pay administrators to decide who deserves help. We make people prove their desperation. And after all that, we still miss the people who need it most, because they didn't know they qualified or couldn't face the forms.</p>
+    <p>A universal payment is never withdrawn. Never has to be applied for. Never has to be justified.</p>
+
+    <div class="beat">Close</div>
+    <p class="stage">[land this &mdash; slower, and look up]</p>
+    <p>So the question before this house isn't whether we can afford to trust people. It's whether we can afford to keep not trusting them. Every serious experiment points the same way.</p>
+    <p style="margin-bottom:0">I urge you to propose.</p>
+  </div>
+
+  <div class="panel" style="margin-top:14px">
+    <p style="margin-top:0"><b>Cutting it down.</b> If your format is shorter, cut in this order: first the Kenya and Finland sentences in Argument 2, then the middle paragraph of Argument 3. <b>Never cut Alaska</b> &mdash; it is the strongest fact you have. Never cut the honest concession about the American study; it is doing more work than any statistic in the speech.</p>
+    <p style="margin-bottom:0"><b>Three things to rehearse.</b> The <b>pauses</b> &mdash; all three are marked, and they do more work than any phrase. The <b>numbers</b>, until you can say them without reading. And the <b>concession</b>, until it sounds like confidence rather than apology &mdash; because that is exactly what it is.</p>
+  </div>
+
+  <h2>Step 7 &mdash; delivery, and the traps</h2>
+  <div class="warn">
+    <h3>Five things that lose rounds</h3>
+    <ul style="margin-bottom:0">
+      <li><b>Claiming it is free.</b> It is not. Say it is a choice about priorities. Overclaiming on cost is the fastest way to lose your credibility on everything else.</li>
+      <li><b>Defending a version you did not propose.</b> When they attack $3,000 a month for everyone, say: &ldquo;That is not our model. Our model is…&rdquo; and repeat your definition.</li>
+      <li><b>Hiding from the OpenResearch study.</b> Raise it yourself if they do not. Owning an inconvenient fact is a strength signal; being caught hiding it is fatal.</li>
+      <li><b>Numbers without a story.</b> Never give a statistic without saying what it means for a person. &ldquo;Twenty-eight to forty per cent&rdquo; means nothing; &ldquo;twelve more people in every hundred got full-time work&rdquo; lands.</li>
+      <li><b>Arguing with the judge's assumptions instead of the opposition's case.</b> Answer what they actually said. Write their arguments down as they speak and tick them off one by one.</li>
+    </ul>
+  </div>
+
+  <div class="panel" style="margin-top:14px">
+    <p style="margin-top:0"><b>Two structural habits that win close rounds.</b> First, <b>signpost</b>: &ldquo;Three arguments. First, security. Second, the evidence on work. Third, simplicity.&rdquo; Judges score what they can follow. Second, <b>weigh at the end</b>: do not just rebut, explain why your argument matters more than theirs. &ldquo;Even if we grant that some people work an hour less, that is set against people escaping poverty traps &mdash; and we say a small reduction in hours is a price worth paying for that.&rdquo;</p>
+    <p style="margin-bottom:0"><b>On honesty:</b> this page is built to argue one side, because that is your assignment. The real evidence is genuinely mixed &mdash; the employment findings point in different directions depending on whether the payment is temporary or permanent, and reasonable economists disagree about cost. Knowing that makes you better in the round, not worse: it is why your rebuttals can afford to concede things, which is exactly what makes them persuasive.</p>
+  </div>
+
+  <h2>Sources &mdash; cite these if asked</h2>
+  <div class="panel srcs">
+    <ul style="margin:0">
+      <li><b>Alaska Permanent Fund:</b> Jones &amp; Marinescu, <i>The Labor Market Impacts of Universal and Permanent Cash Transfers</i>, NBER Working Paper 24312 &mdash; <a href="https://www.nber.org/papers/w24312">nber.org/papers/w24312</a></li>
+      <li><b>Stockton SEED:</b> West, Baker et al., preliminary and final evaluations &mdash; summary at <a href="https://catalog.results4america.org/case-studies/guaranteed-income-stockton">Economic Mobility Catalog</a></li>
+      <li><b>Finland:</b> VATT Institute for Economic Research / Kela final evaluation &mdash; <a href="https://vatt.fi/en/-/results-of-the-basic-income-experiment-small-employment-effects-better-perceived-economic-security-and-mental-wellbeing">vatt.fi</a></li>
+      <li><b>Kenya:</b> Banerjee, Faye, Krueger, Niehaus &amp; Suri, <i>Universal Basic Income: Short-Term Results from a Long-Term Experiment in Kenya</i> &mdash; summary at <a href="https://www.givedirectly.org/2023-ubi-results">GiveDirectly</a></li>
+      <li><b>OpenResearch (the opposition's card):</b> Vivalt, Rhodes, Bartik, Broockman &amp; Miller, <i>The Employment Effects of a Guaranteed Income</i>, NBER Working Paper 32719 &mdash; <a href="https://www.nber.org/papers/w32719">nber.org/papers/w32719</a></li>
+    </ul>
+  </div>
+
+  <footer>Built for Devon &middot; proposition case &middot; good luck</footer>
+</div>
