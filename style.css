@@ -29,6 +29,22 @@
   
   --bad: #FA5252; /* Bright Red */
   --bad-tint: #FFF5F5;
+
+  /* Lesson Hues */
+  --hueA: #4C6EF5;
+  --hueB: #20C997;
+  --hueC: #BE4BDB;
+  --hueD: #FD7E14;
+  --hueE: #E64980;
+  --hueF: #12B886;
+  --hueG: #82C91E;
+  --hueH: #FAB005;
+  --hueI: #7950F2;
+  --hueJ: #15AABF;
+  --hueK: #E64980;
+  --hueL: #FAB005;
+  --tint: #F1F3F5;
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -53,6 +69,22 @@
     
     --bad: #FF8787;
     --bad-tint: #3B1C1C;
+
+    /* Lesson Hues Dark */
+    --hueA: #748FFC;
+    --hueB: #63E6BE;
+    --hueC: #E599F7;
+    --hueD: #FFA94D;
+    --hueE: #FAA2C1;
+    --hueF: #38D9A9;
+    --hueG: #B2F2BB;
+    --hueH: #FFEC99;
+    --hueI: #B197FC;
+    --hueJ: #99E9F2;
+    --hueK: #FAA2C1;
+    --hueL: #FFEC99;
+    --tint: #2B303B;
+
   }
 }
 
