@@ -1571,8 +1571,8 @@
       var section = document.createElement("section");
       section.className = "lesson";
       section.id = "lesson-" + lesson.letter;
-      section.style.setProperty("--hue", "var(" + lesson.hueVar + "-solid)");
-      section.style.setProperty("--tint", "var(" + lesson.hueVar + "-tint)");
+      section.style.setProperty("--hue", "var(" + lesson.hueVar + ")");
+      section.style.setProperty("--tint", "var(--tint)");
 
       var head = document.createElement("div");
       head.className = "lesson-head";
@@ -1779,7 +1779,7 @@
     });
     css += "}";
     style.textContent = css;
-    document.head.appendChild(style);
+    // document.head.appendChild(style); // disabled by UI redesign
   }
 
   function buildCheatSheet(){
@@ -1789,8 +1789,8 @@
       if(!lesson.remember || !lesson.remember.length) return;
       var card = document.createElement("div");
       card.className = "cs-card";
-      card.style.setProperty("--hue", "var(" + lesson.hueVar + "-solid)");
-      card.style.setProperty("--tint", "var(" + lesson.hueVar + "-tint)");
+      card.style.setProperty("--hue", "var(" + lesson.hueVar + ")");
+      card.style.setProperty("--tint", "var(--tint)");
       card.innerHTML =
         '<h4><span class="cs-letter">' + lesson.letter + '</span>' + lesson.title + '</h4>' +
         '<ul>' + lesson.remember.map(function(r){ return "<li>" + r + "</li>"; }).join("") + '</ul>';

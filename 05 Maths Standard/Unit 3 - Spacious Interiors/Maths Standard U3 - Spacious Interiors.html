@@ -609,8 +609,8 @@
       var section = document.createElement("section");
       section.className = "lesson";
       section.id = "lesson-" + lesson.letter;
-      section.style.setProperty("--hue", "var(" + lesson.hueVar + "-solid)");
-      section.style.setProperty("--tint", "var(" + lesson.hueVar + "-tint)");
+      section.style.setProperty("--hue", "var(" + lesson.hueVar + ")");
+      section.style.setProperty("--tint", "var(--tint)");
 
       var head = document.createElement("div");
       head.className = "lesson-head";
@@ -748,7 +748,7 @@
     });
     css += "}";
     style.textContent = css;
-    document.head.appendChild(style);
+    // document.head.appendChild(style); // disabled by UI redesign
   }
 
   injectHueVars();
