@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Light Theme - Clean, Bright, Friendly */
+  --bg: #F8F9FA;
+  --surface: #FFFFFF;
+  --surface-2: #F1F3F5;
+  --ink: #212529;
+  --ink-soft: #495057;
+  --ink-faint: #868E96;
+  --border: #DEE2E6;
+  --border-strong: #CED4DA;
+  --shadow: rgba(33, 37, 41, 0.08);
+  --radius: 20px;
+  --radius-sm: 12px;
+
+  /* Fonts */
+  --font-body: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+
+  /* Accent Colors */
+  --accent: #339AF0; /* Friendly Blue */
+  --accent-ink: #FFFFFF;
+  --accent-2: #FF922B; /* Playful Orange */
+  
+  --good: #40C057; /* Bright Green */
+  --good-tint: #EBFBEE;
+  
+  --bad: #FA5252; /* Bright Red */
+  --bad-tint: #FFF5F5;
+
+  /* Per-lesson hues (used in units) */
+  --hueA: #4C6EF5; 
+  --hueB: #20C997; 
+  --hueC: #BE4BDB; 
+  --hueD: #FD7E14; 
+  --hueE: #E64980; 
+  --hueF: #12B886;
+  --tint: #F1F3F5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* Dark Theme - High contrast, deep space */
+    --bg: #1A1D24;
+    --surface: #222630;
+    --surface-2: #2B303B;
+    --ink: #F8F9FA;
+    --ink-soft: #CED4DA;
+    --ink-faint: #868E96;
+    --border: #343A40;
+    --border-strong: #495057;
+    --shadow: rgba(0, 0, 0, 0.25);
+    
+    --accent: #4DABF7;
+    --accent-ink: #000000;
+    --accent-2: #FFC078;
+    
+    --good: #69DB7C;
+    --good-tint: #1C3322;
+    
+    --bad: #FF8787;
+    --bad-tint: #3B1C1C;
+    
+    --hueA: #748FFC;
+    --hueB: #63E6BE;
+    --hueC: #DA77F2;
+    --hueD: #FFA94D;
+    --hueE: #FAA2C1;
+    --hueF: #38D9A9;
+    --tint: #2B303B;
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 18px; /* Increased from 15px/16px */
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { 
+  color: var(--accent); 
+  text-decoration: none;
+  font-weight: 600;
+}
+a:hover { text-decoration: underline; }
+
+::selection { background: color-mix(in srgb, var(--accent) 30%, transparent); }
+
+.wrap { 
+  max-width: 980px; 
+  margin: 0 auto; 
+  padding: 0 20px; 
+}
+
+h1, h2, h3, h4 { 
+  font-family: var(--font-display); 
+  font-weight: 800; 
+  text-wrap: balance; 
+  margin: 0; 
+  color: var(--ink); 
+  letter-spacing: -0.02em;
+}
+
+code, .mono, .expr { font-family: var(--font-mono); font-size: 0.95em;}
+
+button { 
+  font-family: var(--font-body); 
+  cursor: pointer; 
+  font-size: 16px;
+  font-weight: 700;
+}
+button:focus-visible, input:focus-visible, a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Base UI Components (Cards, Buttons, etc.) used across pages */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 30px;
+  box-shadow: 0 4px 16px var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px var(--shadow);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 800;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  border: none;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.btn:hover {
+  background-color: color-mix(in srgb, var(--accent) 90%, black);
+  text-decoration: none;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+
+.tag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+.tag.success {
+  color: var(--good);
+  background: var(--good-tint);
+}
+.tag.warning {
+  color: var(--accent-2);
+  background: color-mix(in srgb, var(--accent-2) 15%, transparent);
+}
+

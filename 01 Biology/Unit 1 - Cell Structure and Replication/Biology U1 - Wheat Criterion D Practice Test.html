@@ -7,20 +7,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../style.css">
 <style>
-:root{
-  --paper:#F3F5EF; --ink:#1F2A22; --field:#2F5A3C; --grain:#C9A227; --muted:#5E6B60; --line:#D5DBCF; --answer:#FFFFFF; --cite:#7A5B0F;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --paper:#141A16; --ink:#E6EBE3; --field:#8FC49E; --grain:#E3C15A; --muted:#A3AFA5; --line:#2C362F; --answer:#1C241F; --cite:#E3C15A;
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#141A16; --ink:#E6EBE3; --field:#8FC49E; --grain:#E3C15A; --muted:#A3AFA5; --line:#2C362F; --answer:#1C241F; --cite:#E3C15A;
-}
+
+
+
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;font-size:1.075rem;line-height:1.65}
+
 .wrap{max-width:46rem;margin:0 auto;padding:3rem 1.25rem 4rem}
 header{border-left:6px solid var(--grain);padding-left:1.25rem;margin-bottom:2.5rem}
 h1{font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.12;margin:0 0 .6rem;color:var(--field);font-weight:700}
@@ -46,7 +39,7 @@ button{font:inherit;font-size:.9rem;background:var(--field);color:var(--paper);b
   .tools{display:none}
   details{border:none;padding:0}
   summary{display:none}
-  body{background:#fff;color:#000}
+  
 }
 dfn.term{font-style:normal;font-weight:600;color:var(--field);background:color-mix(in srgb,var(--grain) 22%,transparent);border-bottom:2px solid var(--grain);padding:0 .15em;border-radius:2px;cursor:help}
 .termlist{font-family:Figtree,system-ui,sans-serif;font-size:.9rem;border-top:1px dashed var(--line);padding-top:.5rem;color:var(--muted)}

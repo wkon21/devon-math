@@ -1,60 +1,18 @@
 <title>Grade 9 Standard Maths Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+
+<link rel="stylesheet" href="../style.css">
 <style>
-  :root{
-    --bg: #F5F6F2;
-    --surface: #FFFFFF;
-    --surface-2: #ECEFE7;
-    --ink: #1B222C;
-    --ink-soft: #545E6B;
-    --ink-faint: #8A93A0;
-    --accent: #2957A4;
-    --accent-ink: #ffffff;
-    --accent-2: #C1841B;
-    --good: #2C8A57;
-    --good-tint: #E4F3EA;
-    --border: #DBDFD4;
-    --border-strong: #C4CABC;
-    --radius: 16px;
-
-    --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
-    --font-body: "Karla", "Segoe UI", system-ui, sans-serif;
-    --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
-
-    --u1: 262; --u2: 214; --u3: 30; --u4: 350;
-    --lsat: 58%; --llight: 38%; --ltint: 94%;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --bg: #12151A; --surface: #191D24; --surface-2: #1F252E;
-      --ink: #E9ECF1; --ink-soft: #A7B0BE; --ink-faint: #6E7787;
-      --accent: #7DA3E8; --accent-ink: #0D1420; --accent-2: #E3AE55;
-      --good: #57C489; --good-tint: #16261E;
-      --border: #2A303B; --border-strong: #3A4250;
-      --lsat: 62%; --llight: 68%; --ltint: 16%;
-    }
-  }
-  :root[data-theme="dark"]{
-    --bg: #12151A; --surface: #191D24; --surface-2: #1F252E;
-    --ink: #E9ECF1; --ink-soft: #A7B0BE; --ink-faint: #6E7787;
-    --accent: #7DA3E8; --accent-ink: #0D1420; --accent-2: #E3AE55;
-    --good: #57C489; --good-tint: #16261E;
-    --border: #2A303B; --border-strong: #3A4250;
-    --lsat: 62%; --llight: 68%; --ltint: 16%;
-  }
-  :root{
-    --u1-solid: hsl(var(--u1) var(--lsat) var(--llight)); --u1-tint: hsl(var(--u1) var(--lsat) var(--ltint));
-    --u2-solid: hsl(var(--u2) var(--lsat) var(--llight)); --u2-tint: hsl(var(--u2) var(--lsat) var(--ltint));
-    --u3-solid: hsl(var(--u3) var(--lsat) var(--llight)); --u3-tint: hsl(var(--u3) var(--lsat) var(--ltint));
-    --u4-solid: hsl(var(--u4) var(--lsat) var(--llight)); --u4-tint: hsl(var(--u4) var(--lsat) var(--ltint));
-  }
+  
+  
+  
+  
 
   *{ box-sizing: border-box; }
   @media (prefers-reduced-motion: reduce){ *{ animation: none !important; transition: none !important; } }
-  body{ margin:0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  
   a{ color: var(--accent); }
   ::selection{ background: color-mix(in srgb, var(--accent) 30%, transparent); }
   .wrap{ max-width: 980px; margin: 0 auto; padding: 0 20px; }
