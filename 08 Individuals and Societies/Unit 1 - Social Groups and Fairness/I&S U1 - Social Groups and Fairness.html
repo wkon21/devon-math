@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>I&amp;S Unit 1: Social Groups &amp; Fairness — IB MYP Grade 9</title>
+  <title>I&amp;S Unit 1: Social Groups &amp; Fairness — Comprehensive Study Workbook</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="../../style.css">
   <style>
     .wrap {
-      max-width: 980px;
+      max-width: 1040px;
       margin: 0 auto;
-      padding: 0 20px 80px;
+      padding: 0 20px 100px;
     }
 
     /* Masthead */
@@ -21,16 +21,16 @@
       position: relative;
     }
     .masthead-inner {
-      padding: 34px 20px 24px;
+      padding: 38px 20px 28px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      max-width: 980px;
+      gap: 18px;
+      max-width: 1040px;
       margin: 0 auto;
     }
     .eyebrow {
       font-family: var(--font-mono);
-      font-size: 12.5px;
+      font-size: 13px;
       letter-spacing: 0.09em;
       text-transform: uppercase;
       color: var(--ink-faint);
@@ -38,7 +38,7 @@
       align-items: center;
       gap: 10px;
     }
-    .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: #1098AD; }
 
     .title-row {
       display: flex;
@@ -48,26 +48,27 @@
       flex-wrap: wrap;
     }
     .title-row h1 {
-      font-size: clamp(30px, 4.2vw, 42px);
+      font-size: clamp(32px, 4.4vw, 46px);
       line-height: 1.1;
       margin: 0;
+      color: var(--ink);
     }
     .title-row .subtitle {
       color: var(--ink-soft);
-      font-size: 16px;
-      max-width: 58ch;
-      margin-top: 6px;
-      line-height: 1.5;
+      font-size: 17px;
+      max-width: 65ch;
+      margin-top: 8px;
+      line-height: 1.55;
     }
 
     .student-tag {
       font-family: var(--font-mono);
-      font-size: 13px;
+      font-size: 13.5px;
       color: var(--ink-soft);
       background: var(--surface-2);
       border: 1px solid var(--border);
       border-radius: 999px;
-      padding: 7px 16px;
+      padding: 8px 18px;
       white-space: nowrap;
     }
     .student-tag b { color: var(--ink); }
@@ -75,38 +76,46 @@
     .meta-strip {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px 24px;
-      font-size: 13.5px;
+      gap: 12px 28px;
+      font-size: 14px;
       color: var(--ink-soft);
-      padding-top: 4px;
+      padding-top: 6px;
       border-top: 1px dashed var(--border);
     }
     .meta-item b { color: var(--ink); }
 
     .soi-box {
-      background: var(--surface-2);
-      border-left: 5px solid var(--accent);
+      background: color-mix(in srgb, #1098AD 8%, var(--surface));
+      border-left: 5px solid #1098AD;
       border-radius: var(--radius-sm);
-      padding: 14px 18px;
-      font-size: 14.5px;
-      line-height: 1.55;
+      padding: 16px 22px;
+      font-size: 15.5px;
+      line-height: 1.6;
       color: var(--ink);
     }
-    .soi-box b { color: var(--accent); text-transform: uppercase; font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; display: block; margin-bottom: 4px; }
+    .soi-box b {
+      color: #1098AD;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      letter-spacing: .08em;
+      display: block;
+      margin-bottom: 4px;
+    }
 
-    /* Sticky Navigator & Chips */
+    /* Sticky Nav & Filter Chips */
     .nav-bar {
       position: sticky;
       top: 0;
       z-index: 50;
-      background: color-mix(in srgb, var(--bg) 92%, transparent);
-      backdrop-filter: blur(10px);
+      background: color-mix(in srgb, var(--bg) 94%, transparent);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 12px 0;
-      margin-bottom: 30px;
+      margin-bottom: 34px;
     }
     .nav-inner {
-      max-width: 980px;
+      max-width: 1040px;
       margin: 0 auto;
       padding: 0 20px;
       display: flex;
@@ -137,72 +146,72 @@
       color: var(--ink);
     }
     .chip.active {
-      background: var(--accent);
+      background: #1098AD;
       color: #fff;
-      border-color: var(--accent);
+      border-color: #1098AD;
     }
 
     .tally {
       font-family: var(--font-mono);
-      font-size: 13px;
+      font-size: 13.5px;
       color: var(--ink-soft);
       display: flex;
       align-items: center;
       gap: 12px;
     }
-    .tally b { color: var(--ink); font-size: 15px; }
+    .tally b { color: var(--ink); font-size: 16px; }
 
-    /* Lesson Sections */
+    /* Lesson Card Sections */
     .lesson-section {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 32px 30px 40px;
-      margin-bottom: 40px;
-      box-shadow: 0 4px 16px var(--shadow);
+      padding: 36px 34px 44px;
+      margin-bottom: 44px;
+      box-shadow: 0 4px 18px var(--shadow);
     }
     .lesson-badge {
       display: inline-block;
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 800;
       letter-spacing: .08em;
       text-transform: uppercase;
       padding: 4px 12px;
       border-radius: 6px;
-      background: var(--surface-2);
-      color: var(--accent);
+      background: color-mix(in srgb, #1098AD 12%, var(--surface));
+      color: #1098AD;
       margin-bottom: 12px;
     }
     .lesson-section h2 {
-      font-size: 26px;
+      font-size: 28px;
       margin-bottom: 12px;
       color: var(--ink);
     }
     .lesson-lead {
-      font-size: 16.5px;
+      font-size: 17px;
       color: var(--ink-soft);
-      line-height: 1.6;
-      margin-bottom: 24px;
+      line-height: 1.65;
+      margin-bottom: 26px;
     }
 
-    /* Core Concept Cards */
+    /* Concept & Case Study Cards */
     .concept-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
       margin-bottom: 28px;
     }
     .concept-card {
       background: var(--surface-2);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      padding: 18px 20px;
+      padding: 20px 22px;
     }
     .concept-card h4 {
-      font-size: 16px;
+      font-size: 16.5px;
       color: var(--ink);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -210,57 +219,87 @@
     .concept-card p {
       font-size: 14.5px;
       color: var(--ink-soft);
-      line-height: 1.55;
+      line-height: 1.6;
       margin: 0;
     }
+    .concept-card ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
 
-    /* Source Spotlight */
+    /* Primary Source Spotlight Box */
     .source-box {
-      border-left: 4px solid var(--accent-2);
-      background: color-mix(in srgb, var(--accent-2) 6%, var(--surface));
+      border-left: 5px solid var(--accent-2);
+      background: color-mix(in srgb, var(--accent-2) 8%, var(--surface));
       border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      padding: 16px 20px;
-      margin: 24px 0;
-      font-size: 14.5px;
-      line-height: 1.6;
+      padding: 20px 24px;
+      margin: 28px 0;
+      font-size: 15px;
+      line-height: 1.65;
       color: var(--ink);
     }
     .source-box .src-title {
       font-family: var(--font-mono);
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: .07em;
+      letter-spacing: .08em;
       color: var(--accent-2);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
     .source-box blockquote {
-      margin: 0 0 8px;
+      margin: 0 0 10px;
       font-style: italic;
-      color: var(--ink-soft);
+      color: var(--ink);
+      font-size: 15.5px;
     }
     .source-box .src-citation {
-      font-size: 12.5px;
+      font-size: 13px;
       color: var(--ink-faint);
+    }
+
+    /* Diagram Containers */
+    .diagram-box {
+      margin: 26px 0;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      text-align: center;
+    }
+    .diagram-box svg {
+      max-width: 100%;
+      height: auto;
+    }
+    .diagram-caption {
+      margin-top: 10px;
+      font-size: 13.5px;
+      color: var(--ink-faint);
+      font-style: italic;
     }
 
     /* Exercise Grid */
     .ex-title {
       font-family: var(--font-mono);
-      font-size: 13px;
-      font-weight: 700;
+      font-size: 13.5px;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: .07em;
+      letter-spacing: .08em;
       color: var(--ink-faint);
-      margin: 28px 0 16px;
+      margin: 32px 0 18px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
     }
     .ex-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
     }
 
     .ex-card {
@@ -313,15 +352,13 @@
       outline: none;
       transition: border-color .15s;
     }
-    .ex-input:focus {
-      border-color: var(--accent);
-    }
+    .ex-input:focus { border-color: #1098AD; }
 
     .ex-btn {
-      padding: 9px 15px;
+      padding: 9px 16px;
       border-radius: 8px;
       border: none;
-      background: var(--accent);
+      background: #1098AD;
       color: #fff;
       font-weight: 700;
       font-size: 14px;
@@ -362,12 +399,12 @@
     .sol-box {
       display: none;
       margin-top: 8px;
-      padding: 10px 12px;
+      padding: 12px 14px;
       background: var(--surface-2);
       border-radius: 6px;
       font-size: 13.5px;
       color: var(--ink-soft);
-      line-height: 1.5;
+      line-height: 1.55;
     }
     .sol-box.open { display: block; }
 
@@ -378,43 +415,61 @@
       line-height: 1.4;
     }
 
-    /* Diagram Containers */
-    .diagram-box {
-      margin: 20px 0;
+    /* Essay Scaffolding Interactive Box */
+    .essay-box {
       background: var(--surface-2);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      padding: 16px;
-      text-align: center;
+      padding: 22px;
+      margin-top: 20px;
     }
-    .diagram-box svg {
-      max-width: 100%;
-      height: auto;
+    .essay-step {
+      margin-bottom: 20px;
+    }
+    .essay-step h5 {
+      font-size: 15px;
+      margin: 0 0 6px;
+      color: var(--ink);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .essay-step textarea {
+      width: 100%;
+      height: 70px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 14.5px;
+      background: var(--surface);
+      color: var(--ink);
+      resize: vertical;
     }
 
-    /* Cheat Sheet */
+    /* Summary Cheat Sheet */
     .cs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
       margin-top: 24px;
     }
     .cs-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-left: 5px solid var(--accent);
+      border-left: 5px solid #1098AD;
       border-radius: var(--radius-sm);
-      padding: 16px 18px;
+      padding: 18px 20px;
     }
     .cs-card h4 {
-      font-size: 16px;
+      font-size: 16.5px;
       margin: 0 0 10px;
       color: var(--ink);
     }
     .cs-card ul {
       margin: 0;
       padding-left: 18px;
-      font-size: 13.5px;
+      font-size: 14px;
       color: var(--ink-soft);
       line-height: 1.55;
     }
@@ -434,12 +489,12 @@
       <div>
         <h1>Social Groups &amp; Fairness</h1>
         <div class="subtitle">
-          How human societies shifted from prehistoric kin groups to complex economic systems, 
-          the ethics of modern automation, and the debate over Universal Basic Income.
+          The complete master study workbook: from hominin altruism and kinship survival to industrial socioeconomic systems,
+          Rutger Bregman's poverty science, automation ethics, and the Universal Basic Income debate.
         </div>
       </div>
       <div class="student-tag">
-        Student: <b>Devon</b> &middot; Grade 9
+        Student: <b>Devon</b> &middot; Grade 9 &middot; 8 Weeks Study Guide
       </div>
     </div>
 
@@ -447,7 +502,8 @@
       <div class="meta-item">Global Context: <b>Identities &amp; relationships</b> (Competition &amp; cooperation)</div>
       <div class="meta-item">Key Concept: <b>Time, place &amp; space</b></div>
       <div class="meta-item">Related Concepts: <b>Equity, Identity</b></div>
-      <div class="meta-item">Criteria: <b>Criterion C (Communicating) &middot; Criterion D (Thinking critically)</b></div>
+      <div class="meta-item">MYP Criteria: <b>Criterion C (Communicating) &middot; Criterion D (Thinking critically)</b></div>
+      <div class="meta-item">Learner Profile: <b>Open-minded</b></div>
     </div>
 
     <div class="soi-box">
@@ -462,16 +518,17 @@
   <div class="nav-inner">
     <div class="chips" id="chipList">
       <button class="chip active" data-filter="all">All Lessons</button>
-      <button class="chip" data-filter="A">A: Early Man</button>
-      <button class="chip" data-filter="B">B: Kinship</button>
-      <button class="chip" data-filter="C">C: Scale &amp; Durkheim</button>
-      <button class="chip" data-filter="D">D: Economic Systems</button>
-      <button class="chip" data-filter="E">E: Equality vs Equity</button>
-      <button class="chip" data-filter="F">F: Automation &amp; UBI</button>
-      <button class="chip" data-filter="G">G: Sources &amp; Op-Ed</button>
+      <button class="chip" data-filter="A">A: Early Man &amp; Altruism</button>
+      <button class="chip" data-filter="B">B: Kinship &amp; Survival</button>
+      <button class="chip" data-filter="C">C: Scale, Durkheim &amp; Maslow</button>
+      <button class="chip" data-filter="D">D: Socioeconomic Systems</button>
+      <button class="chip" data-filter="E">E: Equality vs. Equity (Bregman)</button>
+      <button class="chip" data-filter="F">F: Automation &amp; UBI Mechanics</button>
+      <button class="chip" data-filter="G">G: Primary Sources (Keynes &amp; Finland)</button>
+      <button class="chip" data-filter="H">H: Criterion C &amp; D Essay Lab</button>
     </div>
     <div class="tally">
-      <span>Completed: <b id="doneCount">0</b> / <b id="totalCount">35</b></span>
+      <span>Progress: <b id="doneCount">0</b> / <b id="totalCount">104</b></span>
       <button class="chip" id="resetBtn" style="padding: 4px 10px; font-size: 11px;">Reset</button>
     </div>
   </div>
@@ -479,293 +536,504 @@
 
 <div class="wrap" id="lessonsWrap">
 
-  <!-- LESSON A: EARLY MAN -->
+  <!-- ========================================================
+       LESSON A: EARLY MAN
+  ======================================================== -->
   <section class="lesson-section" id="lessonA" data-lesson="A">
     <span class="lesson-badge">Week 1 &middot; Lesson A</span>
     <h2>Early Man: Competition, Cooperation &amp; Altruism</h2>
     <p class="lesson-lead">
-      Was human evolution solely a violent struggle for survival, or was mutual aid our greatest evolutionary advantage? 
-      Prehistoric archaeology demonstrates that cooperation, empathy, and social care defined our lineage long before the dawn of agriculture.
+      Was early human evolution a vicious, Hobbesian "war of all against all", or was empathy and cooperation our greatest evolutionary weapon?
+      Anthropology and archaeological finds show that long before agriculture, our hominin ancestors developed profound systems of mutual aid, disability care, and symbolic culture.
     </p>
 
     <div class="concept-grid">
       <div class="concept-card">
-        <h4>🦴 Shanidar 1 ("Nandy")</h4>
+        <h4>🦴 Shanidar 1 ("Nandy") &mdash; Disability in the Paleolithic</h4>
         <p>
-          Discovered in Iraqi Kurdistan, Shanidar 1 was a Neanderthal man who lived into his 40s (ancient for that era) despite suffering a crushed left eye socket (likely blind), a severed/withered right arm, and severe deformities in his leg and foot. In a harsh Ice Age environment, he could not hunt or forage alone. His survival proves his group actively fed, protected, and cared for disabled members.
+          Excavated in the Zagros Mountains of Iraqi Kurdistan, the Neanderthal fossil known as Shanidar 1 dates to ~45,000 BP. He survived until age 40&ndash;50 despite horrific physical trauma suffered in his youth:
+        </p>
+        <ul>
+          <li><b>Crushed left eye socket</b> causing total or partial blindness.</li>
+          <li><b>Withered, amputated right arm</b> broken and healed at the elbow.</li>
+          <li><b>Severe right leg trauma</b> and deformed gait leading to extreme mobility impairment.</li>
+        </ul>
+        <p style="margin-top:8px;">
+          In a harsh periglacial environment, he could neither chase big game nor forage efficiently alone. His survival proves his community actively transported, fed, defended, and valued him for decades.
         </p>
       </div>
+
       <div class="concept-card">
-        <h4>🎨 Neanderthal Culture in France</h4>
+        <h4>🎨 Neanderthal Symbolic Culture in France</h4>
         <p>
-          Excavations at sites like Bruniquel Cave and La Chapelle-aux-Saints revealed stalagmite ring structures, seashell jewelry with mineral pigments, and intentional burial pits with floral tributes and grave goods. This confirms symbolic thinking, group identity, and rituals far beyond pure biological survival.
+          Discoveries across French archaeological sites dismantled the Victorian myth of Neanderthals as mindless beasts:
         </p>
+        <ul>
+          <li><b>Bruniquel Cave (176,500 BP):</b> Deep inside total darkness, Neanderthals intentionally snapped hundreds of stalagmites into rings and arranged them around deliberate fire pits.</li>
+          <li><b>La Chapelle-aux-Saints &amp; La Ferrassie:</b> Deliberate rectangular burial pits dug into bedrock, with skeletons positioned in sleeping poses accompanied by stone tools and animal bones (grave goods).</li>
+          <li><b>Body Adornment:</b> Perforated marine shells stained with red ochre and black manganese dioxide pigments worn as necklaces.</li>
+        </ul>
       </div>
+
       <div class="concept-card">
-        <h4>🤝 Group Solidarity &amp; Altruism</h4>
+        <h4>🤝 Darwin vs. Kropotkin: The Evolution of Altruism</h4>
         <p>
-          While animals display kin selection (protecting genetic relatives), early humans developed <b>reciprocal altruism</b> and shared language. Groups with high trust and mutual food-sharing consistently out-survived hyper-competitive, selfish groups during climate fluctuations.
+          While 19th-century Social Darwinists weaponized "survival of the fittest" to justify ruthless greed, evolutionary biologist Peter Kropotkin (<i>Mutual Aid: A Factor of Evolution</i>, 1902) proved that species that practice mutual support thrive far better than solitary combatants:
         </p>
+        <ul>
+          <li><b>Kin Selection:</b> Sacrificing for genetic relatives (Hamilton's Rule).</li>
+          <li><b>Reciprocal Altruism (Robert Trivers):</b> Cooperating with non-relatives under the social expectation that assistance will be reciprocated in times of famine or injury.</li>
+          <li><b>Group Selection:</b> Cohesive, altruistic bands easily out-survived fractured, selfish bands during glacial climate collapses.</li>
+        </ul>
       </div>
     </div>
 
     <div class="diagram-box">
-      <svg viewBox="0 0 700 120" width="700" height="120">
-        <rect x="10" y="20" width="200" height="80" rx="10" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
-        <text x="110" y="50" text-anchor="middle" font-weight="bold" font-size="14" fill="var(--ink)">Competition Alone</text>
-        <text x="110" y="75" text-anchor="middle" font-size="12" fill="var(--ink-soft)">High individual injury risk</text>
-        <text x="110" y="90" text-anchor="middle" font-size="11" fill="var(--bad)">Zero safety net &rarr; Extinction</text>
+      <svg viewBox="0 0 760 140" width="760" height="140">
+        <rect x="10" y="20" width="220" height="95" rx="10" fill="var(--surface)" stroke="var(--bad)" stroke-width="2"/>
+        <text x="120" y="48" text-anchor="middle" font-weight="bold" font-size="14" fill="var(--bad)">Hyper-Competition</text>
+        <text x="120" y="72" text-anchor="middle" font-size="12" fill="var(--ink)">Injured hunters abandoned</text>
+        <text x="120" y="90" text-anchor="middle" font-size="11" fill="var(--ink-soft)">Zero knowledge retention</text>
+        <text x="120" y="106" text-anchor="middle" font-size="11" fill="var(--bad)">Band collapses upon drought</text>
 
-        <path d="M 220 60 L 255 60" stroke="var(--border-strong)" stroke-width="3" marker-end="url(#arrow)"/>
+        <path d="M 240 68 L 275 68" stroke="var(--border-strong)" stroke-width="3" marker-end="url(#arrow)"/>
 
-        <rect x="260" y="20" width="200" height="80" rx="10" fill="var(--good-tint)" stroke="var(--good)" stroke-width="2"/>
-        <text x="360" y="50" text-anchor="middle" font-weight="bold" font-size="14" fill="var(--good)">Altruism &amp; Care</text>
-        <text x="360" y="72" text-anchor="middle" font-size="12" fill="var(--ink)">Shanidar 1 (care for disabled)</text>
-        <text x="360" y="88" text-anchor="middle" font-size="11" fill="var(--ink-soft)">Knowledge passed across generations</text>
+        <rect x="280" y="20" width="220" height="95" rx="10" fill="var(--good-tint)" stroke="var(--good)" stroke-width="2"/>
+        <text x="390" y="48" text-anchor="middle" font-weight="bold" font-size="14" fill="var(--good)">Reciprocal Altruism</text>
+        <text x="390" y="72" text-anchor="middle" font-size="12" fill="var(--ink)">Meat shared with injured (Shanidar 1)</text>
+        <text x="390" y="90" text-anchor="middle" font-size="11" fill="var(--ink-soft)">Elders preserve ecological lore</text>
+        <text x="390" y="106" text-anchor="middle" font-size="11" fill="var(--good)">Toolmaking traditions survive</text>
 
-        <path d="M 470 60 L 505 60" stroke="var(--border-strong)" stroke-width="3" marker-end="url(#arrow)"/>
+        <path d="M 510 68 L 545 68" stroke="var(--border-strong)" stroke-width="3" marker-end="url(#arrow)"/>
 
-        <rect x="510" y="20" width="180" height="80" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
-        <text x="600" y="50" text-anchor="middle" font-weight="bold" font-size="14" fill="var(--accent)">Social Solidarity</text>
-        <text x="600" y="72" text-anchor="middle" font-size="12" fill="var(--ink)">Shared symbolic language</text>
-        <text x="600" y="88" text-anchor="middle" font-size="11" fill="var(--good)">Resilience &amp; Civilization</text>
+        <rect x="550" y="20" width="200" height="95" rx="10" fill="var(--surface)" stroke="#1098AD" stroke-width="2"/>
+        <text x="650" y="48" text-anchor="middle" font-weight="bold" font-size="14" fill="#1098AD)">Cultural Continuity</text>
+        <text x="650" y="72" text-anchor="middle" font-size="12" fill="var(--ink)">Symbolic art &amp; burials</text>
+        <text x="650" y="90" text-anchor="middle" font-size="11" fill="var(--ink-soft)">Language, trade &amp; rituals</text>
+        <text x="650" y="106" text-anchor="middle" font-size="11" fill="#1098AD)">Foundation of Society</text>
       </svg>
+      <div class="diagram-caption">Evolutionary Continuum: How mutual aid and compassion preserved human knowledge across ice ages.</div>
     </div>
 
-    <div class="ex-title">Practice &amp; Check (Lesson A)</div>
+    <div class="ex-title">Practice Exercises (Lesson A)</div>
     <div class="ex-grid" id="gridA"></div>
   </section>
 
-  <!-- LESSON B: KINSHIP & SURVIVAL -->
+  <!-- ========================================================
+       LESSON B: KINSHIP & SURVIVAL
+  ======================================================== -->
   <section class="lesson-section" id="lessonB" data-lesson="B">
     <span class="lesson-badge">Week 2 &middot; Lesson B</span>
     <h2>Kinship, Survival &amp; Indigenous Case Studies</h2>
     <p class="lesson-lead">
-      Before courts, police, and contracts existed, <b>kinship</b> was the total organizing framework of human life. 
-      It dictated who shared food, who resolved disputes, and who protected the group from outside threats.
+      Before courts, police forces, national borders, or written constitutions existed, <b>kinship</b> was the comprehensive operating system of human society.
+      It organized production, governed territorial rights, dictated marriage alliances, and maintained order.
     </p>
 
     <div class="concept-grid">
       <div class="concept-card">
-        <h4>🌲 Kinship vs. Family</h4>
+        <h4>🌲 Kinship Systems vs. Nuclear Family</h4>
         <p>
-          While "family" usually refers to biological parents and children, <b>kinship</b> is a broader socio-cultural web of rights, reciprocal duties, and lineage. In many cultures, aunts are called "mother," and all clan members share equal responsibility for raising offspring and protecting communal hunting grounds.
+          In modern industrialized nations, the "nuclear family" (parents + children) is often treated as an isolated economic unit. In indigenous and traditional societies, <b>kinship</b> is an expansive matrix:
+        </p>
+        <ul>
+          <li><b>Patrilineal:</b> Descent and inheritance traced through fathers (e.g. ancient Rome, traditional Han lineage).</li>
+          <li><b>Matrilineal:</b> Property, names, and clan leadership trace through mothers (e.g. Karen tribes, Iroquois Confederacy, Minangkabau of Indonesia).</li>
+          <li><b>Bilateral:</b> Equal recognition of maternal and paternal lines (typical of mobile hunter-gatherers).</li>
+        </ul>
+      </div>
+
+      <div class="concept-card">
+        <h4>🏞 Karen Tribes of Northern Thailand: Communal Stewardship</h4>
+        <p>
+          The Karen (Pwo and Sgaw) inhabit the mountainous borders of Thailand and Myanmar. Their society offers a living model of non-market resource governance:
+        </p>
+        <ul>
+          <li><b>Swidden Agriculture (Hku):</b> Rotational farming where fields are cleared, cultivated for one year, and fallowed for 7&ndash;10 years to allow rainforest regeneration.</li>
+          <li><b>Spiritual Tenure:</b> Land cannot be sold for private profit; it belongs to the forest spirit (<i>Thi Kho</i>), collective ancestors, and future generations.</li>
+          <li><b>Matrilocal Residence:</b> Husbands move into their bride's clan village, ensuring women maintain stable collective control over residential homes and food storage.</li>
+        </ul>
+      </div>
+
+      <div class="concept-card">
+        <h4>🏹 North Sentinel Island: The Sovereign Quarantine (2018)</h4>
+        <p>
+          The Sentinelese are an uncontacted hunter-gatherer tribe living on North Sentinel Island in the Bay of Bengal for ~60,000 years:
+        </p>
+        <ul>
+          <li><b>The Incident (Nov 2018):</b> John Allen Chau, an American missionary, bribed local fishermen to illegally trespass onto the island to preach Christianity. He was killed by Sentinelese archers.</li>
+          <li><b>Anthropological Reality:</b> The Sentinelese have zero immunities to common viral pathogens (influenza, measles, rhinovirus). Contact would cause catastrophic biological extinction, identical to what annihilated 95% of indigenous Americans post-1492.</li>
+          <li><b>Legal Sovereignty:</b> The Indian government enforces an absolute exclusion zone under the <i>Protection of Aboriginal Tribes Regulation 1956</i>. The Sentinelese arrow is not malice; it is a defensive boundary maintaining their existence.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="source-box">
+      <div class="src-title">Primary Anthropological Fieldwork &mdash; Survival International</div>
+      <blockquote>
+        "The Sentinelese are fiercely independent and survive entirely on hunting, fishing, and gathering wild plants. Far from living in wretched squalor, they appear healthy, flourishing, and remarkably self-sufficient. Their hostility to outside incursions is entirely rational: every historical contact with neighboring Great Andamanese tribes resulted in violence, kidnapping, addiction, and near-total demographic extinction from foreign epidemics."
+      </blockquote>
+      <div class="src-citation">&mdash; Dr. Sophie Grig, Senior Researcher, Survival International (November 2018)</div>
+    </div>
+
+    <div class="ex-title">Practice Exercises (Lesson B)</div>
+    <div class="ex-grid" id="gridB"></div>
+  </section>
+
+  <!-- ========================================================
+       LESSON C: SCALE, DURKHEIM & MASLOW
+  ======================================================== -->
+  <section class="lesson-section" id="lessonC" data-lesson="C">
+    <span class="lesson-badge">Week 3 &middot; Lesson C</span>
+    <h2>Kinship, Scale &amp; Fairness: Émile Durkheim &amp; Maslow</h2>
+    <p class="lesson-lead">
+      What happens when human settlements grow from 50 hunter-gatherers to cities of 10 million people?
+      Sociologist <b>Émile Durkheim</b> demonstrated that the nature of social cohesion fundamentally transforms as societies expand in size, density, and specialization.
+    </p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <h4>⚙️ Mechanical vs. Organic Solidarity (Durkheim, 1893)</h4>
+        <p>
+          In <i>The Division of Labour in Society</i>, Durkheim identified two distinct forms of social glue:
+        </p>
+        <ul>
+          <li><b>Mechanical Solidarity (Traditional / Kin-based):</b> People perform identical tasks (all hunt, all gather). Cohesion is based on <i>similarity</i> and a powerful collective conscience (shared religion, strict taboos). Deviance is met with <b>repressive law</b> (harsh physical punishment).</li>
+          <li><b>Organic Solidarity (Modern / Industrial):</b> Complex division of labor (specialized surgeons, plumbers, farmers, coders). Cohesion is based on <i>interdependence</i>&mdash;like organs in a biological body, no one can survive alone. Deviance is met with <b>restitutive law</b> (restoring contracts and societal balance).</li>
+        </ul>
+      </div>
+
+      <div class="concept-card">
+        <h4>🧠 Dunbar's Number (~150) &amp; The Institutional Shift</h4>
+        <p>
+          Evolutionary psychologist Robin Dunbar established that primate brain neocortex size correlates with group size:
+        </p>
+        <ul>
+          <li><b>The 150 Ceiling:</b> Humans can maintain stable, trusting personal relationships with at most ~150 individuals. In bands under 150, social gossip, peer pressure, and direct kinship naturally suppress cheating and unfairness.</li>
+          <li><b>The State Emerges:</b> Beyond 150, anonymity enters. You cannot personally know or trust everyone. To prevent systemic breakdown, societies are forced to invent abstract institutions: police forces, written commercial laws, courts, currency, and taxation.</li>
+        </ul>
+      </div>
+
+      <div class="concept-card">
+        <h4>🔺 Maslow's Hierarchy &amp; Structural Fairness</h4>
+        <p>
+          Psychologist Abraham Maslow (1943) mapped human motivation across five tiered levels:
+        </p>
+        <ul>
+          <li><b>1. Physiological:</b> Food, clean water, rest, warmth.</li>
+          <li><b>2. Safety:</b> Shelter, health security, protection from violence.</li>
+          <li><b>3. Belonging &amp; Love:</b> Kinship, community, friendship, social connection.</li>
+          <li><b>4. Esteem:</b> Dignity, respect of peers, competence, agency.</li>
+          <li><b>5. Self-Actualization:</b> Realizing one's creative, intellectual, or personal potential.</li>
+        </ul>
+        <p style="margin-top:8px;">
+          <b>Sociological Application:</b> A society cannot be judged fair if it offers abstract freedom of speech while failing to guarantee Tier 1 and Tier 2 basic survival.
         </p>
       </div>
+    </div>
+
+    <div class="ex-title">Practice Exercises (Lesson C)</div>
+    <div class="ex-grid" id="gridC"></div>
+  </section>
+
+  <!-- ========================================================
+       LESSON D: SOCIOECONOMIC SYSTEMS
+  ======================================================== -->
+  <section class="lesson-section" id="lessonD" data-lesson="D">
+    <span class="lesson-badge">Week 4 &middot; Lesson D</span>
+    <h2>Socioeconomic Systems: Replacing Kinship</h2>
+    <p class="lesson-lead">
+      When human scale outgrew kinship, societies developed formalized political and economic systems to determine:
+      <b>What to produce? How to produce it? And who gets the output?</b>
+    </p>
+
+    <div class="concept-grid">
       <div class="concept-card">
-        <h4>🏞 Karen Tribes of Northern Thailand</h4>
+        <h4>🏭 Capitalism (Free Market &amp; Enterprise)</h4>
+        <ul>
+          <li><b>Key Thinker:</b> Adam Smith (<i>The Wealth of Nations</i>, 1776).</li>
+          <li><b>Core Mechanisms:</b> Private ownership of means of production, market pricing through supply and demand, competition, wage labor, and profit reinvestment.</li>
+          <li><b>Strengths:</b> Massive technological innovation, rapid production scaling, consumer variety, capital efficiency.</li>
+          <li><b>Weaknesses &amp; Market Failures:</b> Monopolies, extreme wealth inequality, environmental externalities (carbon emissions treated as free), exploitation of unorganized labor.</li>
+        </ul>
+      </div>
+
+      <div class="concept-card">
+        <h4>🏛 Socialism &amp; The Nordic Social Democratic Model</h4>
+        <ul>
+          <li><b>Core Mechanisms:</b> Democratic governance where vital infrastructure (healthcare, education, water, public transit) is publicly owned or heavily regulated, while private business operates in consumer markets.</li>
+          <li><b>The Nordic Model (Denmark, Sweden, Norway):</b> High progressive income taxes (up to 55%), free university education, universal healthcare, state pensions, and strong union collective bargaining ("flexicurity").</li>
+          <li><b>Goal:</b> A robust social safety net ensuring no citizen falls below a civilized baseline of dignity regardless of market fortunes.</li>
+        </ul>
+      </div>
+
+      <div class="concept-card">
+        <h4>🚩 Communism: Theoretical Ideal vs. Soviet Reality</h4>
+        <ul>
+          <li><b>Marxist Theory (Karl Marx &amp; Friedrich Engels):</b> Historical materialism. Capitalism inevitably concentrates capital, prompting workers (proletariat) to seize the means of production, leading to a classless, stateless, moneyless collective: <i>"From each according to ability, to each according to need."</i></li>
+          <li><b>Historical Practice (USSR, 1917&ndash;1991):</b> Total state ownership, one-party political dictatorship, state planning committee (Gosplan) setting prices and quotas by decree. Led to bureaucratic paralysis, consumer goods shortages, loss of civil liberties, and economic stagnation.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="source-box">
+      <div class="src-title">Daily Life Comparison Across Three Economic Systems</div>
+      <blockquote>
+        <b>1840s Manchester Factory Worker (Laissez-Faire Capitalism):</b> 14-hour daily shifts six days a week, child chimney sweeps, zero sick pay, living in unventilated cellar tenements, life expectancy in industrial slums dropped below 20 years.<br><br>
+        <b>1970s Moscow Factory Worker (Soviet State Socialism):</b> Guaranteed lifetime employment, free apartment (after a 7-year waitlist), free healthcare and education, but constant queues for basic shoes or meat, strict restrictions on speech and travel.<br><br>
+        <b>2020s Copenhagen Worker (Social Democracy):</b> 37-hour workweek, 5 weeks paid mandatory vacation, 12 months paid parental leave, heavily subsidized high-quality childcare, unemployment insurance providing 90% salary replacement during retraining.
+      </blockquote>
+      <div class="src-citation">&mdash; Comparative Economic History Field Guide (Dwight MYP Humanities)</div>
+    </div>
+
+    <div class="ex-title">Practice Exercises (Lesson D)</div>
+    <div class="ex-grid" id="gridD"></div>
+  </section>
+
+  <!-- ========================================================
+       LESSON E: EQUALITY VS EQUITY & BREGMAN
+  ======================================================== -->
+  <section class="lesson-section" id="lessonE" data-lesson="E">
+    <span class="lesson-badge">Week 5 &middot; Lesson E</span>
+    <h2>Equality vs. Equity: Bregman's "Utopia for Realists"</h2>
+    <p class="lesson-lead">
+      How should a just society distribute resources? Is fairness about identical inputs (Equality), or customized support to guarantee universal capability (Equity)?
+      Dutch historian <b>Rutger Bregman</b> argues that eradicating poverty is not a utopian fantasy, but an economically sound, empirically tested imperative.
+    </p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <h4>⚖️ Equality vs. Equity vs. Justice</h4>
         <p>
-          The Karen people organize around matrilineal descent (property passes through female lines). Their traditional rotational farming ("swidden") is rooted in collective spiritual stewardship: land cannot be individually sold or privatized because it belongs to the collective ancestors and unborn descendants.
+          <b>Equality:</b> Giving every individual the exact same resources regardless of need (e.g. giving every student a size-10 shoe, or allocating identical funding to an elite suburban school and an impoverished inner-city school).<br><br>
+          <b>Equity:</b> Distributing resources proportionally based on individual barriers so that all have equal capability and real freedom (giving each person a shoe that fits their foot).<br><br>
+          <b>Justice:</b> Dismantling the systemic barrier itself so that artificial support is no longer required.
         </p>
       </div>
+
       <div class="concept-card">
-        <h4>🏹 North Sentinel Island (Nov 2018)</h4>
+        <h4>🧠 The Cognitive Tax of Poverty (Mullainathan &amp; Shafir)</h4>
         <p>
-          The Sentinelese people of the Andaman Islands maintain total self-isolation. In November 2018, an American missionary was killed attempting to breach their perimeter. From an anthropological lens, their fierce hostility is an extreme defense mechanism: having zero acquired immunity to modern pathogens, contact would cause immediate demographic collapse. Kinship boundaries equal survival.
+          In <i>Utopia for Realists</i>, Bregman highlights landmark research by Princeton and Harvard psychologists showing that poverty is fundamentally <b>a scarcity of cash, not a defect of character</b>:
+        </p>
+        <ul>
+          <li><b>Mental Bandwidth:</b> Worrying about rent, overdue bills, and feeding children consumes enormous cognitive RAM.</li>
+          <li><b>13-Point IQ Drop:</b> Experimental tests on sugarcane farmers in India before harvest (when destitute) vs. after harvest (when paid) showed an instantaneous 13-point swing in fluid intelligence. Poverty behaves like staying awake for 24 continuous hours.</li>
+        </ul>
+      </div>
+
+      <div class="concept-card">
+        <h4>🇨🇦 The Dauphin "Mincome" Experiment (Manitoba, 1974&ndash;79)</h4>
+        <p>
+          For five years, the Canadian federal and provincial governments guaranteed a basic income floor to all 10,000 residents of the agricultural town of Dauphin, Manitoba:
+        </p>
+        <ul>
+          <li><b>Health Outcomes:</b> Hospitalization rates plunged by <b>8.5%</b>. Work-related accidents and domestic violence plummeted; mental health hospital visits dropped dramatically.</li>
+          <li><b>Education:</b> High school completion rates reached all-time records as adolescents stayed in school rather than dropping out to work low-wage farm labor.</li>
+          <li><b>Work Hours:</b> Primary breadwinners reduced hours by a negligible <b>1%</b>. The only notable reductions occurred among new mothers caring for infants and young students completing high school.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="source-box">
+      <div class="src-title">Rutger Bregman &mdash; Utopia for Realists (Bloomsbury, 2016)</div>
+      <blockquote>
+        "Poverty is not a lack of character. It's a lack of cash. We treat poor people as if they are children who cannot be trusted with money, so we build massive bureaucratic apparatuses with caseworkers, forms, and punitive sanctions that cost billions of dollars to police. If you want to end poverty, the most efficient, cost-effective, and scientifically validated policy on Earth is stunningly simple: give people cash."
+      </blockquote>
+      <div class="src-citation">&mdash; Rutger Bregman, Chapter 2: 'Why We Should Give Free Money to Everyone'</div>
+    </div>
+
+    <div class="ex-title">Practice Exercises (Lesson E)</div>
+    <div class="ex-grid" id="gridE"></div>
+  </section>
+
+  <!-- ========================================================
+       LESSON F: AUTOMATION & UBI MECHANICS
+  ======================================================== -->
+  <section class="lesson-section" id="lessonF" data-lesson="F">
+    <span class="lesson-badge">Weeks 6 &amp; 7 &middot; Lesson F</span>
+    <h2>Applied Equity: Automation, Work &amp; Universal Basic Income</h2>
+    <p class="lesson-lead">
+      We are entering the <b>Fourth Industrial Revolution</b>. Machine learning, generative AI, algorithmic trading, and autonomous robotics are shifting labor from muscle displacement to brain displacement.
+      Does every human still need to sell 40 hours of labor a week just to purchase the right to exist?
+    </p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <h4>🤖 The Cognitive Automation Wave</h4>
+        <p>
+          During the 19th and 20th centuries, machines replaced physical muscle (tractors replaced oxen, assembly line cranes replaced dockworkers). Workers transitioned into cognitive, administrative, and service roles.<br><br>
+          Generative AI and automated software agents displace <b>routine cognitive labor</b>: contract drafting, radiology screening, software coding, graphic generation, translation, and bookkeeping. When productivity expands while human labor hours contract, who reaps the economic surplus?
+        </p>
+      </div>
+
+      <div class="concept-card">
+        <h4>💡 The Three Non-Negotiable Pillars of UBI</h4>
+        <ul>
+          <li><b>1. Universal:</b> Paid to every legal adult citizen regardless of whether they are a barista, a schoolteacher, or a billionaire. (Wealthy citizens pay it back plus much more through progressive taxation).</li>
+          <li><b>2. Unconditional:</b> No means-testing, no mandatory job search logs, no drug tests, and no bureaucratic caseworker approvals. A true economic floor.</li>
+          <li><b>3. Individual:</b> Paid directly to each individual adult, ensuring economic autonomy for women and youth escaping domestic abuse.</li>
+        </ul>
+      </div>
+
+      <div class="concept-card">
+        <h4>🪤 Smashing the Traditional "Poverty Trap"</h4>
+        <p>
+          Under traditional means-tested welfare systems (e.g. food stamps, housing vouchers, income assistance):
+        </p>
+        <ul>
+          <li><b>The Welfare Cliff:</b> If an unemployed person takes a part-time job paying $1,000/month, the state strips $800 of their welfare benefits and taxes them. Their effective marginal tax rate is <b>80%&ndash;90%</b>! Rational people cannot afford to take a job.</li>
+          <li><b>The UBI Solution:</b> UBI is never withdrawn when you find employment. If you earn $1,000, you keep your $1,000 UBI <i>plus</i> your job wages. Work always pays.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="source-box">
+      <div class="src-title">David Graeber &mdash; Bullshit Jobs: A Theory (Simon &amp; Schuster, 2018)</div>
+      <blockquote>
+        "Huge swathes of people, in Europe and North America in particular, spend their entire working lives performing tasks they secretly believe do not really need to be performed. The moral and spiritual damage that comes from this situation is profound. It is a scar across our collective soul. UBI breaks this cycle by giving workers the unconditional power to walk away from pointless or toxic employment."
+      </blockquote>
+      <div class="src-citation">&mdash; David Graeber, Professor of Anthropology, London School of Economics</div>
+    </div>
+
+    <div class="ex-title">Practice Exercises (Lesson F)</div>
+    <div class="ex-grid" id="gridF"></div>
+  </section>
+
+  <!-- ========================================================
+       LESSON G: PRIMARY SOURCES
+  ======================================================== -->
+  <section class="lesson-section" id="lessonG" data-lesson="G">
+    <span class="lesson-badge">Week 8 &middot; Lesson G</span>
+    <h2>Primary &amp; Secondary Source Evaluation</h2>
+    <p class="lesson-lead">
+      Master the empirical evidence and primary texts required for the Summative Essay:
+      Keynes' 1930 economic predictions, the official Finnish Government trial data, and OPVL source analysis.
+    </p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <h4>📜 Source 1: John Maynard Keynes (1930)</h4>
+        <p>
+          <b>Text:</b> <i>Economic Possibilities for our Grandchildren</i>.<br>
+          <b>Key Argument:</b> Writing in the depths of the Great Depression, Keynes predicted that in 100 years (by 2030), capital accumulation and technical efficiency would increase living standards eightfold, resolving mankind's historical "economic struggle for subsistence."<br>
+          <b>The 15-Hour Workweek:</b> He predicted people would work roughly three hours a day (15 hours/week), shifting human purpose from survival to the art of life, leisure, and philosophy.
+        </p>
+      </div>
+
+      <div class="concept-card">
+        <h4>🇫🇮 Source 2: The Finnish Basic Income Trial (Helsinki Times)</h4>
+        <p>
+          <b>Study Details:</b> Nationwide random trial conducted in Finland (2017&ndash;2018) by social insurance agency Kela. 2,000 unemployed individuals received &euro;560 monthly unconditionally.<br>
+          <b>Empirical Findings:</b>
+        </p>
+        <ul>
+          <li><b>Wellbeing:</b> Statistically significant surge in life satisfaction, mental resilience, self-confidence, and trust in politicians, police, and legal courts.</li>
+          <li><b>Employment:</b> Recipients worked an average of 6 more days per year than the control group, disproving the myth that free income induces complete lethargy.</li>
+        </ul>
+      </div>
+
+      <div class="concept-card">
+        <h4>📰 Source 3: The Economist &amp; MIT Technology Review</h4>
+        <p>
+          <b>The Fiscal Dilemma:</b> Opponents point out that a universal cash payment of $12,000/year to 250 million US adults costs ~$3 trillion annually. Funding this requires aggressive VAT (value-added tax), carbon dividends, wealth taxes, or land value taxation (Henry George).<br>
+          <b>Inflation Risk:</b> In inelastic markets (like urban rental housing with constrained supply), landlords may raise rents to capture the cash, proving UBI must be paired with public housing supply policies.
         </p>
       </div>
     </div>
 
     <div class="source-box">
-      <div class="src-title">Case Study Analysis: Isolation &amp; Immunity</div>
+      <div class="src-title">OPVL Analytical Framework for IB Criterion D</div>
       <blockquote>
-        "The Sentinelese are not 'hostile' out of innate cruelty; they are preserving the oldest continuous hunter-gatherer society on Earth. For uncontacted tribes, the arrow is not an act of war, but a quarantine barrier."
+        <b>Origin:</b> Who created the source? When? Where? What is the author's background?<br>
+        <b>Purpose:</b> Why does this document exist? To persuade? To record empirical scientific data? To propagandize?<br>
+        <b>Value:</b> What unique insights does it offer? Is it backed by peer-reviewed methodology or primary eyewitness experience?<br>
+        <b>Limitation:</b> What does the source omit? What biases, national contexts, or funding conflicts must we take into account?
       </blockquote>
-      <div class="src-citation">&mdash; Survival International briefing on North Sentinel Island</div>
+      <div class="src-citation">&mdash; IB Middle Years Programme Individuals &amp; Societies Assessment Guide</div>
     </div>
 
-    <div class="ex-title">Practice &amp; Check (Lesson B)</div>
-    <div class="ex-grid" id="gridB"></div>
-  </section>
-
-  <!-- LESSON C: SCALE & DURKHEIM -->
-  <section class="lesson-section" id="lessonC" data-lesson="C">
-    <span class="lesson-badge">Week 3 &middot; Lesson C</span>
-    <h2>Kinship, Scale &amp; Fairness: Émile Durkheim &amp; Maslow</h2>
-    <p class="lesson-lead">
-      What happens when groups grow from 50 hunter-gatherers to millions in an industrial city? 
-      Sociologist Émile Durkheim examined how the bonds that hold societies together fundamentally change as scale expands.
-    </p>
-
-    <div class="concept-grid">
-      <div class="concept-card">
-        <h4>⚙️ Mechanical vs. Organic Solidarity</h4>
-        <p>
-          <b>Mechanical Solidarity (Small/Kinship):</b> Individuals perform identical tasks, share identical religious beliefs, and adhere to strict conformity. Solidarity arises from likeness.<br>
-          <b>Organic Solidarity (Modern/Complex):</b> High division of labor (doctors, plumbers, coders, farmers). Individuals are radically different, yet bound together by mutual interdependence.
-        </p>
-      </div>
-      <div class="concept-card">
-        <h4>📊 Dunbar's Number (~150)</h4>
-        <p>
-          Evolutionary psychologist Robin Dunbar identified that human brain neocortex volume limits genuine, stable social relationships to approximately 150 people. Beyond 150, kinship and peer-pressure can no longer govern behavior—societies require formal institutions: police, written laws, money, and taxation.
-        </p>
-      </div>
-      <div class="concept-card">
-        <h4>🔺 Maslow's Hierarchy of Needs</h4>
-        <p>
-          Societies can be evaluated by how effectively their economic system fulfills the hierarchy: (1) Physiological (food/water), (2) Safety (shelter/healthcare), (3) Belonging (community/kin), (4) Esteem (respect/purpose), (5) Self-Actualization. When economic systems fail basic needs, social solidarity fractures.
-        </p>
-      </div>
-    </div>
-
-    <div class="ex-title">Practice &amp; Check (Lesson C)</div>
-    <div class="ex-grid" id="gridC"></div>
-  </section>
-
-  <!-- LESSON D: SOCIOECONOMIC SYSTEMS -->
-  <section class="lesson-section" id="lessonD" data-lesson="D">
-    <span class="lesson-badge">Week 4 &middot; Lesson D</span>
-    <h2>Socioeconomic Systems: Replacing Kinship</h2>
-    <p class="lesson-lead">
-      As societies outgrew kinship, they developed formal socioeconomic systems to organize production, distribute resources, and manage labor:
-      Slavery &rarr; Feudalism &rarr; Capitalism &rarr; Socialism.
-    </p>
-
-    <div class="concept-grid">
-      <div class="concept-card">
-        <h4>🏭 Capitalism</h4>
-        <p>
-          <b>Ownership:</b> Private individuals and corporations.<br>
-          <b>Allocation:</b> Market supply and demand; price mechanisms.<br>
-          <b>Incentive:</b> Profit motive and capital accumulation.<br>
-          <b>Pros/Cons:</b> Unmatched innovation and productivity; high economic inequality and risk of market failure.
-        </p>
-      </div>
-      <div class="concept-card">
-        <h4>🏛 Socialism &amp; Social Democracy</h4>
-        <p>
-          <b>Ownership:</b> Collective/public ownership of critical utilities (healthcare, transit, energy) alongside private enterprise.<br>
-          <b>Allocation:</b> Progressive taxation funding universal public goods.<br>
-          <b>Goal:</b> High floor of human dignity and low poverty (e.g. Nordic Model).
-        </p>
-      </div>
-      <div class="concept-card">
-        <h4>🚩 Communism (Theoretical vs State)</h4>
-        <p>
-          <b>Marxist Ideal:</b> A classless, stateless, moneyless collective where resources are shared: <i>"From each according to ability, to each according to need."</i><br>
-          <b>Historical Practice:</b> Highly centralized state-command economies with bureaucratic rationing and restricted civil liberties.
-        </p>
-      </div>
-    </div>
-
-    <div class="ex-title">Practice &amp; Check (Lesson D)</div>
-    <div class="ex-grid" id="gridD"></div>
-  </section>
-
-  <!-- LESSON E: EQUALITY VS EQUITY -->
-  <section class="lesson-section" id="lessonE" data-lesson="E">
-    <span class="lesson-badge">Week 5 &middot; Lesson E</span>
-    <h2>Equality vs. Equity: Bregman's "Utopia for Realists"</h2>
-    <p class="lesson-lead">
-      Is "fairness" giving everyone the exact same thing (Equality), or giving everyone what they need to have equal access and dignity (Equity)?
-      Historian Rutger Bregman argues that abolishing poverty is not an impossible dream, but an affordable investment.
-    </p>
-
-    <div class="concept-grid">
-      <div class="concept-card">
-        <h4>⚖️ Equality vs. Equity</h4>
-        <p>
-          <b>Equality:</b> Providing everyone with identical resources regardless of starting position (giving a size-10 shoe to everyone).<br>
-          <b>Equity:</b> Providing customized resources to eliminate systemic barriers (giving everyone shoes that fit their specific feet).
-        </p>
-      </div>
-      <div class="concept-card">
-        <h4>📖 Rutger Bregman's Core Thesis</h4>
-        <p>
-          Poverty is not a personality defect or lack of work ethic; <b>poverty is simply a lack of cash</b>. The cognitive load of constant financial scarcity drops effective IQ by 13 points (the equivalent of an entire sleepless night). Provide direct cash, and health, education, and child outcomes instantly surge.
-        </p>
-      </div>
-      <div class="concept-card">
-        <h4>🌾 The Dauphin "Mincome" Experiment</h4>
-        <p>
-          In Manitoba, Canada (1974–1979), every resident was guaranteed a basic income floor. Results: Hospitalizations dropped by 8.5%, high school graduation rates jumped, and only two groups reduced hours: mothers of newborns and teenagers staying in school longer.
-        </p>
-      </div>
-    </div>
-
-    <div class="ex-title">Practice &amp; Check (Lesson E)</div>
-    <div class="ex-grid" id="gridE"></div>
-  </section>
-
-  <!-- LESSON F: AUTOMATION & UBI -->
-  <section class="lesson-section" id="lessonF" data-lesson="F">
-    <span class="lesson-badge">Weeks 6 &amp; 7 &middot; Lesson F</span>
-    <h2>Applied Equity: Automation &amp; Universal Basic Income</h2>
-    <p class="lesson-lead">
-      As generative AI, software agents, and robotics accelerate, does every human still need to work 40 hours a week to survive?
-      Universal Basic Income proposes decoupling basic survival from traditional wage labor.
-    </p>
-
-    <div class="concept-grid">
-      <div class="concept-card">
-        <h4>🤖 The Automation Dilemma</h4>
-        <p>
-          Past industrial revolutions replaced manual physical labor (horses replaced by tractors). The AI revolution replaces cognitive and analytical tasks (coding, accounting, writing). If productivity skyrockets while labor demand contracts, who captures the wealth?
-        </p>
-      </div>
-      <div class="concept-card">
-        <h4>💡 Three Pillars of UBI</h4>
-        <p>
-          <b>1. Universal:</b> Given to every citizen regardless of income or net worth.<br>
-          <b>2. Unconditional:</b> No means-testing, no job-seeking mandates, no drug tests.<br>
-          <b>3. Individual:</b> Paid to each adult directly, not per household.
-        </p>
-      </div>
-      <div class="concept-card">
-        <h4>🪤 Smashing the "Poverty Trap"</h4>
-        <p>
-          Under traditional welfare, earning $1 causes $0.80 of benefits to be withdrawn (an effective 80% marginal tax rate on the poor!). UBI is never clawed back when you work, meaning every extra dollar earned strictly improves your situation.
-        </p>
-      </div>
-    </div>
-
-    <div class="ex-title">Practice &amp; Check (Lesson F)</div>
-    <div class="ex-grid" id="gridF"></div>
-  </section>
-
-  <!-- LESSON G: SOURCES & OP-ED -->
-  <section class="lesson-section" id="lessonG" data-lesson="G">
-    <span class="lesson-badge">Weeks 8 &amp; 9 &middot; Lesson G</span>
-    <h2>Primary Sources &amp; Criterion C/D Writing Lab</h2>
-    <p class="lesson-lead">
-      Master the primary and secondary evidence for the UBI Summative Essay: Keynes' predictions, 
-      the Helsinki Times experiment data, and how to structure a Criterion C/D op-ed.
-    </p>
-
-    <div class="concept-grid">
-      <div class="concept-card">
-        <h4>📜 J.M. Keynes (1930)</h4>
-        <p>
-          In <i>Economic Possibilities for our Grandchildren</i>, British economist Keynes predicted that by 2030, technological efficiency would solve "the economic problem," resulting in a <b>15-hour workweek</b> where humans focus on arts, leisure, and philosophy.
-        </p>
-      </div>
-      <div class="concept-card">
-        <h4>🇫🇮 The Finnish Experiment (Helsinki Times)</h4>
-        <p>
-          Finland gave 2,000 unemployed citizens &euro;560/month unconditionally. Evaluators found recipients experienced significantly lower stress, fewer symptoms of depression, higher institutional trust, and slightly higher employment rates than the control group.
-        </p>
-      </div>
-      <div class="concept-card">
-        <h4>✍️ Criterion C &amp; D Essay Structure</h4>
-        <p>
-          <b>Hook &amp; Thesis:</b> Define equity and state your policy stance.<br>
-          <b>Argument 1 (Security):</b> Evidence on poverty reduction &amp; health.<br>
-          <b>Argument 2 (Pre-empt Counter):</b> Address affordability &amp; inflation.<br>
-          <b>Conclusion:</b> Synthesize how cooperation builds a sustainable future.
-        </p>
-      </div>
-    </div>
-
-    <div class="ex-title">Practice &amp; Check (Lesson G)</div>
+    <div class="ex-title">Practice Exercises (Lesson G)</div>
     <div class="ex-grid" id="gridG"></div>
   </section>
 
-  <!-- CHEAT SHEET -->
-  <section class="lesson-section" id="cheatSheet" style="border-left: 6px solid var(--accent);">
-    <span class="lesson-badge" style="background: var(--accent); color: #fff;">Summary Review</span>
-    <h2>Individuals &amp; Societies &mdash; Unit 1 Cheat Sheet</h2>
-    <p style="color:var(--ink-soft); font-size:15px;">The night-before read: the critical definitions, dates, case studies, and essay counter-points across all 8 weeks.</p>
+  <!-- ========================================================
+       LESSON H: CRITERION C & D ESSAY LAB
+  ======================================================== -->
+  <section class="lesson-section" id="lessonH" data-lesson="H">
+    <span class="lesson-badge">Week 9 &middot; Lesson H</span>
+    <h2>Criterion C &amp; D Op-Ed / Summative Essay Workshop</h2>
+    <p class="lesson-lead">
+      Step-by-step scaffolding to craft a top-scoring (7&ndash;8) argumentative Op-Ed or policy paper on Universal Basic Income and Equity.
+    </p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <h4>🎯 Criterion C: Communicating (Max 8)</h4>
+        <ul>
+          <li><b>Strand i:</b> Communicate information and ideas using an appropriate, engaging style for the target audience (editorial, formal essay).</li>
+          <li><b>Strand ii:</b> Structure information and ideas in a coherent, logically connected sequence with transitions.</li>
+          <li><b>Strand iii:</b> Document sources of information properly using academic referencing (APA/MLA parenthetical citations or bibliography).</li>
+        </ul>
+      </div>
+
+      <div class="concept-card">
+        <h4>🧠 Criterion D: Thinking Critically (Max 8)</h4>
+        <ul>
+          <li><b>Strand i:</b> Discuss and evaluate issues, concepts, and policy proposals from multiple distinct perspectives.</li>
+          <li><b>Strand ii:</b> Analyze and synthesize information from multiple primary and secondary sources to generate reasoned arguments.</li>
+          <li><b>Strand iii:</b> Critically evaluate sources for explicit and implicit bias, value, and limitations (OPVL).</li>
+          <li><b>Strand iv:</b> Formulate consistent, justified conclusions supported by concrete quantitative and qualitative data.</li>
+        </ul>
+      </div>
+
+      <div class="concept-card">
+        <h4>🏛 Five-Paragraph Op-Ed Architecture</h4>
+        <ul>
+          <li><b>1. The Hook &amp; Lede:</b> Open with a striking real-world vignette (e.g. AI replacing workers or Shanidar 1's care) and state a crisp, debatable thesis.</li>
+          <li><b>2. The Equity Argument:</b> Detail how means-tested welfare traps recipients vs. how unconditional cash restores human dignity.</li>
+          <li><b>3. The Empirical Proof:</b> Cite the Dauphin Mincome study (8.5% hospitalization drop) and Finnish trial data.</li>
+          <li><b>4. Pre-empting Counter-Claims:</b> Concede the fiscal cost or work disincentive argument, then dismantle it using revenue solutions.</li>
+          <li><b>5. Visionary Synthesis:</b> Connect back to the Statement of Inquiry: how societal progress is measured by cooperation over competition.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Interactive Essay Builder -->
+    <div class="essay-box">
+      <h3 style="margin-top:0; font-size:18px; color:var(--ink);">Interactive Essay Outline Builder (Devon's Working Draft)</h3>
+      <p style="font-size:14px; color:var(--ink-soft); margin-bottom:16px;">Draft your core argumentative sentences below. They save automatically in your browser!</p>
+
+      <div class="essay-step">
+        <h5>1. Working Thesis Statement (Statement of Inquiry in Action)</h5>
+        <textarea id="draftThesis" placeholder="Example: In an era of accelerating automation, adopting a Universal Basic Income is not an idealistic luxury, but an essential tool of equity that fulfills humanity's ancient tradition of mutual cooperation..."></textarea>
+      </div>
+
+      <div class="essay-step">
+        <h5>2. Primary Evidence Line (Dauphin / Finland / Keynes)</h5>
+        <textarea id="draftEvidence" placeholder="Example: Empirical evidence from Dauphin, Manitoba demonstrated that guaranteeing an economic floor caused an 8.5% drop in hospitalizations while leaving work ethic completely intact..."></textarea>
+      </div>
+
+      <div class="essay-step">
+        <h5>3. Counter-Argument &amp; Rebuttal (Criterion D Requirement)</h5>
+        <textarea id="draftRebuttal" placeholder="Example: While critics argue that a UBI is fiscally unaffordable, they fail to account for the catastrophic hidden costs of poverty in policing, emergency healthcare, and lost cognitive capacity..."></textarea>
+      </div>
+
+      <button class="ex-btn" id="saveDraftBtn">Save Draft to Browser</button>
+      <span id="draftSavedMsg" style="font-size:13px; font-weight:700; color:var(--good); margin-left:12px; display:none;">Saved!</span>
+    </div>
+
+    <div class="ex-title">Practice Exercises (Lesson H)</div>
+    <div class="ex-grid" id="gridH"></div>
+  </section>
+
+  <!-- ========================================================
+       MASTER CHEAT SHEET
+  ======================================================== -->
+  <section class="lesson-section" id="cheatSheet" style="border-left: 6px solid #1098AD;">
+    <span class="lesson-badge" style="background: #1098AD; color: #fff;">Revision Master</span>
+    <h2>Social Groups &amp; Fairness &mdash; Master Exam Cheat Sheet</h2>
+    <p style="color:var(--ink-soft); font-size:15px;">Key dates, foundational thinkers, case study facts, and essay arguments for the final Summative Task.</p>
     <div class="cs-grid" id="csGrid"></div>
   </section>
 
@@ -776,254 +1044,622 @@
   const LESSON_EXERCISES = {
     A: [
       {
-        id: "A1", prompt: "What physical evidence on the Shanidar 1 fossil proves early Neanderthals practiced altruism and social care?",
-        accept: ["he had severe disabilities", "withered arm", "disabled", "he lived with disabilities", "blind", "care for disabled"],
-        solution: ["Shanidar 1 survived into his 40s despite a withered arm, crushed eye socket (blindness), and severe leg injuries.", "He could not hunt or survive alone, proving his group actively fed, protected, and accommodated him."]
+        id: "A1", prompt: "Identify the archaeological cave site where the fossil Shanidar 1 was discovered.",
+        accept: ["shanidar", "shanidar cave", "iraqi kurdistan", "iraq", "zagros"],
+        solution: ["Shanidar Cave, situated in the Zagros Mountains of Iraqi Kurdistan."]
       },
       {
-        id: "A2", prompt: "Identify the difference between simple biological kin selection and human reciprocal altruism.",
-        accept: ["reciprocal altruism", "helping non-relatives", "cooperation beyond family", "cooperation"],
-        solution: ["Kin selection only favors genetic relatives.", "Reciprocal altruism allows humans to cooperate with unrelated individuals based on trust, mutual aid, and shared rules."]
+        id: "A2", prompt: "List two major physical disabilities Shanidar 1 suffered from that made solitary hunting impossible.",
+        accept: ["blind withered arm", "crushed eye withered arm", "amputated arm blind", "withered arm leg injury", "arm and eye", "arm and leg", "blind", "withered arm"],
+        solution: ["1. A crushed left eye socket causing blindness, and 2. A withered/amputated right arm broken at the elbow, alongside deformed leg bones."]
       },
       {
-        id: "A3", prompt: "What do the Bruniquel cave structures and La Chapelle burials in France reveal about Neanderthal social groups?",
-        accept: ["symbolic culture", "culture", "burials", "rituals", "symbolic thinking"],
-        solution: ["They prove Neanderthals possessed symbolic thought, cultural rituals, aesthetic decoration, and group solidarity beyond mere day-to-day survival."]
+        id: "A3", prompt: "Approximately how old was Shanidar 1 when he died?",
+        accept: ["40", "40-50", "45", "into his 40s", "40s"],
+        solution: ["He was approximately 40 to 50 years old, an exceptionally advanced age for a Paleolithic hominin."]
       },
       {
-        id: "A4", prompt: "Explain in one sentence why groups that cooperated outlasted hyper-competitive groups during harsh climate swings.",
+        id: "A4", prompt: "What man-made structures inside Bruniquel Cave in France (176,500 BP) prove Neanderthals had symbolic group coordination?",
+        accept: ["stalagmite rings", "stalagmites", "rings", "stone rings"],
+        solution: ["Hundreds of broken stalagmites arranged into deliberate oval rings around fire pits deep in the cave's dark zone."]
+      },
+      {
+        id: "A5", prompt: "Who authored the 1902 treatise 'Mutual Aid: A Factor of Evolution' arguing that cooperation was central to animal and human survival?",
+        accept: ["peter kropotkin", "kropotkin", "pyotr kropotkin"],
+        solution: ["Peter Kropotkin, evolutionary theorist and geographer."]
+      },
+      {
+        id: "A6", prompt: "Explain the difference between kin selection and reciprocal altruism in evolutionary biology.",
         open: true,
-        solution: ["Cooperative groups pooled food, cared for injured members who possessed accumulated ecological knowledge, and minimized internal conflict."]
+        solution: ["Kin selection involves assisting biological relatives to pass on shared genes. Reciprocal altruism involves cooperating with unrelated individuals under the expectation that aid will be returned in the future."]
       },
       {
-        id: "A5", prompt: "True or False: Compassion and care for disabled individuals only began after the invention of agriculture.",
+        id: "A7", prompt: "What archaeological evidence at La Chapelle-aux-Saints indicates early humans held cultural beliefs about mortality?",
+        accept: ["burial pits", "burial", "grave goods", "deliberate burial"],
+        solution: ["Deliberate, carefully dug burial trenches containing skeletons placed in sleeping postures with stone tools and animal bones."]
+      },
+      {
+        id: "A8", prompt: "True or False: Compassion and societal care for disabled group members only began after settled farming villages formed.",
         accept: ["false", "f"],
-        solution: ["False. Shanidar 1 dates back ~45,000 years ago during the Middle Paleolithic, tens of thousands of years before agriculture."]
+        solution: ["False! Shanidar 1 dates back ~45,000 years, tens of thousands of years before the agricultural revolution."]
+      },
+      {
+        id: "A9", prompt: "What chemical pigment did French Neanderthals use to stain seashell jewelry?",
+        accept: ["ochre", "red ochre", "manganese", "ochre and manganese"],
+        solution: ["Red ochre (iron oxide) and black manganese dioxide."]
+      },
+      {
+        id: "A10", prompt: "How does the survival of elderly or disabled individuals give a cooperative hunter-gatherer band an evolutionary advantage?",
+        open: true,
+        solution: ["Disabled elders retain vital ecological memory: where water holes remain during once-in-a-century droughts, which plants heal infections, and complex flintknapping skills."]
+      },
+      {
+        id: "A11", prompt: "What term describes the evolutionary process where cohesive groups with high internal solidarity out-compete fractured, selfish groups?",
+        accept: ["group selection", "multilevel selection"],
+        solution: ["Group selection (or multilevel selection)."]
+      },
+      {
+        id: "A12", prompt: "Which early human species occupied Shanidar Cave and Bruniquel Cave?",
+        accept: ["neanderthals", "homo neanderthalensis", "neanderthal"],
+        solution: ["Neanderthals (Homo neanderthalensis)."]
+      },
+      {
+        id: "A13", prompt: "In one sentence, connect the Shanidar 1 case study directly to our Statement of Inquiry on cooperation and equity.",
+        open: true,
+        solution: ["Shanidar 1 demonstrates that even in prehistoric scarcity, equity and resource-sharing were maintained through mutual cooperation rather than abandonment."]
       }
     ],
 
     B: [
       {
-        id: "B1", prompt: "How does 'kinship' differ from biological 'family' in anthropological terms?",
-        accept: ["cultural system", "broader social web", "social web", "rights and duties", "social system"],
-        solution: ["Family is narrow biological descent; kinship is a cultural framework of mutual obligations, property rights, and community belonging."]
+        id: "B1", prompt: "In anthropological terms, why is 'kinship' distinct from a simple biological family tree?",
+        accept: ["cultural system", "social web", "rights and obligations", "social system", "web of obligations"],
+        solution: ["Kinship is a culturally constructed web of social obligations, legal rights, spiritual duties, and property rules that extends far beyond biological DNA."]
       },
       {
-        id: "B2", prompt: "The Karen tribes of Northern Thailand pass land and family identity through which lineage line?",
-        accept: ["matrilineal", "mother", "female", "matrilineal descent"],
-        solution: ["The Karen follow matrilineal kinship, where inheritance and village identity flow through the female ancestral line."]
+        id: "B2", prompt: "Name the kinship descent rule where ancestry, clan titles, and land rights are passed exclusively through mothers.",
+        accept: ["matrilineal", "matrilineal descent"],
+        solution: ["Matrilineal descent."]
       },
       {
-        id: "B3", prompt: "What is the primary biological reason the Indian government strictly prohibits contact with the Sentinelese people?",
-        accept: ["no immunity", "lack of immunity", "diseases", "pathogens", "disease vulnerability"],
-        solution: ["Because they have been isolated for millennia, they lack acquired immunity to common viruses like flu or measles; contact could trigger extinction."]
+        id: "B3", prompt: "What indigenous group in the highlands of Northern Thailand practices swidden farming and matrilineal residence?",
+        accept: ["karen", "the karen", "karen people", "pwo karen", "sgaw karen"],
+        solution: ["The Karen people (Pwo and Sgaw Karen)."]
       },
       {
-        id: "B4", prompt: "In hunter-gatherer bands, why was food almost always shared communally rather than hoarded individually?",
-        accept: ["spoilage", "hunting luck varies", "reciprocity", "survival", "cannot store meat"],
-        solution: ["Large game meat spoiled quickly without refrigeration, and hunting success was unpredictable. Sharing created reciprocal credit: feeding someone today meant they fed you tomorrow."]
+        id: "B4", prompt: "What is the traditional Karen agricultural practice of rotational plot cultivation called?",
+        accept: ["swidden", "swidden farming", "rotational farming", "shifting cultivation", "hku"],
+        solution: ["Swidden farming (rotational agriculture or 'Hku')."]
       },
       {
-        id: "B5", prompt: "What term describes farming that rotates plots and lets forest regenerate collectively, as practiced by the Karen?",
-        accept: ["swidden", "rotational farming", "shifting cultivation", "rotational"],
-        solution: ["Swidden (or rotational farming / shifting cultivation)."]
+        id: "B5", prompt: "In Karen customary law, why is private sale of village forestland to outside corporations strictly forbidden?",
+        accept: ["belongs to spirits", "collective ancestors", "communal ownership", "belongs to nature", "not private"],
+        solution: ["The Karen view land as belonging collectively to the forest spirit (Thi Kho), ancestral spirits, and unborn generations—not private commodity."]
+      },
+      {
+        id: "B6", prompt: "What island in the Andaman archipelago is home to the world's most isolated uncontacted hunter-gatherer tribe?",
+        accept: ["north sentinel", "north sentinel island", "sentinel"],
+        solution: ["North Sentinel Island."]
+      },
+      {
+        id: "B7", prompt: "In November 2018, which American trespasser was killed attempting to breach the Sentinelese island perimeter?",
+        accept: ["john chau", "john allen chau", "chau"],
+        solution: ["John Allen Chau."]
+      },
+      {
+        id: "B8", prompt: "From a medical and immunological standpoint, why is outside contact an existential threat to the Sentinelese?",
+        accept: ["no immunity", "lack of immunity", "pathogens", "infectious diseases", "epidemic"],
+        solution: ["Having lived isolated for tens of thousands of years, they possess zero acquired antibodies against common viruses; an introduction of influenza could cause total extinction."]
+      },
+      {
+        id: "B9", prompt: "What 1956 Indian legal regulation establishes an armed naval exclusion zone around North Sentinel Island?",
+        accept: ["protection of aboriginal tribes", "aboriginal tribes regulation", "patr 1956", "1956 regulation"],
+        solution: ["The Andaman and Nicobar Islands Protection of Aboriginal Tribes Regulation (1956)."]
+      },
+      {
+        id: "B10", prompt: "In nomadic hunter-gatherer bands, why is private hoarding of large game meat viewed as unacceptable behavior?",
+        open: true,
+        solution: ["Meat spoils quickly without refrigeration and individual hunting success fluctuates wildly. Reciprocal meat-sharing insures everyone against starvation."]
+      },
+      {
+        id: "B11", prompt: "What descent system traces inheritance equally through both the father's and mother's family?",
+        accept: ["bilateral", "bilateral descent"],
+        solution: ["Bilateral descent."]
+      },
+      {
+        id: "B12", prompt: "How does the Sentinelese use of arrows against outsiders represent an act of quarantine rather than senseless aggression?",
+        open: true,
+        solution: ["The hostile perimeter is a rational defense mechanism to preserve their biological survival and autonomy against foreign disease and colonial exploitation."]
+      },
+      {
+        id: "B13", prompt: "Describe one conflict between the Thai national government and the traditional Karen rotational farming practices.",
+        open: true,
+        solution: ["State forestry officials often misclassify traditional rotational swidden fallows as 'deforested' or 'abandoned land', attempting to evict the Karen to create national parks."]
       }
     ],
 
     C: [
       {
-        id: "C1", prompt: "According to Émile Durkheim, what type of solidarity holds small, kin-based, traditional societies together?",
-        accept: ["mechanical", "mechanical solidarity"],
-        solution: ["Mechanical Solidarity: cohesion based on shared similarity, common beliefs, and a uniform daily routine."]
+        id: "C1", prompt: "Which pioneering French sociologist wrote 'The Division of Labour in Society' in 1893?",
+        accept: ["emile durkheim", "durkheim", "émile durkheim"],
+        solution: ["Émile Durkheim."]
       },
       {
-        id: "C2", prompt: "What type of solidarity characterizes complex modern societies with a high division of labor?",
-        accept: ["organic", "organic solidarity"],
-        solution: ["Organic Solidarity: cohesion based on specialized functions and mutual interdependence (like organs in a biological body)."]
+        id: "C2", prompt: "Define 'Mechanical Solidarity' in Durkheimian sociology.",
+        accept: ["solidarity by likeness", "similarity", "solidarity from similarity", "shared likeness"],
+        solution: ["Social cohesion in traditional societies based on shared likeness, identical work roles, and a rigid collective conscience."]
       },
       {
-        id: "C3", prompt: "What is 'Dunbar's Number' (~150), and why does it explain why kinship systems cannot run a modern city?",
-        accept: ["150", "cognitive limit", "social limit", "brain limit"],
-        solution: ["Dunbar's number (~150) is the cognitive limit to the number of stable social relationships an individual can maintain.", "Beyond 150, societies require formal laws, contracts, and institutions because personal familiarity is impossible."]
+        id: "C3", prompt: "Define 'Organic Solidarity' and give the biological analogy Durkheim used to describe it.",
+        open: true,
+        solution: ["Social cohesion in complex modern societies based on specialization and interdependence, analogous to how different biological organs function together to sustain an organism."]
       },
       {
-        id: "C4", prompt: "Which level of Maslow's hierarchy of needs must be satisfied before individuals can focus on esteem and self-actualization?",
-        accept: ["physiological", "basic needs", "safety", "physiological and safety"],
-        solution: ["Physiological needs (food, water, shelter) and Safety needs must be secured first."]
+        id: "C4", prompt: "What type of legal system dominates societies governed by Mechanical Solidarity?",
+        accept: ["repressive", "repressive law", "punitive law", "retributive"],
+        solution: ["Repressive law (severe physical punishment aimed at avenging the injured collective conscience)."]
       },
       {
-        id: "C5", prompt: "When a society transitions from kinship to formal economic systems, what takes the place of elder-led dispute resolution?",
-        accept: ["courts", "legal system", "laws", "judges", "formal law"],
-        solution: ["Codified laws, judicial courts, and government law enforcement."]
+        id: "C5", prompt: "What type of legal system characterizes Organic Solidarity societies?",
+        accept: ["restitutive", "restitutive law", "restorative"],
+        solution: ["Restitutive law (focused on restoring contracts, compensating damages, and returning social equilibrium)."]
+      },
+      {
+        id: "C6", prompt: "What is 'Dunbar's Number', and what specific numerical ceiling did Robin Dunbar identify?",
+        accept: ["150", "approx 150", "150 people"],
+        solution: ["Approximately 150 individuals, the cognitive limit to the number of stable, personal social relationships a human can maintain."]
+      },
+      {
+        id: "C7", prompt: "Why do societies that grow beyond Dunbar's Number inevitably replace kin-based order with formal legal institutions?",
+        open: true,
+        solution: ["Because personal familiarity and social gossip are impossible across thousands of anonymous people; formal written laws, contracts, police, and courts become necessary."]
+      },
+      {
+        id: "C8", prompt: "Identify the base tier (Tier 1) in Abraham Maslow's 1943 Hierarchy of Needs.",
+        accept: ["physiological", "physiological needs", "basic survival", "food water"],
+        solution: ["Physiological needs (food, water, sleep, warmth)."]
+      },
+      {
+        id: "C9", prompt: "What is Tier 2 in Maslow's Hierarchy?",
+        accept: ["safety", "safety needs", "security"],
+        solution: ["Safety needs (personal security, employment, health, shelter)."]
+      },
+      {
+        id: "C10", prompt: "What is the pinnacle (Tier 5) of Maslow's Hierarchy of Needs?",
+        accept: ["self-actualization", "self actualization"],
+        solution: ["Self-actualization (achieving one's full intellectual, creative, and human potential)."]
+      },
+      {
+        id: "C11", prompt: "What sociological term describes the state of normlessness and social disconnection that occurs when economic change outpaces moral codes?",
+        accept: ["anomie"],
+        solution: ["Anomie (coined by Émile Durkheim)."]
+      },
+      {
+        id: "C12", prompt: "How does an economic crisis like mass unemployment affect an individual's position on Maslow's hierarchy?",
+        open: true,
+        solution: ["It violently strips away Tier 2 (safety) and threatens Tier 1 (food/shelter), forcing the person to abandon self-actualization and focus entirely on survival."]
+      },
+      {
+        id: "C13", prompt: "Explain why a society cannot be considered 'equitable' if it provides legal freedom of expression but leaves millions without food or healthcare.",
+        open: true,
+        solution: ["Because higher-order freedoms are meaningless without meeting baseline physiological and safety needs; hunger and homelessness deprive people of real agency."]
       }
     ],
 
     D: [
       {
-        id: "D1", prompt: "What is the primary defining characteristic of Capitalism regarding the 'means of production'?",
-        accept: ["private ownership", "privately owned", "private property", "private"],
-        solution: ["Under capitalism, factories, land, and capital are owned by private individuals or corporations for profit."]
+        id: "D1", prompt: "Who is widely regarded as the foundational philosopher of modern industrial Capitalism with his 1776 book 'The Wealth of Nations'?",
+        accept: ["adam smith", "smith"],
+        solution: ["Adam Smith."]
       },
       {
-        id: "D2", prompt: "How does Democratic Socialism / the Nordic model differ from classical Soviet-style Communism?",
-        accept: ["democracy and welfare", "private business with welfare", "mixed economy", "welfare state", "democratic control"],
-        solution: ["Democratic socialism combines a market economy and democratic elections with strong universal public services and high taxes on wealth.", "Soviet communism was a one-party dictatorship with total state ownership and planned rationing."]
+        id: "D2", prompt: "What metaphor did Adam Smith use to describe how self-interested individuals in a competitive market unintentionally benefit society?",
+        accept: ["invisible hand", "the invisible hand"],
+        solution: ["The 'Invisible Hand'."]
       },
       {
-        id: "D3", prompt: "Who famously wrote: 'From each according to his ability, to each according to his needs'?",
-        accept: ["karl marx", "marx"],
-        solution: ["Karl Marx in his 1875 'Critique of the Gotha Programme'."]
+        id: "D3", prompt: "What is the primary driving incentive for investment and production in a capitalist economy?",
+        accept: ["profit", "profit motive", "profit incentive", "capital accumulation"],
+        solution: ["The profit motive (capital accumulation)."]
       },
       {
-        id: "D4", prompt: "In a 19th-century Manchester industrial capitalist factory, how did workers' daily routine compare to a medieval peasant?",
+        id: "D4", prompt: "Define an 'economic externality' and provide one real-world negative example produced by unregulated industry.",
         open: true,
-        solution: ["Medieval peasants followed seasonal weather and daylight rhythms with numerous saint day holidays.", "Industrial workers faced rigid 14-hour clock-time shifts, dangerous repetitive machinery, and strict separation from nature."]
+        solution: ["An externality is a cost or benefit incurred by an uninvolved third party. A prime example is industrial air pollution or carbon emissions warming the planet."]
       },
       {
-        id: "D5", prompt: "What economic term describes a situation where an unregulated free market fails to allocate resources fairly or efficiently?",
-        accept: ["market failure", "externalities"],
-        solution: ["Market failure (e.g. pollution, monopolies, extreme poverty)."]
+        id: "D5", prompt: "Which three Scandinavian countries embody the 'Nordic Model' of democratic social democracy?",
+        accept: ["denmark sweden norway", "norway sweden denmark", "denmark, sweden, norway"],
+        solution: ["Denmark, Sweden, and Norway (often including Finland and Iceland)."]
+      },
+      {
+        id: "D6", prompt: "In Danish labor market policy, what portmanteau term describes the combination of easy hiring/firing with generous unemployment retraining benefits?",
+        accept: ["flexicurity"],
+        solution: ["Flexicurity (flexibility + security)."]
+      },
+      {
+        id: "D7", prompt: "Who co-authored 'The Communist Manifesto' in 1848 alongside Karl Marx?",
+        accept: ["friedrich engels", "engels"],
+        solution: ["Friedrich Engels."]
+      },
+      {
+        id: "D8", prompt: "In Marxist theory, what term refers to the working class who own no capital and must sell their labor for wages?",
+        accept: ["proletariat", "the proletariat", "working class"],
+        solution: ["The Proletariat."]
+      },
+      {
+        id: "D9", prompt: "What term refers to the capitalist owning class who own factories, land, and machinery?",
+        accept: ["bourgeoisie", "the bourgeoisie"],
+        solution: ["The Bourgeoisie."]
+      },
+      {
+        id: "D10", prompt: "What was the official state central planning agency of the Soviet Union that set nationwide production targets and prices?",
+        accept: ["gosplan"],
+        solution: ["Gosplan (State Planning Committee)."]
+      },
+      {
+        id: "D11", prompt: "Describe two major everyday differences between living as an 1840s Manchester mill worker and a contemporary Danish teacher.",
+        open: true,
+        solution: ["1840s mill worker: 14-hour days, rampant child labor, no sick leave, cholera-infested slums. Modern Danish teacher: 37-hour week, 5 weeks paid leave, free healthcare, high state pension."]
+      },
+      {
+        id: "D12", prompt: "What is the key difference between a democratic socialist mixed economy and a Soviet command economy?",
+        open: true,
+        solution: ["A democratic socialist mixed economy retains democratic elections, private consumer businesses, and independent unions alongside public goods. A Soviet command economy used total state ownership and authoritarian central decree."]
+      },
+      {
+        id: "D13", prompt: "Explain how high progressive taxation in social democracies acts as an economic leveler.",
+        open: true,
+        solution: ["It takes higher percentage revenues from extreme incomes and reinvests them into universal infrastructure (free universities, childcare, transit) so all citizens enjoy equal baseline opportunity."]
       }
     ],
 
     E: [
       {
-        id: "E1", prompt: "Explain the visual metaphor between Equality and Equity using three people watching a game over a fence.",
-        open: true,
-        solution: ["Equality gives everyone the same size wooden box to stand on, meaning the shortest person still cannot see.", "Equity gives the shortest person two boxes and the tallest person zero, ensuring everyone has equal sightlines to the game."]
+        id: "E1", prompt: "Who is the Dutch historian and author of the 2016 international bestseller 'Utopia for Realists'?",
+        accept: ["rutger bregman", "bregman"],
+        solution: ["Rutger Bregman."]
       },
       {
-        id: "E2", prompt: "According to Rutger Bregman in 'Utopia for Realists', what is poverty fundamentally caused by?",
-        accept: ["lack of cash", "lack of money", "money", "cash"],
-        solution: ["Bregman argues poverty is simply a lack of cash, not a moral failure, laziness, or lack of intelligence."]
+        id: "E2", prompt: "Summarize Rutger Bregman's primary argument about the root cause of poverty in six words or fewer.",
+        accept: ["poverty is a lack of cash", "lack of cash", "lack of money", "it is a lack of cash"],
+        solution: ["'Poverty is a lack of cash' (not a lack of character or willpower)."]
       },
       {
-        id: "E3", prompt: "Research by Princeton psychologists cited by Bregman found that the stress of poverty reduces effective IQ by how many points?",
+        id: "E3", prompt: "Psychologists Sendhil Mullainathan and Eldar Shafir discovered that the cognitive strain of financial scarcity reduces fluid intelligence by how many IQ points?",
         accept: ["13", "13 points", "13-14", "14"],
-        solution: ["13 IQ points — equivalent to losing an entire night of sleep or chronic alcohol impairment."]
+        solution: ["13 IQ points, equivalent to losing an entire night of sleep or chronic alcoholism."]
       },
       {
-        id: "E4", prompt: "What Canadian town ran the famous 'Mincome' experiment from 1974 to 1979?",
-        accept: ["dauphin", "dauphin manitoba"],
+        id: "E4", prompt: "Which group of farmers in India were tested before and after their harvest to demonstrate the scarcity bandwidth tax?",
+        accept: ["sugarcane", "sugarcane farmers", "sugar cane"],
+        solution: ["Sugarcane farmers."]
+      },
+      {
+        id: "E5", prompt: "In the famous visual metaphor of people watching a baseball game over a wooden fence, what represents 'Equality'?",
+        accept: ["same size box", "giving everyone one box", "equal boxes", "identical boxes"],
+        solution: ["Giving every person the exact same size wooden box, regardless of their height."]
+      },
+      {
+        id: "E6", prompt: "In that same metaphor, what represents 'Equity'?",
+        accept: ["boxes according to height", "giving shortest more boxes", "proportional boxes", "adjusting boxes"],
+        solution: ["Giving the shortest person two boxes and the tallest person zero, ensuring everyone has equal sightlines."]
+      },
+      {
+        id: "E7", prompt: "What Canadian agricultural town served as the laboratory for the 1974–1979 'Mincome' experiment?",
+        accept: ["dauphin", "dauphin manitoba", "dauphin, manitoba"],
         solution: ["Dauphin, Manitoba."]
       },
       {
-        id: "E5", prompt: "During the Dauphin Mincome experiment, which two demographic groups actually reduced their working hours?",
-        accept: ["mothers and teenagers", "mothers of newborns and students", "mothers and students", "new mothers and teens"],
-        solution: ["Mothers of newborns (who took longer parental leaves) and teenagers (who stayed in high school rather than dropping out to support their family)."]
+        id: "E8", prompt: "By what percentage did hospitalizations decline in Dauphin, Manitoba while Mincome was active?",
+        accept: ["8.5", "8.5%", "8.5 percent", "8.5 pct", "about 8.5%"],
+        solution: ["8.5% reduction in hospital admissions (documented by health economist Evelyn Forget)."]
+      },
+      {
+        id: "E9", prompt: "During Dauphin's Mincome trial, which two demographics were the only ones to reduce their work hours?",
+        accept: ["mothers and teenagers", "mothers of newborns and high schoolers", "new mothers and students", "mothers and students"],
+        solution: ["New mothers (taking longer maternity leaves) and teenage students (staying in high school instead of taking early farm jobs)."]
+      },
+      {
+        id: "E10", prompt: "Which US President proposed a guaranteed family income (the Family Assistance Plan) in 1969?",
+        accept: ["richard nixon", "nixon"],
+        solution: ["Richard Nixon."]
+      },
+      {
+        id: "E11", prompt: "In the 2009 London homelessness pilot by charity Broadway, how much unconditional cash was transferred to 13 entrenched rough sleepers?",
+        accept: ["3000", "3000 pounds", "£3000", "3,000"],
+        solution: ["&pound;3,000 per person."]
+      },
+      {
+        id: "E12", prompt: "What did the London homeless recipients actually spend the unconditional cash on?",
+        open: true,
+        solution: ["Most spent only ~&pound;800 on essentials: clean clothes, identity documents, second-hand laptops, and rental deposits to get off the street."]
+      },
+      {
+        id: "E13", prompt: "Explain why running a punitive bureaucracy with conditional monitoring often costs governments more than simply giving direct cash.",
+        open: true,
+        solution: ["Caseworkers, administrative forms, drug testing, and fraud auditing cost billions, while stress-induced hospitalizations and policing further drain taxpayer revenues."]
       }
     ],
 
     F: [
       {
-        id: "F1", prompt: "What are the three core principles of a Universal Basic Income (UBI)?",
+        id: "F1", prompt: "What are the three fundamental pillars of a Universal Basic Income (UBI)?",
         accept: ["universal unconditional individual", "universal, unconditional, individual", "unconditional universal individual"],
-        solution: ["1. Universal (for everyone), 2. Unconditional (no work test), 3. Individual (paid to each adult)."]
+        solution: ["1. Universal, 2. Unconditional, 3. Individual."]
       },
       {
-        id: "F2", prompt: "What is the 'welfare cliff' or 'poverty trap' in existing means-tested assistance programs?",
+        id: "F2", prompt: "Explain the economic concept known as the 'welfare cliff' or 'poverty trap'.",
         open: true,
-        solution: ["When a poor person takes a low-wage job, their government food and housing benefits are cut by nearly the same amount they earn, leaving them with an effective tax rate of 70–90% and no incentive to work."]
+        solution: ["When low-income citizens accept a job, their government assistance is immediately cut, resulting in an effective tax rate of 80–90% that penalizes work."]
       },
       {
-        id: "F3", prompt: "Why is the current AI and automation wave different from the 19th-century Industrial Revolution?",
-        accept: ["replaces brain not muscle", "cognitive labor", "ai replaces thinking", "intellectual labor", "cognitive"],
-        solution: ["Past mechanization replaced physical muscle power; generative AI and machine learning replace cognitive, analytical, and creative tasks."]
+        id: "F3", prompt: "Why does an unconditional cash floor give exploited workers the 'power to say no'?",
+        open: true,
+        solution: ["Because workers do not face immediate homelessness or starvation if they quit, forcing employers to raise wages and improve unsafe, abusive conditions."]
       },
       {
-        id: "F4", prompt: "How does a UBI increase workers' bargaining power in dangerous or exploitative low-wage jobs?",
-        accept: ["power to say no", "can quit", "bargaining power", "strike", "financial security"],
-        solution: ["Because workers have a guaranteed survival floor, they possess the 'power to say no' to abusive conditions or poverty wages without facing starvation."]
+        id: "F4", prompt: "How does the current artificial intelligence automation wave differ fundamentally from previous mechanical revolutions?",
+        accept: ["replaces cognitive labor", "replaces brain", "cognitive labor", "replaces intellectual work", "ai replaces thinking"],
+        solution: ["Prior revolutions replaced physical muscle; generative AI, robotics, and agents replace cognitive, analytical, and professional labor."]
       },
       {
-        id: "F5", prompt: "State the most common economic counter-argument opponents make against funding a national UBI.",
-        accept: ["too expensive", "inflation", "cost", "unaffordable", "taxes"],
-        solution: ["1. Massive fiscal cost requiring high taxation, or 2. Risk of demand-pull inflation if supply does not rise."]
+        id: "F5", prompt: "Who authored the 2018 book 'Bullshit Jobs: A Theory' documenting the rise of psychologically pointless corporate roles?",
+        accept: ["david graeber", "graeber"],
+        solution: ["David Graeber."]
+      },
+      {
+        id: "F6", prompt: "Identify two revenue mechanisms economists propose to fund a national Universal Basic Income.",
+        accept: ["carbon tax and vat", "carbon tax", "vat", "wealth tax", "land value tax", "robot tax", "financial transaction tax"],
+        solution: ["Carbon dividends, Value-Added Taxes (VAT), Land Value Taxes (Henry George), automated robot taxes, or financial transaction taxes."]
+      },
+      {
+        id: "F7", prompt: "What state in the USA already distributes an unconditional annual cash dividend to all citizens funded by mineral oil wealth?",
+        accept: ["alaska", "alaska permanent fund"],
+        solution: ["Alaska (the Alaska Permanent Fund Dividend, since 1982)."]
+      },
+      {
+        id: "F8", prompt: "What is the primary economic argument critics raise regarding UBI causing demand-pull inflation?",
+        open: true,
+        solution: ["If everyone receives cash without an immediate expansion in the supply of housing or goods, landlords and merchants may simply hike prices to absorb the cash."]
+      },
+      {
+        id: "F9", prompt: "Why must a UBI policy be paired with public zoning and housing supply reform to prevent landlord capture?",
+        open: true,
+        solution: ["Because in cities with restricted housing supply, landlords hold monopolistic leverage and can raise rents, transferring the public dividend straight into real estate profits."]
+      },
+      {
+        id: "F10", prompt: "True or False: In a true UBI, millionaires receive the monthly payment alongside minimum-wage workers.",
+        accept: ["true", "t"],
+        solution: ["True! It is universal. However, progressive taxes ensure millionaires pay back far more than they receive."]
+      },
+      {
+        id: "F11", prompt: "What philosopher and logician wrote 'In Praise of Idleness' (1932) proposing a 4-hour workday?",
+        accept: ["bertrand russell", "russell"],
+        solution: ["Bertrand Russell."]
+      },
+      {
+        id: "F12", prompt: "How does an unconditional basic income recognize unpaid domestic and caregiving labor?",
+        open: true,
+        solution: ["Traditional GDP counts wage labor but ignores childcare and eldercare. UBI financially compensates stay-at-home parents and community volunteers directly."]
+      },
+      {
+        id: "F13", prompt: "In one sentence, refute the counter-argument that 'giving poor people free cash will make everyone stop working.'",
+        open: true,
+        solution: ["Empirical trials in Dauphin, Alaska, and Finland show employment remains stable because humans naturally crave purpose, status, and extra discretionary income."]
       }
     ],
 
     G: [
       {
-        id: "G1", prompt: "In 1930, John Maynard Keynes predicted technology would lead to a workweek of how many hours by 2030?",
-        accept: ["15", "15 hours", "15 hour work week", "15-hour"],
-        solution: ["15 hours per week (Keynes: 'Economic Possibilities for our Grandchildren')."]
+        id: "G1", prompt: "In his 1930 essay 'Economic Possibilities for our Grandchildren', British economist John Maynard Keynes predicted a workweek of how many hours by 2030?",
+        accept: ["15", "15 hours", "15 hour", "15-hour workweek", "15 hrs"],
+        solution: ["15 hours per week."]
       },
       {
-        id: "G2", prompt: "What did the Finnish Basic Income experiment (Helsinki Times) find regarding recipients' mental health?",
-        accept: ["less stress", "lower stress", "better health", "higher trust", "wellbeing improved"],
-        solution: ["Recipients reported significantly lower stress, fewer depressive symptoms, higher confidence in the future, and greater trust in public institutions."]
-      },
-      {
-        id: "G3", prompt: "Under IB MYP Criterion D (Thinking Critically), why must an author include and refute counter-arguments?",
+        id: "G2", prompt: "Why did Keynes' 15-hour workweek prediction fail to materialize despite productivity growing over 400% since 1930?",
         open: true,
-        solution: ["To show balance, intellectual honesty, and deep critical evaluation rather than presenting a one-sided propaganda piece."]
+        solution: ["Economic gains were concentrated into corporate profits rather than distributed as leisure, while advertising cultivated insatiable consumerism and workism."]
       },
       {
-        id: "G4", prompt: "What is the purpose of an Op-Ed compared to a neutral encyclopedia entry?",
-        accept: ["persuade", "persuasion", "make an argument", "advocate a stance", "opinion"],
-        solution: ["An op-ed is an opinion editorial designed to advocate a specific policy stance using evidence and persuasive rhetoric."]
+        id: "G3", prompt: "What Finnish national social security agency conducted the 2017–2018 nationwide Basic Income trial?",
+        accept: ["kela"],
+        solution: ["Kela (the Social Insurance Institution of Finland)."]
       },
       {
-        id: "G5", prompt: "Define 'Equity' in your own words in the context of our Statement of Inquiry.",
+        id: "G4", prompt: "How much monthly cash did the 2,000 Finnish participants receive unconditionally?",
+        accept: ["560", "560 euros", "€560", "560 eur"],
+        solution: ["&euro;560 per month."]
+      },
+      {
+        id: "G5", prompt: "What was the most pronounced, statistically significant outcome reported by the Finnish government researchers?",
+        accept: ["wellbeing", "mental health", "less stress", "lower stress", "trust in institutions"],
+        solution: ["Marked improvements in mental health: significantly reduced stress, fewer symptoms of depression, and greater confidence in public institutions."]
+      },
+      {
+        id: "G6", prompt: "Did Finnish basic income recipients work significantly fewer days than the unemployed control group?",
+        accept: ["no", "they worked slightly more", "worked more", "no they worked more"],
+        solution: ["No! They actually worked an average of 6 more days per year than the control group."]
+      },
+      {
+        id: "G7", prompt: "In the IB OPVL framework, what does the letter 'O' stand for?",
+        accept: ["origin"],
+        solution: ["Origin (author, date, location, primary vs secondary)."]
+      },
+      {
+        id: "G8", prompt: "In the OPVL framework, what does 'P' stand for?",
+        accept: ["purpose"],
+        solution: ["Purpose (the intended goal and target audience of the document)."]
+      },
+      {
+        id: "G9", prompt: "In the OPVL framework, what does 'V' stand for?",
+        accept: ["value"],
+        solution: ["Value (the unique factual or contextual insight the source provides)."]
+      },
+      {
+        id: "G10", prompt: "In the OPVL framework, what does 'L' stand for?",
+        accept: ["limitation", "limitations"],
+        solution: ["Limitation (biases, omissions, ideological skew, or lack of scope)."]
+      },
+      {
+        id: "G11", prompt: "State one key limitation of the 2017–2018 Finnish basic income experiment.",
         open: true,
-        solution: ["Equity is ensuring that fair access, dignity, and opportunities are provided by compensating for historical and material imbalances through cooperative social systems."]
+        solution: ["It was restricted only to individuals already receiving unemployment benefits rather than a truly universal demographic slice, and payments were limited to two years."]
+      },
+      {
+        id: "G12", prompt: "Explain how MIT Technology Review analyzes the relationship between AI and income distribution.",
+        open: true,
+        solution: ["They report that while AI increases enterprise productivity, it risks hollowed-out middle-skill wages, making social redistributive mechanisms imperative."]
+      },
+      {
+        id: "G13", prompt: "Why is a peer-reviewed academic journal generally higher in 'Value' for an IB research paper than an anonymous internet blog?",
+        open: true,
+        solution: ["Peer-reviewed journals undergo rigorous blind methodology reviews, transparent data citations, and expert validation."]
+      }
+    ],
+
+    H: [
+      {
+        id: "H1", prompt: "Under IB MYP Criterion C (Communicating), what is required to achieve the highest mark band (7–8)?",
+        open: true,
+        solution: ["Communicate clearly in a structured, engaging, and appropriate style, using precise social science terminology and consistent, accurate citations."]
+      },
+      {
+        id: "H2", prompt: "Under Criterion D (Thinking Critically), what differentiates a basic grade from a 7–8 grade?",
+        open: true,
+        solution: ["A 7–8 requires thorough, balanced evaluation of multiple perspectives, deep analysis of bias (OPVL), and synthesis into a nuanced, justified conclusion."]
+      },
+      {
+        id: "H3", prompt: "What is an 'Op-Ed' (Opinion Editorial), and how does its purpose differ from an encyclopedia entry?",
+        accept: ["persuasive opinion", "persuasive", "advocate a stance", "persuade", "make an argument"],
+        solution: ["An op-ed is an argumentative article that takes a definitive public stance to persuade readers, whereas an encyclopedia is neutral and purely informative."]
+      },
+      {
+        id: "H4", prompt: "What is the function of a 'hook' in the opening paragraph of an essay or op-ed?",
+        accept: ["grab attention", "engage the reader", "hook the reader", "attention"],
+        solution: ["To immediately captivate the reader's interest using a dramatic real-world paradox, compelling stat, or vivid vignette."]
+      },
+      {
+        id: "H5", prompt: "Why must a strong argumentative op-ed explicitly include and address counter-arguments?",
+        open: true,
+        solution: ["Anticipating opposing arguments demonstrates intellectual depth and disarms critics before they can dismiss your premise."]
+      },
+      {
+        id: "H6", prompt: "Formulate a strong one-sentence thesis statement advocating for a Universal Basic Income.",
+        open: true,
+        solution: ["Sample: 'As rapid artificial intelligence destabilizes traditional labor markets, implementing a Universal Basic Income is an urgent economic imperative to guarantee baseline equity and eliminate systemic poverty.'"]
+      },
+      {
+        id: "H7", prompt: "Which primary citation would you reach for to prove that unconditional cash transfers do not cause mass unemployment?",
+        accept: ["dauphin", "finland", "mincome", "kela", "helsinki times"],
+        solution: ["The Dauphin Mincome trial (Evelyn Forget, 2011) or the Finnish Kela Trial (2019)."]
+      },
+      {
+        id: "H8", prompt: "What is the recommended structure for an effective body paragraph in an IB humanities essay?",
+        accept: ["peel", "point evidence explanation link", "teal"],
+        solution: ["PEEL: Point (topic sentence), Evidence (data/quote), Explanation (analysis), Link (back to thesis)."]
+      },
+      {
+        id: "H9", prompt: "How should Devon link his conclusion directly back to the Statement of Inquiry?",
+        open: true,
+        solution: ["Demonstrate how the shift from industrial competition to institutional cooperation across time and space is the true benchmark of human progress."]
+      },
+      {
+        id: "H10", prompt: "Name two stylistic writing techniques that improve readability in an Op-Ed format.",
+        accept: ["short paragraphs and active voice", "active voice", "rhetorical questions", "concise paragraphs", "clear transitions"],
+        solution: ["Using punchy short paragraphs, active voice verbs, vivid metaphors, and sharp rhetorical turns."]
+      },
+      {
+        id: "H11", prompt: "Explain the difference between in-text parenthetical citations and an end-of-text Works Cited bibliography.",
+        open: true,
+        solution: ["In-text citations acknowledge authors immediately beside borrowed data (e.g. Bregman, 2016), while the bibliography provides full publication details at the end."]
+      },
+      {
+        id: "H12", prompt: "Why is emotional manipulation without data considered a weakness in an IB Criterion D assessment?",
+        open: true,
+        solution: ["Criterion D demands rigorous analytical reasoning and empirical evidence; emotional hyperbole lacks academic validity."]
+      },
+      {
+        id: "H13", prompt: "Provide a one-sentence rebuttal to the argument that 'UBI costs too much for any government to afford.'",
+        open: true,
+        solution: ["Sample: 'We already pay trillions managing the collateral damage of poverty through bloated healthcare systems, policing, and lost productivity—investing in a cash floor is far cheaper.'"]
       }
     ]
   };
 
   const CHEAT_SHEET = [
     {
-      title: "Shanidar 1 & Altruism",
+      title: "Week 1: Early Man & Altruism",
       points: [
-        "Neanderthal lived into his 40s despite withered arm, blind eye, broken leg.",
-        "Proves mutual care & altruism existed >45,000 years ago.",
-        "Cooperation was an evolutionary survival mechanism, not a recent invention."
+        "<b>Shanidar 1 ('Nandy'):</b> 45,000 BP Neanderthal lived to 40–50 with withered arm, blindness, and foot deformity; proved prehistoric care.",
+        "<b>Bruniquel Cave:</b> 176,500 BP stalagmite rings prove symbolic coordination.",
+        "<b>Kropotkin:</b> Proved mutual aid and cooperation were primary drivers of hominin survival."
       ]
     },
     {
-      title: "Kinship & Scale",
+      title: "Week 2: Kinship & Survival",
       points: [
-        "Kinship is a socio-cultural web of rights and reciprocal obligations.",
-        "Dunbar's number (~150) is the brain's limit for personal familiarity.",
-        "Beyond 150, societies replace kin rule with formal laws, courts, and taxation."
+        "<b>Kinship:</b> A socio-cultural web of rights and mutual duties broader than biological descent.",
+        "<b>Karen Highlands:</b> Matrilineal descent, rotational swidden (Hku), communal forest tenure.",
+        "<b>North Sentinel Island:</b> 2018 Chau incident; isolation acts as biological quarantine against epidemics."
       ]
     },
     {
-      title: "Durkheim's Solidarity",
+      title: "Week 3: Durkheim & Maslow",
       points: [
-        "Mechanical Solidarity: simple kin groups bound by similarity and common beliefs.",
-        "Organic Solidarity: complex modern societies bound by division of labor and mutual dependence."
+        "<b>Mechanical Solidarity:</b> Cohesion in kin groups based on shared likeness and repressive law.",
+        "<b>Organic Solidarity:</b> Modern cohesion based on division of labor and mutual interdependence.",
+        "<b>Dunbar's Number (~150):</b> Neocortex limit forcing the emergence of formal state institutions.",
+        "<b>Maslow's Hierarchy:</b> Tier 1 (Physiological) & Tier 2 (Safety) must be secured before self-actualization."
       ]
     },
     {
-      title: "Equality vs. Equity",
+      title: "Week 4: Economic Systems",
       points: [
-        "Equality: equal inputs (same resources for everyone).",
-        "Equity: fair outcomes (adjusting resources to eliminate barriers).",
-        "Bregman: Poverty is a lack of cash, dropping effective cognitive bandwidth by 13 IQ points."
+        "<b>Capitalism:</b> Private property, market price signals, profit motive (Adam Smith).",
+        "<b>Nordic Model:</b> High progressive taxation funding universal public services and flexicurity.",
+        "<b>Marxism:</b> Proletariat vs. Bourgeoisie; historical progression to stateless, classless collective."
       ]
     },
     {
-      title: "UBI & Automation",
+      title: "Week 5: Equality vs. Equity",
       points: [
-        "AI replaces cognitive labor, challenging the idea that all humans must work 40 hrs to eat.",
-        "UBI: Universal, Unconditional, Individual.",
-        "Smashes the poverty trap by removing benefit withdrawal when taking jobs."
+        "<b>Equality:</b> Identical inputs. <b>Equity:</b> Proportional support to eliminate systemic barriers.",
+        "<b>Rutger Bregman:</b> Poverty is a lack of cash, consuming 13 IQ points of cognitive bandwidth.",
+        "<b>Dauphin Mincome:</b> 8.5% drop in hospitalizations, record high school completions, work hours stable."
       ]
     },
     {
-      title: "Keynes & Evidence",
+      title: "Weeks 6–7: Automation & UBI",
       points: [
-        "Keynes predicted a 15-hr workweek by 2030.",
-        "Dauphin Mincome & Finnish Trial proved cash transfers improve health and education without causing mass laziness."
+        "<b>AI Wave:</b> Replaces cognitive and analytical labor rather than manual muscle.",
+        "<b>UBI Pillars:</b> Universal, Unconditional, Individual.",
+        "<b>Poverty Trap Smashed:</b> UBI has zero marginal benefit withdrawal, ensuring work always pays.",
+        "<b>David Graeber:</b> UBI grants workers the leverage to reject 'bullshit jobs'."
+      ]
+    },
+    {
+      title: "Week 8: Primary Sources",
+      points: [
+        "<b>Keynes (1930):</b> Predicted 15-hr workweek by 2030; derailed by consumerism and unequal distribution.",
+        "<b>Finnish Kela Trial:</b> Recipients experienced marked improvements in mental health, reduced stress, and equal employment.",
+        "<b>OPVL Method:</b> Evaluate Origin, Purpose, Value, and Limitation for all cited evidence."
+      ]
+    },
+    {
+      title: "Week 9: Criterion C & D Essay Lab",
+      points: [
+        "<b>Criterion C:</b> Clear thesis, professional tone, academic transitions, proper citations.",
+        "<b>Criterion D:</b> Balanced evaluation, explicit counter-argument refutation, empirical data.",
+        "<b>SOI Synthesis:</b> Human progress is defined by institutional cooperation over competition."
       ]
     }
   ];
 
-  let progress = JSON.parse(localStorage.getItem("devon_is_u1_progress") || "{}");
+  let progress = JSON.parse(localStorage.getItem("devon_is_u1_master_progress") || "{}");
 
   function saveProgress() {
-    localStorage.setItem("devon_is_u1_progress", JSON.stringify(progress));
+    localStorage.setItem("devon_is_u1_master_progress", JSON.stringify(progress));
   }
 
   function cleanStr(s) {
@@ -1050,7 +1686,7 @@
     if (isDone) card.classList.add("correct");
 
     let inputRow = ex.open
-      ? `<div class="open-note">Discussion / critical response. Formulate your reasoning, then click below to view the model answer.</div>`
+      ? `<div class="open-note">Critical Analysis prompt. Formulate your reasoning, then click below to compare with the model response.</div>`
       : `<div class="ex-input-row">
            <input class="ex-input" type="text" placeholder="type key concept..." id="input-${ex.id}" autocomplete="off"/>
            <button class="ex-btn" data-id="${ex.id}" data-lesson="${lessonLetter}">Check</button>
@@ -1059,7 +1695,7 @@
 
     card.innerHTML = `
       <div>
-        <div class="ex-num">Exercise ${lessonLetter}.${idx + 1}</div>
+        <div class="ex-num">Question ${lessonLetter}.${idx + 1}</div>
         <div class="ex-prompt">${ex.prompt}</div>
       </div>
       <div>
@@ -1122,7 +1758,7 @@
           card.classList.remove("wrong");
           card.classList.add("correct");
           fb.className = "ex-feedback correct";
-          fb.textContent = "Correct! Well argued.";
+          fb.textContent = "Correct! Well reasoned.";
           progress[id] = true;
           saveProgress();
           updateTally();
@@ -1130,7 +1766,7 @@
           card.classList.remove("correct");
           card.classList.add("wrong");
           fb.className = "ex-feedback wrong";
-          fb.textContent = "Not quite — review the concept or check the model answer.";
+          fb.textContent = "Not quite — review the concept or check the model solution.";
         }
       }
 
@@ -1173,9 +1809,9 @@
       }
     });
 
-    // Chips filter
+    // Filter Chips
     document.getElementById("chipList").addEventListener("click", function(e) {
-      if (e.target.classList.contains("chip")) {
+      if (e.target.classList.contains("chip") && e.target.id !== "resetBtn") {
         document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
         e.target.classList.add("active");
         let filter = e.target.getAttribute("data-filter");
@@ -1193,6 +1829,25 @@
           }
         });
       }
+    });
+
+    // Essay Draft Persistence
+    const draftThesis = document.getElementById("draftThesis");
+    const draftEvidence = document.getElementById("draftEvidence");
+    const draftRebuttal = document.getElementById("draftRebuttal");
+    const saveDraftBtn = document.getElementById("saveDraftBtn");
+    const draftSavedMsg = document.getElementById("draftSavedMsg");
+
+    draftThesis.value = localStorage.getItem("devon_is_draft_thesis") || "";
+    draftEvidence.value = localStorage.getItem("devon_is_draft_evidence") || "";
+    draftRebuttal.value = localStorage.getItem("devon_is_draft_rebuttal") || "";
+
+    saveDraftBtn.addEventListener("click", function() {
+      localStorage.setItem("devon_is_draft_thesis", draftThesis.value);
+      localStorage.setItem("devon_is_draft_evidence", draftEvidence.value);
+      localStorage.setItem("devon_is_draft_rebuttal", draftRebuttal.value);
+      draftSavedMsg.style.display = "inline";
+      setTimeout(() => { draftSavedMsg.style.display = "none"; }, 2500);
     });
   }
 
