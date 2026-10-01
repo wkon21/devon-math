@@ -1,0 +1,1851 @@
+<title>Unit 3: Sequences &amp; Series — Extended Math</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+<link rel="stylesheet" href="../../style.css">
+<style>
+  /* ============ TOKENS ============ */
+  
+  
+  
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior: auto; } *{ animation: none !important; transition: none !important; } }
+
+  
+
+  a{ color: var(--accent); }
+
+  ::selection{ background: color-mix(in srgb, var(--accent) 30%, transparent); }
+
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+  h1,h2,h3,h4{ font-family: var(--font-display); font-weight: 600; text-wrap: balance; margin: 0; color: var(--ink); }
+
+  code, .mono, .expr{ font-family: var(--font-mono); }
+
+  button{ font-family: var(--font-body); cursor:pointer; }
+  button:focus-visible, input:focus-visible, a:focus-visible{
+    outline: 2.5px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ============ TOP MASTHEAD ============ */
+  .masthead{
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .masthead-inner{
+    padding: 34px 20px 22px;
+    display:flex; flex-direction:column; gap:16px;
+  }
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow .dot{ width:5px; height:5px; border-radius:50%; background: var(--accent-2); }
+  .title-row{
+    display:flex; justify-content: space-between; align-items:flex-end; gap: 24px; flex-wrap: wrap;
+  }
+  .title-row h1{ font-size: clamp(30px, 4.4vw, 44px); line-height: 1.05; }
+  .title-row .subtitle{ color: var(--ink-soft); font-size: 15.5px; max-width: 46ch; margin-top:6px;}
+  .student-tag{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-soft);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 7px 14px;
+    white-space: nowrap;
+  }
+  .student-tag b{ color: var(--ink); }
+
+  .meta-strip{
+    display:flex; flex-wrap:wrap; gap: 10px 28px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    padding-top: 4px;
+    border-top: 1px dashed var(--border);
+    margin-top: 4px;
+    padding-top: 14px;
+  }
+  .meta-strip span b{ color: var(--ink); font-weight:600; }
+
+  /* ============ SCOREBOARD NAV (sticky) ============ */
+  .scoreboard{
+    position: sticky; top:0; z-index: 40;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px) saturate(1.1);
+    -webkit-backdrop-filter: blur(10px) saturate(1.1);
+    border-bottom: 1px solid var(--border);
+  }
+  .scoreboard-inner{
+    display:flex; align-items:center; gap:10px;
+    padding: 10px 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .scoreboard-inner::-webkit-scrollbar{ display:none; }
+  .score-total{
+    font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-soft);
+    white-space: nowrap; padding-right: 8px; border-right: 1px solid var(--border);
+    margin-right: 4px;
+  }
+  .score-total b{ color: var(--ink); }
+  .chip{
+    flex: 0 0 auto;
+    display:flex; align-items:center; gap:8px;
+    padding: 7px 12px 7px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-decoration: none;
+    transition: border-color .15s ease, color .15s ease, transform .1s ease;
+  }
+  .chip:hover{ border-color: var(--chip-hue); color: var(--ink); }
+  .chip:active{ transform: translateY(1px); }
+  .chip .letter{
+    width: 22px; height:22px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 12px; font-weight: 700;
+    background: var(--chip-tint); color: var(--chip-hue);
+    border: 1px solid color-mix(in srgb, var(--chip-hue) 45%, transparent);
+  }
+  .chip .frac{ font-variant-numeric: tabular-nums; font-size: 12px; }
+  .chip.done{ border-color: var(--good); }
+  .chip.done .letter{ background: var(--good-tint); color: var(--good); border-color: var(--good); }
+  .reset-btn{
+    margin-left: auto; flex: 0 0 auto;
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--ink-faint); background: transparent; border: 1px solid transparent;
+    padding: 6px 8px; border-radius: 8px;
+  }
+  .reset-btn:hover{ color: var(--bad); border-color: var(--border); }
+
+  /* ============ INTRO / REFERENCE CARD ============ */
+  main{ padding: 30px 0 90px; }
+  .intro-card{
+    margin: 26px 0 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+  }
+  .intro-card summary{
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 18px;
+    list-style: none;
+    display:flex; align-items:center; justify-content: space-between;
+    gap: 12px;
+  }
+  .intro-card summary::-webkit-details-marker{ display:none; }
+  .intro-card summary .arrow{
+    font-family: var(--font-mono); color: var(--ink-faint); font-size: 13px;
+    transition: transform .2s ease;
+  }
+  .intro-card[open] summary .arrow{ transform: rotate(180deg); }
+  .intro-grid{
+    margin-top: 18px;
+    display:grid; grid-template-columns: 1fr 1fr; gap: 20px 28px;
+  }
+  @media (max-width: 640px){ .intro-grid{ grid-template-columns: 1fr; } }
+  .intro-block h4{ font-size: 12.5px; text-transform: uppercase; letter-spacing:.08em; color: var(--ink-faint); font-family: var(--font-mono); font-weight:600; margin-bottom:8px;}
+  .intro-block p{ margin:0; color: var(--ink-soft); font-size: 14.5px; }
+  .soi{
+    font-family: var(--font-display); font-style: italic; font-size: 17px; color: var(--ink);
+    grid-column: 1 / -1;
+    padding: 14px 16px;
+    background: var(--surface-2);
+    border-left: 3px solid var(--accent-2);
+    border-radius: 6px;
+  }
+  .iq-table{ grid-column: 1/-1; display:grid; gap:8px; }
+  .iq-row{ display:grid; grid-template-columns: 90px 1fr; gap:12px; font-size: 14px; align-items:baseline; }
+  .iq-row .tag{ font-family: var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color: var(--ink-faint); }
+  .iq-row p{ margin:0; color: var(--ink-soft); }
+
+  /* ============ LESSON SECTION ============ */
+  .lesson{
+    scroll-margin-top: 64px;
+    margin-bottom: 56px;
+  }
+  .lesson-head{
+    display:flex; align-items: center; gap: 16px;
+    padding: 18px 20px;
+    border-radius: var(--radius);
+    background: var(--tint);
+    border: 1px solid color-mix(in srgb, var(--hue) 35%, transparent);
+    margin-bottom: 18px;
+  }
+  .lesson-head .big-letter{
+    font-family: var(--font-display); font-weight:700; font-size: 34px;
+    color: var(--hue);
+    width: 52px; height:52px; flex:0 0 auto;
+    border-radius: 12px;
+    background: var(--surface);
+    display:flex; align-items:center; justify-content:center;
+    border: 1px solid color-mix(in srgb, var(--hue) 40%, transparent);
+  }
+  .lesson-head .htext .kicker{ font-family: var(--font-mono); font-size: 11.5px; text-transform:uppercase; letter-spacing:.09em; color: var(--hue); }
+  .lesson-head .htext h2{ font-size: clamp(20px,2.6vw,26px); margin-top:2px; }
+  .lesson-progress{
+    margin-left:auto; text-align:right; flex: 0 0 auto;
+  }
+  .lesson-progress .ring-label{ font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); }
+  .lesson-progress .bar{
+    width: 90px; height: 6px; border-radius: 4px; background: var(--surface);
+    border: 1px solid var(--border); overflow:hidden; margin-top:6px;
+  }
+  .lesson-progress .bar-fill{ height:100%; background: var(--hue); width:0%; transition: width .3s ease; }
+
+  .rules-box{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 16px;
+  }
+  .rules-box h3{ font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-family: var(--font-mono); color: var(--hue); margin-bottom: 10px; }
+  .rules-box ul{ margin:0; padding-left: 20px; color: var(--ink-soft); font-size: 14.5px; }
+  .rules-box li{ margin-bottom: 5px; }
+  .rules-box li::marker{ color: var(--hue); }
+  .trick-box{ background: color-mix(in srgb, var(--hue) 10%, var(--surface)); border: 1px dashed var(--hue); border-radius: var(--radius); padding: 14px 22px; margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-start; }
+  .trick-box .trick-tag{ font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); white-space: nowrap; padding-top: 2px; }
+  .trick-box .trick-text{ color: var(--ink-soft); font-size: 14.5px; }
+  .trick-box .trick-text b{ color: var(--ink); }
+  .diagram-box{ background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 16px; display:flex; justify-content:center; align-items:center; overflow-x:auto; }
+  .diagram-box svg{ width: 100%; max-width: 620px; height: auto; display:block; }
+  .diagram-box{ flex-direction: column; gap: 8px; }
+  .diagram-caption{ font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); text-align:center; max-width: 620px; }
+  .comic-box{ background: var(--surface-2); border: 2px dashed var(--hue); border-radius: var(--radius); padding: 18px 20px 16px; margin-bottom: 16px; display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .comic-box .comic-tag{ font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); align-self:flex-start; }
+  .comic-box svg{ width: 100%; max-width: 460px; height: auto; display:block; }
+  .comic-box .comic-caption{ font-family: var(--font-body); font-style: italic; font-size: 14px; color: var(--ink-soft); text-align:center; max-width: 560px; }
+  .comic-box text{ fill: var(--ink); font-family: var(--font-mono); }
+  .comic-box .cm-face{ fill: var(--tint); stroke: var(--hue); }
+  .comic-box .cm-face2{ fill: var(--surface); stroke: var(--ink-soft); }
+  .comic-box .cm-line{ stroke: var(--ink); fill:none; }
+  .comic-box .cm-fill{ fill: var(--hue); }
+  .comic-box .cm-bad{ fill: var(--bad-tint); stroke: var(--bad); }
+  .comic-box .cm-good{ fill: var(--good-tint); stroke: var(--good); }
+  .comic-box .cm-bad-fill{ fill: var(--bad); stroke: none; }
+  .comic-box .cm-good-fill{ fill: var(--good); stroke: none; }
+  .comic-box .cm-soft{ fill: var(--ink-faint); }
+
+  .remember-box{
+    background: color-mix(in srgb, var(--hue) 7%, var(--surface));
+    border: 1px solid var(--hue);
+    border-left: 5px solid var(--hue);
+    border-radius: var(--radius);
+    padding: 16px 20px 14px;
+    margin-bottom: 20px;
+  }
+  .remember-box h3{ font-family: var(--font-mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--hue); margin-bottom: 10px; }
+  .remember-box ul{ margin:0; padding-left:0; list-style:none; }
+  .remember-box li{ position:relative; padding-left: 26px; margin-bottom: 7px; color: var(--ink-soft); font-size: 14.5px; }
+  .remember-box li:last-child{ margin-bottom:0; }
+  .remember-box li::before{ content:"\2713"; position:absolute; left:4px; top:0; color: var(--hue); font-weight:700; }
+  .remember-box li b{ color: var(--ink); }
+
+  .cheatsheet{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px 28px;
+    margin-top: 36px;
+  }
+  .cheatsheet h2{ font-size: 24px; margin-bottom: 4px; }
+  .cheatsheet .cs-sub{ color: var(--ink-faint); font-size: 13px; font-family: var(--font-mono); margin-bottom: 18px; }
+  .cs-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+  .cs-card{ background: var(--surface-2); border: 1px solid var(--border); border-top: 3px solid var(--hue); border-radius: var(--radius); padding: 14px 16px; }
+  .cs-card h4{ font-size: 14.5px; display:flex; gap:8px; align-items:center; margin-bottom: 9px; font-family: var(--font-body); font-weight:700; }
+  .cs-card .cs-letter{ font-family: var(--font-mono); font-size: 11px; background: var(--tint); color: var(--hue); border:1px solid var(--hue); border-radius: 6px; padding: 2px 7px; }
+  .cs-card ul{ margin:0; padding-left: 18px; color: var(--ink-soft); font-size: 13.5px; }
+  .cs-card li{ margin-bottom: 5px; }
+  .cs-card li:last-child{ margin-bottom:0; }
+  .cs-card li::marker{ color: var(--hue); }
+  .cs-card li b{ color: var(--ink); }
+  .diagram-box .dg-line{ stroke: var(--hue); fill: none; }
+  .diagram-box .dg-fill{ fill: var(--hue); }
+  .diagram-box .dg-tint{ fill: var(--tint); stroke: var(--hue); }
+  .diagram-box .dg-ink{ fill: var(--ink); }
+  .diagram-box .dg-ink-line{ stroke: var(--ink-soft); fill:none; }
+  .diagram-box .dg-soft{ fill: var(--ink-soft); }
+  .diagram-box .dg-good{ fill: var(--good); stroke: var(--good); }
+  .diagram-box .dg-bad{ fill: var(--bad); stroke: var(--bad); }
+  .diagram-box text{ fill: var(--ink); font-family: var(--font-mono); }
+
+  .example-card{
+    background: var(--surface);
+    border: 1.5px dashed var(--border-strong);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 22px;
+  }
+  .example-card h3{
+    font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-family: var(--font-mono);
+    color: var(--ink-faint); margin-bottom: 10px; display:flex; align-items:center; gap:8px;
+  }
+  .example-card h3::before{ content:"✎"; color: var(--accent-2); font-size:14px; }
+  .example-prob{ font-family: var(--font-mono); font-size: 15.5px; margin-bottom: 12px; color: var(--ink); }
+  .example-steps{ display:flex; flex-direction:column; gap: 6px; }
+  .example-steps .step{
+    display:grid; grid-template-columns: 20px 1fr; gap: 10px;
+    font-size: 14.5px; color: var(--ink-soft); align-items:baseline;
+  }
+  .example-steps .step .n{ font-family: var(--font-mono); color: var(--hue); font-size: 12.5px; }
+  .example-steps .step .expr{ color: var(--ink); }
+  .example-answer{
+    margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border);
+    font-size: 14.5px; color: var(--good); font-family: var(--font-mono); font-weight:600;
+  }
+
+  /* ============ EXERCISE GRID ============ */
+  .ex-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 720px){ .ex-grid{ grid-template-columns: 1fr; } }
+
+  .ex-card{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display:flex; flex-direction:column; gap:10px;
+    transition: border-color .2s ease;
+  }
+  .ex-card.correct{ border-color: var(--good); background: color-mix(in srgb, var(--good-tint) 60%, var(--surface)); }
+  .ex-card.wrong{ border-color: var(--bad); }
+
+  .ex-top{ display:flex; align-items:flex-start; gap:10px; }
+  .ex-num{
+    font-family: var(--font-mono); font-size: 12.5px; font-weight:700;
+    color: var(--hue); background: var(--tint); border:1px solid color-mix(in srgb, var(--hue) 40%, transparent);
+    border-radius: 6px; padding: 2px 7px; flex:0 0 auto; margin-top:2px;
+  }
+  .ex-prompt{ font-size: 14.5px; color: var(--ink); line-height:1.5; }
+  .ex-prompt .expr{ font-size: 14.5px; }
+
+  .ex-input-row{ display:flex; gap:8px; }
+  .ex-input{
+    flex:1; min-width:0;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+  }
+  .ex-input::placeholder{ color: var(--ink-faint); }
+  .ex-check{
+    font-family: var(--font-mono); font-size: 12.5px; font-weight:600;
+    padding: 8px 14px; border-radius: 8px; border: 1px solid var(--hue);
+    background: var(--hue); color: var(--accent-ink);
+    white-space:nowrap;
+  }
+  .ex-check:hover{ filter: brightness(1.06); }
+
+  .ex-feedback{ font-size: 13px; font-family: var(--font-mono); min-height: 4px; }
+  .ex-feedback.correct{ color: var(--good); }
+  .ex-feedback.wrong{ color: var(--bad); }
+
+  .ex-foot{ display:flex; justify-content: space-between; align-items:center; margin-top:2px; }
+  .ex-toggle{
+    background:none; border:none; padding:0; font-size: 12.5px;
+    font-family: var(--font-mono); color: var(--ink-faint); text-decoration: underline; text-underline-offset:3px;
+  }
+  .ex-toggle:hover{ color: var(--hue); }
+  .ex-solution{
+    display:none; margin-top: 4px; padding: 12px 14px;
+    background: var(--surface-2); border-radius: 8px;
+    font-size: 13.5px; color: var(--ink-soft);
+  }
+  .ex-solution.open{ display:block; }
+  .ex-solution .sol-step{ margin-bottom: 4px; }
+  .ex-solution .sol-final{ margin-top:8px; color: var(--good); font-weight:700; font-family: var(--font-mono); }
+
+  .open-note{ font-size: 11.5px; color: var(--ink-faint); font-family: var(--font-mono); }
+
+  sup{ font-size: 0.7em; }
+
+  footer{
+    text-align:center; padding: 30px 20px 50px;
+    color: var(--ink-faint); font-size: 13px; font-family: var(--font-mono);
+  }
+
+  .toast{
+    position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color: var(--bg);
+    padding: 10px 18px; border-radius: 999px; font-family: var(--font-mono); font-size: 13px;
+    opacity: 0; pointer-events:none; transition: opacity .25s ease, transform .25s ease;
+    z-index: 100; white-space: nowrap;
+  }
+  .toast.show{ opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+
+<div class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="eyebrow"><span class="dot"></span>IB MYP Extended Mathematics &middot; Grade 9 (MYP 4) &middot; Unit 3 &middot; from 26 September</div>
+    <div class="title-row">
+      <div>
+        <h1>Unit 3: Sequences &amp; Series</h1>
+        <div class="subtitle">Extended Mathematics workbook &mdash; arithmetic sequences and the nth term, geometric sequences and the common ratio, the arithmetic series, the geometric series, modelling with sequences and series, and harder mixed problems. Six lessons, 120 exercises, two worked examples and two illustrations per lesson.</div>
+      </div>
+      <div class="student-tag">Prepared for <b>Devon</b> &middot; Extended Math track</div>
+    </div>
+    <div class="meta-strip">
+      <span>Global context: <b>Scientific &amp; Technical Innovation</b></span>
+      <span>Key concept: <b>Logic</b></span>
+      <span>Related concepts: <b>Generalization &middot; Pattern</b></span>
+      <span>Criteria: <b>A &middot; C &middot; D</b></span>
+    </div>
+  </div>
+</div>
+
+<div class="scoreboard">
+  <div class="wrap scoreboard-inner" id="scoreboardInner">
+    <span class="score-total"><b id="totalDone">0</b>/120 done</span>
+    <!-- chips injected by JS -->
+    <button class="reset-btn" id="resetBtn" title="Clear saved progress">reset progress</button>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <details class="intro-card" id="introCard">
+    <summary>Unit reference &mdash; Statement of Inquiry, inquiry questions &amp; how to use this guide<span class="arrow">&#9660;</span></summary>
+    <div class="intro-grid">
+      <p class="soi">&ldquo;Generalising patterns in a sequence lets us predict and calculate quantities that accumulate over time.&rdquo;</p>
+
+      <div class="intro-block">
+        <h4>How this guide works</h4>
+        <p>Each lesson (A&ndash;F) opens with the core rules and a diagram, then two fully worked examples, a short <b>Rules to remember</b> checklist, a <b>math meme break</b>, and 20 practice exercises. Every lesson's checklist is collected again in the <b>Rules to remember</b> cheat sheet at the bottom of the page. Type an answer and press <b>Check</b> for instant feedback, or open <b>Show solution</b> to see the steps. Numbers can be typed as decimals or as fractions &mdash; <code>13/7</code> and <code>1.857</code> are both accepted &mdash; and an nth-term rule is typed like <code>3n+2</code>. The checker ignores spaces and round brackets. Your progress is saved automatically in this browser.</p>
+      </div>
+      <div class="intro-block">
+        <h4>Assessment &amp; the learner profile</h4>
+        <p>This unit is assessed on <b>Criterion A</b> (knowing and understanding), <b>Criterion C</b> (communicating) and <b>Criterion D</b> (applying mathematics in real-life contexts). As on Summative Assessment&nbsp;I, a bare number scores badly: <b>show complete solutions with proper notation</b> &mdash; state a&#8321;, d or r and n before you substitute, write the formula out, then substitute, then simplify. Exercises in each lesson escalate the way the paper bands its questions, from Level&nbsp;1&ndash;2 recall through Level&nbsp;3&ndash;4 multi-step work to Level&nbsp;5&ndash;6 and 7&ndash;8 problems set in unfamiliar situations. Calculators are allowed &mdash; use one for powers such as 3&#8312;, not to replace the algebra.</p>
+      </div>
+
+      <div class="iq-table">
+        <div class="iq-row"><span class="tag">Factual</span><p>What is the difference between a sequence and a series? <em>(see Lesson A, Exercise 19 and Lesson C, Exercise 20)</em></p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>How does generalising a pattern into an nth-term rule let us predict a quantity we never counted? <em>(see Lessons A and B)</em></p></div>
+        <div class="iq-row"><span class="tag">Conceptual</span><p>Why does adding a constant behave so differently from multiplying by a constant? <em>(see Lesson D, Exercise 20)</em></p></div>
+        <div class="iq-row"><span class="tag">Debatable</span><p>When is a real situation better modelled arithmetically, and when geometrically? <em>(see Lesson E, Exercise 19)</em></p></div>
+      </div>
+    </div>
+  </details>
+
+  <div id="lessons"></div>
+
+  <section class="cheatsheet" id="cheatsheet">
+    <h2>Rules to remember</h2>
+    <div class="cs-sub">The whole unit on one page &mdash; read this before a test</div>
+    <div class="cs-grid" id="csGrid"></div>
+  </section>
+
+</main>
+
+<footer>Sequences &amp; Series &middot; Extended Math Unit 3 study workbook &middot; built for Devon</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------------------------------------------------------
+     DATA
+  --------------------------------------------------------------- */
+  var LESSONS = [
+    {
+      letter: "A", hueVar: "--hueA", title: "Sequences, Terms &amp; the nth Term",
+      rules: [
+        "A <b>sequence</b> is an ordered list of numbers. Each entry is a <b>term</b>. We write the first term a&#8321;, the second a&#8322;, and the general or <b>nth term</b> a&#8345;. The position number n is always a counting number: 1, 2, 3, &hellip;",
+        "A sequence is <b>arithmetic</b> when you get from each term to the next by <b>adding the same number</b>. That number is the <b>common difference</b> d, and d = a&#8345; &minus; a&#8345;&#8331;&#8321;. Subtract <i>any</i> term from the one after it &mdash; you must get the same answer every time, or it is not arithmetic.",
+        "The generalisation is <b>a&#8345; = a&#8321; + (n &minus; 1)d</b>. You take (n &minus; 1) steps to reach the nth term, not n steps &mdash; the first term costs you no steps at all. Forgetting the &minus;1 is the single most common error in this unit.",
+        "The formula is a <b>machine that works both ways</b>. Given n, it hands you a term. Given a term, set a&#8321; + (n &minus; 1)d equal to it and solve for n. If n comes out as a fraction or a negative, that number is <b>not</b> in the sequence.",
+        "Written as a rule in n, an arithmetic sequence is always <b>linear</b>: a&#8345; = dn + (a&#8321; &minus; d). So 5, 8, 11, 14, &hellip; has d = 3 and a&#8345; = 3n + 2. The coefficient of n <i>is</i> the common difference.",
+        "A <b>series</b> is what you get when you add the terms of a sequence together. 3, 7, 11, 15 is a sequence; 3 + 7 + 11 + 15 is a series and its value, 36, is the sum. Lessons C and D are about those sums."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 440 210" width="440" height="210">
+        <text x="220" y="26" text-anchor="middle" font-size="15" font-weight="bold">Arithmetic: the same d is added at every step</text>
+        <rect x="20" y="118" width="64" height="48" rx="10" class="dg-tint" stroke-width="2"/>
+        <rect x="106" y="118" width="64" height="48" rx="10" class="dg-tint" stroke-width="2"/>
+        <rect x="192" y="118" width="64" height="48" rx="10" class="dg-tint" stroke-width="2"/>
+        <rect x="278" y="118" width="64" height="48" rx="10" class="dg-tint" stroke-width="2"/>
+        <rect x="364" y="118" width="64" height="48" rx="10" class="dg-tint" stroke-width="2"/>
+        <text x="52" y="150" text-anchor="middle" font-size="21" font-weight="bold">3</text>
+        <text x="138" y="150" text-anchor="middle" font-size="21" font-weight="bold">7</text>
+        <text x="224" y="150" text-anchor="middle" font-size="21" font-weight="bold">11</text>
+        <text x="310" y="150" text-anchor="middle" font-size="21" font-weight="bold">15</text>
+        <text x="396" y="150" text-anchor="middle" font-size="21" font-weight="bold">19</text>
+        <line x1="86" y1="142" x2="98" y2="142" class="dg-line" stroke-width="2"/>
+        <polygon points="104,142 96,138 96,146" class="dg-fill"/>
+        <line x1="172" y1="142" x2="184" y2="142" class="dg-line" stroke-width="2"/>
+        <polygon points="190,142 182,138 182,146" class="dg-fill"/>
+        <line x1="258" y1="142" x2="270" y2="142" class="dg-line" stroke-width="2"/>
+        <polygon points="276,142 268,138 268,146" class="dg-fill"/>
+        <line x1="344" y1="142" x2="356" y2="142" class="dg-line" stroke-width="2"/>
+        <polygon points="362,142 354,138 354,146" class="dg-fill"/>
+        <text x="95" y="108" text-anchor="middle" font-size="14" font-weight="bold">+4</text>
+        <text x="181" y="108" text-anchor="middle" font-size="14" font-weight="bold">+4</text>
+        <text x="267" y="108" text-anchor="middle" font-size="14" font-weight="bold">+4</text>
+        <text x="353" y="108" text-anchor="middle" font-size="14" font-weight="bold">+4</text>
+        <text x="52" y="190" text-anchor="middle" font-size="14" class="dg-soft">a&#8321;</text>
+        <text x="138" y="190" text-anchor="middle" font-size="14" class="dg-soft">a&#8322;</text>
+        <text x="224" y="190" text-anchor="middle" font-size="14" class="dg-soft">a&#8323;</text>
+        <text x="310" y="190" text-anchor="middle" font-size="14" class="dg-soft">a&#8324;</text>
+        <text x="396" y="190" text-anchor="middle" font-size="14" class="dg-soft">a&#8325;</text>
+      </svg>`,
+        `<svg viewBox="0 0 420 200" width="420" height="200">
+        <text x="70" y="62" text-anchor="middle" font-size="24" font-weight="bold">a&#8345;</text>
+        <text x="115" y="62" text-anchor="middle" font-size="24">=</text>
+        <text x="160" y="62" text-anchor="middle" font-size="24" font-weight="bold">a&#8321;</text>
+        <text x="200" y="62" text-anchor="middle" font-size="24">+</text>
+        <text x="265" y="62" text-anchor="middle" font-size="24" font-weight="bold">(n &minus; 1)</text>
+        <text x="330" y="62" text-anchor="middle" font-size="24" font-weight="bold">d</text>
+        <line x1="70" y1="76" x2="70" y2="112" class="dg-line" stroke-width="1.8"/>
+        <text x="70" y="134" text-anchor="middle" font-size="13">the nth term</text>
+        <line x1="265" y1="76" x2="265" y2="112" class="dg-line" stroke-width="1.8"/>
+        <text x="265" y="134" text-anchor="middle" font-size="13">steps taken</text>
+        <line x1="160" y1="76" x2="160" y2="157" class="dg-line" stroke-width="1.8"/>
+        <text x="160" y="179" text-anchor="middle" font-size="13">first term</text>
+        <line x1="330" y1="76" x2="330" y2="157" class="dg-line" stroke-width="1.8"/>
+        <text x="330" y="179" text-anchor="middle" font-size="13">common difference</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "Four steps of +4 take you from a&#8321; = 3 to a&#8325; = 19. Count the arrows, not the boxes: reaching the 5th term costs 4 steps.",
+        "Every symbol in a&#8345; = a&#8321; + (n &minus; 1)d, named. The bracket (n &minus; 1) is the number of steps taken, which is always one less than the position n."
+      ],
+      trick: "Count arrows, not boxes. To reach the nth term you take <b>n &minus; 1</b> steps of size d &mdash; that is the whole reason for the &minus;1. If you ever doubt a formula, test it on n = 1: a&#8321; + (1 &minus; 1)d = a&#8321;, which is exactly what it should give. A version without the &minus;1 would claim a&#8321; = a&#8321; + d, which is nonsense.",
+      examples: [
+        {
+          problem: "Find the 20th term of the sequence 3, 7, 11, 15, &hellip;",
+          steps: [
+            "Check it is arithmetic: 7 &minus; 3 = 4, 11 &minus; 7 = 4, 15 &minus; 11 = 4. The difference is constant, so d = 4.",
+            "State the values: a&#8321; = 3, d = 4, n = 20.",
+            "Write the formula, then substitute: a&#8345; = a&#8321; + (n &minus; 1)d, so a&#8322;&#8320; = 3 + (20 &minus; 1)(4)",
+            "Simplify: a&#8322;&#8320; = 3 + 19 &times; 4 = 3 + 76"
+          ],
+          answer: "a&#8322;&#8320; = 79"
+        },
+        {
+          problem: "An arithmetic sequence has a&#8321; = 5 and d = 3. Which term of the sequence is equal to 62?",
+          steps: [
+            "Here the term is known and the position n is the unknown. Substitute into a&#8345; = a&#8321; + (n &minus; 1)d: 62 = 5 + (n &minus; 1)(3)",
+            "Subtract 5 from both sides: 57 = 3(n &minus; 1)",
+            "Divide both sides by 3: 19 = n &minus; 1",
+            "Add 1: n = 20. Because n is a whole number, 62 really is a term of the sequence &mdash; had n come out as, say, 19.4, the answer would be &lsquo;62 is not a term&rsquo;."
+          ],
+          answer: "62 is the 20th term (n = 20)"
+        }
+      ],
+      remember: [
+        "<b>d is a subtraction, not a guess.</b> d = a&#8345; &minus; a&#8345;&#8331;&#8321;, and it must come out the same for every consecutive pair.",
+        "<b>a&#8345; = a&#8321; + (n &minus; 1)d.</b> Test any formula at n = 1 &mdash; it must give back a&#8321;.",
+        "<b>To find a position, solve for n.</b> A fractional or negative n means the number is not in the sequence.",
+        "<b>Sequence = the list. Series = the running total.</b> a&#8322;&#8320; is one term; S&#8322;&#8320; is twenty terms added up."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 200" width="460" height="200">
+        <rect x="10" y="8" width="196" height="48" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="100,56 116,56 108,86" class="cm-face2" stroke-width="2"/>
+        <text x="108" y="29" text-anchor="middle" font-size="12">&ldquo;I'm just a list.</text>
+        <text x="108" y="46" text-anchor="middle" font-size="12">Nobody adds me up.&rdquo;</text>
+        <circle cx="108" cy="124" r="34" class="cm-face" stroke-width="2"/>
+        <circle cx="96" cy="116" r="3.5" class="cm-fill"/>
+        <circle cx="120" cy="116" r="3.5" class="cm-fill"/>
+        <path d="M94 132 Q108 146 122 132" class="cm-line" stroke-width="2"/>
+        <text x="108" y="180" text-anchor="middle" font-size="13" font-weight="bold">3, 7, 11, 15</text>
+        <text x="108" y="195" text-anchor="middle" font-size="11" class="cm-soft">a sequence</text>
+        <rect x="254" y="8" width="196" height="48" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="344,56 360,56 352,86" class="cm-face2" stroke-width="2"/>
+        <text x="352" y="29" text-anchor="middle" font-size="12">&ldquo;About that. I ate</text>
+        <text x="352" y="46" text-anchor="middle" font-size="12">the list. I'm a 36.&rdquo;</text>
+        <circle cx="352" cy="124" r="34" class="cm-face" stroke-width="2"/>
+        <circle cx="340" cy="116" r="3.5" class="cm-fill"/>
+        <circle cx="364" cy="116" r="3.5" class="cm-fill"/>
+        <path d="M338 128 Q352 144 366 128" class="cm-line" stroke-width="2"/>
+        <text x="352" y="180" text-anchor="middle" font-size="13" font-weight="bold">3 + 7 + 11 + 15</text>
+        <text x="352" y="195" text-anchor="middle" font-size="11" class="cm-soft">a series</text>
+      </svg>`,
+        caption: "Same four numbers, two completely different objects. The sequence still has four terms you can point at; the series has collapsed into one number, 36, and you can no longer tell from it what the terms were."
+      },
+      exercises: [
+        { prompt: "Write down the next term of the sequence 3, 7, 11, 15, &hellip;", value: 19,
+          solution: ["The common difference is 7 &minus; 3 = 4", "15 + 4 = 19"] },
+        { prompt: "Find the common difference d of the sequence 3, 7, 11, 15, &hellip;", value: 4,
+          solution: ["d = a&#8322; &minus; a&#8321; = 7 &minus; 3 = 4", "Check with another pair: 15 &minus; 11 = 4 &#10003;"] },
+        { prompt: "Find the common difference d of the sequence 20, 17, 14, 11, &hellip;", value: -3,
+          solution: ["d = 17 &minus; 20 = &minus;3", "The terms are decreasing, so d is negative"] },
+        { prompt: "Is the sequence 2, 4, 8, 16, &hellip; arithmetic? Answer yes or no.", accept: ["no"],
+          solution: ["4 &minus; 2 = 2 but 8 &minus; 4 = 4", "The difference is not constant, so it is not arithmetic &mdash; it is geometric"] },
+        { prompt: "An arithmetic sequence has a&#8321; = 5 and d = 3. Find a&#8324;.", value: 14,
+          solution: ["a&#8324; = a&#8321; + (4 &minus; 1)d = 5 + 3(3)", "= 5 + 9 = 14"] },
+        { prompt: "Find the 10th term of 3, 7, 11, 15, &hellip;", value: 39,
+          solution: ["a&#8321; = 3, d = 4, n = 10", "a&#8321;&#8320; = 3 + (10 &minus; 1)(4) = 3 + 36 = 39"] },
+        { prompt: "An arithmetic sequence has a&#8321; = 100 and d = &minus;7. Find a&#8321;&#8322;.", value: 23,
+          solution: ["a&#8321;&#8322; = 100 + (12 &minus; 1)(&minus;7)", "= 100 &minus; 77 = 23"] },
+        { prompt: "Write the nth term rule for 5, 8, 11, 14, &hellip; in the form an + b. Type it like 3n+2.", accept: ["3n+2","2+3n"],
+          solution: ["d = 3, a&#8321; = 5", "a&#8345; = 5 + (n &minus; 1)(3) = 5 + 3n &minus; 3", "a&#8345; = 3n + 2 &mdash; and notice the coefficient of n is d"] },
+        { prompt: "Write the nth term rule for 7, 12, 17, 22, &hellip; in the form an + b. Type it like 3n+2.", accept: ["5n+2","2+5n"],
+          solution: ["d = 5, a&#8321; = 7", "a&#8345; = 7 + 5(n &minus; 1) = 7 + 5n &minus; 5 = 5n + 2"] },
+        { prompt: "Write the nth term rule for 20, 17, 14, 11, &hellip; Type it like 3n+2 or -3n+23.", accept: ["-3n+23","23-3n","&minus;3n+23"],
+          solution: ["d = &minus;3, a&#8321; = 20", "a&#8345; = 20 &minus; 3(n &minus; 1) = 20 &minus; 3n + 3 = 23 &minus; 3n"] },
+        { prompt: "An arithmetic sequence has a&#8321; = 4 and d = 6. Find a&#8323;&#8320;.", value: 178,
+          solution: ["a&#8323;&#8320; = 4 + (30 &minus; 1)(6)", "= 4 + 174 = 178"] },
+        { prompt: "Which term of the sequence 5, 8, 11, 14, &hellip; is equal to 62? Give the position n.", value: 20,
+          solution: ["a&#8321; = 5, d = 3. Set 5 + 3(n &minus; 1) = 62", "3(n &minus; 1) = 57, so n &minus; 1 = 19", "n = 20"] },
+        { prompt: "Is 100 a term of the sequence 4, 11, 18, 25, &hellip;? Answer yes or no.", accept: ["no"],
+          solution: ["d = 7. Set 4 + 7(n &minus; 1) = 100", "7(n &minus; 1) = 96, so n &minus; 1 = 96/7 = 13.71&hellip;", "n is not a whole number, so 100 is not a term &rarr; no"] },
+        { prompt: "In an arithmetic sequence a&#8323; = 11 and a&#8327; = 27. Find d.", value: 4,
+          solution: ["Going from the 3rd term to the 7th term is 4 steps", "4d = 27 &minus; 11 = 16", "d = 4"] },
+        { prompt: "In the same sequence (a&#8323; = 11, a&#8327; = 27), find a&#8321;.", value: 3,
+          solution: ["d = 4, and a&#8323; = a&#8321; + 2d", "11 = a&#8321; + 8, so a&#8321; = 3"] },
+        { prompt: "An arithmetic sequence has a&#8325; = 20 and a&#8321;&#8322; = 48. Find a&#8321;.", value: 4,
+          solution: ["From the 5th to the 12th term is 7 steps: 7d = 48 &minus; 20 = 28, so d = 4", "a&#8325; = a&#8321; + 4d, so 20 = a&#8321; + 16", "a&#8321; = 4"] },
+        { prompt: "An arithmetic sequence has a&#8321; = &minus;8 and d = 5. Find the position n of the first term that is greater than 50.", value: 13,
+          solution: ["Solve &minus;8 + 5(n &minus; 1) &gt; 50", "5(n &minus; 1) &gt; 58, so n &minus; 1 &gt; 11.6 and n &gt; 12.6", "The first whole number that works is n = 13 (and a&#8321;&#8323; = &minus;8 + 60 = 52)"] },
+        { prompt: "Which term of the sequence 2, 9, 16, 23, &hellip; is equal to 100? Give the position n.", value: 15,
+          solution: ["d = 7. Set 2 + 7(n &minus; 1) = 100", "7(n &minus; 1) = 98, so n &minus; 1 = 14", "n = 15"] },
+        { prompt: "In your own words, explain the difference between a sequence and a series, using 4, 9, 14, 19 as your example.", open: true,
+          solution: ["Sample response: 4, 9, 14, 19 is a sequence &mdash; an ordered list, and I can point to a&#8323; = 14 as a particular item in it. The series is what happens when I add those terms together: 4 + 9 + 14 + 19, whose value is 46. The sequence keeps every term separate and in order; the series throws the order away and keeps only the total. That is why a&#8324; = 19 and S&#8324; = 46 are different questions about the same four numbers."] },
+        { prompt: "Explain why the rule for the nth term of an arithmetic sequence always turns out to be linear in n, and say what the gradient of that line represents.", open: true,
+          solution: ["Sample response: expanding a&#8345; = a&#8321; + (n &minus; 1)d gives a&#8345; = dn + (a&#8321; &minus; d), which has the shape y = mx + c with n in place of x. So plotting term value against position gives points lying on a straight line. The gradient is d, the common difference &mdash; it is the amount the term value rises for each one-step increase in position, exactly what &lsquo;gradient&rsquo; means. The intercept a&#8321; &minus; d is the value the line would take at n = 0, one step before the sequence starts."] }
+      ]
+    },
+    {
+      letter: "B", hueVar: "--hueB", title: "Geometric Sequences &amp; the Common Ratio",
+      rules: [
+        "A sequence is <b>geometric</b> when you get from each term to the next by <b>multiplying by the same number</b>. That number is the <b>common ratio</b> r, and r = a&#8345;&#8330;&#8321; &divide; a&#8345;. Divide <i>any</i> term by the one before it &mdash; you must get the same answer every time.",
+        "The generalisation is <b>a&#8345; = a&#8321; &middot; r&#8319;&#8315;&#185;</b>. The same &lsquo;one fewer step&rsquo; logic as the arithmetic rule: reaching the nth term takes n &minus; 1 multiplications, so the exponent is n &minus; 1, never n.",
+        "<b>The sign of r tells you the shape.</b> If r &gt; 0 every term keeps the sign of a&#8321;. If r &lt; 0 the terms <b>alternate</b> in sign, because an odd power of a negative is negative and an even power is positive: 3, &minus;6, 12, &minus;24, &hellip; has r = &minus;2.",
+        "<b>The size of r tells you the behaviour.</b> If |r| &gt; 1 the terms grow without bound. If |r| &lt; 1 they shrink towards zero &mdash; 800, 400, 200, 100, &hellip; has r = &frac12;. If r = 1 every term is the same number.",
+        "<b>Two terms determine the sequence.</b> If a&#8323; = 12 and a&#8326; = 96 then dividing gives a&#8326;/a&#8323; = r&#179; = 8, so r = 2. In general, jumping k places multiplies by r&#7503;.",
+        "<b>Arithmetic adds, geometric multiplies.</b> When you are handed a list, test both: subtract consecutive pairs, then divide consecutive pairs. Whichever test gives a constant is the kind of sequence you have &mdash; and a list can be neither."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 440 210" width="440" height="210">
+        <text x="220" y="24" text-anchor="middle" font-size="15" font-weight="bold">Grains on the chessboard: each square doubles</text>
+        <line x1="14" y1="172" x2="426" y2="172" class="dg-ink-line" stroke-width="1.8"/>
+        <rect x="20" y="171" width="36" height="1" class="dg-fill"/>
+        <rect x="72" y="170" width="36" height="2" class="dg-fill"/>
+        <rect x="124" y="168" width="36" height="4" class="dg-fill"/>
+        <rect x="176" y="164" width="36" height="8" class="dg-fill"/>
+        <rect x="228" y="157" width="36" height="15" class="dg-fill"/>
+        <rect x="280" y="142" width="36" height="30" class="dg-fill"/>
+        <rect x="332" y="112" width="36" height="60" class="dg-fill"/>
+        <rect x="384" y="52" width="36" height="120" class="dg-fill"/>
+        <text x="38" y="163" text-anchor="middle" font-size="12">1</text>
+        <text x="90" y="162" text-anchor="middle" font-size="12">2</text>
+        <text x="142" y="160" text-anchor="middle" font-size="12">4</text>
+        <text x="194" y="156" text-anchor="middle" font-size="12">8</text>
+        <text x="246" y="149" text-anchor="middle" font-size="12">16</text>
+        <text x="298" y="134" text-anchor="middle" font-size="12">32</text>
+        <text x="350" y="104" text-anchor="middle" font-size="12">64</text>
+        <text x="402" y="44" text-anchor="middle" font-size="12" font-weight="bold">128</text>
+        <text x="38" y="192" text-anchor="middle" font-size="12" class="dg-soft">1</text>
+        <text x="90" y="192" text-anchor="middle" font-size="12" class="dg-soft">2</text>
+        <text x="142" y="192" text-anchor="middle" font-size="12" class="dg-soft">3</text>
+        <text x="194" y="192" text-anchor="middle" font-size="12" class="dg-soft">4</text>
+        <text x="246" y="192" text-anchor="middle" font-size="12" class="dg-soft">5</text>
+        <text x="298" y="192" text-anchor="middle" font-size="12" class="dg-soft">6</text>
+        <text x="350" y="192" text-anchor="middle" font-size="12" class="dg-soft">7</text>
+        <text x="402" y="192" text-anchor="middle" font-size="12" class="dg-soft">8</text>
+        <text x="220" y="206" text-anchor="middle" font-size="12" class="dg-soft">square number</text>
+      </svg>`,
+        `<svg viewBox="0 0 440 200" width="440" height="200">
+        <text x="110" y="30" text-anchor="middle" font-size="14" font-weight="bold">ratio stays the same &#10003;</text>
+        <text x="330" y="30" text-anchor="middle" font-size="14" font-weight="bold">ratio changes &#10007;</text>
+        <rect x="10" y="44" width="200" height="104" rx="12" class="dg-tint" stroke-width="2"/>
+        <rect x="230" y="44" width="200" height="104" rx="12" class="dg-tint" stroke-width="2"/>
+        <text x="40" y="110" text-anchor="middle" font-size="22" font-weight="bold">3</text>
+        <text x="110" y="110" text-anchor="middle" font-size="22" font-weight="bold">12</text>
+        <text x="180" y="110" text-anchor="middle" font-size="22" font-weight="bold">48</text>
+        <text x="260" y="110" text-anchor="middle" font-size="22" font-weight="bold">3</text>
+        <text x="330" y="110" text-anchor="middle" font-size="22" font-weight="bold">12</text>
+        <text x="400" y="110" text-anchor="middle" font-size="22" font-weight="bold">27</text>
+        <line x1="52" y1="102" x2="90" y2="102" class="dg-line" stroke-width="1.8"/>
+        <polygon points="96,102 88,98 88,106" class="dg-fill"/>
+        <line x1="126" y1="102" x2="158" y2="102" class="dg-line" stroke-width="1.8"/>
+        <polygon points="164,102 156,98 156,106" class="dg-fill"/>
+        <line x1="272" y1="102" x2="306" y2="102" class="dg-line" stroke-width="1.8"/>
+        <polygon points="312,102 304,98 304,106" class="dg-fill"/>
+        <line x1="346" y1="102" x2="376" y2="102" class="dg-line" stroke-width="1.8"/>
+        <polygon points="382,102 374,98 374,106" class="dg-fill"/>
+        <text x="74" y="84" text-anchor="middle" font-size="14" font-weight="bold">&times;4</text>
+        <text x="145" y="84" text-anchor="middle" font-size="14" font-weight="bold">&times;4</text>
+        <text x="292" y="84" text-anchor="middle" font-size="14" font-weight="bold">&times;4</text>
+        <text x="364" y="84" text-anchor="middle" font-size="14" font-weight="bold">&times;2.25</text>
+        <text x="110" y="138" text-anchor="middle" font-size="13">geometric, r = 4</text>
+        <text x="330" y="138" text-anchor="middle" font-size="13">not geometric</text>
+        <text x="220" y="180" text-anchor="middle" font-size="13">the test: divide each term by the one before it</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "Eight squares of the chessboard. The first four bars look like nothing, which is exactly the trap in the rice puzzle &mdash; doubling is slow until suddenly it is not.",
+        "Two lists that start identically. Only the left one survives the ratio test, so only the left one has a common ratio."
+      ],
+      trick: "Do <b>both</b> tests before you commit. Subtract consecutive pairs: constant &rarr; arithmetic. Divide consecutive pairs: constant &rarr; geometric. Doing only one test is how students call 1, 4, 9, 16 &lsquo;arithmetic with d = 3&rsquo; &mdash; the differences 3, 5, 7 are not constant and the ratios 4, 2.25, 1.78 are not either, so it is neither. And when you find r, check the exponent by testing n = 1: a&#8321; &middot; r&#8304; = a&#8321; &#10003;.",
+      examples: [
+        {
+          problem: "Find the 8th term of the sequence 2, 6, 18, 54, &hellip;",
+          steps: [
+            "Test for a common ratio: 6 &divide; 2 = 3, 18 &divide; 6 = 3, 54 &divide; 18 = 3. Constant, so it is geometric with r = 3.",
+            "State the values: a&#8321; = 2, r = 3, n = 8.",
+            "Write the formula, then substitute: a&#8345; = a&#8321; &middot; r&#8319;&#8315;&#185;, so a&#8328; = 2 &times; 3&#8311;",
+            "Evaluate the power first: 3&#8311; = 2187, so a&#8328; = 2 &times; 2187"
+          ],
+          answer: "a&#8328; = 4374"
+        },
+        {
+          problem: "A geometric sequence has a&#8321; = 5 and a&#8324; = 135. Find r, then find a&#8326;.",
+          steps: [
+            "Going from the 1st term to the 4th term is 3 multiplications, so a&#8324; = a&#8321; &middot; r&#179;",
+            "Substitute: 135 = 5r&#179;, so r&#179; = 27",
+            "Take the cube root: r = 3 (a cube root has just one real value, so there is no &plusmn; here)",
+            "Now a&#8326; = a&#8321; &middot; r&#8309; = 5 &times; 3&#8309; = 5 &times; 243"
+          ],
+          answer: "r = 3 and a&#8326; = 1215"
+        }
+      ],
+      remember: [
+        "<b>r is a division, not a subtraction.</b> r = a&#8345;&#8330;&#8321; &divide; a&#8345;, constant for every consecutive pair.",
+        "<b>a&#8345; = a&#8321; &middot; r&#8319;&#8315;&#185;.</b> The exponent counts multiplications, so it is n &minus; 1, and a&#8321; &middot; r&#8304; = a&#8321; checks it.",
+        "<b>Negative r alternates the signs; |r| &lt; 1 shrinks towards zero.</b> Read r before you compute anything.",
+        "<b>Jumping k places multiplies by r&#7503;.</b> So a&#8326;/a&#8323; = r&#179; &mdash; two terms are enough to pin the whole sequence down."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 200" width="460" height="200">
+        <rect x="10" y="8" width="196" height="48" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="100,56 116,56 108,86" class="cm-face2" stroke-width="2"/>
+        <text x="108" y="29" text-anchor="middle" font-size="12">&ldquo;One grain? Sure,</text>
+        <text x="108" y="46" text-anchor="middle" font-size="12">take the whole board.&rdquo;</text>
+        <circle cx="108" cy="124" r="34" class="cm-face" stroke-width="2"/>
+        <circle cx="96" cy="116" r="3.5" class="cm-fill"/>
+        <circle cx="120" cy="116" r="3.5" class="cm-fill"/>
+        <path d="M94 132 Q108 146 122 132" class="cm-line" stroke-width="2"/>
+        <text x="108" y="180" text-anchor="middle" font-size="13" font-weight="bold">square 1: 1 grain</text>
+        <text x="108" y="195" text-anchor="middle" font-size="11" class="cm-soft">the king, feeling generous</text>
+        <rect x="254" y="8" width="196" height="48" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="344,56 360,56 352,86" class="cm-face2" stroke-width="2"/>
+        <text x="352" y="29" text-anchor="middle" font-size="12">&ldquo;Your Majesty, we</text>
+        <text x="352" y="46" text-anchor="middle" font-size="12">are out of planet.&rdquo;</text>
+        <circle cx="352" cy="124" r="34" class="cm-face" stroke-width="2"/>
+        <circle cx="340" cy="116" r="3.5" class="cm-fill"/>
+        <circle cx="364" cy="116" r="3.5" class="cm-fill"/>
+        <path d="M338 138 Q352 124 366 138" class="cm-line" stroke-width="2"/>
+        <text x="352" y="180" text-anchor="middle" font-size="13" font-weight="bold">square 64: 2&#8310;&#179; grains</text>
+        <text x="352" y="195" text-anchor="middle" font-size="11" class="cm-soft">the royal accountant</text>
+      </svg>`,
+        caption: "The king agreed to the rule, not to the total &mdash; and with r = 2 the rule is the total. Square 64 alone is about 9.2 &times; 10&#185;&#8312; grains, which is why nobody in the story ever finishes paying."
+      },
+      exercises: [
+        { prompt: "Find the common ratio r of the sequence 2, 6, 18, 54, &hellip;", value: 3,
+          solution: ["r = a&#8322; &divide; a&#8321; = 6 &divide; 2 = 3", "Check: 54 &divide; 18 = 3 &#10003;"] },
+        { prompt: "Write down the next term of the sequence 2, 6, 18, 54, &hellip;", value: 162,
+          solution: ["r = 3", "54 &times; 3 = 162"] },
+        { prompt: "Find the common ratio r of the sequence 81, 27, 9, 3, &hellip; (a fraction is fine)", value: 0.3333333333, tol: 0.005, accept: ["1/3"],
+          solution: ["r = 27 &divide; 81 = 1/3", "Check: 3 &divide; 9 = 1/3 &#10003;. Since |r| &lt; 1 the terms shrink towards zero"] },
+        { prompt: "Find the common ratio r of the sequence 3, &minus;6, 12, &minus;24, &hellip;", value: -2,
+          solution: ["r = &minus;6 &divide; 3 = &minus;2", "Check: 12 &divide; (&minus;6) = &minus;2 &#10003;. A negative r is what makes the signs alternate"] },
+        { prompt: "Is the sequence 3, 7, 11, 15, &hellip; geometric? Answer yes or no.", accept: ["no"],
+          solution: ["7 &divide; 3 = 2.33&hellip; but 11 &divide; 7 = 1.57&hellip;", "The ratio is not constant, so no &mdash; this one is arithmetic with d = 4"] },
+        { prompt: "A geometric sequence has a&#8321; = 4 and r = 2. Find a&#8325;.", value: 64,
+          solution: ["a&#8325; = a&#8321; &middot; r&#8308; = 4 &times; 2&#8308;", "= 4 &times; 16 = 64"] },
+        { prompt: "Find the 7th term of 2, 6, 18, 54, &hellip;", value: 1458,
+          solution: ["a&#8321; = 2, r = 3, n = 7", "a&#8327; = 2 &times; 3&#8310; = 2 &times; 729 = 1458"] },
+        { prompt: "A geometric sequence has a&#8321; = 5 and r = 1/2. Find a&#8326;. (a fraction or a decimal is fine)", value: 0.15625, tol: 0.0005, accept: ["5/32"],
+          solution: ["a&#8326; = 5 &times; (1/2)&#8309; = 5 &times; 1/32", "= 5/32 = 0.15625"] },
+        { prompt: "A geometric sequence has a&#8321; = 7 and r = &minus;3. Find a&#8325;.", value: 567,
+          solution: ["a&#8325; = 7 &times; (&minus;3)&#8308;", "(&minus;3)&#8308; = 81 because the exponent is even, so a&#8325; = 7 &times; 81 = 567"] },
+        { prompt: "A geometric sequence has a&#8321; = 1 and r = 2. Find a&#8321;&#8320;.", value: 512,
+          solution: ["a&#8321;&#8320; = 1 &times; 2&#8313;", "= 512"] },
+        { prompt: "In the rice puzzle you place 1 grain on square 1 and double on every square after. How many grains are on square 10?", value: 512,
+          solution: ["a&#8321; = 1, r = 2, n = 10", "a&#8321;&#8320; = 1 &times; 2&#8313; = 512 grains"] },
+        { prompt: "Find the 6th term of 3, 12, 48, &hellip;", value: 3072,
+          solution: ["r = 12 &divide; 3 = 4, a&#8321; = 3", "a&#8326; = 3 &times; 4&#8309; = 3 &times; 1024 = 3072"] },
+        { prompt: "A geometric sequence has a&#8321; = 6 and a&#8323; = 54, with r positive. Find r.", value: 3,
+          solution: ["From the 1st to the 3rd term is 2 multiplications: a&#8323; = a&#8321;r&#178;", "54 = 6r&#178;, so r&#178; = 9 and r = &plusmn;3", "We are told r is positive, so r = 3"] },
+        { prompt: "A geometric sequence has a&#8322; = 10 and a&#8325; = 80. Find a&#8321;.", value: 5,
+          solution: ["From the 2nd to the 5th term is 3 multiplications: 80 = 10r&#179;, so r&#179; = 8 and r = 2", "a&#8322; = a&#8321;r, so 10 = 2a&#8321;", "a&#8321; = 5"] },
+        { prompt: "Which term of the sequence 3, 6, 12, 24, &hellip; is equal to 384? Give the position n.", value: 8,
+          solution: ["a&#8321; = 3, r = 2. Set 3 &times; 2&#8319;&#8315;&#185; = 384", "2&#8319;&#8315;&#185; = 128 = 2&#8311;, so n &minus; 1 = 7", "n = 8"] },
+        { prompt: "Which term of the sequence 5, 15, 45, &hellip; is equal to 3645? Give the position n.", value: 7,
+          solution: ["a&#8321; = 5, r = 3. Set 5 &times; 3&#8319;&#8315;&#185; = 3645", "3&#8319;&#8315;&#185; = 729 = 3&#8310;, so n &minus; 1 = 6", "n = 7"] },
+        { prompt: "A geometric sequence has a&#8321; = 800 and r = 0.5. Find a&#8327;.", value: 12.5, tol: 0.01,
+          solution: ["a&#8327; = 800 &times; (0.5)&#8310; = 800 &times; 1/64", "= 12.5"] },
+        { prompt: "A geometric sequence has a&#8323; = 12 and a&#8326; = 96. Find a&#8321;.", value: 3,
+          solution: ["From the 3rd to the 6th term is 3 multiplications: 96 = 12r&#179;, so r&#179; = 8 and r = 2", "a&#8323; = a&#8321;r&#178;, so 12 = 4a&#8321;", "a&#8321; = 3"] },
+        { prompt: "A geometric sequence has |r| &lt; 1. Describe what happens to its terms as n grows, and give an example of a real situation that behaves this way.", open: true,
+          solution: ["Sample response: multiplying by a number smaller than 1 in size makes every term smaller than the one before it, so the terms shrink towards zero without ever reaching it. For example a ball dropped from 10 m that rebounds to 60% of its previous height gives heights 10, 6, 3.6, 2.16, &hellip; with r = 0.6 &mdash; the bounces get shorter and shorter, and in the same way a car losing 15% of its value each year has r = 0.85. Nothing ever becomes exactly zero; it just becomes negligible."] },
+        { prompt: "Saving $2 on day 1 and $2 more each day, against 1 grain of rice doubling each square: explain which pattern is which, and why the doubling one is so easy to underestimate at the start.", open: true,
+          solution: ["Sample response: the savings are arithmetic &mdash; the amount added is always the same $2, so the totals climb by a fixed step and the graph is a straight line. The rice is geometric with r = 2 &mdash; each square multiplies by 2, so the step itself keeps growing. It is easy to underestimate because for the first few squares the geometric numbers are the smaller ones: after 4 days the saver has put aside $8 while the board holds 8 grains. Geometric growth looks flat for a long time and then overtakes everything at once, which is why by square 10 there are 512 grains against a $20 daily deposit."] }
+      ]
+    },
+    {
+      letter: "C", hueVar: "--hueC", title: "The Arithmetic Series",
+      rules: [
+        "S&#8345; means the <b>sum of the first n terms</b> of a sequence. S&#8325; = a&#8321; + a&#8322; + a&#8323; + a&#8324; + a&#8325;. It is a single number, and it is not the same object as a&#8345;, which is one term.",
+        "For an arithmetic sequence, <b>S&#8345; = n/2 (2a&#8321; + (n &minus; 1)d)</b>. Use this version when you are given a&#8321; and d.",
+        "The equivalent form is <b>S&#8345; = n/2 (a&#8321; + a&#8345;)</b>. Use this version when you are given the first and last terms. In words: the number of terms, times the average of the first and last.",
+        "<b>Why the average works:</b> write the series forwards and again backwards underneath. Every column adds to a&#8321; + a&#8345;, and there are n columns, so twice the sum is n(a&#8321; + a&#8345;). Halve it and you have the formula.",
+        "<b>Find the last term first</b> when only a&#8321;, d and n are given and you prefer the second form: a&#8345; = a&#8321; + (n &minus; 1)d, then S&#8345; = n/2 (a&#8321; + a&#8345;). Both routes must give the same number &mdash; a free check.",
+        "<b>Going the other way</b>, if S&#8345; is known and n is not, substituting gives a <b>quadratic in n</b>. Solve it, then discard any root that is negative or not a whole number, because n counts terms."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 440 210" width="440" height="210">
+        <text x="220" y="26" text-anchor="middle" font-size="15" font-weight="bold">Add the series to itself, written backwards</text>
+        <text x="12" y="72" font-size="13" class="dg-soft">S &rarr;</text>
+        <text x="12" y="120" font-size="13" class="dg-soft">S &larr;</text>
+        <text x="120" y="72" text-anchor="middle" font-size="22" font-weight="bold">3</text>
+        <text x="215" y="72" text-anchor="middle" font-size="22" font-weight="bold">7</text>
+        <text x="310" y="72" text-anchor="middle" font-size="22" font-weight="bold">11</text>
+        <text x="405" y="72" text-anchor="middle" font-size="22" font-weight="bold">15</text>
+        <text x="120" y="120" text-anchor="middle" font-size="22" font-weight="bold">15</text>
+        <text x="215" y="120" text-anchor="middle" font-size="22" font-weight="bold">11</text>
+        <text x="310" y="120" text-anchor="middle" font-size="22" font-weight="bold">7</text>
+        <text x="405" y="120" text-anchor="middle" font-size="22" font-weight="bold">3</text>
+        <line x1="96" y1="136" x2="425" y2="136" class="dg-ink-line" stroke-width="1.8"/>
+        <text x="120" y="166" text-anchor="middle" font-size="20" font-weight="bold">18</text>
+        <text x="215" y="166" text-anchor="middle" font-size="20" font-weight="bold">18</text>
+        <text x="310" y="166" text-anchor="middle" font-size="20" font-weight="bold">18</text>
+        <text x="405" y="166" text-anchor="middle" font-size="20" font-weight="bold">18</text>
+        <text x="220" y="196" text-anchor="middle" font-size="15">2S = 4 &times; 18 = 72, so S = 36</text>
+      </svg>`,
+        `<svg viewBox="0 0 440 215" width="440" height="215">
+        <line x1="14" y1="172" x2="426" y2="172" class="dg-ink-line" stroke-width="1.8"/>
+        <rect x="30" y="148" width="56" height="24" class="dg-fill"/>
+        <rect x="105" y="116" width="56" height="56" class="dg-fill"/>
+        <rect x="180" y="84" width="56" height="88" class="dg-fill"/>
+        <rect x="255" y="52" width="56" height="120" class="dg-fill"/>
+        <rect x="330" y="20" width="56" height="152" class="dg-fill"/>
+        <line x1="20" y1="84" x2="386" y2="84" class="dg-line" stroke-width="2" stroke-dasharray="6 4"/>
+        <text x="30" y="76" font-size="13" font-weight="bold">average term = 11</text>
+        <text x="58" y="192" text-anchor="middle" font-size="14">3</text>
+        <text x="133" y="192" text-anchor="middle" font-size="14">7</text>
+        <text x="208" y="192" text-anchor="middle" font-size="14">11</text>
+        <text x="283" y="192" text-anchor="middle" font-size="14">15</text>
+        <text x="358" y="192" text-anchor="middle" font-size="14">19</text>
+        <text x="220" y="210" text-anchor="middle" font-size="13" class="dg-soft">S&#8325; = 5 &times; 11 = 55</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "The pairing argument for S&#8345; = n/2 (a&#8321; + a&#8345;). Every column of the doubled series adds to the same total, 18, because as one row climbs by d the other falls by d.",
+        "The same idea as a picture: for 3, 7, 11, 15, 19 the bars stick out above the average line by exactly as much as the short ones fall below it, so the sum is 5 lots of the average, 11."
+      ],
+      trick: "Choose your formula by what you were handed. Given <b>a&#8321;, d and n</b> &rarr; use S&#8345; = n/2 (2a&#8321; + (n &minus; 1)d). Given <b>first and last terms</b> &rarr; use S&#8345; = n/2 (a&#8321; + a&#8345;), which is just &lsquo;how many &times; the average of the ends&rsquo;. And before you press a single calculator key, sanity-check: S&#8345; should land somewhere near n &times; (a middling term). If you get 82 for twenty terms averaging 41, you have computed a term, not a sum.",
+      examples: [
+        {
+          problem: "Find the sum of the first 20 terms of 3, 7, 11, 15, &hellip;",
+          steps: [
+            "Identify values: a&#8321; = 3, d = 4, n = 20",
+            "Substitute into S&#8345; = n/2 (2a&#8321; + (n &minus; 1)d): S&#8322;&#8320; = 20/2 &times; (2(3) + 19(4))",
+            "Simplify inside the brackets: S&#8322;&#8320; = 10 &times; (6 + 76) = 10 &times; 82",
+            "Check by the other route: a&#8322;&#8320; = 3 + 19(4) = 79, and S&#8322;&#8320; = 20/2 (3 + 79) = 10 &times; 82 &#10003;"
+          ],
+          answer: "S&#8322;&#8320; = 820"
+        },
+        {
+          problem: "An arithmetic sequence has a&#8321; = 5 and d = 3. Find S&#8321;&#8325;.",
+          steps: [
+            "Identify values: a&#8321; = 5, d = 3, n = 15",
+            "Substitute: S&#8321;&#8325; = 15/2 &times; (2(5) + 14(3))",
+            "Simplify inside the brackets: 10 + 42 = 52, so S&#8321;&#8325; = 15/2 &times; 52",
+            "15/2 &times; 52 = 15 &times; 26 &mdash; halve the 52 rather than the 15, and the fraction disappears"
+          ],
+          answer: "S&#8321;&#8325; = 390"
+        }
+      ],
+      remember: [
+        "<b>S&#8345; = n/2 (2a&#8321; + (n &minus; 1)d)</b> when you know a&#8321;, d and n.",
+        "<b>S&#8345; = n/2 (a&#8321; + a&#8345;)</b> when you know the ends &mdash; count &times; average.",
+        "<b>a&#8345; is one term, S&#8345; is n terms added.</b> Read the question for which one it wants.",
+        "<b>Solving for n gives a quadratic.</b> Keep only the positive whole-number root."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 200" width="460" height="200">
+        <rect x="10" y="8" width="196" height="48" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="100,56 116,56 108,86" class="cm-face2" stroke-width="2"/>
+        <text x="108" y="29" text-anchor="middle" font-size="12">&ldquo;Add every number</text>
+        <text x="108" y="46" text-anchor="middle" font-size="12">from 1 to 100. Quietly.&rdquo;</text>
+        <circle cx="108" cy="124" r="34" class="cm-face" stroke-width="2"/>
+        <circle cx="96" cy="116" r="3.5" class="cm-fill"/>
+        <circle cx="120" cy="116" r="3.5" class="cm-fill"/>
+        <path d="M94 132 Q108 146 122 132" class="cm-line" stroke-width="2"/>
+        <text x="108" y="180" text-anchor="middle" font-size="13" font-weight="bold">the teacher</text>
+        <text x="108" y="195" text-anchor="middle" font-size="11" class="cm-soft">planning a long, quiet hour</text>
+        <rect x="254" y="8" width="196" height="48" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="344,56 360,56 352,86" class="cm-face2" stroke-width="2"/>
+        <text x="352" y="29" text-anchor="middle" font-size="12">&ldquo;50 pairs of 101.</text>
+        <text x="352" y="46" text-anchor="middle" font-size="12">5050. May I go?&rdquo;</text>
+        <circle cx="352" cy="124" r="34" class="cm-face" stroke-width="2"/>
+        <circle cx="340" cy="116" r="3.5" class="cm-fill"/>
+        <circle cx="364" cy="116" r="3.5" class="cm-fill"/>
+        <path d="M338 130 Q352 144 366 130" class="cm-line" stroke-width="2"/>
+        <text x="352" y="180" text-anchor="middle" font-size="13" font-weight="bold">S&#8321;&#8320;&#8320; = 100/2 (1 + 100)</text>
+        <text x="352" y="195" text-anchor="middle" font-size="11" class="cm-soft">the student, eight seconds in</text>
+      </svg>`,
+        caption: "He did not add faster. He folded the list in half and noticed that 1 + 100, 2 + 99 and 3 + 98 are all 101 &mdash; which is the pairing argument behind S&#8345; = n/2 (a&#8321; + a&#8345;), discovered under duress."
+      },
+      exercises: [
+        { prompt: "An arithmetic sequence has a&#8321; = 1 and d = 2. Find S&#8321;&#8320;.", value: 100,
+          solution: ["S&#8321;&#8320; = 10/2 (2(1) + 9(2))", "= 5 &times; (2 + 18) = 5 &times; 20 = 100"] },
+        { prompt: "Find the sum 2 + 4 + 6 + 8 + 10.", value: 30,
+          solution: ["a&#8321; = 2, a&#8325; = 10, n = 5", "S&#8325; = 5/2 (2 + 10) = 5/2 &times; 12 = 30"] },
+        { prompt: "Find S&#8322;&#8320; for the sequence 3, 7, 11, 15, &hellip;", value: 820,
+          solution: ["a&#8321; = 3, d = 4, n = 20", "S&#8322;&#8320; = 20/2 (2(3) + 19(4)) = 10 &times; (6 + 76) = 10 &times; 82 = 820"] },
+        { prompt: "Find S&#8321;&#8322; for the sequence 2, 5, 8, 11, &hellip;", value: 222,
+          solution: ["a&#8321; = 2, d = 3, n = 12", "S&#8321;&#8322; = 12/2 (2(2) + 11(3)) = 6 &times; (4 + 33) = 6 &times; 37 = 222"] },
+        { prompt: "An arithmetic sequence has a&#8321; = 5 and d = 3. Find S&#8321;&#8325;.", value: 390,
+          solution: ["S&#8321;&#8325; = 15/2 (2(5) + 14(3))", "= 15/2 &times; (10 + 42) = 15 &times; 26 = 390"] },
+        { prompt: "Find the sum of the whole numbers from 1 to 100.", value: 5050,
+          solution: ["a&#8321; = 1, a&#8321;&#8320;&#8320; = 100, n = 100", "S&#8321;&#8320;&#8320; = 100/2 (1 + 100) = 50 &times; 101 = 5050"] },
+        { prompt: "An arithmetic sequence has a&#8321; = 10 and d = 5. Find S&#8328;.", value: 220,
+          solution: ["S&#8328; = 8/2 (2(10) + 7(5))", "= 4 &times; (20 + 35) = 4 &times; 55 = 220"] },
+        { prompt: "Find the sum of the first 50 odd numbers, 1 + 3 + 5 + &hellip;", value: 2500,
+          solution: ["a&#8321; = 1, d = 2, n = 50", "S&#8325;&#8320; = 50/2 (2(1) + 49(2)) = 25 &times; (2 + 98) = 25 &times; 100 = 2500"] },
+        { prompt: "Find S&#8321;&#8322; for the sequence 4, 9, 14, 19, &hellip;", value: 378,
+          solution: ["a&#8321; = 4, d = 5, n = 12", "S&#8321;&#8322; = 12/2 (2(4) + 11(5)) = 6 &times; (8 + 55) = 6 &times; 63 = 378"] },
+        { prompt: "An arithmetic sequence has a&#8321; = 3 and a&#8322;&#8320; = 79. Use S&#8345; = n/2 (a&#8321; + a&#8345;) to find S&#8322;&#8320;.", value: 820,
+          solution: ["S&#8322;&#8320; = 20/2 (3 + 79)", "= 10 &times; 82 = 820"] },
+        { prompt: "An arithmetic sequence has a&#8321; = &minus;10 and d = 4. Find S&#8322;&#8325;.", value: 950,
+          solution: ["S&#8322;&#8325; = 25/2 (2(&minus;10) + 24(4))", "= 25/2 &times; (&minus;20 + 96) = 25/2 &times; 76 = 25 &times; 38 = 950"] },
+        { prompt: "Find the sum of all the multiples of 3 from 3 up to 60 inclusive.", value: 630,
+          solution: ["The terms are 3, 6, 9, &hellip;, 60, so a&#8321; = 3, d = 3, a&#8345; = 60", "60 = 3 + 3(n &minus; 1) gives n = 20", "S&#8322;&#8320; = 20/2 (3 + 60) = 10 &times; 63 = 630"] },
+        { prompt: "Find S&#8321;&#8320; for the sequence 20, 17, 14, 11, &hellip;", value: 65,
+          solution: ["a&#8321; = 20, d = &minus;3, n = 10", "S&#8321;&#8320; = 10/2 (2(20) + 9(&minus;3)) = 5 &times; (40 &minus; 27) = 5 &times; 13 = 65"] },
+        { prompt: "An arithmetic sequence has a&#8321; = 2 and d = 0.5. Find S&#8323;&#8320;.", value: 277.5, tol: 0.05,
+          solution: ["S&#8323;&#8320; = 30/2 (2(2) + 29(0.5))", "= 15 &times; (4 + 14.5) = 15 &times; 18.5 = 277.5"] },
+        { prompt: "An arithmetic sequence has a&#8321; = 2 and d = 3, and S&#8345; = 155. Find n.", value: 10,
+          solution: ["n/2 (2(2) + 3(n &minus; 1)) = 155, so n(4 + 3n &minus; 3) = 310", "n(3n + 1) = 310, giving 3n&#178; + n &minus; 310 = 0", "The discriminant is 1 + 3720 = 3721 = 61&#178;, so n = (&minus;1 + 61)/6 = 10 (the other root is negative and is rejected)"] },
+        { prompt: "The sum 1 + 2 + 3 + &hellip; + n equals 210. Find n.", value: 20,
+          solution: ["n(n + 1)/2 = 210, so n&#178; + n &minus; 420 = 0", "(n + 21)(n &minus; 20) = 0", "n = 20, rejecting n = &minus;21 because n counts terms"] },
+        { prompt: "An arithmetic sequence has a&#8321; = 7 and S&#8321;&#8320; = 250. Find d.", value: 4,
+          solution: ["10/2 (2(7) + 9d) = 250, so 5(14 + 9d) = 250", "14 + 9d = 50, so 9d = 36", "d = 4"] },
+        { prompt: "Find the sum of the first 30 terms of 100, 96, 92, 88, &hellip;", value: 1260,
+          solution: ["a&#8321; = 100, d = &minus;4, n = 30", "S&#8323;&#8320; = 30/2 (2(100) + 29(&minus;4)) = 15 &times; (200 &minus; 116) = 15 &times; 84 = 1260"] },
+        { prompt: "Explain, using 3 + 7 + 11 + 15 as your example, why S&#8345; = n/2 (a&#8321; + a&#8345;) works. Refer to writing the series backwards.", open: true,
+          solution: ["Sample response: write S = 3 + 7 + 11 + 15 and underneath it the same series backwards, S = 15 + 11 + 7 + 3. Adding the two lines column by column gives 18 + 18 + 18 + 18, because every step of +4 taken by the top row is matched by a step of &minus;4 in the bottom row, so each column has the same total a&#8321; + a&#8345; = 3 + 15 = 18. There are n = 4 columns, so 2S = 4 &times; 18 = 72 and S = 36. In general 2S = n(a&#8321; + a&#8345;), which rearranges to S&#8345; = n/2 (a&#8321; + a&#8345;)."] },
+        { prompt: "A student writes &ldquo;a&#8322;&#8320; = 820&rdquo; for the sequence 3, 7, 11, 15, &hellip;. State what has gone wrong and what the two correct statements should be.", open: true,
+          solution: ["Sample response: 820 is the sum of the first twenty terms, not the twentieth term, so the notation is wrong even though the arithmetic is right. The two correct statements are a&#8322;&#8320; = 3 + 19(4) = 79, which is the single number sitting in position 20 of the list, and S&#8322;&#8320; = 20/2 (3 + 79) = 820, which is what you get when all twenty of those terms are added together. Criterion C is about exactly this: the same number written under the wrong symbol is not a correct answer."] }
+      ]
+    },
+    {
+      letter: "D", hueVar: "--hueD", title: "The Geometric Series",
+      rules: [
+        "The sum of the first n terms of a geometric sequence is <b>S&#8345; = a&#8321;(r&#8319; &minus; 1) / (r &minus; 1)</b>, and the condition is <b>r &ne; 1</b>. If r were 1 the denominator would be zero, and the formula would be meaningless &mdash; but then every term equals a&#8321;, so the sum is simply n &times; a&#8321;.",
+        "<b>The exponent on r is n, not n &minus; 1.</b> This is the one place in the unit where the exponent matches the count exactly. A term formula counts multiplications (n &minus; 1); a sum formula counts terms (n).",
+        "<b>Order of operations matters.</b> Work out r&#8319; first, subtract 1, then multiply by a&#8321;, and divide by (r &minus; 1) last. Doing a&#8321; &times; r first and then subtracting 1 gives a different, wrong number.",
+        "<b>A negative r is fine.</b> Just keep the brackets: with r = &minus;3 and n = 5, r&#8319; = (&minus;3)&#8309; = &minus;243, and the denominator is &minus;3 &minus; 1 = &minus;4. Two negatives divide to a positive.",
+        "<b>When 0 &lt; r &lt; 1</b> both r&#8319; &minus; 1 and r &minus; 1 are negative, so the sum still comes out positive. Many students prefer the equivalent rearrangement S&#8345; = a&#8321;(1 &minus; r&#8319;) / (1 &minus; r) here, which keeps everything positive. The two forms are identical &mdash; multiply top and bottom by &minus;1.",
+        "<b>Finding n from a sum</b> means solving a power equation. With a&#8321; = 1 and r = 2, S&#8345; = 2&#8319; &minus; 1, so a sum of 255 gives 2&#8319; = 256 and n = 8. Recognise the powers of 2 and 3 on sight &mdash; it is faster than any calculator."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 440 190" width="440" height="190">
+        <text x="220" y="28" text-anchor="middle" font-size="16" font-weight="bold">1 + 2 + 4 + 8 + 16 = 32 &minus; 1 = 31</text>
+        <rect x="20" y="70" width="192" height="52" class="dg-fill"/>
+        <rect x="212" y="70" width="96" height="52" class="dg-tint" stroke-width="2"/>
+        <rect x="308" y="70" width="48" height="52" class="dg-fill"/>
+        <rect x="356" y="70" width="24" height="52" class="dg-tint" stroke-width="2"/>
+        <rect x="380" y="70" width="12" height="52" class="dg-fill"/>
+        <rect x="392" y="70" width="12" height="52" class="dg-bad" stroke-dasharray="4 3"/>
+        <text x="116" y="103" text-anchor="middle" font-size="18" font-weight="bold" style="fill:var(--surface)">16</text>
+        <text x="260" y="103" text-anchor="middle" font-size="18" font-weight="bold">8</text>
+        <text x="332" y="103" text-anchor="middle" font-size="18" font-weight="bold" style="fill:var(--surface)">4</text>
+        <line x1="368" y1="126" x2="368" y2="140" class="dg-line" stroke-width="1.6"/>
+        <text x="368" y="156" text-anchor="middle" font-size="14">2</text>
+        <line x1="386" y1="126" x2="386" y2="164" class="dg-line" stroke-width="1.6"/>
+        <text x="386" y="180" text-anchor="middle" font-size="14">1</text>
+        <line x1="398" y1="66" x2="398" y2="58" class="dg-line" stroke-width="1.6"/>
+        <text x="398" y="50" text-anchor="middle" font-size="14" font-weight="bold">&minus;1</text>
+        </svg>`,
+        `<svg viewBox="0 0 520 200" width="520" height="200">
+        <text x="100" y="40" text-anchor="middle" font-size="13">sum of the first n terms</text>
+        <line x1="100" y1="50" x2="100" y2="88" class="dg-line" stroke-width="1.8"/>
+        <text x="100" y="108" text-anchor="middle" font-size="26" font-weight="bold">S&#8345;</text>
+        <text x="150" y="108" text-anchor="middle" font-size="26">=</text>
+        <text x="280" y="88" text-anchor="middle" font-size="26" font-weight="bold">a&#8321;(r&#8319; &minus; 1)</text>
+        <line x1="196" y1="100" x2="364" y2="100" class="dg-ink-line" stroke-width="2.4"/>
+        <text x="280" y="140" text-anchor="middle" font-size="26" font-weight="bold">r &minus; 1</text>
+        <text x="380" y="44" text-anchor="middle" font-size="13">exponent is n</text>
+        <polyline points="380,52 380,64 268,64" class="dg-line" style="fill:none" stroke-width="1.6"/>
+        <polygon points="268,70 264,62 272,62" class="dg-fill"/>
+        <line x1="280" y1="150" x2="280" y2="166" class="dg-line" stroke-width="1.8"/>
+        <text x="260" y="188" text-anchor="middle" font-size="15">zero when r = 1, so we need r &ne; 1</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "Why the doubling sum is always one short of the next power: 1 + 2 + 4 + 8 + 16 lays end to end into a block of 32 with a single unit missing, which is exactly a&#8321;(r&#8319; &minus; 1)/(r &minus; 1) with a&#8321; = 1 and r = 2.",
+        "The geometric sum formula, labelled. The exponent on r is n &mdash; it counts terms, not steps &mdash; and the denominator is the reason r = 1 has to be excluded."
+      ],
+      trick: "Ask &lsquo;how many terms?&rsquo; and put that number straight onto r as an exponent. The term formula uses r&#8319;&#8315;&#185; and the sum formula uses r&#8319;, and the difference is not arbitrary: one counts the jumps between terms, the other counts the terms themselves. Then always evaluate the power first &mdash; 2(3&#8312; &minus; 1)/(3 &minus; 1) means 2(6561 &minus; 1)/2, not (2 &times; 3)&#8312;.",
+      examples: [
+        {
+          problem: "Find the sum of the first 8 terms of 2, 6, 18, 54, &hellip;",
+          steps: [
+            "Identify values: a&#8321; = 2, r = 3, n = 8",
+            "Substitute into S&#8345; = a&#8321;(r&#8319; &minus; 1)/(r &minus; 1): S&#8328; = 2(3&#8312; &minus; 1) / (3 &minus; 1)",
+            "Evaluate the power first: 3&#8312; = 6561, so S&#8328; = 2(6561 &minus; 1) / 2 = 2(6560) / 2",
+            "The 2s cancel: S&#8328; = 6560"
+          ],
+          answer: "S&#8328; = 6,560"
+        },
+        {
+          problem: "A geometric sequence has a&#8321; = 4 and r = 2. Find S&#8326;, and check your answer by adding the terms.",
+          steps: [
+            "Identify values: a&#8321; = 4, r = 2, n = 6",
+            "Substitute: S&#8326; = 4(2&#8310; &minus; 1) / (2 &minus; 1) = 4(64 &minus; 1) / 1",
+            "Simplify: S&#8326; = 4 &times; 63 = 252",
+            "Check by listing: 4 + 8 + 16 + 32 + 64 + 128 = 252 &#10003;"
+          ],
+          answer: "S&#8326; = 252"
+        }
+      ],
+      remember: [
+        "<b>S&#8345; = a&#8321;(r&#8319; &minus; 1)/(r &minus; 1), r &ne; 1.</b> If r = 1 the sum is just n &times; a&#8321;.",
+        "<b>Exponent n for a sum, n &minus; 1 for a term.</b> Sums count terms; terms count steps.",
+        "<b>Power first, then subtract, then divide.</b> Brackets are not decoration.",
+        "<b>For 0 &lt; r &lt; 1 use a&#8321;(1 &minus; r&#8319;)/(1 &minus; r)</b> if you dislike negatives &mdash; it is the same formula."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 200" width="460" height="200">
+        <rect x="10" y="8" width="196" height="48" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="100,56 116,56 108,86" class="cm-face2" stroke-width="2"/>
+        <text x="108" y="29" text-anchor="middle" font-size="12">&ldquo;I'm a perfectly</text>
+        <text x="108" y="46" text-anchor="middle" font-size="12">normal ratio. Use me.&rdquo;</text>
+        <circle cx="108" cy="124" r="34" class="cm-face" stroke-width="2"/>
+        <circle cx="96" cy="116" r="3.5" class="cm-fill"/>
+        <circle cx="120" cy="116" r="3.5" class="cm-fill"/>
+        <path d="M94 132 Q108 146 122 132" class="cm-line" stroke-width="2"/>
+        <text x="108" y="180" text-anchor="middle" font-size="14" font-weight="bold">r = 1</text>
+        <text x="108" y="195" text-anchor="middle" font-size="11" class="cm-soft">5, 5, 5, 5, 5, &hellip;</text>
+        <rect x="254" y="8" width="196" height="48" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="344,56 360,56 352,86" class="cm-face2" stroke-width="2"/>
+        <text x="352" y="29" text-anchor="middle" font-size="12">&ldquo;You make my</text>
+        <text x="352" y="46" text-anchor="middle" font-size="12">denominator zero.&rdquo;</text>
+        <circle cx="352" cy="124" r="34" class="cm-face" stroke-width="2"/>
+        <circle cx="340" cy="116" r="3.5" class="cm-fill"/>
+        <circle cx="364" cy="116" r="3.5" class="cm-fill"/>
+        <path d="M338 138 Q352 124 366 138" class="cm-line" stroke-width="2"/>
+        <text x="352" y="180" text-anchor="middle" font-size="14" font-weight="bold">S&#8345; = a&#8321;(r&#8319; &minus; 1)/(r &minus; 1)</text>
+        <text x="352" y="195" text-anchor="middle" font-size="11" class="cm-soft">not taking the call</text>
+      </svg>`,
+        caption: "r = 1 is not a hard case, it is an excluded one. The sequence 5, 5, 5, 5, 5 still has a perfectly good sum &mdash; it is 5n &mdash; but you have to get it by counting, because the formula flatly refuses to divide by zero."
+      },
+      exercises: [
+        { prompt: "A geometric sequence has a&#8321; = 4 and r = 2. Find S&#8326;.", value: 252,
+          solution: ["S&#8326; = 4(2&#8310; &minus; 1)/(2 &minus; 1)", "= 4(64 &minus; 1)/1 = 4 &times; 63 = 252"] },
+        { prompt: "Find the sum of the first 8 terms of 2, 6, 18, 54, &hellip;", value: 6560,
+          solution: ["a&#8321; = 2, r = 3, n = 8", "S&#8328; = 2(3&#8312; &minus; 1)/(3 &minus; 1) = 2(6561 &minus; 1)/2 = 6560"] },
+        { prompt: "A geometric sequence has a&#8321; = 3 and r = 2. Find S&#8325;.", value: 93,
+          solution: ["S&#8325; = 3(2&#8309; &minus; 1)/(2 &minus; 1)", "= 3(32 &minus; 1)/1 = 3 &times; 31 = 93"] },
+        { prompt: "Find the sum of the first 10 terms of 1, 2, 4, 8, &hellip;", value: 1023,
+          solution: ["a&#8321; = 1, r = 2, n = 10", "S&#8321;&#8320; = 1(2&#185;&#8304; &minus; 1)/(2 &minus; 1) = 1024 &minus; 1 = 1023"] },
+        { prompt: "Find the sum of the first 6 terms of 5, 10, 20, 40, &hellip;", value: 315,
+          solution: ["a&#8321; = 5, r = 2, n = 6", "S&#8326; = 5(2&#8310; &minus; 1)/(2 &minus; 1) = 5(64 &minus; 1) = 5 &times; 63 = 315"] },
+        { prompt: "Find the sum 1 + 3 + 9 + 27.", value: 40,
+          solution: ["a&#8321; = 1, r = 3, n = 4", "S&#8324; = 1(3&#8308; &minus; 1)/(3 &minus; 1) = (81 &minus; 1)/2 = 80/2 = 40"] },
+        { prompt: "Find S&#8325; for the sequence 2, &minus;6, 18, &minus;54, &hellip;", value: 122,
+          solution: ["r = &minus;6 &divide; 2 = &minus;3, a&#8321; = 2, n = 5", "S&#8325; = 2((&minus;3)&#8309; &minus; 1)/(&minus;3 &minus; 1) = 2(&minus;243 &minus; 1)/(&minus;4) = 2(&minus;244)/(&minus;4)", "= &minus;488/&minus;4 = 122. Check: 2 &minus; 6 + 18 &minus; 54 + 162 = 122 &#10003;"] },
+        { prompt: "Find S&#8326; for the sequence 81, 27, 9, &hellip; (give your answer to 2 decimal places, or as a fraction)", value: 121.33333333, tol: 0.01, accept: ["364/3"],
+          solution: ["a&#8321; = 81, r = 1/3, n = 6", "S&#8326; = 81(1 &minus; (1/3)&#8310;)/(1 &minus; 1/3) = 81(1 &minus; 1/729) &divide; (2/3)", "= 81 &times; (728/729) &times; (3/2) = 364/3 = 121.33 (check: 81 + 27 + 9 + 3 + 1 + 1/3)"] },
+        { prompt: "In the rice puzzle, how many grains are on the first 10 squares in total?", value: 1023,
+          solution: ["a&#8321; = 1, r = 2, n = 10", "S&#8321;&#8320; = (2&#185;&#8304; &minus; 1)/(2 &minus; 1) = 1024 &minus; 1 = 1023 grains"] },
+        { prompt: "Saving $2 on day 1 and $2 more each day gives $110 after 10 days. The rice board gives 1023 grains after 10 squares. How much bigger is the rice total than the coin total?", value: 913,
+          solution: ["Coins: S&#8321;&#8320; = 10/2 (2(2) + 9(2)) = 5 &times; 22 = 110", "Rice: S&#8321;&#8320; = 2&#185;&#8304; &minus; 1 = 1023", "1023 &minus; 110 = 913"] },
+        { prompt: "A geometric sequence has a&#8321; = 1 and r = 3. Find S&#8327;.", value: 1093,
+          solution: ["S&#8327; = 1(3&#8311; &minus; 1)/(3 &minus; 1)", "= (2187 &minus; 1)/2 = 2186/2 = 1093"] },
+        { prompt: "A geometric sequence has a&#8321; = 6 and r = 1/2. Find S&#8324;.", value: 11.25, tol: 0.01, accept: ["45/4"],
+          solution: ["S&#8324; = 6(1 &minus; (1/2)&#8308;)/(1 &minus; 1/2) = 6(1 &minus; 1/16) &divide; (1/2)", "= 6 &times; (15/16) &times; 2 = 45/4 = 11.25", "Check: 6 + 3 + 1.5 + 0.75 = 11.25 &#10003;"] },
+        { prompt: "Find the sum 3 + 6 + 12 + 24 + 48.", value: 93,
+          solution: ["a&#8321; = 3, r = 2, n = 5", "S&#8325; = 3(2&#8309; &minus; 1)/(2 &minus; 1) = 3 &times; 31 = 93"] },
+        { prompt: "A geometric sequence has a&#8321; = 2 and r = 5. Find S&#8324;.", value: 312,
+          solution: ["S&#8324; = 2(5&#8308; &minus; 1)/(5 &minus; 1)", "= 2(625 &minus; 1)/4 = 2 &times; 624/4 = 312", "Check: 2 + 10 + 50 + 250 = 312 &#10003;"] },
+        { prompt: "For the sequence 1, 2, 4, 8, &hellip; the sum of the first n terms is 255. Find n.", value: 8,
+          solution: ["S&#8345; = (2&#8319; &minus; 1)/(2 &minus; 1) = 2&#8319; &minus; 1", "2&#8319; &minus; 1 = 255, so 2&#8319; = 256", "256 = 2&#8312;, so n = 8"] },
+        { prompt: "A geometric sequence has a&#8321; = 3 and S&#8323; = 39, with r positive. Find r.", value: 3,
+          solution: ["The first three terms are 3, 3r, 3r&#178;, so 3 + 3r + 3r&#178; = 39", "Divide by 3: 1 + r + r&#178; = 13, so r&#178; + r &minus; 12 = 0", "(r + 4)(r &minus; 3) = 0, so r = 3 (rejecting r = &minus;4 as r is positive)"] },
+        { prompt: "Find S&#8321;&#8320; for the sequence 1, &minus;1, 1, &minus;1, &hellip;", value: 0,
+          solution: ["r = &minus;1, a&#8321; = 1, n = 10", "S&#8321;&#8320; = 1((&minus;1)&#185;&#8304; &minus; 1)/(&minus;1 &minus; 1) = (1 &minus; 1)/(&minus;2) = 0", "It makes sense: five +1s and five &minus;1s cancel exactly"] },
+        { prompt: "A geometric sequence has a&#8321; = 1000 and r = 0.8. Find S&#8325;, correct to 1 decimal place.", value: 3361.6, tol: 0.1,
+          solution: ["S&#8325; = 1000(1 &minus; 0.8&#8309;)/(1 &minus; 0.8)", "0.8&#8309; = 0.32768, so S&#8325; = 1000(0.67232)/(0.2)", "= 672.32/0.2 = 3361.6"] },
+        { prompt: "Explain why the geometric sum formula has to exclude r = 1, and state what the sum of n terms actually is in that case.", open: true,
+          solution: ["Sample response: substituting r = 1 makes the denominator r &minus; 1 = 0, and division by zero is undefined &mdash; the numerator a&#8321;(1&#8319; &minus; 1) is also zero, so the expression collapses to 0/0, which carries no information at all. The sum itself is not undefined though: if r = 1 then every term equals a&#8321;, so adding n of them gives S&#8345; = n &times; a&#8321;. For instance 5, 5, 5, 5, 5 sums to 25. The formula is excluded, not the case."] },
+        { prompt: "Over 10 steps the arithmetic savings total $110 while the doubling rice total is 1023 grains. Discuss what this comparison shows about arithmetic and geometric growth, and why the answer would look different after only 3 steps.", open: true,
+          solution: ["Sample response: after 3 steps the coins total 2 + 4 + 6 = $12 while the rice totals 1 + 2 + 4 = 7 grains, so the arithmetic pattern is comfortably ahead. By step 10 the rice total is 1023 against 110, over nine times as large, and the gap is 913. The reason is that an arithmetic series adds a fixed amount each time, so its total grows like n&#178; at worst, while a geometric series with r &gt; 1 multiplies, so its total grows like r&#8319; &mdash; each new term is bigger than everything that came before it put together. Geometric growth starts behind and finishes so far ahead that the early comparison is actively misleading, which is the whole point of the chessboard story."] }
+      ]
+    },
+    {
+      letter: "E", hueVar: "--hueE", title: "Modelling with Sequences &amp; Series",
+      rules: [
+        "<b>Decide which model first.</b> Does the situation add a fixed amount (a pay rise of $1500 a year, 2 extra seats per row) or multiply by a fixed factor (5% growth, a 60% rebound, doubling)? Fixed amount &rarr; arithmetic. Fixed factor &rarr; geometric. Everything else follows from that one decision.",
+        "<b>Percentages become ratios.</b> A rise of 5% per year means r = 1.05. A fall of 15% per year means r = 0.85. A rebound to 60% of the previous height means r = 0.6. Never use r = 0.05 for a 5% rise &mdash; that would be losing 95% a year.",
+        "<b>Decide whether the question wants a term or a sum.</b> &lsquo;How many seats in the 20th row?&rsquo; is a&#8322;&#8320;. &lsquo;How many seats altogether?&rsquo; is S&#8322;&#8320;. &lsquo;What is her salary in year 10?&rsquo; is a term; &lsquo;how much has she earned in ten years?&rsquo; is a sum.",
+        "<b>Be careful what counts as term 1.</b> If a population is 5000 <i>now</i> and grows 3% a year, the value after t years is 5000 &times; 1.03&#7511;, so &lsquo;now&rsquo; is a&#8321; and the value after 6 years is a&#8327;. Write down what a&#8321; represents in words before substituting.",
+        "<b>Bouncing balls need two readings.</b> The <i>height</i> after the nth bounce is a geometric term, a&#8321;r&#8319;. The total <i>distance travelled</i> adds a downward journey and an upward journey for every bounce, so it is a sum &mdash; and the first drop is counted only once.",
+        "<b>Finish with a sentence.</b> Criterion D marks interpretation: state the number with its unit and say what it means in the context, and say whether the model is sensible that far out. A sequence model does not know that a theatre runs out of floor."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 440 215" width="440" height="215">
+        <text x="220" y="24" text-anchor="middle" font-size="15" font-weight="bold">Each row has 2 more seats than the row in front</text>
+        <text x="12" y="62" font-size="12" class="dg-soft">Row 1</text>
+        <circle cx="77" cy="58" r="5" class="dg-fill"/>
+        <circle cx="91" cy="58" r="5" class="dg-fill"/>
+        <circle cx="105" cy="58" r="5" class="dg-fill"/>
+        <circle cx="119" cy="58" r="5" class="dg-fill"/>
+        <circle cx="133" cy="58" r="5" class="dg-fill"/>
+        <circle cx="147" cy="58" r="5" class="dg-fill"/>
+        <circle cx="161" cy="58" r="5" class="dg-fill"/>
+        <circle cx="175" cy="58" r="5" class="dg-fill"/>
+        <circle cx="189" cy="58" r="5" class="dg-fill"/>
+        <circle cx="203" cy="58" r="5" class="dg-fill"/>
+        <circle cx="217" cy="58" r="5" class="dg-fill"/>
+        <circle cx="231" cy="58" r="5" class="dg-fill"/>
+        <circle cx="245" cy="58" r="5" class="dg-fill"/>
+        <circle cx="259" cy="58" r="5" class="dg-fill"/>
+        <circle cx="273" cy="58" r="5" class="dg-fill"/>
+        <text x="292" y="63" text-anchor="middle" font-size="14" font-weight="bold">15</text>
+        <text x="12" y="96" font-size="12" class="dg-soft">Row 2</text>
+        <circle cx="77" cy="92" r="5" class="dg-fill"/>
+        <circle cx="91" cy="92" r="5" class="dg-fill"/>
+        <circle cx="105" cy="92" r="5" class="dg-fill"/>
+        <circle cx="119" cy="92" r="5" class="dg-fill"/>
+        <circle cx="133" cy="92" r="5" class="dg-fill"/>
+        <circle cx="147" cy="92" r="5" class="dg-fill"/>
+        <circle cx="161" cy="92" r="5" class="dg-fill"/>
+        <circle cx="175" cy="92" r="5" class="dg-fill"/>
+        <circle cx="189" cy="92" r="5" class="dg-fill"/>
+        <circle cx="203" cy="92" r="5" class="dg-fill"/>
+        <circle cx="217" cy="92" r="5" class="dg-fill"/>
+        <circle cx="231" cy="92" r="5" class="dg-fill"/>
+        <circle cx="245" cy="92" r="5" class="dg-fill"/>
+        <circle cx="259" cy="92" r="5" class="dg-fill"/>
+        <circle cx="273" cy="92" r="5" class="dg-fill"/>
+        <circle cx="287" cy="92" r="5" class="dg-fill"/>
+        <circle cx="301" cy="92" r="5" class="dg-fill"/>
+        <text x="320" y="97" text-anchor="middle" font-size="14" font-weight="bold">17</text>
+        <text x="12" y="130" font-size="12" class="dg-soft">Row 3</text>
+        <circle cx="77" cy="126" r="5" class="dg-fill"/>
+        <circle cx="91" cy="126" r="5" class="dg-fill"/>
+        <circle cx="105" cy="126" r="5" class="dg-fill"/>
+        <circle cx="119" cy="126" r="5" class="dg-fill"/>
+        <circle cx="133" cy="126" r="5" class="dg-fill"/>
+        <circle cx="147" cy="126" r="5" class="dg-fill"/>
+        <circle cx="161" cy="126" r="5" class="dg-fill"/>
+        <circle cx="175" cy="126" r="5" class="dg-fill"/>
+        <circle cx="189" cy="126" r="5" class="dg-fill"/>
+        <circle cx="203" cy="126" r="5" class="dg-fill"/>
+        <circle cx="217" cy="126" r="5" class="dg-fill"/>
+        <circle cx="231" cy="126" r="5" class="dg-fill"/>
+        <circle cx="245" cy="126" r="5" class="dg-fill"/>
+        <circle cx="259" cy="126" r="5" class="dg-fill"/>
+        <circle cx="273" cy="126" r="5" class="dg-fill"/>
+        <circle cx="287" cy="126" r="5" class="dg-fill"/>
+        <circle cx="301" cy="126" r="5" class="dg-fill"/>
+        <circle cx="315" cy="126" r="5" class="dg-fill"/>
+        <circle cx="329" cy="126" r="5" class="dg-fill"/>
+        <text x="348" y="131" text-anchor="middle" font-size="14" font-weight="bold">19</text>
+        <text x="12" y="164" font-size="12" class="dg-soft">Row 4</text>
+        <circle cx="77" cy="160" r="5" class="dg-fill"/>
+        <circle cx="91" cy="160" r="5" class="dg-fill"/>
+        <circle cx="105" cy="160" r="5" class="dg-fill"/>
+        <circle cx="119" cy="160" r="5" class="dg-fill"/>
+        <circle cx="133" cy="160" r="5" class="dg-fill"/>
+        <circle cx="147" cy="160" r="5" class="dg-fill"/>
+        <circle cx="161" cy="160" r="5" class="dg-fill"/>
+        <circle cx="175" cy="160" r="5" class="dg-fill"/>
+        <circle cx="189" cy="160" r="5" class="dg-fill"/>
+        <circle cx="203" cy="160" r="5" class="dg-fill"/>
+        <circle cx="217" cy="160" r="5" class="dg-fill"/>
+        <circle cx="231" cy="160" r="5" class="dg-fill"/>
+        <circle cx="245" cy="160" r="5" class="dg-fill"/>
+        <circle cx="259" cy="160" r="5" class="dg-fill"/>
+        <circle cx="273" cy="160" r="5" class="dg-fill"/>
+        <circle cx="287" cy="160" r="5" class="dg-fill"/>
+        <circle cx="301" cy="160" r="5" class="dg-fill"/>
+        <circle cx="315" cy="160" r="5" class="dg-fill"/>
+        <circle cx="329" cy="160" r="5" class="dg-fill"/>
+        <circle cx="343" cy="160" r="5" class="dg-fill"/>
+        <circle cx="357" cy="160" r="5" class="dg-fill"/>
+        <text x="376" y="165" text-anchor="middle" font-size="14" font-weight="bold">21</text>
+        <text x="12" y="198" font-size="12" class="dg-soft">Row 5</text>
+        <circle cx="77" cy="194" r="5" class="dg-fill"/>
+        <circle cx="91" cy="194" r="5" class="dg-fill"/>
+        <circle cx="105" cy="194" r="5" class="dg-fill"/>
+        <circle cx="119" cy="194" r="5" class="dg-fill"/>
+        <circle cx="133" cy="194" r="5" class="dg-fill"/>
+        <circle cx="147" cy="194" r="5" class="dg-fill"/>
+        <circle cx="161" cy="194" r="5" class="dg-fill"/>
+        <circle cx="175" cy="194" r="5" class="dg-fill"/>
+        <circle cx="189" cy="194" r="5" class="dg-fill"/>
+        <circle cx="203" cy="194" r="5" class="dg-fill"/>
+        <circle cx="217" cy="194" r="5" class="dg-fill"/>
+        <circle cx="231" cy="194" r="5" class="dg-fill"/>
+        <circle cx="245" cy="194" r="5" class="dg-fill"/>
+        <circle cx="259" cy="194" r="5" class="dg-fill"/>
+        <circle cx="273" cy="194" r="5" class="dg-fill"/>
+        <circle cx="287" cy="194" r="5" class="dg-fill"/>
+        <circle cx="301" cy="194" r="5" class="dg-fill"/>
+        <circle cx="315" cy="194" r="5" class="dg-fill"/>
+        <circle cx="329" cy="194" r="5" class="dg-fill"/>
+        <circle cx="343" cy="194" r="5" class="dg-fill"/>
+        <circle cx="357" cy="194" r="5" class="dg-fill"/>
+        <circle cx="371" cy="194" r="5" class="dg-fill"/>
+        <circle cx="385" cy="194" r="5" class="dg-fill"/>
+        <text x="404" y="199" text-anchor="middle" font-size="14" font-weight="bold">23</text>
+      </svg>`,
+        `<svg viewBox="0 0 440 230" width="440" height="230">
+        <text x="220" y="20" text-anchor="middle" font-size="15" font-weight="bold">The same 10 steps</text>
+        <line x1="50" y1="190" x2="418" y2="190" class="dg-ink-line" stroke-width="1.8"/>
+        <line x1="50" y1="32" x2="50" y2="190" class="dg-ink-line" stroke-width="1.8"/>
+        <polyline points="50,189.9 90,189.6 130,189 170,187.8 210,185.5 250,180.8 290,171.4 330,152.6 370,115.1 410,40" class="dg-bad" style="fill:none" stroke-width="3"/>
+        <polyline points="50,189.7 90,189.1 130,188.2 170,187.1 210,185.6 250,183.8 290,181.8 330,179.4 370,176.8 410,173.9" class="dg-good" style="fill:none" stroke-width="3"/>
+        <circle cx="62" cy="44" r="6" class="dg-bad"/>
+        <text x="76" y="49" font-size="13">rice &mdash; doubling</text>
+        <circle cx="62" cy="68" r="6" class="dg-good"/>
+        <text x="76" y="73" font-size="13">coins &mdash; +$2 a day</text>
+        <text x="412" y="32" text-anchor="end" font-size="13" font-weight="bold">1023 grains</text>
+        <text x="412" y="166" text-anchor="end" font-size="13" font-weight="bold">$110</text>
+        <text x="234" y="212" text-anchor="middle" font-size="13" class="dg-soft">step 1 &rarr; step 10</text>
+        <text x="26" y="118" text-anchor="middle" font-size="13" class="dg-soft" transform="rotate(-90 26 118)">running total</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "The first five rows of the theatre, drawn seat by seat. Row 1 has 15, and the arithmetic rule a&#8345; = 15 + 2(n &minus; 1) carries it out to row 20, which has 53.",
+        "The inquiry question, plotted. The doubling total is the lower curve for the first four steps &mdash; that is precisely why the rice looks like a modest request when the king agrees to it."
+      ],
+      trick: "Write one sentence in words before you write any algebra: &lsquo;a&#8321; is the number of seats in row 1; d is the extra seats per row; n is the row number.&rsquo; Nearly every lost mark in a modelling question comes from an off-by-one in what a&#8321; means &mdash; a salary &lsquo;after 3 years&rsquo; is the 4th term, not the 3rd, because the starting salary is already term 1.",
+      examples: [
+        {
+          problem: "A theatre's front row has 15 seats. Each row behind has 2 more seats than the row before it, for 20 rows. How many seats are there in total?",
+          steps: [
+            "Name the model in words: a&#8321; = 15 is the front row, d = 2 extra seats per row, n = 20 rows. The seats per row form an arithmetic sequence, and the total is a series.",
+            "Find the last row if you want the second formula: a&#8322;&#8320; = 15 + (20 &minus; 1)(2) = 15 + 38 = 53 seats in row 20",
+            "Substitute into S&#8345; = n/2 (2a&#8321; + (n &minus; 1)d): S&#8322;&#8320; = 20/2 (2(15) + 19(2)) = 10 &times; (30 + 38)",
+            "Simplify: S&#8322;&#8320; = 10 &times; 68 = 680. Check with the other form: 20/2 (15 + 53) = 10 &times; 68 &#10003;"
+          ],
+          answer: "The theatre has 680 seats in total (with 53 in the back row)."
+        },
+        {
+          problem: "A ball is dropped from a height of 10 m. After each bounce it rises to 60% of its previous height. Find the height after the 4th bounce, and the total distance the ball has fallen in its first four drops.",
+          steps: [
+            "The rebound heights are geometric with r = 0.6. Taking the drop height 10 m as the starting value, the height after the nth bounce is 10 &times; 0.6&#8319;.",
+            "After the 4th bounce: 10 &times; 0.6&#8308; = 10 &times; 0.1296 = 1.296 m",
+            "The downward journeys are 10, 6, 3.6 and 2.16 metres &mdash; a geometric series with a&#8321; = 10, r = 0.6, n = 4",
+            "S&#8324; = 10(1 &minus; 0.6&#8308;)/(1 &minus; 0.6) = 10(1 &minus; 0.1296)/0.4 = 10(0.8704)/0.4 = 21.76 m"
+          ],
+          answer: "Height after the 4th bounce = 1.296 m; total distance fallen in four drops = 21.76 m"
+        }
+      ],
+      remember: [
+        "<b>Fixed amount added &rarr; arithmetic. Fixed factor multiplied &rarr; geometric.</b> Decide before you calculate.",
+        "<b>A p% rise means r = 1 + p/100; a p% fall means r = 1 &minus; p/100.</b> Never r = p/100.",
+        "<b>One row / one year / one bounce = a term. Altogether = a sum.</b>",
+        "<b>Say what a&#8321; means in words first</b> &mdash; &lsquo;after 3 years&rsquo; is usually the 4th term."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 200" width="460" height="200">
+        <rect x="10" y="8" width="196" height="48" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="100,56 116,56 108,86" class="cm-face2" stroke-width="2"/>
+        <text x="108" y="29" text-anchor="middle" font-size="12">&ldquo;I counted every</text>
+        <text x="108" y="46" text-anchor="middle" font-size="12">seat. Took all night.&rdquo;</text>
+        <circle cx="108" cy="124" r="34" class="cm-face" stroke-width="2"/>
+        <circle cx="96" cy="116" r="3.5" class="cm-fill"/>
+        <circle cx="120" cy="116" r="3.5" class="cm-fill"/>
+        <path d="M94 136 Q108 122 122 136" class="cm-line" stroke-width="2"/>
+        <text x="108" y="180" text-anchor="middle" font-size="14" font-weight="bold">680</text>
+        <text x="108" y="195" text-anchor="middle" font-size="11" class="cm-soft">the usher</text>
+        <rect x="254" y="8" width="196" height="48" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="344,56 360,56 352,86" class="cm-face2" stroke-width="2"/>
+        <text x="352" y="29" text-anchor="middle" font-size="12">&ldquo;Same. Took me</text>
+        <text x="352" y="46" text-anchor="middle" font-size="12">one line of working.&rdquo;</text>
+        <circle cx="352" cy="124" r="34" class="cm-face" stroke-width="2"/>
+        <circle cx="340" cy="116" r="3.5" class="cm-fill"/>
+        <circle cx="364" cy="116" r="3.5" class="cm-fill"/>
+        <path d="M338 130 Q352 144 366 130" class="cm-line" stroke-width="2"/>
+        <text x="352" y="180" text-anchor="middle" font-size="14" font-weight="bold">10 &times; (30 + 38)</text>
+        <text x="352" y="195" text-anchor="middle" font-size="11" class="cm-soft">the student</text>
+      </svg>`,
+        caption: "Both answers are 680, and only one of them scales. Generalising the pattern is not a shortcut for lazy people &mdash; it is what lets you answer &lsquo;and if there were 200 rows?&rsquo; without going back into the building."
+      },
+      exercises: [
+        { prompt: "A theatre's front row has 15 seats and each row behind has 2 more. How many seats are in row 20?", value: 53,
+          solution: ["a&#8321; = 15, d = 2, n = 20", "a&#8322;&#8320; = 15 + (20 &minus; 1)(2) = 15 + 38 = 53 seats"] },
+        { prompt: "The same theatre has 20 rows. How many seats does it have altogether?", value: 680,
+          solution: ["S&#8322;&#8320; = 20/2 (2(15) + 19(2)) = 10 &times; (30 + 38)", "= 10 &times; 68 = 680 seats"] },
+        { prompt: "You save $2 on day 1, then $2 more each day than the day before. How much do you put in on day 10?", value: 20,
+          solution: ["a&#8321; = 2, d = 2, n = 10", "a&#8321;&#8320; = 2 + 9(2) = $20 on day 10"] },
+        { prompt: "For the same savings plan, how much have you saved in total after 10 days?", value: 110,
+          solution: ["S&#8321;&#8320; = 10/2 (2(2) + 9(2)) = 5 &times; (4 + 18)", "= 5 &times; 22 = $110"] },
+        { prompt: "One grain of rice on square 1, doubling on every square after. How many grains are on square 10?", value: 512,
+          solution: ["a&#8321; = 1, r = 2, n = 10", "a&#8321;&#8320; = 1 &times; 2&#8313; = 512 grains"] },
+        { prompt: "How many grains are on the first 10 squares of the chessboard altogether?", value: 1023,
+          solution: ["S&#8321;&#8320; = 1(2&#185;&#8304; &minus; 1)/(2 &minus; 1)", "= 1024 &minus; 1 = 1023 grains"] },
+        { prompt: "After 10 steps, how many more units does the rice total have than the coin total ($110)?", value: 913,
+          solution: ["1023 &minus; 110 = 913", "The doubling pattern started behind and finished more than nine times larger"] },
+        { prompt: "A graduate starts on a salary of $30,000 and receives a rise of $1,500 every year. What is the salary in year 5?", value: 36000,
+          solution: ["a&#8321; = 30000 is year 1, d = 1500, n = 5", "a&#8325; = 30000 + 4(1500) = 30000 + 6000 = $36,000"] },
+        { prompt: "How much does that graduate earn in total over the first 10 years?", value: 367500,
+          solution: ["S&#8321;&#8320; = 10/2 (2(30000) + 9(1500))", "= 5 &times; (60000 + 13500) = 5 &times; 73500 = $367,500"] },
+        { prompt: "A different graduate starts on $40,000 with a rise of 5% each year. What is the salary in year 4? Give your answer to the nearest dollar.", value: 46305, tol: 1,
+          solution: ["A percentage rise is geometric: r = 1.05, a&#8321; = 40000 is year 1", "a&#8324; = 40000 &times; 1.05&#179; = 40000 &times; 1.157625", "= $46,305"] },
+        { prompt: "A ball is dropped from 20 m and rebounds to half its previous height each bounce. How high does it rise after the 3rd bounce?", value: 2.5, tol: 0.01,
+          solution: ["r = 0.5, starting height 20 m", "Height after the 3rd bounce = 20 &times; 0.5&#179; = 20 &times; 0.125 = 2.5 m"] },
+        { prompt: "A ball is dropped from 10 m and rebounds to 60% of its previous height. How high does it rise after the 4th bounce?", value: 1.296, tol: 0.005,
+          solution: ["r = 0.6, starting height 10 m", "Height after the 4th bounce = 10 &times; 0.6&#8308; = 10 &times; 0.1296 = 1.296 m"] },
+        { prompt: "For that same ball (dropped from 10 m, 60% rebound), find the total distance it falls in its first four downward journeys.", value: 21.76, tol: 0.02,
+          solution: ["The drops are 10, 6, 3.6, 2.16 m &mdash; geometric with a&#8321; = 10, r = 0.6, n = 4", "S&#8324; = 10(1 &minus; 0.6&#8308;)/(1 &minus; 0.6) = 10(0.8704)/0.4", "= 21.76 m"] },
+        { prompt: "A town's population is 5,000 now and grows by 3% each year. What is the population after 6 years, to the nearest whole person?", value: 5970, tol: 1,
+          solution: ["r = 1.03, and &lsquo;now&rsquo; is the starting value", "Population after 6 years = 5000 &times; 1.03&#8310; = 5000 &times; 1.194052&hellip;", "= 5970 people"] },
+        { prompt: "A bacterial culture starts with 200 cells and doubles every hour. How many cells are there after 8 hours?", value: 51200,
+          solution: ["r = 2, starting value 200", "After 8 hours: 200 &times; 2&#8312; = 200 &times; 256 = 51,200 cells"] },
+        { prompt: "$1,200 is invested at 4% compound interest per year. What is it worth after 10 years, to the nearest cent?", value: 1776.29, tol: 0.02,
+          solution: ["r = 1.04, starting value 1200", "Value = 1200 &times; 1.04&#185;&#8304; = 1200 &times; 1.4802442&hellip;", "= $1,776.29"] },
+        { prompt: "Logs are stacked with 25 in the bottom row, 24 in the next, and so on up to 1 in the top row. How many logs are there altogether?", value: 325,
+          solution: ["This is 25 + 24 + &hellip; + 1, arithmetic with a&#8321; = 25, a&#8322;&#8325; = 1, n = 25", "S&#8322;&#8325; = 25/2 (25 + 1) = 25/2 &times; 26 = 25 &times; 13 = 325 logs"] },
+        { prompt: "A stadium section has 10 seats in the front row and 4 more seats in each row behind. The section holds 960 seats in total. How many rows does it have?", value: 20,
+          solution: ["n/2 (2(10) + 4(n &minus; 1)) = 960, so n(20 + 4n &minus; 4) = 1920", "n(4n + 16) = 1920, giving 4n&#178; + 16n &minus; 1920 = 0, or n&#178; + 4n &minus; 480 = 0", "(n + 24)(n &minus; 20) = 0, so n = 20 rows (rejecting n = &minus;24)"] },
+        { prompt: "A phone loses 20% of its value each year, and a bicycle loses $80 of its value each year. Explain which model suits which item, and what happens to each value in the long run.", open: true,
+          solution: ["Sample response: the phone loses a fixed <i>proportion</i>, so it is geometric with r = 0.8 &mdash; a $900 phone is worth 900, 720, 576, 460.80, &hellip; and because |r| &lt; 1 the value shrinks towards zero but never actually reaches it, which matches reality: an old phone is nearly worthless, not worth less than nothing. The bicycle loses a fixed <i>amount</i>, so it is arithmetic with d = &minus;80, giving a straight-line drop. That model eventually predicts a negative value, so it is only valid until the value reaches zero &mdash; a good example of a model having a sensible domain."] },
+        { prompt: "Write a Criterion D style interpretation of the savings-versus-rice comparison: state both totals after 10 steps with units, say what the difference means, and comment on whether either model would still be sensible after 64 steps.", open: true,
+          solution: ["Sample response: after 10 steps the saver has put aside $110 in total, while the chessboard holds 1,023 grains of rice &mdash; a difference of 913 units in favour of the rice. The savings model stays sensible for a long time: after 64 days the total would be S&#8326;&#8324; = 32(4 + 126) = $4,160, which is a large but perfectly possible sum of money. The rice model does not survive: after 64 squares the total is 2&#8310;&#8308; &minus; 1 &asymp; 1.8 &times; 10&#185;&#8313; grains, which is several hundred times the world's annual rice harvest, so the mathematics is correct but the situation it describes is impossible. That is the real lesson of the puzzle &mdash; a geometric model with r &gt; 1 will always outrun the physical system it was built to describe."] }
+      ]
+    },
+    {
+      letter: "F", hueVar: "--hueF", title: "Harder Problems &mdash; Mixed &amp; Simultaneous",
+      rules: [
+        "<b>Two unknowns need two equations.</b> An arithmetic sequence is completely determined by a&#8321; and d, so any two independent facts about it &mdash; two terms, a term and a sum, two sums &mdash; are enough to pin it down. Write each fact as an equation in a&#8321; and d, then solve the pair.",
+        "<b>Turn every fact into the same two letters.</b> &lsquo;a&#8323; = 8&rsquo; becomes a&#8321; + 2d = 8. &lsquo;S&#8321;&#8320; = 155&rsquo; becomes 5(2a&#8321; + 9d) = 155. Do not try to solve one before you have written both.",
+        "<b>The geometric-mean condition.</b> If x, y, z are three consecutive terms of a geometric sequence then y/x = z/y, which rearranges to <b>y&#178; = xz</b>. Use this whenever a question says three quantities &lsquo;form a geometric sequence&rsquo; &mdash; it turns a ratio statement into a polynomial equation.",
+        "<b>The arithmetic-mean condition</b> is its partner: if x, y, z are consecutive arithmetic terms then y &minus; x = z &minus; y, so <b>2y = x + z</b>. The middle term is the average of its neighbours.",
+        "<b>Symmetric substitution saves work.</b> Three arithmetic terms with a known sum are best written as a &minus; d, a, a + d, because the sum collapses to 3a. Three geometric terms with a known product are best written as a/r, a, ar, because the product collapses to a&#179;.",
+        "<b>Always reject impossible roots.</b> n must be a positive whole number. A ratio r that the question calls positive cannot be the negative root. A common difference d = 0 usually makes a &lsquo;geometric&rsquo; condition trivially true, so check whether the question has ruled it out."
+      ],
+      diagrams: [
+        `<svg viewBox="0 0 440 205" width="440" height="205">
+        <text x="220" y="22" text-anchor="middle" font-size="15" font-weight="bold">Three terms lifted out of one sequence</text>
+        <circle cx="40" cy="60" r="9" class="dg-good"/>
+        <circle cx="76" cy="60" r="9" class="dg-tint" stroke-width="2"/>
+        <circle cx="112" cy="60" r="9" class="dg-good"/>
+        <circle cx="148" cy="60" r="9" class="dg-tint" stroke-width="2"/>
+        <circle cx="184" cy="60" r="9" class="dg-tint" stroke-width="2"/>
+        <circle cx="220" cy="60" r="9" class="dg-tint" stroke-width="2"/>
+        <circle cx="256" cy="60" r="9" class="dg-tint" stroke-width="2"/>
+        <circle cx="292" cy="60" r="9" class="dg-tint" stroke-width="2"/>
+        <circle cx="328" cy="60" r="9" class="dg-tint" stroke-width="2"/>
+        <circle cx="364" cy="60" r="9" class="dg-tint" stroke-width="2"/>
+        <circle cx="400" cy="60" r="9" class="dg-good"/>
+        <text x="40" y="42" text-anchor="middle" font-size="13" font-weight="bold">1st</text>
+        <text x="112" y="42" text-anchor="middle" font-size="13" font-weight="bold">3rd</text>
+        <text x="400" y="42" text-anchor="middle" font-size="13" font-weight="bold">11th</text>
+        <line x1="40" y1="70" x2="105" y2="132" class="dg-line" stroke-width="1.8"/>
+        <line x1="112" y1="70" x2="225" y2="132" class="dg-line" stroke-width="1.8"/>
+        <line x1="400" y1="70" x2="345" y2="132" class="dg-line" stroke-width="1.8"/>
+        <rect x="60" y="132" width="90" height="44" rx="9" class="dg-tint" stroke-width="2"/>
+        <rect x="180" y="132" width="90" height="44" rx="9" class="dg-tint" stroke-width="2"/>
+        <rect x="300" y="132" width="90" height="44" rx="9" class="dg-tint" stroke-width="2"/>
+        <text x="105" y="161" text-anchor="middle" font-size="17" font-weight="bold">a</text>
+        <text x="225" y="161" text-anchor="middle" font-size="17" font-weight="bold">a + 2d</text>
+        <text x="345" y="161" text-anchor="middle" font-size="17" font-weight="bold">a + 10d</text>
+        <text x="220" y="196" text-anchor="middle" font-size="14">and these three must be geometric</text>
+      </svg>`,
+        `<svg viewBox="0 0 440 190" width="440" height="190">
+        <text x="220" y="30" text-anchor="middle" font-size="15" font-weight="bold">Three consecutive geometric terms</text>
+        <rect x="40" y="62" width="100" height="52" rx="10" class="dg-tint" stroke-width="2"/>
+        <rect x="170" y="62" width="100" height="52" rx="10" class="dg-tint" stroke-width="2"/>
+        <rect x="300" y="62" width="100" height="52" rx="10" class="dg-tint" stroke-width="2"/>
+        <text x="90" y="96" text-anchor="middle" font-size="24" font-weight="bold">x</text>
+        <text x="220" y="96" text-anchor="middle" font-size="24" font-weight="bold">y</text>
+        <text x="350" y="96" text-anchor="middle" font-size="24" font-weight="bold">z</text>
+        <line x1="144" y1="88" x2="160" y2="88" class="dg-line" stroke-width="2"/>
+        <polygon points="166,88 158,84 158,92" class="dg-fill"/>
+        <line x1="274" y1="88" x2="290" y2="88" class="dg-line" stroke-width="2"/>
+        <polygon points="296,88 288,84 288,92" class="dg-fill"/>
+        <text x="155" y="52" text-anchor="middle" font-size="15" font-weight="bold">&times;r</text>
+        <text x="285" y="52" text-anchor="middle" font-size="15" font-weight="bold">&times;r</text>
+        <text x="220" y="150" text-anchor="middle" font-size="18" font-weight="bold">y &divide; x = z &divide; y</text>
+        <text x="220" y="176" text-anchor="middle" font-size="18" font-weight="bold">so y&#178; = xz</text>
+      </svg>`
+      ],
+      diagramCaptions: [
+        "The challenge item in one picture: the 1st, 3rd and 11th terms of an arithmetic sequence are lifted out and required to be geometric, which gives you one equation; their sum being 26 gives you the second.",
+        "The geometric-mean condition. Because the same r takes x to y and y to z, the two ratios are equal &mdash; and cross-multiplying turns that ratio statement into the equation y&#178; = xz."
+      ],
+      trick: "Count your unknowns, then count your facts. Two unknowns and two facts means you can always finish &mdash; so stop looking for a clever trick and just write both equations down. And whenever a question says &lsquo;form a geometric sequence&rsquo;, immediately write y&#178; = xz for the three quantities, because that single line converts the hardest sentence in the question into ordinary algebra.",
+      examples: [
+        {
+          problem: "The first, third and eleventh terms of an arithmetic sequence form the first three consecutive terms of a geometric sequence. If the sum of these three geometric terms is 26, find the first term and the common difference of the arithmetic sequence.",
+          steps: [
+            "Let the arithmetic sequence have first term a and common difference d. Then the three terms are a&#8321; = a, a&#8323; = a + 2d and a&#8321;&#8321; = a + 10d.",
+            "Geometric condition (y&#178; = xz): (a + 2d)&#178; = a(a + 10d). Expanding, a&#178; + 4ad + 4d&#178; = a&#178; + 10ad, so 4d&#178; = 6ad, giving 2d&#178; = 3ad and d(2d &minus; 3a) = 0. Taking d &ne; 0 (otherwise every term is the same), d = 3a/2.",
+            "Sum condition: a + (a + 2d) + (a + 10d) = 26, so 3a + 12d = 26.",
+            "Substitute d = 3a/2: 3a + 12(3a/2) = 3a + 18a = 21a = 26, so a = 26/21. Then d = (3/2)(26/21) = 78/42 = 13/7.",
+            "Check: a = 26/21, a + 2d = 26/21 + 26/7 = 26/21 + 78/21 = 104/21, a + 10d = 26/21 + 130/7 = 26/21 + 390/21 = 416/21. Their ratios are 4 and 4 &#10003;, and their sum is (26 + 104 + 416)/21 = 546/21 = 26 &#10003;"
+          ],
+          answer: "a = 26/21 and d = 13/7 (the three geometric terms are 26/21, 104/21, 416/21, with r = 4)"
+        },
+        {
+          problem: "An arithmetic sequence has a&#8323; = 8 and S&#8321;&#8320; = 155. Find a&#8321; and d.",
+          steps: [
+            "Two unknowns, so turn both facts into equations in a&#8321; and d. First fact: a&#8321; + 2d = 8.",
+            "Second fact: S&#8321;&#8320; = 10/2 (2a&#8321; + 9d) = 155, so 5(2a&#8321; + 9d) = 155 and 2a&#8321; + 9d = 31.",
+            "From the first equation a&#8321; = 8 &minus; 2d. Substitute into the second: 2(8 &minus; 2d) + 9d = 31, so 16 &minus; 4d + 9d = 31.",
+            "5d = 15, so d = 3, and then a&#8321; = 8 &minus; 6 = 2.",
+            "Check: the sequence is 2, 5, 8, 11, &hellip; so a&#8323; = 8 &#10003; and S&#8321;&#8320; = 5(4 + 27) = 155 &#10003;"
+          ],
+          answer: "a&#8321; = 2 and d = 3"
+        }
+      ],
+      remember: [
+        "<b>Two unknowns, two equations.</b> Write every given fact in terms of a&#8321; and d before solving anything.",
+        "<b>&lsquo;Form a geometric sequence&rsquo; means y&#178; = xz.</b> &lsquo;Form an arithmetic sequence&rsquo; means 2y = x + z.",
+        "<b>Use a &minus; d, a, a + d for a known sum; a/r, a, ar for a known product.</b>",
+        "<b>Reject the roots the context forbids</b> &mdash; negative or fractional n, a negative r when r is stated positive, d = 0 when it trivialises the condition."
+      ],
+      comic: {
+        svg: `<svg viewBox="0 0 460 200" width="460" height="200">
+        <rect x="10" y="8" width="196" height="48" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="100,56 116,56 108,86" class="cm-face2" stroke-width="2"/>
+        <text x="108" y="29" text-anchor="middle" font-size="12">&ldquo;Two unknowns and</text>
+        <text x="108" y="46" text-anchor="middle" font-size="12">only one equation?!&rdquo;</text>
+        <circle cx="108" cy="124" r="34" class="cm-face" stroke-width="2"/>
+        <circle cx="96" cy="116" r="3.5" class="cm-fill"/>
+        <circle cx="120" cy="116" r="3.5" class="cm-fill"/>
+        <path d="M94 138 Q108 124 122 138" class="cm-line" stroke-width="2"/>
+        <text x="108" y="180" text-anchor="middle" font-size="13" font-weight="bold">3a + 12d = 26</text>
+        <text x="108" y="195" text-anchor="middle" font-size="11" class="cm-soft">panicking, minute 1</text>
+        <rect x="254" y="8" width="196" height="48" rx="11" class="cm-face2" stroke-width="2"/>
+        <polygon points="344,56 360,56 352,86" class="cm-face2" stroke-width="2"/>
+        <text x="352" y="29" text-anchor="middle" font-size="12">&ldquo;You read half the</text>
+        <text x="352" y="46" text-anchor="middle" font-size="12">question. Read the rest.&rdquo;</text>
+        <circle cx="352" cy="124" r="34" class="cm-face" stroke-width="2"/>
+        <circle cx="340" cy="116" r="3.5" class="cm-fill"/>
+        <circle cx="364" cy="116" r="3.5" class="cm-fill"/>
+        <path d="M338 130 Q352 144 366 130" class="cm-line" stroke-width="2"/>
+        <text x="352" y="180" text-anchor="middle" font-size="13" font-weight="bold">(a + 2d)&#178; = a(a + 10d)</text>
+        <text x="352" y="195" text-anchor="middle" font-size="11" class="cm-soft">calmly, minute 2</text>
+      </svg>`,
+        caption: "&lsquo;Form a geometric sequence&rsquo; is not scene-setting, it is the second equation. The words in a hard question are doing algebraic work, and the phrase that sounds like description is usually the one carrying the constraint."
+      },
+      exercises: [
+        { prompt: "An arithmetic sequence has a&#8322; = 7 and a&#8325; = 16. Find d.", value: 3,
+          solution: ["From the 2nd to the 5th term is 3 steps: 3d = 16 &minus; 7 = 9", "d = 3"] },
+        { prompt: "For that same sequence (a&#8322; = 7, a&#8325; = 16), find a&#8321;.", value: 4,
+          solution: ["d = 3 and a&#8322; = a&#8321; + d", "7 = a&#8321; + 3, so a&#8321; = 4"] },
+        { prompt: "An arithmetic sequence has a&#8324; = 14 and a&#8329; = 34. Find d.", value: 4,
+          solution: ["From the 4th to the 9th term is 5 steps: 5d = 34 &minus; 14 = 20", "d = 4"] },
+        { prompt: "For that same sequence (a&#8324; = 14, a&#8329; = 34), find a&#8321;.", value: 2,
+          solution: ["d = 4 and a&#8324; = a&#8321; + 3d", "14 = a&#8321; + 12, so a&#8321; = 2"] },
+        { prompt: "A geometric sequence has a&#8322; = 6 and a&#8324; = 24, with r positive. Find r.", value: 2,
+          solution: ["From the 2nd to the 4th term is 2 multiplications: 24 = 6r&#178;", "r&#178; = 4, so r = &plusmn;2, and r is positive", "r = 2"] },
+        { prompt: "For that same geometric sequence (a&#8322; = 6, a&#8324; = 24, r &gt; 0), find a&#8321;.", value: 3,
+          solution: ["r = 2 and a&#8322; = a&#8321;r", "6 = 2a&#8321;, so a&#8321; = 3"] },
+        { prompt: "An arithmetic sequence has a&#8323; = 8 and S&#8321;&#8320; = 155. Find d.", value: 3,
+          solution: ["a&#8321; + 2d = 8, and 10/2 (2a&#8321; + 9d) = 155 gives 2a&#8321; + 9d = 31", "Substituting a&#8321; = 8 &minus; 2d: 16 &minus; 4d + 9d = 31, so 5d = 15", "d = 3"] },
+        { prompt: "For that same sequence (a&#8323; = 8, S&#8321;&#8320; = 155), find a&#8321;.", value: 2,
+          solution: ["d = 3 and a&#8321; + 2d = 8", "a&#8321; = 8 &minus; 6 = 2 &mdash; the sequence is 2, 5, 8, 11, &hellip;"] },
+        { prompt: "An arithmetic sequence has a&#8321; = 2 and S&#8326; = 57. Find d.", value: 3,
+          solution: ["6/2 (2(2) + 5d) = 57, so 3(4 + 5d) = 57", "4 + 5d = 19, so 5d = 15", "d = 3"] },
+        { prompt: "A geometric sequence has a&#8321; = 2 and S&#8323; = 14, with r positive. Find r.", value: 2,
+          solution: ["The first three terms are 2, 2r, 2r&#178;, so 2 + 2r + 2r&#178; = 14", "Divide by 2: r&#178; + r &minus; 6 = 0, so (r + 3)(r &minus; 2) = 0", "r = 2, rejecting r = &minus;3 because r is positive"] },
+        { prompt: "Three consecutive terms of an arithmetic sequence add up to 24. What is the middle term?", value: 8,
+          solution: ["Write them as a &minus; d, a, a + d", "Their sum is 3a = 24, because the &minus;d and +d cancel", "a = 8"] },
+        { prompt: "Three consecutive terms of a geometric sequence have a product of 64, and all are positive. What is the middle term?", value: 4,
+          solution: ["Write them as a/r, a, ar", "Their product is a&#179; = 64, because the r and 1/r cancel", "a = 4"] },
+        { prompt: "Three numbers in an arithmetic sequence have a sum of 21 and a product of 231. Find the positive common difference d.", value: 4,
+          solution: ["Write them as a &minus; d, a, a + d. The sum gives 3a = 21, so a = 7", "The product gives 7(7 &minus; d)(7 + d) = 231, so 49 &minus; d&#178; = 33", "d&#178; = 16, so d = 4 (the numbers are 3, 7, 11)"] },
+        { prompt: "x, x + 4 and 3x are three consecutive terms of an arithmetic sequence. Find x.", value: 4,
+          solution: ["The arithmetic condition is 2y = x + z, so 2(x + 4) = x + 3x", "2x + 8 = 4x, so 2x = 8", "x = 4, and the terms are 4, 8, 12 &#10003;"] },
+        { prompt: "2, k and 18 are three consecutive terms of a geometric sequence, with k positive. Find k.", value: 6,
+          solution: ["The geometric-mean condition is k&#178; = 2 &times; 18 = 36", "k = &plusmn;6, and we are told k is positive", "k = 6, giving 2, 6, 18 with r = 3"] },
+        { prompt: "The 1st, 3rd and 11th terms of an arithmetic sequence form the first three terms of a geometric sequence, and those three add to 26. Find the first term a. (a fraction is fine)", value: 1.238095238, tol: 0.01, accept: ["26/21"],
+          solution: ["The three terms are a, a + 2d and a + 10d. The geometric condition gives (a + 2d)&#178; = a(a + 10d)", "Expanding: a&#178; + 4ad + 4d&#178; = a&#178; + 10ad, so 4d&#178; = 6ad and d(2d &minus; 3a) = 0. With d &ne; 0, d = 3a/2", "The sum gives 3a + 12d = 26. Substituting: 3a + 18a = 21a = 26", "a = 26/21"] },
+        { prompt: "For that same challenge sequence, find the common difference d. (a fraction is fine)", value: 1.857142857, tol: 0.01, accept: ["13/7"],
+          solution: ["From the geometric condition, d = 3a/2", "With a = 26/21: d = (3/2)(26/21) = 78/42", "d = 13/7. Check: the three terms 26/21, 104/21, 416/21 have ratio 4 and sum 546/21 = 26 &#10003;"] },
+        { prompt: "For that same challenge sequence (a = 26/21, d = 13/7), find the common ratio r of the geometric sequence formed by its 1st, 3rd and 11th terms.", value: 4,
+          solution: ["a&#8323; = a + 2d = 26/21 + 26/7 = 26/21 + 78/21 = 104/21", "r = a&#8323; &divide; a&#8321; = (104/21) &divide; (26/21) = 104/26 = 4", "Check with the next one: a&#8321;&#8321; = 416/21, and (416/21) &divide; (104/21) = 4 &#10003;"] },
+        { prompt: "A question tells you that three quantities &lsquo;form a geometric sequence&rsquo;. Explain what equation that sentence is worth, why it is worth an equation at all, and how you would decide whether you have enough information to finish.", open: true,
+          solution: ["Sample response: it is worth the equation y&#178; = xz for the three quantities x, y, z, because the same ratio r has to take x to y and y to z &mdash; so y/x = z/y, and cross-multiplying gives y&#178; = xz. It is an equation rather than a description because it constrains the values: only certain triples satisfy it. To decide whether I can finish, I count unknowns against independent equations. In the challenge item there are two unknowns, a and d, and two facts &mdash; the geometric condition and the sum of 26 &mdash; so two equations in two unknowns, which is enough. If the sum had not been given I would have had one equation for two unknowns and could only have found the relationship d = 3a/2, not the values."] },
+        { prompt: "Explain why writing three arithmetic terms as a &minus; d, a, a + d (or three geometric terms as a/r, a, ar) makes a problem easier, and give the one thing you must remember to do at the end.", open: true,
+          solution: ["Sample response: the symmetric form makes the awkward condition collapse. For the arithmetic version the sum becomes (a &minus; d) + a + (a + d) = 3a, so a known sum instantly gives the middle term with no simultaneous equations at all; for the geometric version the product becomes (a/r) &times; a &times; ar = a&#179;, so a known product instantly gives the middle term. Both work because the outer terms are deliberately built to cancel. The thing to remember at the end is that a and d (or a and r) in this notation describe the <i>middle</i> term and the step, so if the question asked for the <i>first</i> term of the sequence I must convert back &mdash; the first term is a &minus; d, not a."] }
+      ]
+    }
+  ];
+
+  /* ---------------------------------------------------------------
+     STORAGE
+  --------------------------------------------------------------- */
+  var STORE_KEY = "g9ext_u3_progress_v1";
+  function loadProgress(){
+    try{
+      var raw = localStorage.getItem(STORE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    }catch(e){ return {}; }
+  }
+  function saveProgress(p){
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(p)); }catch(e){ /* ignore */ }
+  }
+  var progress = loadProgress();
+
+  /* ---------------------------------------------------------------
+     ANSWER CHECKING
+  --------------------------------------------------------------- */
+  function parseNum(s){
+    if(s == null) return null;
+    s = String(s).trim();
+    var fracM = s.match(/^(-?\d+(?:\.\d+)?)\s*\/\s*(-?\d+(?:\.\d+)?)$/);
+    if(fracM){
+      var a = parseFloat(fracM[1]), b = parseFloat(fracM[2]);
+      if(b === 0) return null;
+      return a / b;
+    }
+    var v = parseFloat(s);
+    return isNaN(v) ? null : v;
+  }
+  function normalize(raw){
+    return String(raw).toLowerCase().replace(/[\s()]/g,"");
+  }
+  function checkAnswer(ex, raw){
+    if(!raw || !String(raw).trim()) return false;
+    var norm = normalize(raw);
+    if(ex.accept && ex.accept.indexOf(norm) > -1) return true;
+    if(typeof ex.value === "number"){
+      var v = parseNum(raw);
+      if(v !== null && Math.abs(v - ex.value) < (ex.tol || 0.02)) return true;
+    }
+    if(ex.valueSet){
+      var parts = String(raw).toLowerCase().split(/,|or|and/).map(parseNum).filter(function(x){ return x !== null; });
+      if(parts.length === ex.valueSet.length){
+        var remaining = ex.valueSet.slice();
+        var ok = parts.every(function(p){
+          var idx = -1;
+          for(var i=0;i<remaining.length;i++){
+            if(Math.abs(remaining[i]-p) < (ex.tol||0.02)){ idx=i; break; }
+          }
+          if(idx>-1){ remaining.splice(idx,1); return true; }
+          return false;
+        });
+        if(ok) return true;
+      }
+    }
+    return false;
+  }
+
+  /* ---------------------------------------------------------------
+     RENDER
+  --------------------------------------------------------------- */
+  var lessonsEl = document.getElementById("lessons");
+  var scoreboardInner = document.getElementById("scoreboardInner");
+  var resetBtn = document.getElementById("resetBtn");
+  var totalDoneEl = document.getElementById("totalDone");
+
+  function exId(li, ei){ return "L" + li + "E" + ei; }
+
+  function buildChips(){
+    LESSONS.forEach(function(lesson, li){
+      var a = document.createElement("a");
+      a.href = "#lesson-" + lesson.letter;
+      a.className = "chip";
+      a.style.setProperty("--chip-hue", "var(" + lesson.hueVar + "-solid)");
+      a.style.setProperty("--chip-tint", "var(" + lesson.hueVar + "-tint)");
+      a.id = "chip-" + li;
+      a.innerHTML = '<span class="letter">' + lesson.letter + '</span><span class="frac" data-frac>0/' + lesson.exercises.length + '</span>';
+      scoreboardInner.insertBefore(a, resetBtn);
+    });
+  }
+
+  function lessonDoneCount(li){
+    var lesson = LESSONS[li];
+    var n = 0;
+    lesson.exercises.forEach(function(ex, ei){
+      if(progress[exId(li,ei)]) n++;
+    });
+    return n;
+  }
+
+  function updateAllProgressUI(){
+    var total = 0;
+    LESSONS.forEach(function(lesson, li){
+      var n = lessonDoneCount(li);
+      total += n;
+      var lessonTotal = lesson.exercises.length;
+      var chip = document.getElementById("chip-" + li);
+      if(chip){
+        chip.querySelector("[data-frac]").textContent = n + "/" + lessonTotal;
+        chip.classList.toggle("done", n === lessonTotal);
+      }
+      var ring = document.getElementById("ring-" + li);
+      if(ring){
+        ring.querySelector(".ring-label").textContent = n + " / " + lessonTotal;
+        ring.querySelector(".bar-fill").style.width = (n / lessonTotal * 100) + "%";
+      }
+    });
+    totalDoneEl.textContent = total;
+  }
+
+  function showToast(msg){
+    var t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(showToast._h);
+    showToast._h = setTimeout(function(){ t.classList.remove("show"); }, 1600);
+  }
+
+  function buildLessons(){
+    LESSONS.forEach(function(lesson, li){
+      var section = document.createElement("section");
+      section.className = "lesson";
+      section.id = "lesson-" + lesson.letter;
+      section.style.setProperty("--hue", "var(" + lesson.hueVar + ")");
+      section.style.setProperty("--tint", "var(--tint)");
+
+      var head = document.createElement("div");
+      head.className = "lesson-head";
+      head.innerHTML =
+        '<div class="big-letter">' + lesson.letter + '</div>' +
+        '<div class="htext"><div class="kicker">Lesson ' + lesson.letter + '</div><h2>' + lesson.title + '</h2></div>' +
+        '<div class="lesson-progress" id="ring-' + li + '">' +
+          '<div class="ring-label">0 / ' + lesson.exercises.length + '</div>' +
+          '<div class="bar"><div class="bar-fill"></div></div>' +
+        '</div>';
+      section.appendChild(head);
+
+      var rulesBox = document.createElement("div");
+      rulesBox.className = "rules-box";
+      rulesBox.innerHTML = '<h3>The rules</h3><ul>' + lesson.rules.map(function(r){ return "<li>" + r + "</li>"; }).join("") + "</ul>";
+      section.appendChild(rulesBox);
+
+      var diagramList = lesson.diagrams || (lesson.diagram ? [lesson.diagram] : []);
+      var diagramCaptions = lesson.diagramCaptions || [];
+      if(diagramList[0]){
+        var diagramBox = document.createElement("div");
+        diagramBox.className = "diagram-box";
+        diagramBox.innerHTML = diagramList[0] + (diagramCaptions[0] ? '<div class="diagram-caption">' + diagramCaptions[0] + '</div>' : '');
+        section.appendChild(diagramBox);
+      }
+
+      if(lesson.trick){
+        var trickBox = document.createElement("div");
+        trickBox.className = "trick-box";
+        trickBox.innerHTML = '<span class="trick-tag">Rule of thumb</span><span class="trick-text">' + lesson.trick + '</span>';
+        section.appendChild(trickBox);
+      }
+
+      var exampleList = lesson.examples || (lesson.example ? [lesson.example] : []);
+
+      function buildExampleCard(exampleObj, idx){
+        var card = document.createElement("div");
+        card.className = "example-card";
+        card.innerHTML =
+          '<h3>Worked example' + (exampleList.length > 1 ? " " + (idx+1) : "") + '</h3>' +
+          '<div class="example-prob expr">' + exampleObj.problem + '</div>' +
+          '<div class="example-steps">' +
+            exampleObj.steps.map(function(s, i){
+              return '<div class="step"><span class="n">' + (i+1) + '.</span><span class="expr">' + s + '</span></div>';
+            }).join("") +
+          '</div>' +
+          '<div class="example-answer">Answer: ' + exampleObj.answer + '</div>';
+        return card;
+      }
+
+      if(exampleList[0]) section.appendChild(buildExampleCard(exampleList[0], 0));
+
+      if(diagramList[1]){
+        var diagramBox2 = document.createElement("div");
+        diagramBox2.className = "diagram-box";
+        diagramBox2.innerHTML = diagramList[1] + (diagramCaptions[1] ? '<div class="diagram-caption">' + diagramCaptions[1] + '</div>' : '');
+        section.appendChild(diagramBox2);
+      }
+
+      if(exampleList[1]) section.appendChild(buildExampleCard(exampleList[1], 1));
+
+      if(lesson.remember && lesson.remember.length){
+        var rememberBox = document.createElement("div");
+        rememberBox.className = "remember-box";
+        rememberBox.innerHTML = '<h3>Rules to remember</h3><ul>' +
+          lesson.remember.map(function(r){ return "<li>" + r + "</li>"; }).join("") + '</ul>';
+        section.appendChild(rememberBox);
+      }
+
+      if(lesson.comic){
+        var comicBox = document.createElement("div");
+        comicBox.className = "comic-box";
+        comicBox.innerHTML =
+          '<span class="comic-tag">Math meme break</span>' +
+          lesson.comic.svg +
+          '<div class="comic-caption">' + lesson.comic.caption + '</div>';
+        section.appendChild(comicBox);
+      }
+
+      var grid = document.createElement("div");
+      grid.className = "ex-grid";
+
+      lesson.exercises.forEach(function(exObj, ei){
+        var id = exId(li, ei);
+        var card = document.createElement("div");
+        card.className = "ex-card";
+        card.id = "card-" + id;
+
+        var inputRow = exObj.open
+          ? '<div class="open-note">Open response &mdash; there\'s no single right answer. Try it yourself, then compare with the sample.</div>'
+          : '<div class="ex-input-row">' +
+              '<input class="ex-input" type="text" placeholder="your answer" id="input-' + id + '" autocomplete="off" />' +
+              '<button class="ex-check" data-id="' + id + '" data-li="' + li + '" data-ei="' + ei + '">Check</button>' +
+            '</div>' +
+            '<div class="ex-feedback" id="fb-' + id + '"></div>';
+
+        card.innerHTML =
+          '<div class="ex-top"><span class="ex-num">' + (ei+1) + '</span><div class="ex-prompt expr">' + exObj.prompt + '</div></div>' +
+          inputRow +
+          '<div class="ex-foot">' +
+            '<button class="ex-toggle" data-target="sol-' + id + '">' + (exObj.open ? "Show sample response" : "Show solution") + '</button>' +
+          '</div>' +
+          '<div class="ex-solution" id="sol-' + id + '">' +
+            exObj.solution.map(function(s){ return '<div class="sol-step">' + s + '</div>'; }).join("") +
+          '</div>';
+
+        grid.appendChild(card);
+      });
+
+      section.appendChild(grid);
+      lessonsEl.appendChild(section);
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     EVENTS (delegated)
+  --------------------------------------------------------------- */
+  function wireEvents(){
+    lessonsEl.addEventListener("click", function(e){
+      var checkBtn = e.target.closest(".ex-check");
+      if(checkBtn){
+        var li = parseInt(checkBtn.getAttribute("data-li"), 10);
+        var ei = parseInt(checkBtn.getAttribute("data-ei"), 10);
+        var id = checkBtn.getAttribute("data-id");
+        var exObj = LESSONS[li].exercises[ei];
+        var input = document.getElementById("input-" + id);
+        var fb = document.getElementById("fb-" + id);
+        var card = document.getElementById("card-" + id);
+        var ok = checkAnswer(exObj, input.value);
+        card.classList.remove("correct","wrong");
+        fb.classList.remove("correct","wrong");
+        if(ok){
+          card.classList.add("correct");
+          fb.classList.add("correct");
+          fb.textContent = "Correct!";
+          progress[id] = true;
+          saveProgress(progress);
+          updateAllProgressUI();
+        } else {
+          card.classList.add("wrong");
+          fb.classList.add("wrong");
+          fb.textContent = "Not quite — try again or check the solution.";
+        }
+        return;
+      }
+      var toggleBtn = e.target.closest(".ex-toggle");
+      if(toggleBtn){
+        var targetId = toggleBtn.getAttribute("data-target");
+        var sol = document.getElementById(targetId);
+        var willOpen = !sol.classList.contains("open");
+        sol.classList.toggle("open");
+        toggleBtn.textContent = willOpen
+          ? (toggleBtn.textContent.indexOf("sample") > -1 ? "Hide sample response" : "Hide solution")
+          : (toggleBtn.textContent.indexOf("sample") > -1 ? "Show sample response" : "Show solution");
+
+        // mark open-response exercises as "done" once viewed
+        var cardEl = toggleBtn.closest(".ex-card");
+        if(willOpen && cardEl){
+          var idMatch = targetId.replace("sol-","");
+          var liEi = idMatch.match(/^L(\d+)E(\d+)$/);
+          if(liEi){
+            var li2 = parseInt(liEi[1],10), ei2 = parseInt(liEi[2],10);
+            if(LESSONS[li2].exercises[ei2].open){
+              progress[idMatch] = true;
+              saveProgress(progress);
+              updateAllProgressUI();
+            }
+          }
+        }
+        return;
+      }
+    });
+
+    lessonsEl.addEventListener("keydown", function(e){
+      if(e.key === "Enter" && e.target.classList.contains("ex-input")){
+        var id = e.target.id.replace("input-","");
+        var btn = document.querySelector('.ex-check[data-id="' + id + '"]');
+        if(btn) btn.click();
+      }
+    });
+
+    resetBtn.addEventListener("click", function(){
+      if(!confirm("Clear all saved progress on this device?")) return;
+      progress = {};
+      saveProgress(progress);
+      document.querySelectorAll(".ex-card").forEach(function(c){ c.classList.remove("correct","wrong"); });
+      document.querySelectorAll(".ex-feedback").forEach(function(f){ f.textContent = ""; f.classList.remove("correct","wrong"); });
+      updateAllProgressUI();
+      showToast("Progress cleared");
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     HUE SOLID/TINT CSS VARS (derived once, injected as a style tag)
+  --------------------------------------------------------------- */
+  function injectHueVars(){
+    var style = document.createElement("style");
+    var letters = ["A","B","C","D","E","F"];
+    var css = ":root{";
+    letters.forEach(function(L){
+      var hv = "--hue" + L;
+      css += hv + "-solid: hsl(var(" + hv + ") var(--lsat) var(--llight));";
+      css += hv + "-tint: hsl(var(" + hv + ") var(--lsat) var(--ltint));";
+    });
+    css += "}";
+    style.textContent = css;
+    // document.head.appendChild(style); // disabled by UI redesign
+  }
+
+  function buildCheatSheet(){
+    var grid = document.getElementById("csGrid");
+    if(!grid) return;
+    LESSONS.forEach(function(lesson){
+      if(!lesson.remember || !lesson.remember.length) return;
+      var card = document.createElement("div");
+      card.className = "cs-card";
+      card.style.setProperty("--hue", "var(" + lesson.hueVar + ")");
+      card.style.setProperty("--tint", "var(--tint)");
+      card.innerHTML =
+        '<h4><span class="cs-letter">' + lesson.letter + '</span>' + lesson.title + '</h4>' +
+        '<ul>' + lesson.remember.map(function(r){ return "<li>" + r + "</li>"; }).join("") + '</ul>';
+      grid.appendChild(card);
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     INIT
+  --------------------------------------------------------------- */
+  injectHueVars();
+  buildChips();
+  buildLessons();
+  buildCheatSheet();
+  wireEvents();
+  updateAllProgressUI();
+
+})();
+</script>
