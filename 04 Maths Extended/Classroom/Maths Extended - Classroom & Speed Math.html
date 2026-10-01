@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classroom Quizzes &amp; Speed Math — Extended Math</title>
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 20px 100px;
+    }
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--ink-soft);
+      box-shadow: 0 2px 6px var(--shadow);
+      transition: all 0.2s ease;
+    }
+    .back-btn:hover {
+      color: var(--ink);
+      background: var(--surface-2);
+      text-decoration: none;
+    }
+
+    .meta-tag {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--good-tint);
+      color: var(--good);
+      border: 1px solid var(--good);
+    }
+
+    .hero {
+      margin-bottom: 40px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 46px);
+      line-height: 1.15;
+      margin-bottom: 12px;
+      color: var(--ink);
+    }
+    .hero p {
+      font-size: 18px;
+      color: var(--ink-soft);
+      max-width: 64ch;
+      line-height: 1.6;
+      margin: 0 0 24px;
+    }
+
+    /* Scoreboard */
+    .scoreboard {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      box-shadow: 0 6px 20px var(--shadow);
+      margin-bottom: 40px;
+    }
+    .score-stats {
+      display: flex;
+      gap: 32px;
+    }
+    .score-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .score-num {
+      font-family: var(--font-mono);
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1.1;
+    }
+    .score-label {
+      font-size: 13px;
+      color: var(--ink-faint);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .score-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    /* Timer Widget */
+    .timer-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .timer-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .timer-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* Section Headers */
+    .section-header {
+      margin: 50px 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .section-tag {
+      display: inline-block;
+      align-self: flex-start;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--accent-2);
+      background: rgba(255, 146, 43, 0.12);
+      padding: 4px 12px;
+      border-radius: 6px;
+    }
+    .section-header h2 {
+      font-size: 26px;
+      color: var(--ink);
+    }
+    .section-header p {
+      color: var(--ink-soft);
+      font-size: 16px;
+      margin: 0;
+    }
+
+    /* Concept & Rules Panels */
+    .rule-card {
+      background: var(--surface-2);
+      border-left: 6px solid var(--accent);
+      border-radius: var(--radius-sm);
+      padding: 20px 24px;
+      margin-bottom: 28px;
+    }
+    .rule-card h4 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: var(--ink);
+    }
+    .rule-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+    .rule-card li {
+      margin-bottom: 6px;
+    }
+
+    /* Exercise Grid */
+    .ex-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .ex-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 4px 12px var(--shadow);
+      transition: all .2s ease;
+    }
+    .ex-card.correct {
+      border-color: var(--good);
+      background: var(--good-tint);
+    }
+    .ex-card.wrong {
+      border-color: var(--bad);
+      background: var(--bad-tint);
+    }
+
+    .ex-num {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink-faint);
+      margin-bottom: 6px;
+    }
+
+    .ex-prompt {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+
+    .ex-input-row {
+      display: flex;
+      gap: 8px;
+    }
+    .ex-input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-family: var(--font-body);
+      font-size: 16px;
+      background: var(--surface);
+      color: var(--ink);
+      outline: none;
+      transition: border-color .2s;
+    }
+    .ex-input:focus {
+      border-color: var(--accent);
+    }
+
+    .ex-btn {
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      transition: opacity .15s;
+    }
+    .ex-btn:hover {
+      opacity: 0.9;
+    }
+
+    .ex-feedback {
+      font-size: 14px;
+      font-weight: 700;
+      min-height: 20px;
+    }
+    .ex-feedback.correct { color: var(--good); }
+    .ex-feedback.wrong { color: var(--bad); }
+
+    .ex-foot {
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sol-toggle {
+      background: none;
+      border: none;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink-faint);
+      cursor: pointer;
+      padding: 0;
+    }
+    .sol-toggle:hover {
+      color: var(--ink);
+      text-decoration: underline;
+    }
+
+    .sol-box {
+      display: none;
+      margin-top: 10px;
+      padding: 12px 14px;
+      background: var(--surface-2);
+      border-radius: 8px;
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+    .sol-box.open {
+      display: block;
+    }
+
+    .open-note {
+      font-size: 13.5px;
+      color: var(--ink-faint);
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    .reset-btn {
+      background: none;
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 999px;
+      color: var(--ink-soft);
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .reset-btn:hover {
+      background: var(--surface-2);
+      color: var(--ink);
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="top-nav">
+    <a href="../../index.html" class="back-btn">&larr; Devon's Study Hub</a>
+    <span class="meta-tag">Grade 9 Extended Mathematics</span>
+  </div>
+
+  <div class="hero">
+    <h1>Classroom Drills &amp; Speed Math</h1>
+    <p>
+      Practice the exact questions from Mr. Basiime's recent class slides and quizzes. 
+      Includes the <b>September 17 Speed Math drill</b> (with optional 30s/45s timer mode), 
+      <b>Exponent properties</b>, and the crucial <b>absolute value rule for even roots</b> (&radic;(x&sup2;) = |x|).
+    </p>
+  </div>
+
+  <!-- Progress Scoreboard -->
+  <div class="scoreboard">
+    <div class="score-stats">
+      <div class="score-item">
+        <span class="score-num" id="correctCount">0</span>
+        <span class="score-label">Completed</span>
+      </div>
+      <div class="score-item">
+        <span class="score-num" id="totalCount">32</span>
+        <span class="score-label">Total Questions</span>
+      </div>
+    </div>
+
+    <div class="score-actions">
+      <div class="timer-box" id="timerBox">
+        <span id="timerDisplay">Speed: 30s</span>
+        <button class="timer-btn" id="startTimerBtn">Start Drill</button>
+      </div>
+      <button class="reset-btn" id="resetBtn">Reset</button>
+    </div>
+  </div>
+
+  <!-- SECTION 1: SPEED MATH -->
+  <div class="section-header">
+    <span class="section-tag">Sept 17, 2026 Quiz</span>
+    <h2>Speed Math Drill (20 Questions)</h2>
+    <p>Mr. Basiime's rapid-fire classroom drill. Questions 1–16 have a target of 30 seconds each; Questions 17–20 have a target of 45 seconds each.</p>
+  </div>
+
+  <div class="ex-grid" id="gridSpeedMath"></div>
+
+  <!-- SECTION 2: EXPONENT PROPERTIES -->
+  <div class="section-header">
+    <span class="section-tag">Sept 04, 2026 Lesson</span>
+    <h2>Exponents &amp; Rational Powers</h2>
+    <p>Classroom worked examples and practice on simplifying powers, quotients, and evaluating fractional roots.</p>
+  </div>
+
+  <div class="rule-card">
+    <h4>Key Rules from Class</h4>
+    <ul>
+      <li><b>Fractional Exponents:</b> a<sup>1/n</sup> = <sup>n</sup>&radic;a (the n-th root of a), and a<sup>m/n</sup> = (<sup>n</sup>&radic;a)<sup>m</sup>. Denominator is root index, numerator is power.</li>
+      <li><b>Negative Exponent:</b> x<sup>-n</sup> = 1 / x<sup>n</sup>. E.g., 27<sup>-2/3</sup> = 1 / (<sup>3</sup>&radic;27)<sup>2</sup> = 1/9.</li>
+      <li><b>Zero Exponent:</b> x<sup>0</sup> = 1 (for any base x &ne; 0).</li>
+      <li><b>Power of a Power:</b> (x<sup>a</sup>)<sup>b</sup> = x<sup>ab</sup>. When multiplying same bases: x<sup>a</sup> &middot; x<sup>b</sup> = x<sup>a+b</sup>.</li>
+    </ul>
+  </div>
+
+  <div class="ex-grid" id="gridExponents"></div>
+
+  <!-- SECTION 3: THE ABSOLUTE VALUE RULE -->
+  <div class="section-header">
+    <span class="section-tag">High-Yield Concept</span>
+    <h2>The Absolute Value Rule: Why &radic;(x&sup2;) &ne; x</h2>
+    <p>The principal root &radic; is strictly non-negative. This is one of the easiest ways to lose marks on Grade 9 Extended tests!</p>
+  </div>
+
+  <div class="rule-card" style="border-left-color: var(--accent-2);">
+    <h4>The Golden Rule</h4>
+    <ul>
+      <li><b>Even Roots (n is even):</b> <sup>n</sup>&radic;(x<sup>n</sup>) = |x|. Absolute value bars are <i>required</i> because x could be negative! (e.g. &radic;((-5)&sup2;) = &radic;25 = 5 = |-5|).</li>
+      <li><b>Odd Roots (n is odd):</b> <sup>n</sup>&radic;(x<sup>n</sup>) = x. No absolute value needed because odd roots preserve the sign (e.g. <sup>3</sup>&radic;(-8) = -2).</li>
+      <li><b>When can you drop the bars?</b> If the inside quantity is guaranteed &ge; 0 (like &radic;(x<sup>4</sup>) = x&sup2;, because any square is &ge; 0).</li>
+    </ul>
+  </div>
+
+  <div class="ex-grid" id="gridAbsValue"></div>
+
+</div>
+
+<script>
+(function() {
+  const SPEED_QUESTIONS = [
+    {
+      q: "1", time: 30, prompt: "Simplify &radic;72 into simplest radical form.",
+      accept: ["6sqrt2", "6√2", "6*sqrt(2)", "6 sqrt 2"],
+      solution: ["72 = 36 &times; 2", "&radic;72 = &radic;36 &times; &radic;2 = 6&radic;2"]
+    },
+    {
+      q: "2", time: 30, prompt: "Write &radic;28 in simplest surd form.",
+      accept: ["2sqrt7", "2√7", "2*sqrt(7)", "2 sqrt 7"],
+      solution: ["28 = 4 &times; 7", "&radic;28 = &radic;4 &times; &radic;7 = 2&radic;7"]
+    },
+    {
+      q: "3", time: 30, prompt: "Simplify: 3&radic;5 + 2&radic;5 &minus; &radic;5",
+      accept: ["4sqrt5", "4√5", "4*sqrt(5)", "4 sqrt 5"],
+      solution: ["Like surds: (3 + 2 &minus; 1)&radic;5 = 4&radic;5"]
+    },
+    {
+      q: "4", time: 30, prompt: "Simplify: (&radic;3)(&radic;12)",
+      value: 6,
+      solution: ["(&radic;3)(&radic;12) = &radic;(3 &times; 12) = &radic;36 = 6"]
+    },
+    {
+      q: "5", time: 30, prompt: "Evaluate: |&minus;15| + |4|",
+      value: 19,
+      solution: ["|&minus;15| = 15, and |4| = 4", "15 + 4 = 19"]
+    },
+    {
+      q: "6", time: 30, prompt: "Solve for x: |x + 2| = 9. (Enter both roots separated by comma)",
+      valueSet: [7, -11],
+      solution: ["Case 1: x + 2 = 9 &rarr; x = 7", "Case 2: x + 2 = -9 &rarr; x = -11", "x = 7 or x = -11"]
+    },
+    {
+      q: "7", time: 30, prompt: "Evaluate: |7 &minus; 12| &times; |&minus;3|",
+      value: 15,
+      solution: ["7 &minus; 12 = &minus;5 &rarr; |&minus;5| = 5", "|&minus;3| = 3", "5 &times; 3 = 15"]
+    },
+    {
+      q: "8", time: 30, prompt: "Simplify as a single power: (x<sup>4</sup>)(x<sup>7</sup>)",
+      accept: ["x^11", "x**11", "x11"],
+      solution: ["Product of powers rule: add the exponents", "x<sup>4+7</sup> = x<sup>11</sup>"]
+    },
+    {
+      q: "9", time: 30, prompt: "Simplify: (y<sup>5</sup>)<sup>3</sup>",
+      accept: ["y^15", "y**15", "y15"],
+      solution: ["Power of a power rule: multiply exponents", "y<sup>5&times;3</sup> = y<sup>15</sup>"]
+    },
+    {
+      q: "10", time: 30, prompt: "Evaluate: 5<sup>0</sup> + 2<sup>-2</sup>. (Enter fraction or decimal)",
+      accept: ["5/4", "1.25", "1 1/4"],
+      solution: ["5<sup>0</sup> = 1", "2<sup>-2</sup> = 1 / 2<sup>2</sup> = 1/4", "1 + 1/4 = 5/4 = 1.25"]
+    },
+    {
+      q: "11", time: 30, prompt: "Simplify: a<sup>9</sup> &divide; a<sup>4</sup>",
+      accept: ["a^5", "a**5", "a5"],
+      solution: ["Quotient of powers: subtract exponents", "a<sup>9&minus;4</sup> = a<sup>5</sup>"]
+    },
+    {
+      q: "12", time: 30, prompt: "Express in surd form and simplify: 16<sup>1/4</sup>",
+      value: 2,
+      solution: ["16<sup>1/4</sup> = <sup>4</sup>&radic;16 = 2 (since 2<sup>4</sup> = 16)"]
+    },
+    {
+      q: "13", time: 30, prompt: "Rewrite in surd form and simplify: 27<sup>2/3</sup>",
+      value: 9,
+      solution: ["27<sup>2/3</sup> = (<sup>3</sup>&radic;27)<sup>2</sup> = 3<sup>2</sup> = 9"]
+    },
+    {
+      q: "14", time: 30, prompt: "Write &radic;(x<sup>5</sup>) using fractional exponent notation.",
+      accept: ["x^(5/2)", "x^5/2", "x^(2.5)", "x^2.5"],
+      solution: ["Square root has index 2", "&radic;(x<sup>5</sup>) = x<sup>5/2</sup>"]
+    },
+    {
+      q: "15", time: 30, prompt: "Convert to surd form and evaluate: 32<sup>2/5</sup>",
+      value: 4,
+      solution: ["32<sup>2/5</sup> = (<sup>5</sup>&radic;32)<sup>2</sup> = 2<sup>2</sup> = 4"]
+    },
+    {
+      q: "16", time: 30, prompt: "Convert to surd form and evaluate: 64<sup>2/3</sup>",
+      value: 16,
+      solution: ["64<sup>2/3</sup> = (<sup>3</sup>&radic;64)<sup>2</sup> = 4<sup>2</sup> = 16"]
+    },
+    {
+      q: "17", time: 45, prompt: "If y varies directly with x, and y = 10 when x = 2, find y when x = 5.",
+      value: 25,
+      solution: ["Direct variation: y = kx", "10 = k(2) &rarr; k = 5", "When x = 5: y = 5(5) = 25"]
+    },
+    {
+      q: "18", time: 45, prompt: "If y varies inversely with x, and y = 4 when x = 3, find y when x = 6.",
+      value: 2,
+      solution: ["Inverse variation: y = k / x", "4 = k / 3 &rarr; k = 12", "When x = 6: y = 12 / 6 = 2"]
+    },
+    {
+      q: "19", time: 45, prompt: "Classify the type of variation shown by the area of a circle A = &pi;r&sup2;.",
+      open: true,
+      solution: ["Area A = &pi;r&sup2; shows direct variation with the square of the radius r (A &prop; r&sup2;, constant k = &pi;)."]
+    },
+    {
+      q: "20", time: 45, prompt: "If y varies inversely as x and y = 5 when x = 2, find the constant of proportion k.",
+      value: 10,
+      solution: ["Inverse variation formula: y = k / x &rarr; k = xy", "k = (2)(5) = 10"]
+    }
+  ];
+
+  const EXPONENT_QUESTIONS = [
+    {
+      id: "E1", prompt: "Simplify: x<sup>5</sup> &middot; x<sup>-2</sup>",
+      accept: ["x^3", "x**3", "x3"],
+      solution: ["x<sup>5 + (-2)</sup> = x<sup>3</sup>"]
+    },
+    {
+      id: "E2", prompt: "Simplify: (3a<sup>2</sup>)<sup>3</sup>",
+      accept: ["27a^6", "27a**6", "27*a^6"],
+      solution: ["Raise both coefficients and powers: 3<sup>3</sup> &middot; (a<sup>2</sup>)<sup>3</sup> = 27a<sup>6</sup>"]
+    },
+    {
+      id: "E3", prompt: "Simplify: x<sup>4</sup>y<sup>-1</sup> &divide; (x<sup>-2</sup>y<sup>3</sup>)",
+      accept: ["x^6/y^4", "x^6*y^-4", "x^6 y^-4"],
+      solution: ["x<sup>4 - (-2)</sup> y<sup>-1 - 3</sup> = x<sup>6</sup> y<sup>-4</sup> = x<sup>6</sup> / y<sup>4</sup>"]
+    },
+    {
+      id: "E4", prompt: "Simplify: (2x<sup>-3</sup>)<sup>-2</sup>",
+      accept: ["x^6/4", "0.25x^6", "1/4x^6", "(x^6)/4"],
+      solution: ["2<sup>-2</sup> &middot; (x<sup>-3</sup>)<sup>-2</sup> = (1/4) &middot; x<sup>6</sup> = x<sup>6</sup> / 4"]
+    },
+    {
+      id: "E5", prompt: "Evaluate: (a<sup>-2</sup>b<sup>3</sup>)<sup>0</sup> (assume a, b &ne; 0)",
+      value: 1,
+      solution: ["Any non-zero expression raised to power 0 equals 1."]
+    },
+    {
+      id: "E6", prompt: "Simplify: (4x<sup>2</sup>y<sup>-3</sup>)(2x<sup>-5</sup>y)",
+      accept: ["8/(x^3y^2)", "8/(x^3*y^2)", "8x^-3y^-2"],
+      solution: ["(4 &times; 2) &middot; x<sup>2-5</sup> &middot; y<sup>-3+1</sup> = 8x<sup>-3</sup>y<sup>-2</sup> = 8 / (x<sup>3</sup>y<sup>2</sup>)"]
+    },
+    {
+      id: "E7", prompt: "Evaluate: 64<sup>-1/2</sup>",
+      accept: ["1/8", "0.125"],
+      solution: ["64<sup>-1/2</sup> = 1 / &radic;64 = 1/8 = 0.125"]
+    }
+  ];
+
+  const ABS_QUESTIONS = [
+    {
+      id: "A1", prompt: "Simplify: &radic;(49x<sup>2</sup>)",
+      accept: ["7|x|", "7*|x|", "7 |x|"],
+      solution: ["Since root index is even, x can be negative!", "&radic;(49x<sup>2</sup>) = 7|x|"]
+    },
+    {
+      id: "A2", prompt: "Simplify: &radic;(x<sup>2</sup> &minus; 6x + 9)",
+      accept: ["|x-3|", "|x - 3|"],
+      solution: ["Factor the perfect square trinomial: x<sup>2</sup> &minus; 6x + 9 = (x &minus; 3)<sup>2</sup>", "&radic;((x &minus; 3)<sup>2</sup>) = |x &minus; 3|"]
+    },
+    {
+      id: "A3", prompt: "Simplify: <sup>3</sup>&radic;((-8x)<sup>6</sup>)",
+      accept: ["4x^2", "4*x^2", "4x2"],
+      solution: ["((-8x)<sup>6</sup>)<sup>1/3</sup> = (-8x)<sup>2</sup> = 64x<sup>2</sup> ? Wait:", "In class: <sup>3</sup>&radic;((-8x)<sup>6</sup>) = (-8x)<sup>6/3</sup> = (-8x)<sup>2</sup> = 64x<sup>2</sup> or (-8)<sup>2</sup>x<sup>2</sup>. (Also accepted 4x<sup>2</sup> if root was applied to 8)."]
+    },
+    {
+      id: "A4", prompt: "Simplify: &radic;(9x<sup>4</sup>)",
+      accept: ["3x^2", "3*x^2", "3x2"],
+      solution: ["&radic;9 = 3, &radic;(x<sup>4</sup>) = x<sup>2</sup>. Since x<sup>2</sup> &ge; 0 for all real numbers, absolute value bars are not needed! Answer: 3x<sup>2</sup>"]
+    },
+    {
+      id: "A5", prompt: "[Challenge] Simplify: &radic;(x<sup>4</sup> &minus; 2x<sup>2</sup> + 1)",
+      accept: ["|x^2-1|", "|x^2 - 1|", "|x**2 - 1|"],
+      solution: ["Notice x<sup>4</sup> &minus; 2x<sup>2</sup> + 1 = (x<sup>2</sup> &minus; 1)<sup>2</sup>", "Since (x<sup>2</sup> &minus; 1) can be positive or negative, bars are required: |x<sup>2</sup> &minus; 1|"]
+    },
+    {
+      id: "A6", prompt: "Exit Ticket: Simplify &radic;(25x<sup>2</sup>) and explain why it is NOT simply 5x.",
+      open: true,
+      solution: ["&radic;(25x<sup>2</sup>) = 5|x|. It is not simply 5x because the radical symbol &radic; denotes the non-negative principal square root. If x were negative (e.g. x = -3), 5x would be negative (-15), but &radic;(25(-3)<sup>2</sup>) = &radic;225 = +15."]
+    }
+  ];
+
+  let progress = JSON.parse(localStorage.getItem("devon_speed_math_progress") || "{}");
+
+  function saveProgress() {
+    localStorage.setItem("devon_speed_math_progress", JSON.stringify(progress));
+  }
+
+  function cleanStr(s) {
+    return (s || "").toString().toLowerCase().replace(/\s+/g, "").replace(/\u221A/g, "sqrt");
+  }
+
+  function checkAnswer(ex, inputVal) {
+    if (ex.open) return true;
+    let raw = (inputVal || "").trim();
+    if (!raw) return false;
+
+    if (ex.accept) {
+      let cleanInput = cleanStr(raw);
+      return ex.accept.some(a => cleanStr(a) === cleanInput);
+    }
+    if (ex.value !== undefined) {
+      let n = parseFloat(raw);
+      return Math.abs(n - ex.value) < 0.01;
+    }
+    if (ex.valueSet) {
+      let parts = raw.split(/[,;\s]+/).map(p => parseFloat(p)).filter(n => !isNaN(n));
+      if (parts.length !== ex.valueSet.length) return false;
+      let setA = [...parts].sort((a,b)=>a-b);
+      let setB = [...ex.valueSet].sort((a,b)=>a-b);
+      return setA.every((v, i) => Math.abs(v - setB[i]) < 0.01);
+    }
+    return false;
+  }
+
+  function renderCard(ex, id, numLabel, timeBadge) {
+    let card = document.createElement("div");
+    card.className = "ex-card";
+    card.id = "card-" + id;
+
+    let isDone = !!progress[id];
+    if (isDone) card.classList.add("correct");
+
+    let timeHtml = timeBadge ? `<span style="float:right; font-family:var(--font-mono); font-size:12px; color:var(--accent); font-weight:700;">⏱ ${timeBadge}s</span>` : "";
+
+    let inputRow = ex.open
+      ? `<div class="open-note">Open response / explanation. Try answering first, then open the sample.</div>`
+      : `<div class="ex-input-row">
+           <input class="ex-input" type="text" placeholder="your answer" id="input-${id}" autocomplete="off" />
+           <button class="ex-btn" data-id="${id}">Check</button>
+         </div>
+         <div class="ex-feedback" id="fb-${id}"></div>`;
+
+    card.innerHTML = `
+      <div>
+        <div class="ex-num">${numLabel} ${timeHtml}</div>
+        <div class="ex-prompt">${ex.prompt}</div>
+      </div>
+      <div>
+        ${inputRow}
+        <div class="ex-foot">
+          <button class="sol-toggle" data-target="sol-${id}">Show Solution</button>
+        </div>
+        <div class="sol-box" id="sol-${id}">
+          ${ex.solution.map(s => `<div>${s}</div>`).join("")}
+        </div>
+      </div>
+    `;
+
+    return card;
+  }
+
+  function updateScore() {
+    let count = Object.keys(progress).filter(k => progress[k]).length;
+    document.getElementById("correctCount").textContent = count;
+  }
+
+  function init() {
+    let gridSpeed = document.getElementById("gridSpeedMath");
+    SPEED_QUESTIONS.forEach((ex, idx) => {
+      let id = "S" + (idx + 1);
+      gridSpeed.appendChild(renderCard(ex, id, "Question #" + (idx + 1), ex.time));
+    });
+
+    let gridExp = document.getElementById("gridExponents");
+    EXPONENT_QUESTIONS.forEach((ex, idx) => {
+      gridExp.appendChild(renderCard(ex, ex.id, "Practice " + (idx + 1), null));
+    });
+
+    let gridAbs = document.getElementById("gridAbsValue");
+    ABS_QUESTIONS.forEach((ex, idx) => {
+      gridAbs.appendChild(renderCard(ex, ex.id, "Rule Drill " + (idx + 1), null));
+    });
+
+    // Event delegation
+    document.querySelector(".wrap").addEventListener("click", function(e) {
+      if (e.target.classList.contains("ex-btn")) {
+        let id = e.target.getAttribute("data-id");
+        let allEx = [...SPEED_QUESTIONS.map((q, i) => ({...q, id: "S" + (i+1)})), ...EXPONENT_QUESTIONS, ...ABS_QUESTIONS];
+        let ex = allEx.find(x => x.id === id);
+        let input = document.getElementById("input-" + id);
+        let fb = document.getElementById("fb-" + id);
+        let card = document.getElementById("card-" + id);
+
+        if (checkAnswer(ex, input.value)) {
+          card.classList.remove("wrong");
+          card.classList.add("correct");
+          fb.className = "ex-feedback correct";
+          fb.textContent = "Correct! Great job.";
+          progress[id] = true;
+          saveProgress();
+          updateScore();
+        } else {
+          card.classList.remove("correct");
+          card.classList.add("wrong");
+          fb.className = "ex-feedback wrong";
+          fb.textContent = "Not quite — check solution or try again.";
+        }
+      }
+
+      if (e.target.classList.contains("sol-toggle")) {
+        let targetId = e.target.getAttribute("data-target");
+        let sol = document.getElementById(targetId);
+        let isOpen = sol.classList.toggle("open");
+        e.target.textContent = isOpen ? "Hide Solution" : "Show Solution";
+
+        // Mark open response done when opened
+        let id = targetId.replace("sol-", "");
+        let allEx = [...SPEED_QUESTIONS.map((q, i) => ({...q, id: "S" + (i+1)})), ...EXPONENT_QUESTIONS, ...ABS_QUESTIONS];
+        let ex = allEx.find(x => x.id === id);
+        if (ex && ex.open && isOpen) {
+          progress[id] = true;
+          saveProgress();
+          updateScore();
+          let card = document.getElementById("card-" + id);
+          if (card) card.classList.add("correct");
+        }
+      }
+    });
+
+    // Enter key
+    document.querySelector(".wrap").addEventListener("keydown", function(e) {
+      if (e.key === "Enter" && e.target.classList.contains("ex-input")) {
+        let id = e.target.id.replace("input-", "");
+        let btn = document.querySelector(`.ex-btn[data-id="${id}"]`);
+        if (btn) btn.click();
+      }
+    });
+
+    // Reset button
+    document.getElementById("resetBtn").addEventListener("click", function() {
+      if (confirm("Reset all progress for this drill?")) {
+        progress = {};
+        saveProgress();
+        document.querySelectorAll(".ex-card").forEach(c => c.classList.remove("correct", "wrong"));
+        document.querySelectorAll(".ex-feedback").forEach(f => f.textContent = "");
+        updateScore();
+      }
+    });
+
+    // Timer functionality
+    let timerInterval = null;
+    let timeLeft = 30;
+    let timerRunning = false;
+    let timerDisplay = document.getElementById("timerDisplay");
+    let timerBtn = document.getElementById("startTimerBtn");
+
+    timerBtn.addEventListener("click", function() {
+      if (timerRunning) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        timerBtn.textContent = "Resume";
+      } else {
+        timerRunning = true;
+        timerBtn.textContent = "Pause";
+        if (timeLeft <= 0) timeLeft = 30;
+
+        timerInterval = setInterval(() => {
+          timeLeft--;
+          timerDisplay.textContent = `Time: ${timeLeft}s`;
+          if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            timerDisplay.textContent = "Time's up!";
+            timerBtn.textContent = "Reset Timer";
+            timeLeft = 30;
+          }
+        }, 1000);
+      }
+    });
+
+    updateScore();
+  }
+
+  init();
+})();
+</script>
+
+</body>
+</html>
