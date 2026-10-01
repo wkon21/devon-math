@@ -447,6 +447,141 @@
       resize: vertical;
     }
 
+    
+    /* UBI Debate Section Styles */
+    .thesis {
+      background: color-mix(in srgb, #1098AD 12%, var(--surface));
+      border: 2px solid #1098AD;
+      border-radius: var(--radius);
+      padding: 22px 26px;
+      margin: 24px 0 28px;
+    }
+    .thesis p {
+      font-size: 19px;
+      line-height: 1.5;
+      margin: 0;
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .thesis .lbl {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #1098AD;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    details.reb {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+    details.reb summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 16px 20px;
+      font-weight: 700;
+      font-size: 15.5px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      background: var(--surface);
+    }
+    details.reb summary::-webkit-details-marker { display: none; }
+    details.reb summary .q {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--bad);
+      background: var(--bad-tint);
+      border-radius: 6px;
+      padding: 3px 8px;
+      flex: none;
+      font-weight: 800;
+    }
+    details.reb summary .arrow {
+      margin-left: auto;
+      color: var(--ink-faint);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      flex: none;
+      transition: transform 0.2s;
+    }
+    details.reb[open] summary .arrow {
+      transform: rotate(90deg);
+    }
+    details.reb .body {
+      padding: 0 20px 18px;
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+    details.reb .body .turn {
+      background: var(--good-tint);
+      border-left: 3px solid var(--good);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-top: 12px;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    details.reb .body .turn b { color: var(--good); }
+
+    .speech {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px 30px;
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: var(--ink);
+      box-shadow: 0 4px 16px var(--shadow);
+    }
+    .speech p { margin: 0 0 14px; }
+    .speech .beat {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #1098AD;
+      margin: 22px 0 6px;
+      font-weight: 800;
+    }
+    .speech .beat:first-child { margin-top: 0; }
+    .speech .stage {
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      color: var(--ink-faint);
+      font-style: italic;
+    }
+
+    .warn-panel {
+      background: color-mix(in srgb, var(--accent-2) 10%, var(--surface));
+      border: 1px solid var(--accent-2);
+      border-left: 5px solid var(--accent-2);
+      border-radius: var(--radius-sm);
+      padding: 20px 24px;
+      color: var(--ink);
+      margin-top: 24px;
+    }
+    .warn-panel h4 {
+      color: var(--accent-2);
+      margin: 0 0 10px;
+      font-size: 17px;
+    }
+    .warn-panel ul {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 14.5px;
+      line-height: 1.6;
+    }
+
     /* Summary Cheat Sheet */
     .cs-grid {
       display: grid;
@@ -526,6 +661,7 @@
       <button class="chip" data-filter="F">F: Automation &amp; UBI Mechanics</button>
       <button class="chip" data-filter="G">G: Primary Sources (Keynes &amp; Finland)</button>
       <button class="chip" data-filter="H">H: Criterion C &amp; D Essay Lab</button>
+      <button class="chip" data-filter="DEBATE" style="border-color: #1098AD; color: #1098AD;">🎤 UBI Debate Dossier &amp; Speech</button>
     </div>
     <div class="tally">
       <span>Progress: <b id="doneCount">0</b> / <b id="totalCount">104</b></span>
@@ -1025,6 +1161,230 @@
 
     <div class="ex-title">Practice Exercises (Lesson H)</div>
     <div class="ex-grid" id="gridH"></div>
+  </section>
+
+  
+  <!-- ========================================================
+       LESSON / MODULE: UBI DEBATE DOSSIER & PROPOSITION SPEECH
+  ======================================================== -->
+  <section class="lesson-section" id="lessonDebate" data-lesson="DEBATE" style="border-top: 5px solid #1098AD;">
+    <span class="lesson-badge" style="background: #1098AD; color: #fff;">Formative &middot; Debate Dossier</span>
+    <h2>The Formal UBI Debate: Proposition Case &amp; Full Speech</h2>
+    <p class="lesson-lead">
+      <b>Motion:</b> <i>&ldquo;This House Would Introduce a Universal Basic Income.&rdquo;</i><br>
+      You are arguing on the <b>Proposition</b> (in favor). This is your complete, debate-ready dossier: the definitions, the three core arguments, the empirical evidence locker, eight interactive rebuttals to opposing attacks, cross-examination trap questions, and the full speech with stage directions.
+    </p>
+
+    <div class="thesis">
+      <div class="lbl">Devon's Case in One Sentence</div>
+      <p>A basic income floor gives people the security to make better decisions &mdash; and the real-world evidence shows they keep working, spend it on essentials, and end up healthier, happier, and more employable, not less.</p>
+    </div>
+
+    <!-- Step 1 -->
+    <h3 style="font-size:20px; margin: 28px 0 10px; color:var(--ink);">Step 1 &mdash; Define It Before They Do</h3>
+    <div class="concept-card" style="margin-bottom:24px;">
+      <p style="margin-bottom:10px;">
+        <b>Whoever defines the motion controls the debate.</b> Define UBI in your first thirty seconds, and define a <i>modest, funded</i> version. If you let the opposition define it, they will argue against $3,000 a month for everyone funded by printing money, and you will spend the entire round defending something you never proposed.
+      </p>
+      <ul>
+        <li><b>Universal:</b> Every adult citizen receives it, regardless of existing wealth or income.</li>
+        <li><b>Unconditional:</b> Zero means-testing, no job search logs, and no caseworker approvals.</li>
+        <li><b>Individual:</b> Paid directly to the individual person, not per household.</li>
+        <li><b>In Cash:</b> Paid as cash, because individuals know their own needs better than a bureaucracy does.</li>
+        <li><b>What Stays:</b> Healthcare and disability support stay on top. UBI consolidates duplicate, bloated unemployment bureaucracies.</li>
+      </ul>
+    </div>
+
+    <!-- Step 2 -->
+    <h3 style="font-size:20px; margin: 28px 0 10px; color:var(--ink);">Step 2 &mdash; Your Three Core Arguments</h3>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <h4>1. Security Breeds Initiative, Not Laziness</h4>
+        <p>
+          In Stockton, California, people given $500/month saw full-time employment surge from 28% to 40%. The ability to cover an unexpected $400 cash emergency doubled. When people have security, they take the risk to attend job interviews, retrain, and pursue higher-skilled work.
+        </p>
+      </div>
+
+      <div class="concept-card">
+        <h4>2. Pre-empt Their Case with Real History</h4>
+        <p>
+          The opposition will claim people stop working. You have four decades of proof: <b>Alaska has paid every resident an annual oil dividend since 1982</b>, and NBER economists proved it had zero negative effect on employment. In Finland, unemployed recipients worked 6 days more and suffered far less depression.
+        </p>
+      </div>
+
+      <div class="concept-card">
+        <h4>3. The Existing Welfare State is Broken</h4>
+        <p>
+          Current welfare creates a "welfare cliff" with effective tax rates of 80%–90%, penalizing recipients for finding part-time jobs. Furthermore, conditional programs stigmatize the poor, cost billions to police, and fail to reach over 30% of eligible families due to red tape.
+        </p>
+      </div>
+    </div>
+
+    <!-- Step 3: Evidence Locker Table -->
+    <h3 style="font-size:20px; margin: 28px 0 10px; color:var(--ink);">Step 3 &mdash; The Evidence Locker</h3>
+    <div class="concept-card" style="padding:0; overflow:hidden; margin-bottom:28px;">
+      <table style="width:100%; border-collapse:collapse; font-size:14px;">
+        <thead>
+          <tr style="background:var(--surface-2); border-bottom:2px solid var(--border);">
+            <th style="padding:12px 16px; text-align:left;">Location &amp; Year</th>
+            <th style="padding:12px 16px; text-align:left;">Scale &amp; Details</th>
+            <th style="padding:12px 16px; text-align:left;">Key Measurable Finding</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:12px 16px;"><b>Dauphin, Manitoba (1974–79)</b></td>
+            <td style="padding:12px 16px;">10,000 residents; town-wide basic income floor (Mincome).</td>
+            <td style="padding:12px 16px;"><b>Hospitalizations fell 8.5%</b>; high school graduation rates surged; primary earner work hours dropped only 1%.</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:12px 16px;"><b>Alaska (1982–Present)</b></td>
+            <td style="padding:12px 16px;">All Alaskan residents; $1,000–$3,000/yr unconditional permanent dividend.</td>
+            <td style="padding:12px 16px;"><b>Zero drop in full-time employment</b> over 40+ years; lower child poverty; stimulated local retail economies.</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:12px 16px;"><b>Stockton, California (2019–21)</b></td>
+            <td style="padding:12px 16px;">125 low-income residents; $500/month for 24 months.</td>
+            <td style="padding:12px 16px;">Full-time employment jumped from <b>28% to 40%</b>; dramatic reduction in psychological distress and anxiety.</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:12px 16px;"><b>Finland (2017–18)</b></td>
+            <td style="padding:12px 16px;">2,000 unemployed adults; &euro;560/month unconditional.</td>
+            <td style="padding:12px 16px;">Recipients worked <b>6 more days</b> than control group; reported marked gains in mental health and trust.</td>
+          </tr>
+          <tr>
+            <td style="padding:12px 16px;"><b>London Rough Sleepers (2009)</b></td>
+            <td style="padding:12px 16px;">13 long-term homeless men; &pound;3,000 cash with no strings attached.</td>
+            <td style="padding:12px 16px;">Spent on rental deposits and IDs; saved taxpayers tens of thousands of pounds in emergency services.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Step 4: Rebuttals -->
+    <h3 style="font-size:20px; margin: 28px 0 6px; color:var(--ink);">Step 4 &mdash; The 8 Rebuttals (Interactive Attack Cards)</h3>
+    <p style="color:var(--ink-soft); font-size:14.5px; margin-bottom:16px;">Click each attack to reveal your response. Memorize these to dominate the cross-examination!</p>
+
+    <details class="reb">
+      <summary><span class="q">Attack 1</span><span>&ldquo;People will just stop working and sit on the sofa.&rdquo;</span><span class="arrow">&#9654;</span></summary>
+      <div class="body">
+        The data from every real-world pilot shows this does not happen. In Dauphin, primary earners dropped hours by just 1%. In Finland, recipients worked <i>more</i> than the control group. In Alaska, four decades of dividends produced zero employment drop. Humans do not work purely to avoid starvation; they work for social connection, pride, status, and discretionary income.
+        <div class="turn"><b>The Turnaround:</b> Ask the opposition: <i>&ldquo;If you received $1,000 a month, would you quit school and do nothing for the rest of your life? No? Then why do you assume everyone else would?&rdquo;</i></div>
+      </div>
+    </details>
+
+    <details class="reb">
+      <summary><span class="q">Attack 2</span><span>&ldquo;It is unaffordable. The numbers do not add up.&rdquo;</span><span class="arrow">&#9654;</span></summary>
+      <div class="body">
+        Gross cost is not net cost. Wealthier citizens pay their basic income straight back in progressive taxes. Furthermore, UBI replaces the massive overhead of means-tested bureaucracies and saves billions on the indirect costs of poverty: emergency room visits, chronic mental health crises, and police intervention.
+        <div class="turn"><b>The Turnaround:</b> <i>&ldquo;Poverty is not cheap. We already spend trillions managing the collateral damage of poverty badly. UBI is an investment in human infrastructure.&rdquo;</i></div>
+      </div>
+    </details>
+
+    <details class="reb">
+      <summary><span class="q">Attack 3</span><span>&ldquo;It will cause inflation &mdash; landlords will just swallow the money.&rdquo;</span><span class="arrow">&#9654;</span></summary>
+      <div class="body">
+        Inflation happens when new money is printed out of thin air. A UBI funded by <b>taxation and carbon dividends</b> recirculates existing capital; it does not increase the money supply. In tight rental markets, UBI must be paired with zoning reform and social housing construction.
+        <div class="turn"><b>The Turnaround:</b> A landlord in a crowded city might raise rent, but a UBI gives tenants the financial cushion to move away from exploitative markets to lower-cost towns.</div>
+      </div>
+    </details>
+
+    <details class="reb">
+      <summary><span class="q">Attack 4</span><span>&ldquo;Why give money to millionaires? Elon Musk doesn't need $1,000.&rdquo;</span><span class="arrow">&#9654;</span></summary>
+      <div class="body">
+        Universality eliminates the humiliating stigma of welfare and destroys the bureaucratic apparatus required to police eligibility. The rich receive the check, but through progressive income and wealth taxes, they pay it back hundreds of times over.
+        <div class="turn"><b>The Turnaround:</b> <i>&ldquo;Universal public schools and national healthcare educate and treat millionaires' children too. Universality protects programs from being defunded or gutted.&rdquo;</i></div>
+      </div>
+    </details>
+
+    <details class="reb">
+      <summary><span class="q">Attack 5</span><span>&ldquo;People will spend it on alcohol, drugs, and gambling.&rdquo;</span><span class="arrow">&#9654;</span></summary>
+      <div class="body">
+        World Bank and Stockton SEED data prove this stereotype is completely false. In Stockton, less than 1% of funds went to alcohol or tobacco; over 80% went toward food, utilities, car repairs, and children's medicine.
+        <div class="turn"><b>The Turnaround:</b> The belief that poor people are inherently addicted or irresponsible is class bias. Scarcity causes stress, and stress drives escapism; cash stability resolves the underlying anxiety.</div>
+      </div>
+    </details>
+
+    <details class="reb">
+      <summary><span class="q">Attack 6</span><span>&ldquo;Work gives life meaning. UBI destroys purpose.&rdquo;</span><span class="arrow">&#9654;</span></summary>
+      <div class="body">
+        UBI does not ban work. It empowers people to engage in vital unpaid work that our current GDP model ignores: raising children, caring for elderly grandparents, volunteering, and artistic creation.
+        <div class="turn"><b>The Turnaround:</b> <i>&ldquo;If the opposition believes work gives meaning, why do they only count work when a corporate boss pays you a wage? Why does caring for a sick parent not count?&rdquo;</i></div>
+      </div>
+    </details>
+
+    <details class="reb">
+      <summary><span class="q">Attack 7</span><span>&ldquo;It will trigger a border crisis and attract mass immigration.&rdquo;</span><span class="arrow">&#9654;</span></summary>
+      <div class="body">
+        Eligibility rules are defined by policy design. Just like state pensions, national healthcare, and voting rights, UBI is distributed to legal citizens and long-term permanent residents with established residency criteria.
+      </div>
+    </details>
+
+    <details class="reb">
+      <summary><span class="q">Attack 8</span><span>&ldquo;The OpenResearch study showed a 1–2 hour weekly drop in work!&rdquo;</span><span class="arrow">&#9654;</span></summary>
+      <div class="body">
+        <b>This is their best card&mdash;concede it and turn it into a victory!</b> The 3-year US OpenResearch trial did find hours worked dropped by 1.3 hours/week. But look at where the time went: into community education, parenting, and seeking higher-wage careers!
+        <div class="turn"><b>The Turnaround:</b> <i>&ldquo;If a single mother works one hour less a week so she can read bedtime stories to her child, that is not an economic loss; that is the very definition of a civilized society.&rdquo;</i></div>
+      </div>
+    </details>
+
+    <!-- Step 5: Trap Questions -->
+    <h3 style="font-size:20px; margin: 28px 0 10px; color:var(--ink);">Step 5 &mdash; Five Trap Questions for Cross-Examination</h3>
+    <div class="concept-card" style="margin-bottom:28px;">
+      <ul>
+        <li><b>1.</b> <i>&ldquo;What is the effective marginal tax rate on a low-income worker moving from conditional benefits into a minimum-wage job today?&rdquo;</i> (They will not know it reaches 80%&ndash;90%!).</li>
+        <li><b>2.</b> <i>&ldquo;Alaska has paid an unconditional cash dividend to every resident for over 40 years. Why has their economy not collapsed?&rdquo;</i></li>
+        <li><b>3.</b> <i>&ldquo;How many eligible citizens currently fail to claim conditional welfare due to paperwork barriers and stigma?&rdquo;</i></li>
+        <li><b>4.</b> <i>&ldquo;As AI and automation displace millions of cognitive jobs over the next 15 years, what is your alternative plan?&rdquo;</i></li>
+        <li><b>5.</b> <i>&ldquo;Why do you trust a government bureaucrat to decide what a family needs more than you trust the family itself?&rdquo;</i></li>
+      </ul>
+    </div>
+
+    <!-- Step 6: Full Speech -->
+    <h3 style="font-size:20px; margin: 28px 0 10px; color:var(--ink);">Step 6 &mdash; Devon's Full Proposition Speech (3.5 Minutes)</h3>
+    <div class="speech">
+      <div class="beat">Hook</div>
+      <p>Imagine you are offered a better job. Better pay, real prospects. But it starts in three weeks, and it is on the other side of town. Today, you are forced to turn it down &mdash; because going three weeks without a paycheck means you get evicted from your flat.</p>
+      <p>That worker isn't lazy. They aren't unambitious. They simply have no floor to stand on. And our entire welfare system is built on the false assumption that what they need is more punitive pressure.</p>
+      <p class="stage">[Pause &middot; Look at the judges]</p>
+
+      <div class="beat">Definition &mdash; Take The Ground Early</div>
+      <p>We propose a Universal Basic Income: a regular, unconditional cash payment to every legal adult citizen. Universal &mdash; everyone receives it. Unconditional &mdash; no means-testing, no job search logs. Paid in cash, because individuals understand their own lives better than a government office ever could.</p>
+      <p>And let me be specific, because the opposition will attempt to argue against something we never proposed. We are not proposing a lavish luxury. We propose a modest floor &mdash; enough for nutrition and basic shelter. It consolidates redundant welfare bureaucracies while disability and medical support stay on top. It is funded by closing tax loopholes on the highest incomes, land value taxation, and carbon dividends.</p>
+
+      <div class="beat">Argument 1 &mdash; Security Breeds Initiative</div>
+      <p><b>My first argument: financial security makes human beings more productive, not less.</b></p>
+      <p>In Stockton, California, recipients given five hundred dollars a month saw full-time employment rise from twenty-eight percent to forty percent. The number of families able to cover an unexpected expense in cash doubled. They didn't stop working &mdash; they finally had the stability to work <i>better</i>.</p>
+
+      <div class="beat">Argument 2 &mdash; Answering Their Objections With History</div>
+      <p><b>My second argument pre-empts the objections you are about to hear.</b></p>
+      <p>The opposition will tell you people will quit their jobs. We do not have to guess. Alaska has paid an unconditional cash dividend to every resident for over forty years. Economists at the National Bureau of Economic Research analyzed the data and found zero negative impact on employment. None.</p>
+      <p>In Finland, recipients of unconditional cash worked six days more per year than the control group, while experiencing marked drops in depression and anxiety.</p>
+      <p class="stage">[Slow down &middot; Deliver this line with absolute sincerity]</p>
+      <p>I will be honest with this house, because the evidence deserves it. One large American study did find a small reduction &mdash; about one to two hours of work a week. But look at where those hours went: into completing high school, caring for infant children, and nursing aging parents. We proudly accept that trade. A person who works one hour less and is no longer terrified of poverty is a triumph of civilization.</p>
+
+      <div class="beat">Argument 3 &mdash; The Current System Is Broken</div>
+      <p><b>My third argument: the status quo is indefensible.</b></p>
+      <p>Today, our welfare cliff imposes an effective tax rate of eighty to ninety percent on the poorest citizens when they take a job. We built a system that actively punishes work and then we complain that people are stuck in poverty.</p>
+      <p>We pay millions to bureaucrats to interrogate the poor. A universal payment is never withdrawn, never has to be justified, and never leaves a family behind.</p>
+
+      <div class="beat">Close</div>
+      <p class="stage">[Land this firmly &middot; Slower &middot; Look at the audience]</p>
+      <p>The question before this house is not whether we can afford to trust our fellow citizens. The question is whether we can afford the catastrophic human and economic cost of continuing not to trust them.</p>
+      <p style="margin-bottom:0">Every serious experiment points the same way. I urge you to vote Proposition.</p>
+    </div>
+
+    <!-- Step 7: Delivery Traps -->
+    <div class="warn-panel">
+      <h4>⚠️ Five Things That Lose Debate Rounds</h4>
+      <ul>
+        <li><b>1. Pretending UBI is Free:</b> Never say "it pays for itself." Say: <i>"It is a conscious societal choice about whether we fund human security or fund the bloated aftermath of poverty."</i></li>
+        <li><b>2. Getting Trapped in Huge Numbers:</b> Opponents will scream "$3 trillion!" Remind the judges: <i>"Gross cost is not net cost; high earners return the cash through progressive tax."</i></li>
+        <li><b>3. Reading Too Fast:</b> The pauses marked in the speech are where judges write down your scores. If you rush through, they cannot score your points.</li>
+        <li><b>4. Forgetting Alaska:</b> Alaska is your ultimate trump card. It is not a 2-year lab experiment; it is 40+ years of real-world history.</li>
+        <li><b>5. Losing Your Temper:</b> When the opposition calls UBI "socialist laziness," smile calmly and cite the Stockton employment data. Data always beats rhetoric.</li>
+      </ul>
+    </div>
   </section>
 
   <!-- ========================================================
